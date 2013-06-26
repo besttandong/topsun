@@ -1,0 +1,87 @@
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.pos.webservice.topsunit.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="PosWebService" targetNamespace="http://service.pos.webservice.topsunit.com/">
+	<wsdl:types>
+		<xs:schema xmlns:tns="http://service.pos.webservice.topsunit.com/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+			targetNamespace="http://service.pos.webservice.topsunit.com/"
+			version="1.0">
+			<xs:element name="syncData" type="tns:syncData" />
+			<xs:element name="syncDataResponse" type="tns:syncDataResponse" />
+			<xs:element name="uploadDataFile" type="tns:uploadDataFile" />
+			<xs:element name="uploadDataFileResponse" type="tns:uploadDataFileResponse" />
+			<xs:complexType name="syncData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="type" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="syncDataResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="syncData" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="uploadDataFile">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="type" type="xs:string" />
+					<xs:element minOccurs="0" name="data" type="xs:string" />
+					<xs:element minOccurs="0" name="fileName" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="uploadDataFileResponse">
+				<xs:sequence>
+					<xs:element name="uploadDataFile" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="uploadDataFileResponse">
+		<wsdl:part element="tns:uploadDataFileResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="syncData">
+		<wsdl:part element="tns:syncData" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="uploadDataFile">
+		<wsdl:part element="tns:uploadDataFile" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="syncDataResponse">
+		<wsdl:part element="tns:syncDataResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="IPosService">
+		<wsdl:operation name="syncData">
+			<wsdl:input message="tns:syncData" name="syncData"></wsdl:input>
+			<wsdl:output message="tns:syncDataResponse" name="syncDataResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="uploadDataFile">
+			<wsdl:input message="tns:uploadDataFile" name="uploadDataFile"></wsdl:input>
+			<wsdl:output message="tns:uploadDataFileResponse" name="uploadDataFileResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PosWebServiceSoapBinding" type="tns:IPosService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="syncData">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="syncData">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="syncDataResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="uploadDataFile">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="uploadDataFile">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="uploadDataFileResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PosWebService">
+		<wsdl:port binding="tns:PosWebServiceSoapBinding" name="IPosServicePort">
+			<soap:address location="http://localhost:22089/posWebService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
