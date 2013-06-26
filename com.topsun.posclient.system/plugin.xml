@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.views">
+         <view
+            allowMultiple="true"
+            class="com.topsun.posclient.system.ui.SyncDataView"
+            icon="icons/type-list-1.png"
+            id="com.topsun.posclient.system.ui.SyncDataView"
+            name="同步数据"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="true"
+            class="com.topsun.posclient.system.ui.SettingView"
+            icon="icons/type-list-1.png"
+            id="com.topsun.posclient.system.ui.SettingView"
+            name="设置"
+            restorable="true">
+      </view>
+   </extension>
+
+
+</plugin>

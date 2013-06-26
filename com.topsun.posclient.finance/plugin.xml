@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.views">
+      <view allowMultiple="true" class="com.topsun.posclient.finance.ui.SettleAccountWayView"
+            icon="icons/type-list-1.png" id="com.topsun.posclient.finance.ui.SettleAccountWayView"
+            name="结算方式" restorable="true">
+      </view>
+      
+      <view allowMultiple="true" class="com.topsun.posclient.finance.ui.StorePayView"
+            icon="icons/type-list-1.png" id="com.topsun.posclient.finance.ui.StorePayView"
+            name="店铺缴款" restorable="true">
+      </view>
+      
+   </extension>
+</plugin>
