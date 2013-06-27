@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data>
+	<settleAccWay>
+		<account>6225667788990989</account>
+		<bankName>中国建设银行</bankName>
+		<id>000101</id>
+		<payCustomer>XXX工厂</payCustomer>
+		<receiveCustomer>XXXX客户</receiveCustomer>
+		<remark>备注信息</remark>
+		<settleAccWay>1</settleAccWay>
+	</settleAccWay>
+	<settleAccWay>
+		<account>6225334488990989</account>
+		<bankName>中国工商银行</bankName>
+		<id>000102</id>
+		<payCustomer>XXX工厂</payCustomer>
+		<receiveCustomer>XXXX客户</receiveCustomer>
+		<remark>备注信息</remark>
+		<settleAccWay>1</settleAccWay>
+	</settleAccWay>
+</data>
