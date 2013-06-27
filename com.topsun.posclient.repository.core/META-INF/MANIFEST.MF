@@ -13,3 +13,5 @@ Require-Bundle: org.eclipse.ui,
  com.topsun.posclient.application;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: com.topsun.posclient.repository.service,
+ com.topsun.posclient.repository.service.impl

@@ -22,13 +22,13 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.topsun.posclient.application.model.Goods;
 import com.topsun.posclient.application.model.PartSales;
+import com.topsun.posclient.common.ui.utils.ImageUtils;
 import com.topsun.posclient.sales.data.SalesDataFactory;
 import com.topsun.posclient.sales.dto.PartSalesDTO;
 import com.topsun.posclient.sales.service.IPartSaleService;
 import com.topsun.posclient.sales.service.impl.PartSaleServiceImpl;
 import com.topsun.posclient.sales.ui.table.SalesTableContentProvider;
 import com.topsun.posclient.sales.ui.table.SalesTableLableProvider;
-import com.topsun.posclient.sales.ui.tree.ImageUtils;
 import com.topsun.widget.calendar.CalendarCombo;
 import com.topsun.widget.calendar.DefaultSettings;
 
@@ -81,7 +81,7 @@ public class SalesView extends ViewPart {
 		{
 			Button button = new Button(operation, SWT.NONE);
 			button.setText("保存");
-			//button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "ok.gif"));
+			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//ok.gif"));
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -134,7 +134,7 @@ public class SalesView extends ViewPart {
 		{
 			Button button = new Button(operation, SWT.NONE);
 			button.setText("取消");
-			//button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "nook.png"));
+			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//nook.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -265,7 +265,7 @@ public class SalesView extends ViewPart {
 		{
 			Button button = new Button(printCompoiste, SWT.NONE);
 			button.setText("扫描计数模式");
-			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "sales.png"));
+			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//sales.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -295,7 +295,7 @@ public class SalesView extends ViewPart {
 		{
 			Button button = new Button(printCompoiste, SWT.NONE);
 			button.setText("定长扫描");
-			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "sales.png"));
+			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//sales.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 100;

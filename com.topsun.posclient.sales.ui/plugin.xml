@@ -3,19 +3,33 @@
 <plugin>
    <extension
          point="org.eclipse.ui.views">
-      <view
-            class="com.topsun.posclient.sales.ui.menu.MenuView"
-            icon="icons/type-list-1.png"
-            id="topsun.menu"
-            name="任务栏"
-            restorable="true">
-      </view>      
       <view allowMultiple="true"
             class="com.topsun.posclient.sales.ui.menu.SalesView"
             icon="icons/type-list-1.png"
             id="com.topsun.posclient.sales.ui.menu.SalesView"
             name="零售" restorable="true">
       </view>
+   </extension>
+   <extension
+         point="com.topsun.menu">
+      <menu
+            icon="icons/sales.png"
+            index="1"
+            menuid="sales"
+            class=""
+            name="销售">
+      </menu>
+   </extension>
+   <extension
+         point="com.topsun.tree">
+      <tree
+      		treeid=""
+            icons="icons/type-list-1.png"
+            index="1"
+            menuid="sales"
+            name="零售"
+            viewid="com.topsun.posclient.sales.ui.menu.SalesView">
+      </tree>
    </extension>
 
 </plugin>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension point="org.eclipse.ui.views">
+         <view allowMultiple="true"
+            class="com.topsun.posclient.repository.ui.view.AdjustRepositoryView"
+            icon="icons/type-list-1.png"
+            id="com.topsun.posclient.repository.ui.AdjustRepositoryView"
+            name="仓调仓" restorable="true">
+      	</view>
+      	<view allowMultiple="true"
+            class="com.topsun.posclient.repository.ui.view.AdjustStoreView"
+            icon="icons/type-list-1.png"
+            id="com.topsun.posclient.repository.ui.AdjustStoreView"
+            name="店调店" restorable="true">
+      	</view>
+   </extension>
+<extension
+      point="com.topsun.tree">
+   <tree
+         icons="icons/type-list-1.png"
+         menuid="repository.menu"
+         name="仓调仓"
+         treeid="rep2rep.tree"
+         viewid="com.topsun.posclient.repository.ui.AdjustRepositoryView">
+   </tree>
+   <tree
+         icons="icons/type-list-1.png"
+         menuid="repository.menu"
+         name="店调店"
+         treeid="shop2shop.tree"
+         viewid="com.topsun.posclient.repository.ui.AdjustStoreView">
+   </tree>
+</extension>
+<extension
+      point="com.topsun.menu">
+   <menu
+         class="com.topsun.posclient.repository.ui.Menu4"
+         icon="icons/type-list-1.png"
+         menuid="repository.menu"
+         name="库存">
+   </menu>
+</extension>
+</plugin>

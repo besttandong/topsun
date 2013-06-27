@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="com.topsun.menu" name="menu" schema="schema/com.topsun.menu.exsd"/>
+   <extension-point id="com.topsun.tree" name="tree" schema="schema/com.topsun.tree.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="com.topsun.posclient.common.ui.menu.TopSunMenuTree"
+            icon="icons/type-list-1.png"
+            id="topsun.menu"
+            name="任务栏"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

@@ -2,21 +2,21 @@
 <data>
 	<operator>
 		<employeeId>10</employeeId>
-		<employeeName>张三</employeeName>
+		<employeeName>AA</employeeName>
 		<id>1</id>
 		<name>admin</name>
 		<orgId>1</orgId>
-		<orgName>营业部</orgName>
+		<orgName>aa</orgName>
 		<password>123456</password>
 		<roleId>0</roleId>
 	</operator>
 	<operator>
 		<employeeId>10</employeeId>
-		<employeeName>李四</employeeName>
+		<employeeName>bb</employeeName>
 		<id>1</id>
 		<name>admin</name>
 		<orgId>1</orgId>
-		<orgName>营业部</orgName>
+		<orgName>bb</orgName>
 		<password>123456</password>
 		<roleId>0</roleId>
 	</operator>

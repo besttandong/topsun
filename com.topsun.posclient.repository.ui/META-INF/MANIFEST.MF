@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui
+Bundle-SymbolicName: com.topsun.posclient.repository.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.topsun.posclient.repository.ui.RepositoryUIActivator
+Bundle-Vendor: TOPSUN
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.topsun.posclient.common.core;bundle-version="1.0.0",
+ com.topsun.posclient.repository.core;bundle-version="1.0.0",
+ com.topsun.posclient.widget;bundle-version="1.0.0",
+ com.topsun.posclient.common.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

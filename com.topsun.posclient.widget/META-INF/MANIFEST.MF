@@ -9,5 +9,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.topsun.widget,
+Export-Package: com.topsun.posclient.widget.pshelf,
+ com.topsun.widget,
  com.topsun.widget.calendar

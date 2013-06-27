@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.views">
+      <view allowMultiple="true" class="com.topsun.posclient.finance.ui.view.SettleAccountWayView"
+            icon="icons/type-list-1.png" id="com.topsun.posclient.finance.ui.SettleAccountWayView"
+            name="结算方式" restorable="true">
+      </view>
+      
+      <view allowMultiple="true" class="com.topsun.posclient.finance.ui.view.StorePayView"
+            icon="icons/type-list-1.png" id="com.topsun.posclient.finance.ui.StorePayView"
+            name="店铺缴款" restorable="true">
+      </view>
+      
+   </extension>
+   <extension
+         point="com.topsun.tree">
+      <tree
+            icons="icons/type-list-1.png"
+            menuid="finance.menu"
+            name="结算方式"
+            treeid="account.tree"
+            viewid="com.topsun.posclient.finance.ui.SettleAccountWayView">
+      </tree>
+      <tree
+            icons="icons/type-list-1.png"
+            menuid="finance.menu"
+            name="店铺缴款"
+            treeid="sotrepay.tree"
+            viewid="com.topsun.posclient.finance.ui.StorePayView">
+      </tree>
+   </extension>
+   <extension
+         point="com.topsun.menu">
+      <menu
+            class="com.topsun.posclient.finance.ui.Menu3"
+            icon="icons/type-list-1.png"
+            menuid="finance.menu"
+            name="财务管理">
+      </menu>
+   </extension>
+</plugin>
