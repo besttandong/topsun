@@ -1,24 +1,23 @@
-package com.topsun.posclient.repository;
+package com.topsun.posclient.sales.core;
 
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class RepositoryActivator extends AbstractUIPlugin {
+public class SalesCoreActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.topsun.posclient.repository.core"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.topsun.posclient.sales.core"; //$NON-NLS-1$
 
 	// The shared instance
-	private static RepositoryActivator plugin;
+	private static SalesCoreActivator plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public RepositoryActivator() {
+	public SalesCoreActivator() {
 	}
 
 	/*
@@ -44,18 +43,8 @@ public class RepositoryActivator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static RepositoryActivator getDefault() {
+	public static SalesCoreActivator getDefault() {
 		return plugin;
 	}
 
-	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
 }

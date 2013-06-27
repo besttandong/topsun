@@ -10,7 +10,7 @@ import org.osgi.framework.BundleContext;
 public class SystemActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.topsun.posclient.system"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.topsun.posclient.system.core"; //$NON-NLS-1$
 
 	// The shared instance
 	private static SystemActivator plugin;

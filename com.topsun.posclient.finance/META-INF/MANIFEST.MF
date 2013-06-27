@@ -1,13 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: 财务管理
-Bundle-SymbolicName: com.topsun.posclient.finance; singleton:=true
+Bundle-SymbolicName: com.topsun.posclient.finance.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.topsun.posclient.finance.FinanceActivator
 Bundle-Vendor: TOPSUN
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.topsun.poclient.application;bundle-version="1.0.0",
- org.junit4;bundle-version="4.8.1"
+ org.junit4;bundle-version="4.8.1",
+ com.topsun.posclient.common.core;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

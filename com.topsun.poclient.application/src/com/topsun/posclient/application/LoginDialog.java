@@ -17,6 +17,7 @@ import com.topsun.posclient.application.common.service.IOperatorService;
 import com.topsun.posclient.application.common.service.impl.OperatorServiceImpl;
 import com.topsun.posclient.application.model.Operator;
 
+
 public class LoginDialog extends TitleAreaDialog {
 	
 	private IOperatorService operatorService = new OperatorServiceImpl();

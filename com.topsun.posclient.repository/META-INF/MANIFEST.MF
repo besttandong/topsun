@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: 库存管理
-Bundle-SymbolicName: com.topsun.posclient.repository; singleton:=true
+Bundle-SymbolicName: com.topsun.posclient.repository.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.topsun.posclient.repository.RepositoryActivator
 Bundle-Vendor: TOPSUN
@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.topsun.poclient.application;bundle-version="1.0.0",
  com.topsun.posclient.widget;bundle-version="1.0.0",
- org.junit4;bundle-version="4.8.1"
+ org.junit4;bundle-version="4.8.1",
+ com.topsun.posclient.common.core;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
