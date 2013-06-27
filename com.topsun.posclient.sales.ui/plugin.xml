@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="com.topsun.posclient.sales.ui.menu.MenuView"
+            icon="icons/type-list-1.png"
+            id="topsun.menu"
+            name="任务栏"
+            restorable="true">
+      </view>      
+      <view allowMultiple="true"
+            class="com.topsun.posclient.sales.ui.menu.SalesView"
+            icon="icons/type-list-1.png"
+            id="com.topsun.posclient.sales.ui.menu.SalesView"
+            name="零售" restorable="true">
+      </view>
+   </extension>
+
+</plugin>
