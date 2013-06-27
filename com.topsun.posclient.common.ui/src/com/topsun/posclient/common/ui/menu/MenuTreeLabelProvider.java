@@ -9,15 +9,15 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.internal.util.BundleUtility;
 import org.osgi.framework.Bundle;
 
-import com.topsun.posclient.common.ui.model.TopSunTree;
+import com.topsun.posclient.common.ui.model.TopSunTreeModel;
 
 public class MenuTreeLabelProvider extends LabelProvider {
 
 	@Override
 	public Image getImage(Object element) {
 		URL url = null;
-		if(element instanceof TopSunTree){
-			TopSunTree sunTree = (TopSunTree)element;	
+		if(element instanceof TopSunTreeModel){
+			TopSunTreeModel sunTree = (TopSunTreeModel)element;	
 			Bundle bundle = BundleHelper.getDefault().getBundle(sunTree.getPluginId());
 			url = BundleUtility.find(bundle,sunTree.getIcon());
 		}
@@ -28,8 +28,8 @@ public class MenuTreeLabelProvider extends LabelProvider {
 
 	@Override
 	public String getText(Object element) {
-		if(element instanceof TopSunTree){
-			TopSunTree sunTree = (TopSunTree)element;	
+		if(element instanceof TopSunTreeModel){
+			TopSunTreeModel sunTree = (TopSunTreeModel)element;	
 			return sunTree.getTreeName();
 		}
 		return element.toString();

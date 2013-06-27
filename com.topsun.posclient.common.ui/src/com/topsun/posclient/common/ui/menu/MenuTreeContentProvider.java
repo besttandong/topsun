@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-import com.topsun.posclient.common.ui.model.TopSunTree;
+import com.topsun.posclient.common.ui.model.TopSunTreeModel;
 
 public class MenuTreeContentProvider implements ITreeContentProvider {
 
@@ -26,8 +26,8 @@ public class MenuTreeContentProvider implements ITreeContentProvider {
 		if(inputElement instanceof List){
 			List list  = (List)inputElement;
 			for (Object object : list) {
-				if(object instanceof TopSunTree){
-					TopSunTree tree  = (TopSunTree)object;;
+				if(object instanceof TopSunTreeModel){
+					TopSunTreeModel tree  = (TopSunTreeModel)object;;
 				}
 			}
 			return list.toArray();

@@ -1,10 +1,23 @@
 package com.topsun.posclient.common.ui.model;
 
-public class TopSunTree {
+public class TopSunTreeModel {
 	private String pluginId;
 	private String icon;
+	private String treeId;
+	private String viewid;
+	private String treeName;
+	private String index;
 	
 	
+	
+	public String getIndex() {
+		return index;
+	}
+
+	public void setIndex(String index) {
+		this.index = index;
+	}
+
 	public String getIcon() {
 		return icon;
 	}
@@ -21,13 +34,7 @@ public class TopSunTree {
 		this.pluginId = pluginId;
 	}
 
-
-
-	private String treeId;
-	private String viewid;
-	private String treeName;
-
-	public TopSunTree(TopSunMenu menu){
+	public TopSunTreeModel(TopSunMenuModel menu){
 		menu.getTrees().add(this);
 	}
 	

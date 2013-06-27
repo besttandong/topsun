@@ -27,8 +27,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import com.topsun.posclient.common.ui.model.TopSunMenu;
-import com.topsun.posclient.common.ui.model.TopSunTree;
+import com.topsun.posclient.common.ui.model.TopSunMenuModel;
+import com.topsun.posclient.common.ui.model.TopSunTreeModel;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
 import com.topsun.posclient.widget.pshelf.PShelf;
 import com.topsun.posclient.widget.pshelf.PShelfItem;
@@ -42,9 +42,9 @@ public class MenuTreeManagerFacede {
 	
 	private static MenuTreeManagerFacede facede = new MenuTreeManagerFacede();
 	
-	private static List<TopSunMenu> menuList  = new ArrayList<TopSunMenu>();
+	private static List<TopSunMenuModel> menuList  = new ArrayList<TopSunMenuModel>();
 	
-	private static List<TopSunTree> treeList  = new ArrayList<TopSunTree>();
+	private static List<TopSunTreeModel> treeList  = new ArrayList<TopSunTreeModel>();
 	
 	private MenuTreeManagerFacede(){
 		
@@ -73,8 +73,8 @@ public class MenuTreeManagerFacede {
 		return facede;
 	}
 	
-	private TopSunTree findTree(String treeName){
-		for (TopSunTree tree : treeList) {
+	private TopSunTreeModel findTree(String treeName){
+		for (TopSunTreeModel tree : treeList) {
 			if(treeName.equals(tree.getTreeName())){
 				return tree;
 			}
@@ -82,25 +82,25 @@ public class MenuTreeManagerFacede {
 		return null;
 	}
 	
-	private TopSunMenu findMenu(String menuID){
-		for (TopSunMenu menu : menuList) {
+	private TopSunMenuModel findMenu(String menuID){
+		for (TopSunMenuModel menu : menuList) {
 			if(menuID.equals(menu.getMenuID())){
 				return menu;
 			}
 		}
 		return null;
 	};
-	private void createTree(Composite composite,final TopSunMenu menu){
+	private void createTree(Composite composite,final TopSunMenuModel menu){
 		loadTreeExtension(menu);
 		TreeViewer treeViewer = new TreeViewer(composite);
 		Tree tree = treeViewer.getTree();
 		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
 		treeViewer.setLabelProvider(new MenuTreeLabelProvider());
 		treeViewer.setContentProvider(new MenuTreeContentProvider());
-		TopSunMenu t_Menu = findMenu(menu.getMenuID());
-		List<TopSunTree> topSunTrees = t_Menu.getTrees();
+		TopSunMenuModel t_Menu = findMenu(menu.getMenuID());
+		List<TopSunTreeModel> topSunTrees = t_Menu.getTrees();
 		List<String> treeNames = new ArrayList<String>();
-		for (TopSunTree topSunTree : topSunTrees) {
+		for (TopSunTreeModel topSunTree : topSunTrees) {
 			treeNames.add(topSunTree.getTreeName());
 		}
 		if(treeNames == null || treeNames.size() ==0){
@@ -115,10 +115,10 @@ public class MenuTreeManagerFacede {
 				if (iSelection instanceof TreeSelection) {
 					TreeSelection selection = (TreeSelection) iSelection;
 					Object obj = selection.getFirstElement();
-					if (obj instanceof TopSunTree) {
-						TopSunTree selectionTree = (TopSunTree) obj;
+					if (obj instanceof TopSunTreeModel) {
+						TopSunTreeModel selectionTree = (TopSunTreeModel) obj;
 						
-						TopSunTree topsunTree = findTree(selectionTree.getTreeName());
+						TopSunTreeModel topsunTree = findTree(selectionTree.getTreeName());
 						String viewId = topsunTree.getViewid();
 							checkSecondaryId(viewId);
 							if (window != null) {
@@ -147,7 +147,7 @@ public class MenuTreeManagerFacede {
 		});
 
 	}
-	public void loadTreeExtension(TopSunMenu menu){
+	public void loadTreeExtension(TopSunMenuModel menu){
 		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint("com.topsun.tree").getExtensions();
 		for (IExtension iExtension : extensions) {
 			IConfigurationElement[] configurationElement = iExtension.getConfigurationElements();
@@ -170,7 +170,7 @@ public class MenuTreeManagerFacede {
 				String icon = iConfigurationElement.getAttribute("icons");
 				
 				if(menu.getMenuID().equals(menuId)){
-					TopSunTree sunTree = new TopSunTree(menu);
+					TopSunTreeModel sunTree = new TopSunTreeModel(menu);
 					sunTree.setTreeId(treeid);
 					sunTree.setTreeName(treeName);
 					sunTree.setViewid(viewid);
@@ -197,7 +197,7 @@ public class MenuTreeManagerFacede {
 				String menuid = iConfigurationElement.getAttribute("menuid");
 				String icon = iConfigurationElement.getAttribute("icon");
 				
-				TopSunMenu menu = new TopSunMenu();
+				TopSunMenuModel menu = new TopSunMenuModel();
 				menu.setMenuID(menuid);
 				menu.setMenuName(meunName);
 				menuList.add(menu);
