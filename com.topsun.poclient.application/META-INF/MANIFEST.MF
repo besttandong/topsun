@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Application
-Bundle-SymbolicName: com.topsun.poclient.application;singleton:=true
+Bundle-SymbolicName: com.topsun.posclient.application;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.topsun.posclient.application.TopSunApplicationActivator
 Bundle-Vendor: HAHA

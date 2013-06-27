@@ -7,10 +7,10 @@ Bundle-Activator: com.topsun.posclient.sales.ui.menu.SalesActivator
 Bundle-Vendor: HAHA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.topsun.poclient.application;bundle-version="1.0.0",
  com.topsun.posclient.widget;bundle-version="1.0.0",
  org.junit4;bundle-version="4.8.1",
  com.topsun.posclient.common.core;bundle-version="1.0.0",
- com.topsun.posclient.sales.core;bundle-version="1.0.0"
+ com.topsun.posclient.sales.core;bundle-version="1.0.0",
+ com.topsun.posclient.application;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

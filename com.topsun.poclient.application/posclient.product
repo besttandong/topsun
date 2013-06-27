@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="POS客户端" uid="posclient" id="com.topsun.application.product" application="com.topsun.application.application" version="1.0" useFeatures="false" includeLaunchers="true">
+<product name="POS客户端" uid="posclient" id="com.topsun.posclient.application.product" application="com.topsun.posclient.application.application" version="1.0" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -11,11 +11,11 @@
    </launcherArgs>
 
    <plugins>
-      <plugin id="com.topsun.poclient.application"/>
-      <plugin id="com.topsun.posclient.finance"/>
-      <plugin id="com.topsun.posclient.repository"/>
-      <plugin id="com.topsun.posclient.sales"/>
-      <plugin id="com.topsun.posclient.system"/>
+      <plugin id="com.topsun.poclient.application" fragment=""/>
+      <plugin id="com.topsun.posclient.finance" fragment=""/>
+      <plugin id="com.topsun.posclient.repository" fragment=""/>
+      <plugin id="com.topsun.posclient.sales" fragment=""/>
+      <plugin id="com.topsun.posclient.system" fragment=""/>
       <plugin id="com.topsun.posclient.widget"/>
    </plugins>
 
