@@ -124,7 +124,7 @@ public class MenuTreeManagerFacede {
 											.getActivePage()
 											.showView(
 													viewId,
-													Integer.toString(instanceNum),
+													Integer.toString(0),
 													IWorkbenchPage.VIEW_ACTIVATE);
 									instanceNum++;
 
