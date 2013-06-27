@@ -17,6 +17,7 @@
          point="com.topsun.tree">
       <tree
             icons="icons/type-list-1.png"
+            index="2"
             menuid="finance.menu"
             name="结算方式"
             treeid="account.tree"
@@ -24,6 +25,7 @@
       </tree>
       <tree
             icons="icons/type-list-1.png"
+            index="1"
             menuid="finance.menu"
             name="店铺缴款"
             treeid="sotrepay.tree"
@@ -33,8 +35,8 @@
    <extension
          point="com.topsun.menu">
       <menu
-            class="com.topsun.posclient.finance.ui.Menu3"
             icon="icons/type-list-1.png"
+            index="200"
             menuid="finance.menu"
             name="财务管理">
       </menu>

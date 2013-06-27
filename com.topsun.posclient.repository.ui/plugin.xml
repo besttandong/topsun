@@ -35,8 +35,8 @@
 <extension
       point="com.topsun.menu">
    <menu
-         class="com.topsun.posclient.repository.ui.Menu4"
          icon="icons/type-list-1.png"
+         index="300"
          menuid="repository.menu"
          name="库存">
    </menu>

@@ -1,6 +1,7 @@
 package com.topsun.posclient.common.ui.menu;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -30,6 +31,7 @@ import org.eclipse.ui.PlatformUI;
 import com.topsun.posclient.common.ui.model.TopSunMenuModel;
 import com.topsun.posclient.common.ui.model.TopSunTreeModel;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
+import com.topsun.posclient.common.ui.utils.TopSunMenuTreeComparator;
 import com.topsun.posclient.widget.pshelf.PShelf;
 import com.topsun.posclient.widget.pshelf.PShelfItem;
 
@@ -99,13 +101,8 @@ public class MenuTreeManagerFacede {
 		treeViewer.setContentProvider(new MenuTreeContentProvider());
 		TopSunMenuModel t_Menu = findMenu(menu.getMenuID());
 		List<TopSunTreeModel> topSunTrees = t_Menu.getTrees();
-		List<String> treeNames = new ArrayList<String>();
-		for (TopSunTreeModel topSunTree : topSunTrees) {
-			treeNames.add(topSunTree.getTreeName());
-		}
-		if(treeNames == null || treeNames.size() ==0){
-			return;
-		}
+		TopSunMenuTreeComparator comparator = new TopSunMenuTreeComparator();
+		Collections.sort(topSunTrees, comparator);
 		treeViewer.setInput(topSunTrees);
 		treeViewer.addDoubleClickListener(new IDoubleClickListener() {
 
@@ -175,19 +172,31 @@ public class MenuTreeManagerFacede {
 					sunTree.setTreeName(treeName);
 					sunTree.setViewid(viewid);
 					sunTree.setPluginId(pluginId);
-					sunTree.setIcon(icon);
+					sunTree.setIcon(icon==null?"":icon);
+					sunTree.setIndex(index==null?"":index);
 					treeList.add(sunTree);
 				}
 			}
 		}
 	}
 	
-	public void initMenu(){
-		
+	public void initMenu(PShelf parent){
+		for (TopSunMenuModel menuModel : menuList) {
+			PShelfItem item = new PShelfItem(parent, SWT.NONE);
+			item.setText(menuModel.getMenuName());
+
+			Composite compsite = item.getBody();
+			Color color = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE);
+			item.setImage(ImageUtils.createImage(menuModel.getPluginID(),menuModel.getIcon()));
+			compsite.setBackground(color);
+			compsite.setLayout(new GridLayout(1,false));
+
+			//Create Tree Viewer
+			createTree(compsite,menuModel);
+		}
 	}
 	
-	public List<PShelfItem>  loadMenuExtension(PShelf parent){
-		List<PShelfItem> items = new ArrayList<PShelfItem>();
+	public void  loadMenuExtension(){
 		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint("com.topsun.menu").getExtensions();
 		for (IExtension iExtension : extensions) {
 			IConfigurationElement[] configurationElement = iExtension.getConfigurationElements();
@@ -196,35 +205,27 @@ public class MenuTreeManagerFacede {
 				String index = iConfigurationElement.getAttribute("index");
 				String menuid = iConfigurationElement.getAttribute("menuid");
 				String icon = iConfigurationElement.getAttribute("icon");
-				
+				String pluginId = "";
+				try {
+					pluginId = iExtension.getDeclaringPluginDescriptor().getPlugin().toString();
+				} catch (InvalidRegistryObjectException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CoreException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				TopSunMenuModel menu = new TopSunMenuModel();
 				menu.setMenuID(menuid);
 				menu.setMenuName(meunName);
+				menu.setIcon(icon==null?"":icon);
+				menu.setIndex(index==null?"":index);
+				menu.setPluginID(pluginId);
 				menuList.add(menu);
-				
-				PShelfItem item = new PShelfItem(parent, SWT.NONE);
-				item.setText(meunName);
-				String pluginId;
-				try {
-					pluginId = iExtension.getDeclaringPluginDescriptor().getPlugin().toString();
-					Composite compsite = item.getBody();
-					Color color = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE);
-					item.setImage(ImageUtils.createImage(pluginId,icon));
-					compsite.setBackground(color);
-					compsite.setLayout(new GridLayout(1,false));
-					
-					//Create Tree Viewer
-					createTree(compsite,menu);
-					items.add(item);
-				} catch (InvalidRegistryObjectException e) {
-					e.printStackTrace();
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
-				
 			}
 		}
+		TopSunMenuTreeComparator comparator = new TopSunMenuTreeComparator();
+		Collections.sort(menuList, comparator);
 		
-		return items;
 	}
 }

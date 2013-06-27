@@ -22,9 +22,8 @@
 <extension
       point="com.topsun.menu">
    <menu
-         class="com.topsun.posclient.system.ui.Menu2"
          icon="icons/type-list-1.png"
-         index="2"
+         index="400"
          menuid="system.mneu"
          name="系统设置">
    </menu>

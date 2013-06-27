@@ -14,9 +14,8 @@
          point="com.topsun.menu">
       <menu
             icon="icons/sales.png"
-            index="1"
+            index="100"
             menuid="sales"
-            class=""
             name="销售">
       </menu>
    </extension>

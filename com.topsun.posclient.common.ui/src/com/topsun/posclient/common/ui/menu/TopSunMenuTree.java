@@ -40,7 +40,8 @@ public class TopSunMenuTree extends ViewPart{
 //		pShelf.setBackground(color);
 		pShelf.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
-		List<PShelfItem> items = MenuTreeManagerFacede.getInstance().loadMenuExtension(pShelf);
+		MenuTreeManagerFacede.getInstance().loadMenuExtension();
+		MenuTreeManagerFacede.getInstance().initMenu(pShelf);
 //		
 
 //		TopSunMenuTreeManager.createSalesTree(comp1);
