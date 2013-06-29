@@ -5,7 +5,6 @@ import java.io.File;
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.datamodel.dto.CashierModeDTO;
-import com.topsun.posclient.datamodel.dto.ShopDTO;
 import com.topsun.posclient.datamodel.dto.UserDTO;
 
 /**
@@ -34,26 +33,17 @@ public class CommonDao extends BaseDao {
 	/**
 	 * 根据用户ID获取所在店铺
 	 * 
-	 * @param userId
-	 *            用户ID
+	 * @param userId 用户ID
 	 * @return
 	 * @throws Exception
 	 */
-	public ShopDTO getShopByUserId(int userId) throws Exception {
+	public UserDTO getUserById(int userId) throws Exception {
 		File userDatafile = new File(ProjectUtil.getRuntimeClassPath()
 				+ AppConstants.DATA_USER_FILENAME);
 		UserDTO userDTO = (UserDTO) getLocalProcessor().getObjectFromXml(
 				getLocalProcessor().getDataFileContent(userDatafile),
 				UserDTO.class);
-
-		File shopDatafile = new File(ProjectUtil.getRuntimeClassPath()
-				+ AppConstants.DATA_USER_FILENAME);
-
-		ShopDTO shopDTO = (ShopDTO) getLocalProcessor().getObjectFromXml(
-				getLocalProcessor().getDataFileContent(shopDatafile),
-				ShopDTO.class);
-
-		return shopDTO;
+		return userDTO;
 	}
 
 	/**

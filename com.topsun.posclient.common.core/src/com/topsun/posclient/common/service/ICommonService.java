@@ -3,8 +3,6 @@ package com.topsun.posclient.common.service;
 import java.util.List;
 
 import com.topsun.posclient.datamodel.CashierMode;
-import com.topsun.posclient.datamodel.Shop;
-
 
 /**
  * 公共服务接口
@@ -20,7 +18,7 @@ public interface ICommonService {
 	 * @return 店铺对象
 	 * @throws Exception
 	 */
-	public Shop getShopByUserId(int userId) throws Exception;
+	public String getShopNameByUserId(int userId) throws Exception;
 	
 	/**
 	 * 获取所有结算方式
