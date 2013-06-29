@@ -1,6 +1,6 @@
 package com.topsun.posclient.system.service;
 
-import com.topsun.posclient.application.common.service.IBaseService;
+import com.topsun.posclient.common.service.IBaseService;
 
 /**
  * 数据同步接口
