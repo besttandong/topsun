@@ -1,8 +1,8 @@
 package com.topsun.posclient.sales.service;
 
 
-import com.topsun.posclient.application.common.service.IBaseService;
-import com.topsun.posclient.sales.dto.PartSalesDTO;
+import com.topsun.posclient.common.service.IBaseService;
+import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 
 /**
  * ¡„ €Ω”ø⁄

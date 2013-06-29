@@ -1,8 +1,8 @@
 package com.topsun.posclient.sales.service.impl;
 
-import com.topsun.posclient.application.common.service.impl.BaseServiceImpl;
-import com.topsun.posclient.sales.dao.PartSaleLocalDao;
-import com.topsun.posclient.sales.dto.PartSalesDTO;
+import com.topsun.posclient.common.service.impl.BaseServiceImpl;
+import com.topsun.posclient.datamodel.dto.PartSalesDTO;
+import com.topsun.posclient.sales.dao.PartSaleDao;
 import com.topsun.posclient.sales.service.IPartSaleService;
 
 /**
@@ -12,17 +12,17 @@ import com.topsun.posclient.sales.service.IPartSaleService;
  */
 public class PartSaleServiceImpl extends BaseServiceImpl implements IPartSaleService {
 	
-	private PartSaleLocalDao partSaleLocalDao = new PartSaleLocalDao();
+	private PartSaleDao partSaleDao = new PartSaleDao();
 
 	/* (non-Javadoc)
 	 * @see com.topsun.posclient.sales.service.IPartSaleService#saveSaleData(com.topsun.posclient.sales.entity.PartSales)
 	 */
 	public void saveSaleData(PartSalesDTO salesDTO) throws Exception {
 		try {
-			partSaleLocalDao.saveSalesData(salesDTO);
+			partSaleDao.saveSalesData(salesDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception("‰øùÂ≠òÈîÄÂîÆÊï∞ÊçÆÂ§±Ë¥•");
+			throw new Exception("±£¥Ê¡„ € ˝æ› ß∞‹");
 		}
 	}
 

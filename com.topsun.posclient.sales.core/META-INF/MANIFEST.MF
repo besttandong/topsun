@@ -7,12 +7,11 @@ Bundle-Activator: com.topsun.posclient.sales.core.SalesCoreActivator
 Bundle-Vendor: TOPSUN
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.topsun.posclient.common.core;bundle-version="1.0.0"
+ com.topsun.posclient.common.core;bundle-version="1.0.0",
+ com.topsun.posclient.datamodel;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.topsun.posclient.sales.core,
  com.topsun.posclient.sales.dao,
- com.topsun.posclient.sales.data,
- com.topsun.posclient.sales.dto,
  com.topsun.posclient.sales.service,
  com.topsun.posclient.sales.service.impl
