@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Datamodel
+Bundle-SymbolicName: com.topsun.posclient.datamodel; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.topsun.posclient.DataModelActivator
+Bundle-Vendor: TOPSUN
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.topsun.posclient,
+ com.topsun.posclient.datamodel,
+ com.topsun.posclient.datamodel.dto
