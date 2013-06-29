@@ -1,27 +1,21 @@
-package com.topsun.posclient.application.dao;
+package com.topsun.posclient.common.dao;
 
 import java.net.InetAddress;
 
-import com.topsun.posclient.application.common.POSException;
+import com.topsun.posclient.common.LocalDataProcessor;
+import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.common.POSServerCaller;
 
-/**
- * 数据处理接口
- * 
- * 
- * 
- * @author Dong
- *
- */
-public class PosProcessor {
+public class BaseDao {
 	
-	LocalProcessor localProcessor = new LocalProcessor();
-	
-	CallServerProcessor callServerProcessor = new CallServerProcessor();
-	
+	LocalDataProcessor localProcessor = new LocalDataProcessor();
+
+	POSServerCaller serverCaller = new POSServerCaller();
+
 	static String host = "10.10.10.9";
 	static int timeOut = 3000; //超时应该在3钞以上  
-	
-	
+
+
 	/**
 	 * 是否在线
 	 * 
@@ -31,7 +25,7 @@ public class PosProcessor {
 	public boolean checkConnection() {
 		return doCheck();
 	}
-	
+
 	private boolean doCheck() {
 		boolean status = false;
 		try {
@@ -42,12 +36,11 @@ public class PosProcessor {
 		return status;
 	}
 
-	public LocalProcessor getLocalProcessor() {
+	public LocalDataProcessor getLocalProcessor() {
 		return localProcessor;
 	}
 
-	public CallServerProcessor getCallServerProcessor() {
-		return callServerProcessor;
+	public POSServerCaller getServerCaller() {
+		return serverCaller;
 	}
-
 }

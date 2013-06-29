@@ -1,4 +1,4 @@
-package com.topsun.posclient.application.dao;
+package com.topsun.posclient.common;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,19 +12,16 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import com.topsun.posclient.application.common.ProjectUtil;
-
 /**
- * 本地数据处理
  * 
  * @author Dong
  * 
  */
-public class LocalProcessor {
+public class LocalDataProcessor {
 
 	String id;
 
-	public LocalProcessor() { }
+	public LocalDataProcessor() { }
 
 	public String getId() {
 		return id;
@@ -34,17 +31,10 @@ public class LocalProcessor {
 		this.id = id;
 	}
 
-	public LocalProcessor(String id) {
+	public LocalDataProcessor(String id) {
 		this.id = id;
 	}
 	
-	/**
-	 * 将文件转移到备份目录
-	 * @param file 要转移的文件
-	 * @param needDel 是否需要删除
-	 * @return
-	 * @throws IOException
-	 */
 	public boolean copyFileToBack(File file, boolean needDel) throws IOException{
 		String backPath = file.getAbsolutePath().replace("upload", "back");
 		File backFile = new File(backPath);
@@ -52,7 +42,6 @@ public class LocalProcessor {
 			backFile.createNewFile();
 		}
 		if(needDel){
-			// 转移到备份目录后删除
 			file.delete();
 		}
 		return true;
@@ -84,13 +73,13 @@ public class LocalProcessor {
 	}
 
 	/**
-	 * 根据XML字符内容获取数据对象
 	 * 
 	 * @param data
 	 * @param classe
 	 * @return
 	 * @throws JAXBException
 	 */
+	@SuppressWarnings("rawtypes")
 	public Object getObjectFromXml(String data, Class classe)
 			throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance(classe);
@@ -99,7 +88,6 @@ public class LocalProcessor {
 	}
 
 	/**
-	 * 根据数据对象创建XML文件
 	 * 
 	 * @param data
 	 * @param fileName
