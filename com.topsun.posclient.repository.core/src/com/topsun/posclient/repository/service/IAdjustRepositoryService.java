@@ -1,8 +1,8 @@
 package com.topsun.posclient.repository.service;
 
-import com.topsun.posclient.application.common.POSException;
-import com.topsun.posclient.application.common.service.IBaseService;
-import com.topsun.posclient.repository.dto.AdjustRepositoryDTO;
+import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.common.service.IBaseService;
+import com.topsun.posclient.datamodel.dto.AdjustRepositoryDTO;
 
 /**
  * µ÷²Ö½Ó¿Ú

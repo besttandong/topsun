@@ -1,21 +1,21 @@
 package com.topsun.posclient.repository.dao;
 
-import com.topsun.posclient.application.common.AppConstants;
-import com.topsun.posclient.application.dao.LocalProcessor;
-import com.topsun.posclient.repository.dto.AdjustStoreDTO;
+import com.topsun.posclient.common.AppConstants;
+import com.topsun.posclient.common.dao.BaseDao;
+import com.topsun.posclient.datamodel.dto.AdjustStoreDTO;
 
 /**
  * @author Dong
  *
  */
-public class AdjustStoreDao extends LocalProcessor {
+public class AdjustStoreDao extends BaseDao {
 	
 	/**
 	 * @param adjustStoreDTO
 	 * @throws Exception
 	 */
 	public void saveAdjustStore(AdjustStoreDTO adjustStoreDTO) throws Exception {
-		this.createXmlFileFromObject(adjustStoreDTO, "data_adjustStore", AppConstants.DATA_ADJUSTSTORE_PATH);
+		this.getLocalProcessor().createXmlFileFromObject(adjustStoreDTO, "data_adjustStore", AppConstants.DATA_ADJUSTSTORE_PATH);
 	}
 
 }
