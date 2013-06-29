@@ -24,10 +24,14 @@ public class CommonDao extends BaseDao {
 	public UserDTO getUserData() throws Exception {
 		File file = new File(ProjectUtil.getRuntimeClassPath()
 				+ AppConstants.DATA_USER_FILENAME);
-		UserDTO operatorDTO = (UserDTO) getLocalProcessor().getObjectFromXml(
-				this.getLocalProcessor().getDataFileContent(file),
-				UserDTO.class);
-		return operatorDTO;
+		
+		if(file.exists()){
+			UserDTO operatorDTO = (UserDTO) getLocalProcessor().getObjectFromXml(
+					this.getLocalProcessor().getDataFileContent(file),
+					UserDTO.class);
+			return operatorDTO;
+		}
+		return null;
 	}
 
 	/**

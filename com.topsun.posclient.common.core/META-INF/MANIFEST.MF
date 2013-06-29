@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Core
-Bundle-SymbolicName: com.topsun.posclient.common.core
+Bundle-SymbolicName: com.topsun.posclient.common.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.topsun.posclient.common.core.CommonCoreActivator
 Bundle-Vendor: TOPSUN

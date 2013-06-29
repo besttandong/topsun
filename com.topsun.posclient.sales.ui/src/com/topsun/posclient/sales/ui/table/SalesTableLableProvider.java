@@ -1,12 +1,10 @@
 package com.topsun.posclient.sales.ui.table;
 
-import java.util.List;
-
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import com.topsun.posclient.application.model.Goods;
+import com.topsun.posclient.datamodel.Item;
 
 public class SalesTableLableProvider implements ITableLabelProvider {
 
@@ -42,18 +40,18 @@ public class SalesTableLableProvider implements ITableLabelProvider {
 
 	@Override
 	public String getColumnText(Object element, int columnIndex) {
-		if (element instanceof Goods) {
-			Goods goodsSales = (Goods) element;
-			String productName = goodsSales.getGoodsName();
-			String type = goodsSales.getGoodsType();
-			double number = goodsSales.getNumber();
-			String listPrice = goodsSales.getListPrice();
-			double retailPrice = goodsSales.getRetailPrice();
-			double disB = goodsSales.getDiscountB();
-			double disA = goodsSales.getDiscountA();
-			double unitPrice = goodsSales.getUnitPrice();
-			double amount = goodsSales.getAmount();
-			double singlePoints = goodsSales.getSinglePoints();
+		if (element instanceof Item) {
+			Item goodsSales = (Item) element;
+			String productName = goodsSales.getItemName();
+			String type = goodsSales.getItemCode();
+//			double number = goodsSales.getn
+//			String listPrice = goodsSales.getListPrice();
+//			double retailPrice = goodsSales.getRetailPrice();
+//			double disB = goodsSales.getDiscountB();
+//			double disA = goodsSales.getDiscountA();
+//			double unitPrice = goodsSales.getUnitPrice();
+//			double amount = goodsSales.getAmount();
+//			double singlePoints = goodsSales.getSinglePoints();
 
 			switch (columnIndex) {
 			case 0:
@@ -61,21 +59,21 @@ public class SalesTableLableProvider implements ITableLabelProvider {
 			case 1:
 				return type;
 			case 2:
-				return String.valueOf(number);
+				return String.valueOf("");
 			case 3:
-				return listPrice;
+				return "";
 			case 4:
-				return String.valueOf(retailPrice);
+				return String.valueOf("");
 			case 5:
-				return String.valueOf(disB);
+				return String.valueOf("");
 			case 6:
-				return String.valueOf(disA);
+				return String.valueOf("");
 			case 7:
-				return String.valueOf(unitPrice);
+				return String.valueOf("");
 			case 8:
-				return String.valueOf(amount);
+				return String.valueOf("");
 			case 9:
-				return String.valueOf(singlePoints);
+				return String.valueOf("");
 
 			default:
 				return "";

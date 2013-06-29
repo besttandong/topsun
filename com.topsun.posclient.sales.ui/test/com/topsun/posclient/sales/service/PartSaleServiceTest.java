@@ -1,8 +1,8 @@
 package com.topsun.posclient.sales.service;
 
-import com.topsun.posclient.application.common.MockDataFactory;
 import com.topsun.posclient.application.common.POSClientTestCase;
-import com.topsun.posclient.sales.dto.PartSalesDTO;
+import com.topsun.posclient.common.MockDataFactory;
+import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 import com.topsun.posclient.sales.service.impl.PartSaleServiceImpl;
 
 public class PartSaleServiceTest extends POSClientTestCase {

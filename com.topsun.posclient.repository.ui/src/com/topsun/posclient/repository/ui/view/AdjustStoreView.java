@@ -1,6 +1,7 @@
 package com.topsun.posclient.repository.ui.view;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.viewers.TableViewer;
@@ -20,8 +21,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.topsun.posclient.application.model.AdjustRepositoryInfo;
-import com.topsun.posclient.application.model.Goods;
+import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
+import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.repository.service.IAdjustRepositoryService;
 import com.topsun.posclient.repository.service.impl.AdjustRepositoryServiceImpl;
 import com.topsun.widget.calendar.CalendarCombo;
@@ -37,7 +38,7 @@ public class AdjustStoreView extends ViewPart {
 
 	public IAdjustRepositoryService goodsRepositoryervice = new AdjustRepositoryServiceImpl();
 
-	List<Goods> goodsList = null;
+	List<Item> goodsList = null;
 
 	public AdjustRepositoryInfo adjustRepositoryInfo;
 
@@ -92,15 +93,15 @@ public class AdjustStoreView extends ViewPart {
 					adjustRepositoryInfo.setStoreName(storeName.getText());
 					adjustRepositoryInfo.setOrderNo(orderNo.getText());
 					adjustRepositoryInfo.setDeliver(deliver.getText());
-					adjustRepositoryInfo.setBackDate(backDate.getDateAsString());
+					adjustRepositoryInfo.setBackDate(new Date(backDate.getDateAsString()));
 					adjustRepositoryInfo.setReceiveRepository(receiveRepository.getText());
-					adjustRepositoryInfo.setCheckDate(checkDate.getDateAsString());
+					adjustRepositoryInfo.setCheckDate(new Date(checkDate.getDateAsString()));
 					adjustRepositoryInfo.setBackReason(backReason.getText());
-					adjustRepositoryInfo.setReCheckDate(reCheckDate.getDateAsString());
+					adjustRepositoryInfo.setReCheckDate(new Date(reCheckDate.getDateAsString()));
 					adjustRepositoryInfo.setRemark(remark.getText());
 					if (tableViewer.getInput() instanceof List) {
 						List list = (List) tableViewer.getInput();
-						adjustRepositoryInfo.setGoodsList(list);
+						adjustRepositoryInfo.setItemList(list);
 					};
 
 					List<AdjustRepositoryInfo> goodsRepositoryList = new ArrayList<AdjustRepositoryInfo>();
@@ -266,7 +267,7 @@ public class AdjustStoreView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 
 					if (tableViewer.getInput() != null) {
-						goodsList.add(((List<Goods>) tableViewer.getInput()).get(0));
+						goodsList.add(((List<Item>) tableViewer.getInput()).get(0));
 					}
 					tableViewer.setInput(goodsList);
 				}

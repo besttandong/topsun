@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 
-import com.topsun.posclient.application.model.PartSales;
-
 public class SalesTableContentProvider extends ArrayContentProvider{
 
 	@Override

@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+import org.eclipse.core.runtime.Platform;
+
 public class ProjectUtil {
 	
 	static SimpleDateFormat defaultFmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -30,7 +32,7 @@ public class ProjectUtil {
 	}
 
 	public static String getRuntimeClassPath(){
-		String path = CommonCoreActivator.getDefault().getBundle().getLocation().replace("initial@reference:file:", "")+ "bin\\";
+		String path = Platform.getBundle(CommonCoreActivator.PLUGIN_ID).getLocation().replace("initial@reference:file:", "")+ "bin\\";
 		return path;
 	}
 	

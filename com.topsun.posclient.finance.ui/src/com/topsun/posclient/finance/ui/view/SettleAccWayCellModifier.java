@@ -3,9 +3,6 @@ package com.topsun.posclient.finance.ui.view;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.TableItem;
-
-import com.topsun.posclient.application.model.SettleAccWayInfo;
 
 public class SettleAccWayCellModifier implements ICellModifier
 {
@@ -22,23 +19,24 @@ public class SettleAccWayCellModifier implements ICellModifier
 	  }
 
 	  public Object getValue(Object element, String property) {
-		 SettleAccWayInfo p = (SettleAccWayInfo)element;
-	    if (property.equals("settleAccWay"))
-	      return p.getSettleAccWay();
-	    if (property.equals("payCustomer"))
-	      return ((p.getPayCustomer() == null) ? "" : p.getPayCustomer());
-	    if (property.equals("receiveCustomer"))
-	      return new Integer(getJavaTypeIndex(p.getReceiveCustomer()));
-	    if (property.equals("posId"))
-	      return p.getPosId();
-	    if (property.equals("bankName"))
-	      return new Integer(p.getBankName());
-	    if (property.equals("account"))
-	      return p.getAccount();
-	    if (property.equals("remark"))
-	      return p.getRemark();
-
-	    throw new RuntimeException("error column name : " + property);
+//		 SettleAccWayInfo p = (SettleAccWayInfo)element;
+//	    if (property.equals("settleAccWay"))
+//	      return p.getSettleAccWay();
+//	    if (property.equals("payCustomer"))
+//	      return ((p.getPayCustomer() == null) ? "" : p.getPayCustomer());
+//	    if (property.equals("receiveCustomer"))
+//	      return new Integer(getJavaTypeIndex(p.getReceiveCustomer()));
+//	    if (property.equals("posId"))
+//	      return p.getPosId();
+//	    if (property.equals("bankName"))
+//	      return new Integer(p.getBankName());
+//	    if (property.equals("account"))
+//	      return p.getAccount();
+//	    if (property.equals("remark"))
+//	      return p.getRemark();
+//
+//	    throw new RuntimeException("error column name : " + property);
+		  return null;
 	  }
 
 	  private int getJavaTypeIndex(String name) {
@@ -51,15 +49,15 @@ public class SettleAccWayCellModifier implements ICellModifier
 	  }
 
 	  public void modify(Object element, String property, Object value) {
-	    String newValue;
-	    TableItem item = (TableItem)element;
-	    SettleAccWayInfo p = (SettleAccWayInfo)item.getData();
-	    if (property.equals("settleAccWay")) {
-	      p.setSettleAccWay(0);
-	    } else if (property.equals("payCustomer")) {
-	      newValue = (String)value;
-	      p.setPayCustomer(newValue);
-	    } else {}
-	    this.tv.update(p, null);
+//	    String newValue;
+//	    TableItem item = (TableItem)element;
+//	    SettleAccWayInfo p = (SettleAccWayInfo)item.getData();
+//	    if (property.equals("settleAccWay")) {
+//	      p.setSettleAccWay(0);
+//	    } else if (property.equals("payCustomer")) {
+//	      newValue = (String)value;
+//	      p.setPayCustomer(newValue);
+//	    } else {}
+//	    this.tv.update(p, null);
 	  }
 	}

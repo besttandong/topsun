@@ -1,6 +1,7 @@
 package com.topsun.posclient.sales.ui.menu;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.viewers.TableViewer;
@@ -20,11 +21,10 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.topsun.posclient.application.model.Goods;
-import com.topsun.posclient.application.model.PartSales;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
-import com.topsun.posclient.sales.data.SalesDataFactory;
-import com.topsun.posclient.sales.dto.PartSalesDTO;
+import com.topsun.posclient.datamodel.Item;
+import com.topsun.posclient.datamodel.PartSales;
+import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 import com.topsun.posclient.sales.service.IPartSaleService;
 import com.topsun.posclient.sales.service.impl.PartSaleServiceImpl;
 import com.topsun.posclient.sales.ui.table.SalesTableContentProvider;
@@ -36,7 +36,8 @@ public class SalesView extends ViewPart {
 	
 	public IPartSaleService partSaleService = new PartSaleServiceImpl();
 	
-	List<Goods> goodsSales = SalesDataFactory.initGoodsSales(); 
+	List<Item> goodsSales = new ArrayList();
+//		SalesDataFactory.initGoodsSales(); 
 		
 	public PartSales partSales;
 	
@@ -97,18 +98,18 @@ public class SalesView extends ViewPart {
 					partSales.setBalloter(casher.getText());
 					partSales.setBallotNo(casherNo.getText());
 					partSales.setCardNo(cardNo.getText());
-					partSales.setCheckDate(checkDate.getDateAsString());
+					partSales.setCheckDate(new Date(checkDate.getDateAsString()));
 					partSales.setChecker(checker.getText());
 					partSales.setEnableBalance(enableBalance.getText());
 					partSales.setEnablePoint(enablePoint.getText());
 					partSales.setNo(orderNo.getText());
 					partSales.setRemark(remark.getText());
-					partSales.setSalesDate(salesDate.getDateAsString());
+					partSales.setSalesDate(new Date(salesDate.getDateAsString()));
 					partSales.setStorename(shopName.getText());
 					partSales.setUserName(userName.getText());
 					if(tableViewer.getInput() instanceof List){
 						List list = (List)tableViewer.getInput();
-						partSales.setGoodsSales(list);
+						partSales.setItemList(list);
 					};
 					
 					List<PartSales> partSalesList = new ArrayList<PartSales>();
@@ -277,7 +278,7 @@ public class SalesView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 					
 					if(tableViewer.getInput() != null){
-						goodsSales.add(((List<Goods>)tableViewer.getInput()).get(0));
+						goodsSales.add(((List<Item>)tableViewer.getInput()).get(0));
 					}
 					tableViewer.setInput(goodsSales);
 				}

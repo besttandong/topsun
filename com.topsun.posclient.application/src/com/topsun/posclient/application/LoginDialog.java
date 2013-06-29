@@ -13,14 +13,15 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.topsun.posclient.application.common.service.IOperatorService;
-import com.topsun.posclient.application.common.service.impl.OperatorServiceImpl;
-import com.topsun.posclient.application.model.Operator;
+import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.datamodel.User;
+import com.topsun.posclient.system.service.ILoginService;
+import com.topsun.posclient.system.service.impl.LoginServiceImpl;
 
 
 public class LoginDialog extends TitleAreaDialog {
 	
-	private IOperatorService operatorService = new OperatorServiceImpl();
+	private  ILoginService longinsService = new LoginServiceImpl();
 
 	private Text passwordText;
 	private Text userNameText;
@@ -119,11 +120,19 @@ public class LoginDialog extends TitleAreaDialog {
 	 * @throws Exception
 	 */
 	private void login(String userName, String password) throws Exception {
-		Operator operator = operatorService.getOperator(userName, password);
-		if (null != operator){
-			return;
-		}else{
-			throw new Exception("错误的用户名和密");
+		
+		User operator;
+		try {
+			operator = longinsService.getUserData(userName, password);
+			if (null != operator){
+				return;
+			}else{
+				throw new Exception("错误的用户名和密");
+			}
+		} catch (POSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 	}
 }
