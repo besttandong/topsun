@@ -26,6 +26,7 @@ import com.topsun.posclient.common.ui.utils.ImageUtils;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
 import com.topsun.posclient.datamodel.dto.PartSalesDTO;
+import com.topsun.posclient.sales.dialog.SalesPayDialog;
 import com.topsun.posclient.sales.service.IPartSaleService;
 import com.topsun.posclient.sales.service.impl.PartSaleServiceImpl;
 import com.topsun.posclient.sales.ui.table.SalesTableContentProvider;
@@ -93,6 +94,11 @@ public class SalesView extends ViewPart {
 				
 				@Override
 				public void widgetSelected(SelectionEvent e) {
+					
+					Button saveButton = (Button)e.getSource();
+					SalesPayDialog dialog = new SalesPayDialog(saveButton.getShell());
+					dialog.open();
+					
 					partSales = new PartSales();
 					partSales.setApplyUser(applyUser.getText());
 					//partSales.setBalance(balance)
@@ -322,6 +328,10 @@ public class SalesView extends ViewPart {
 		}
 	}
 	
+	/**
+	 * 商品信息
+	 * @param parent
+	 */
 	private void buildProductInfo(Composite parent){
 		Group productInfo = new Group(parent, SWT.NONE);
 		productInfo.setText("商品信息");
