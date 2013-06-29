@@ -5,9 +5,9 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.topsun.posclient.application.common.POSException;
-import com.topsun.posclient.application.model.PayRecord;
-import com.topsun.posclient.finance.dto.PayRecordDTO;
+import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.datamodel.PayRecord;
+import com.topsun.posclient.datamodel.dto.PayRecordDTO;
 import com.topsun.posclient.finance.service.impl.StorePayServiceImpl;
 
 public class StorePayServiceTest extends TestCase {

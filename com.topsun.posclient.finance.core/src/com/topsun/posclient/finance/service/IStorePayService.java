@@ -1,8 +1,8 @@
 package com.topsun.posclient.finance.service;
 
-import com.topsun.posclient.application.common.POSException;
-import com.topsun.posclient.application.common.service.IBaseService;
-import com.topsun.posclient.finance.dto.PayRecordDTO;
+import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.common.service.IBaseService;
+import com.topsun.posclient.datamodel.dto.PayRecordDTO;
 
 /**
  * @author Dong

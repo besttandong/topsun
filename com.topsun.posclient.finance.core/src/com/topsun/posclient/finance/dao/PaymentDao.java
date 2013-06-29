@@ -1,14 +1,14 @@
 package com.topsun.posclient.finance.dao;
 
-import com.topsun.posclient.application.common.AppConstants;
-import com.topsun.posclient.application.dao.PosProcessor;
-import com.topsun.posclient.finance.dto.PaymentDTO;
+import com.topsun.posclient.common.AppConstants;
+import com.topsun.posclient.common.dao.BaseDao;
+import com.topsun.posclient.datamodel.dto.PaymentDTO;
 
 /**
  * @author Dong
  *
  */
-public class PaymentDao extends PosProcessor {
+public class PaymentDao extends BaseDao {
 
 	/**
 	 * @param paymentDTO
