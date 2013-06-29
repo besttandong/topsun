@@ -1,5 +1,6 @@
 package com.topsun.posclient.sales.ui.menu;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -437,9 +438,10 @@ public class SalesView extends ViewPart {
 			GridData data = new GridData();
 			data.widthHint = 185;
 			data.horizontalSpan = 3;
-			shopName.select(0);
 			shopName.setLayoutData(data);
 			shopName.setItems(new String[]{"上海","北京"});
+			shopName.setEnabled(false);
+			shopName.select(0);
 		}
 		
 		{
@@ -456,7 +458,10 @@ public class SalesView extends ViewPart {
 			data.horizontalSpan = 3;
 			orderNo.setLayoutData(data);
 			orderNo.setEditable(false);
-			orderNo.setText("01234567");
+			Date currentTime = new Date();  
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");  
+			String dateString = formatter.format(currentTime);
+			orderNo.setText(dateString);
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
@@ -467,6 +472,7 @@ public class SalesView extends ViewPart {
 		}
 		{
 			casher = new Combo(leftComposite, SWT.NONE);
+			casher.setEnabled(false);
 			GridData data = new GridData();
 			data.horizontalSpan = 3;
 			data.widthHint = 185;
@@ -484,11 +490,15 @@ public class SalesView extends ViewPart {
 		
 		{
 			casherNo = new Text(rightCompoiste, SWT.BORDER);
+			casherNo.setEditable(false);
 			GridData data = new GridData();
 			data.horizontalSpan = 3;
 			data.widthHint = 200;
 			casherNo.setLayoutData(data);
-			casherNo.setText("");
+			Date currentTime = new Date();  
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");  
+			String dateString = formatter.format(currentTime);
+			casherNo.setText(dateString);
 		}
 		
 		
