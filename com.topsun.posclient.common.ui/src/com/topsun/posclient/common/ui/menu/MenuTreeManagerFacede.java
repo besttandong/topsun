@@ -149,16 +149,7 @@ public class MenuTreeManagerFacede {
 		for (IExtension iExtension : extensions) {
 			IConfigurationElement[] configurationElement = iExtension.getConfigurationElements();
 			for (IConfigurationElement iConfigurationElement : configurationElement) {
-				String pluginId = "";
-					try {
-						pluginId = iExtension.getDeclaringPluginDescriptor().getPlugin().toString();
-					} catch (InvalidRegistryObjectException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (CoreException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				String pluginId = iExtension.getNamespace();
 				String menuId = iConfigurationElement.getAttribute("menuid");
 				String treeName = iConfigurationElement.getAttribute("name");
 				String treeid = iConfigurationElement.getAttribute("treeid");
@@ -205,16 +196,7 @@ public class MenuTreeManagerFacede {
 				String index = iConfigurationElement.getAttribute("index");
 				String menuid = iConfigurationElement.getAttribute("menuid");
 				String icon = iConfigurationElement.getAttribute("icon");
-				String pluginId = "";
-				try {
-					pluginId = iExtension.getDeclaringPluginDescriptor().getPlugin().toString();
-				} catch (InvalidRegistryObjectException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (CoreException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				String pluginId = iExtension.getNamespace();
 				TopSunMenuModel menu = new TopSunMenuModel();
 				menu.setMenuID(menuid);
 				menu.setMenuName(meunName);
