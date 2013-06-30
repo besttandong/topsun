@@ -561,7 +561,7 @@ public class SalesView extends ViewPart {
 			cardNo.setText("");
 		}
 		
-		{
+		{ 
 			Label lable = new Label(leftComposite, SWT.NONE);
 			lable.setText("ÐÕÃû£º");
 			GridData data = new GridData();
