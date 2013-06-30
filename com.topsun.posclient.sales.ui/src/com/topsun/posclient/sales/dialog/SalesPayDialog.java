@@ -17,6 +17,12 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+
+/**
+ * 
+ * @author yujie
+ *
+ */
 public class SalesPayDialog extends Dialog{
 
 	public SalesPayDialog(Shell parent) {
