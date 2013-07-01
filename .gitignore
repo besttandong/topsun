@@ -4,3 +4,4 @@
 *.jar
 *.war
 *.ear
+/com.topsun.posclient.common.ui
