@@ -136,11 +136,11 @@ public abstract class AbstractSettings implements ISettings {
 	}
 
 	public String getNoneText() {
-		return "None";
+		return "Çå³ı";
 	}
 
 	public String getTodayText() {
-		return "Today";
+		return "½ñÌì";
 	}
 
 	public String getNoDateSetText() {
