@@ -9,6 +9,8 @@ import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
 
+import com.topsun.posclient.common.core.CommonCoreActivator;
+
 public class ProjectUtil {
 	
 	static SimpleDateFormat defaultFmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -36,13 +38,6 @@ public class ProjectUtil {
 		return path;
 	}
 	
-	/**
-	 * 格式化日期
-	 * 
-	 * @param dateStr 日期字符 如 2013-06-28
-	 * @param custFormat 格式字符 如 yyyy-MM-dd
-	 * @return Date对象
-	 */
 	public static Date getDateByFormat(String dateStr, String custFormat){
 		SimpleDateFormat dataformat = new SimpleDateFormat(custFormat);
 		Date date = null;
