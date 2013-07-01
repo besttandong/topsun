@@ -1,0 +1,180 @@
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.pos.webservice.topsunit.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="IPosWebServiceService" targetNamespace="http://service.pos.webservice.topsunit.com/">
+	<wsdl:types>
+		<xs:schema xmlns:tns="http://service.pos.webservice.topsunit.com/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+			targetNamespace="http://service.pos.webservice.topsunit.com/"
+			version="1.0">
+			<xs:element name="savePartSales" type="tns:savePartSales" />
+			<xs:element name="savePartSalesResponse" type="tns:savePartSalesResponse" />
+			<xs:element name="savePayment" type="tns:savePayment" />
+			<xs:element name="savePaymentResponse" type="tns:savePaymentResponse" />
+			<xs:element name="saveReceive" type="tns:saveReceive" />
+			<xs:element name="saveReceiveResponse" type="tns:saveReceiveResponse" />
+			<xs:element name="saveStorePay" type="tns:saveStorePay" />
+			<xs:element name="saveStorePayResponse" type="tns:saveStorePayResponse" />
+			<xs:element name="syncData" type="tns:syncData" />
+			<xs:element name="syncDataResponse" type="tns:syncDataResponse" />
+			<xs:complexType name="saveReceive">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="receiveDTO" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="saveReceiveResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="syncData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="type" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="syncDataResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="syncData" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="savePayment">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="paymentDTO" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="savePaymentResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="saveStorePay">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="payRecordDTO" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="saveStorePayResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="savePartSales">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="partSalesDTO" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="savePartSalesResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="savePartSales">
+		<wsdl:part element="tns:savePartSales" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="savePaymentResponse">
+		<wsdl:part element="tns:savePaymentResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="saveStorePay">
+		<wsdl:part element="tns:saveStorePay" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="savePayment">
+		<wsdl:part element="tns:savePayment" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="savePartSalesResponse">
+		<wsdl:part element="tns:savePartSalesResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="saveStorePayResponse">
+		<wsdl:part element="tns:saveStorePayResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="saveReceive">
+		<wsdl:part element="tns:saveReceive" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="syncData">
+		<wsdl:part element="tns:syncData" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="syncDataResponse">
+		<wsdl:part element="tns:syncDataResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="saveReceiveResponse">
+		<wsdl:part element="tns:saveReceiveResponse" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="IPosWebService">
+		<wsdl:operation name="saveReceive">
+			<wsdl:input message="tns:saveReceive" name="saveReceive"></wsdl:input>
+			<wsdl:output message="tns:saveReceiveResponse" name="saveReceiveResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="syncData">
+			<wsdl:input message="tns:syncData" name="syncData"></wsdl:input>
+			<wsdl:output message="tns:syncDataResponse" name="syncDataResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="savePayment">
+			<wsdl:input message="tns:savePayment" name="savePayment"></wsdl:input>
+			<wsdl:output message="tns:savePaymentResponse" name="savePaymentResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="saveStorePay">
+			<wsdl:input message="tns:saveStorePay" name="saveStorePay"></wsdl:input>
+			<wsdl:output message="tns:saveStorePayResponse" name="saveStorePayResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="savePartSales">
+			<wsdl:input message="tns:savePartSales" name="savePartSales"></wsdl:input>
+			<wsdl:output message="tns:savePartSalesResponse" name="savePartSalesResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="IPosWebServiceServiceSoapBinding"
+		type="tns:IPosWebService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="saveReceive">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="saveReceive">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="saveReceiveResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="savePayment">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="savePayment">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="savePaymentResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="syncData">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="syncData">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="syncDataResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="saveStorePay">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="saveStorePay">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="saveStorePayResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="savePartSales">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="savePartSales">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="savePartSalesResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="IPosWebServiceService">
+		<wsdl:port binding="tns:IPosWebServiceServiceSoapBinding"
+			name="IPosWebServicePort">
+			<soap:address location="http://localhost:22089/posWebService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

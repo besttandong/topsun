@@ -1,16 +1,28 @@
 package com.topsun.posclient.common;
 
+import java.net.URL;
+
+import javax.xml.namespace.QName;
+
+import com.topsun.posclient.common.webservice.IPosWebService;
+import com.topsun.posclient.common.webservice.IPosWebServiceService;
+
 /**
- * POSServerµ÷ÓÃÆ÷
- * ÓÃÀ´µ÷ÓÃPOSServerµÄwebservice½Ó¿Ú
+ * POSServerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½POSServerï¿½ï¿½webserviceï¿½Ó¿ï¿½
  * 
  * @author Dong
  *
  */
 public class POSServerCaller {
 	
-	public Object callServer() throws Exception {
-		return null;
+	public IPosWebService getWebService() throws Exception {
+		QName SERVICE_NAME = new QName("http://service.pos.webservice.topsunit.com/", "IPosWebServiceService");
+		// è°ƒç”¨æœåŠ¡å™¨WebServiceæ¥å£è·å–æœ€æ–°ç”¨æˆ·æ•°æ®
+		URL wsdlURL = IPosWebServiceService.WSDL_LOCATION;
+		IPosWebServiceService ss = new IPosWebServiceService(wsdlURL, SERVICE_NAME);
+        IPosWebService webservice = ss.getIPosWebServicePort();
+		return webservice;
 	}
 
 }

@@ -95,7 +95,7 @@ public class LocalDataProcessor {
 	 * @throws JAXBException
 	 * @throws IOException
 	 */
-	public void createXmlFileFromObject(Object data, String fileName,
+	public File createXmlFileFromObject(Object data, String fileName,
 			String dataPath) throws JAXBException, IOException {
 		String filePath = ProjectUtil.class.getClassLoader().getResource("")
 				.getFile();
@@ -108,5 +108,6 @@ public class LocalDataProcessor {
 		JAXBContext context = JAXBContext.newInstance(data.getClass());
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.marshal(data, fos);
+		return file;
 	}
 }
