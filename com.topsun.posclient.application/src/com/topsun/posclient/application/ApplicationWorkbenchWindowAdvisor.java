@@ -27,12 +27,12 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	public void preWindowOpen() {
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
-		configurer.setShowCoolBar(false);// ÏÔÊ¾¹¤¾ßÌõÇøÓò
-		configurer.setShowStatusLine(true);// ÏÔÊ¾×´Ì¬À¸ÇøÓò
-		configurer.setShowProgressIndicator(false); // ÏÔÊ¾½ø¶ÈÌõÇøÓò
+		configurer.setShowCoolBar(false);// æ˜¾ç¤ºå·¥å…·æ¡åŒºåŸŸ
+		configurer.setShowStatusLine(true);// æ˜¾ç¤ºçŠ¶æ€æ åŒºåŸŸ
+		configurer.setShowProgressIndicator(false); // æ˜¾ç¤ºè¿›åº¦æ¡åŒºåŸŸ
 		configurer.setTitle("TOPSUN");
 		//configurer.setShellStyle(SWT.CLOSE | SWT.MIN |SWT.MAX);
-		configurer.setShowMenuBar(false);// ÏÔÊ¾²Ëµ¥ÇøÓò
+		configurer.setShowMenuBar(false);// æ˜¾ç¤ºèœå•åŒºåŸŸ
 		configurer.setShowFastViewBars(false);
 	}
 
@@ -43,7 +43,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		customizationWindow(shell);
 		
 		IStatusLineManager statusLine = configurer.getActionBarConfigurer().getStatusLineManager();
-		statusLine.setMessage(null, "ÀëÏßÄ£Ê½\t\t|²¿ÃÅ£ºÓªÒµ²¿\t\t|²Ù×÷Ô±£ºÕÅÈı");  
+		statusLine.setMessage(null, "ç¦»çº¿æ¨¡å¼\t\t|éƒ¨é—¨ï¼šè¥ä¸šéƒ¨\t\t|æ“ä½œå‘˜ï¼šå¼ ä¸‰");  
 	}
 	
 	private void customizationWindow(Shell shell) {
