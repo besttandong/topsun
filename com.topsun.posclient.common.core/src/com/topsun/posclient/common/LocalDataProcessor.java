@@ -97,8 +97,7 @@ public class LocalDataProcessor {
 	 */
 	public File createXmlFileFromObject(Object data, String fileName,
 			String dataPath) throws JAXBException, IOException {
-		String filePath = ProjectUtil.class.getClassLoader().getResource("")
-				.getFile();
+		String filePath = ProjectUtil.getRuntimeClassPath();
 		File file = new File(filePath + dataPath + fileName + "_"
 				+ System.currentTimeMillis() + ".xml");
 		if (!file.exists()) {
