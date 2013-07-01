@@ -22,9 +22,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.topsun.posclient.common.POSClientApp;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
+import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 import com.topsun.posclient.sales.dialog.SalesPayDialog;
 import com.topsun.posclient.sales.service.IPartSaleService;
@@ -112,7 +114,7 @@ public class SalesView extends ViewPart {
 					partSales.setNo(orderNo.getText());
 					partSales.setRemark(remark.getText());
 					partSales.setSalesDate(new Date(salesDate.getDateAsString()));
-					partSales.setStorename(shopName.getText());
+					partSales.setShopName(shopName.getText());
 					partSales.setUserName(userName.getText());
 					if(tableViewer.getInput() instanceof List){
 						List list = (List)tableViewer.getInput();
@@ -412,6 +414,9 @@ public class SalesView extends ViewPart {
 	
 
 	private void buildBaseInfo(Composite parent) {
+		
+		User loginUser = POSClientApp.get().getLoginUser();
+		
 		Group baseInfo = new Group(parent, SWT.NONE);
 	
 		baseInfo.setText("基本信息：");
@@ -449,7 +454,8 @@ public class SalesView extends ViewPart {
 			data.widthHint = 185;
 			data.horizontalSpan = 3;
 			shopName.setLayoutData(data);
-			shopName.setItems(new String[]{"上海","北京"});
+			String loginShopName = loginUser.getDeptName();
+			shopName.setItems(new String[]{loginShopName});
 			shopName.setEnabled(false);
 			shopName.select(0);
 		}
@@ -487,7 +493,8 @@ public class SalesView extends ViewPart {
 			data.horizontalSpan = 3;
 			data.widthHint = 185;
 			casher.setLayoutData(data);
-			casher.setItems(new String[]{"销售"});
+			String userName = loginUser.getUserName();
+			casher.setItems(new String[]{userName});
 			casher.select(0);
 		}
 		{

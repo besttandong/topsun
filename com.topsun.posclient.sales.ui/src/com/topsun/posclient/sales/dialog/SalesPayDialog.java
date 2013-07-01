@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * 
- * @author yujie
+ * @author yujie creator
  *
  */
 public class SalesPayDialog extends Dialog{
@@ -31,7 +31,7 @@ public class SalesPayDialog extends Dialog{
 
 	@Override
 	protected Control createContents(Composite parent) {
-		Font font = new Font(parent.getDisplay(),"黑体", 12, SWT.BOLD);
+		Font font = new Font(parent.getDisplay(),"榛戜綋", 12, SWT.BOLD);
 		Composite compsite = new Composite(parent, SWT.BORDER);
 		
 		compsite.setLayout(new GridLayout(3, false));
@@ -42,7 +42,7 @@ public class SalesPayDialog extends Dialog{
 			Label label = new Label(compsite, SWT.NONE);
 			GridData data = new GridData(GridData.FILL_HORIZONTAL);
 			label.setLayoutData(data);
-			label.setText("交易单号(F6):");
+			label.setText("鏀堕摱鏂瑰紡(F6):");
 		}
 		{
 			Text text = new Text(compsite, SWT.BORDER);
@@ -62,7 +62,7 @@ public class SalesPayDialog extends Dialog{
 			Label label = new Label(compsite, SWT.NONE);
 			GridData data = new GridData(GridData.FILL_HORIZONTAL);
 			label.setLayoutData(data);
-			label.setText("手工单号(F5):");
+			label.setText("鎵嬪伐鍗曞彿(F5):");
 		}
 		{
 			Text text = new Text(compsite, SWT.BORDER);
@@ -76,7 +76,7 @@ public class SalesPayDialog extends Dialog{
 			Label label = new Label(compsite, SWT.NONE);
 			GridData data = new GridData(GridData.FILL_HORIZONTAL);
 			label.setLayoutData(data);
-			label.setText("合计金额:");
+			label.setText("鍚堣閲戦:");
 		}
 		{
 			Text text = new Text(compsite, SWT.BORDER);
@@ -100,13 +100,13 @@ public class SalesPayDialog extends Dialog{
 			table.setHeaderVisible(true);
 			{
 				TableColumn column = new TableColumn(table, SWT.NONE);
-				column.setText("收银方式(F3)");
+				column.setText("鏀堕摱鏂瑰紡(F3)");
 				column.setWidth(170);
 			}
 			
 			{
 				TableColumn column = new TableColumn(table, SWT.NONE);
-				column.setText("收款金额");
+				column.setText("鏀舵閲戦");
 				column.setWidth(170);
 			}
 		}
@@ -114,7 +114,7 @@ public class SalesPayDialog extends Dialog{
 			Label label = new Label(compsite, SWT.NONE);
 			GridData data = new GridData(GridData.FILL_HORIZONTAL);
 			label.setLayoutData(data);
-			label.setText("现金找补:");
+			label.setText("鐜伴噾鎵捐ˉ:");
 		}
 		{
 			Text text = new Text(compsite, SWT.BORDER);
@@ -126,7 +126,6 @@ public class SalesPayDialog extends Dialog{
 			text.setEditable(false);
 			text.setText("20.00");
 		}
-	
 		return super.createContents(parent);
 	}
 	
