@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
-import com.topsun.posclient.datamodel.AdjustStoreInfo;
+import com.topsun.posclient.datamodel.AdjustShopInfo;
 import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
@@ -59,36 +59,36 @@ public class MockDataFactory {
 		return itemList;
 	}
 	
-	public static List<AdjustStoreInfo> createAdjustStoreInfoList(){
-		AdjustStoreInfo adjustStoreInfo1 = new AdjustStoreInfo();
-		adjustStoreInfo1.setCallDate(ProjectUtil.getDate("2013-06-25"));
-		adjustStoreInfo1.setCallType("1");
-		adjustStoreInfo1.setCheckDate(ProjectUtil.getDate("2013-06-25"));
-		adjustStoreInfo1.setItemNum(2);
-		adjustStoreInfo1.setId("00101");
-		adjustStoreInfo1.setIntoStore("乐天超市晨光家园店");
-		adjustStoreInfo1.setOutStore("乐天超市东直门店");
-		adjustStoreInfo1.setReCheckDate(ProjectUtil.getDate("2013-06-25"));
-		adjustStoreInfo1.setVoucherNo("20130625001");
-		adjustStoreInfo1.setItemList(createItemList());
+	public static List<AdjustShopInfo> createAdjustShopInfoList(){
+		AdjustShopInfo adjustShopInfo1 = new AdjustShopInfo();
+		adjustShopInfo1.setCallDate(ProjectUtil.getDate("2013-06-25"));
+		adjustShopInfo1.setCallType("1");
+		adjustShopInfo1.setCheckDate(ProjectUtil.getDate("2013-06-25"));
+		adjustShopInfo1.setItemNum(2);
+		adjustShopInfo1.setId("00101");
+		adjustShopInfo1.setIntoShop("乐天超市晨光家园店");
+		adjustShopInfo1.setOutShop("乐天超市东直门店");
+		adjustShopInfo1.setReCheckDate(ProjectUtil.getDate("2013-06-25"));
+		adjustShopInfo1.setVoucherNo("20130625001");
+		adjustShopInfo1.setItemList(createItemList());
 		
-		AdjustStoreInfo adjustStoreInfo2 = new AdjustStoreInfo();
-		adjustStoreInfo2.setCallDate(ProjectUtil.getDate("2013-06-24"));
-		adjustStoreInfo2.setCallType("2");
-		adjustStoreInfo2.setCheckDate(ProjectUtil.getDate("2013-06-24"));
-		adjustStoreInfo2.setItemNum(2);
-		adjustStoreInfo2.setId("00102");
-		adjustStoreInfo2.setIntoStore("美廉美超市晨光家园店");
-		adjustStoreInfo2.setOutStore("美廉美超市东直门店");
-		adjustStoreInfo2.setReCheckDate(ProjectUtil.getDate("2013-06-24"));
-		adjustStoreInfo2.setVoucherNo("20130625002");
-		adjustStoreInfo2.setItemList(createItemList());
+		AdjustShopInfo adjustShopInfo2 = new AdjustShopInfo();
+		adjustShopInfo2.setCallDate(ProjectUtil.getDate("2013-06-24"));
+		adjustShopInfo2.setCallType("2");
+		adjustShopInfo2.setCheckDate(ProjectUtil.getDate("2013-06-24"));
+		adjustShopInfo2.setItemNum(2);
+		adjustShopInfo2.setId("00102");
+		adjustShopInfo2.setIntoShop("美廉美超市晨光家园店");
+		adjustShopInfo2.setOutShop("美廉美超市东直门店");
+		adjustShopInfo2.setReCheckDate(ProjectUtil.getDate("2013-06-24"));
+		adjustShopInfo2.setVoucherNo("20130625002");
+		adjustShopInfo2.setItemList(createItemList());
 		
-		List<AdjustStoreInfo> adjustStoreInfos = new ArrayList<AdjustStoreInfo>();
-		adjustStoreInfos.add(adjustStoreInfo1);
-		adjustStoreInfos.add(adjustStoreInfo2);
+		List<AdjustShopInfo> adjustShopInfos = new ArrayList<AdjustShopInfo>();
+		adjustShopInfos.add(adjustShopInfo1);
+		adjustShopInfos.add(adjustShopInfo2);
 		
-		return adjustStoreInfos;
+		return adjustShopInfos;
 	}
 	
 	
@@ -103,7 +103,7 @@ public class MockDataFactory {
 		adjustRepositoryInfo1.setReceiveRepository("朝阳区十里铺仓库");
 		adjustRepositoryInfo1.setReCheckDate(ProjectUtil.getDate("2013-09-08"));
 		adjustRepositoryInfo1.setRemark("备注信息");
-		adjustRepositoryInfo1.setStoreName("物美超市");
+		adjustRepositoryInfo1.setShopName("物美超市");
 		adjustRepositoryInfo1.setItemList(createItemList());
 		
 		AdjustRepositoryInfo adjustRepositoryInfo2 = new AdjustRepositoryInfo();
@@ -116,7 +116,7 @@ public class MockDataFactory {
 		adjustRepositoryInfo2.setReceiveRepository("东城区和平里仓库");
 		adjustRepositoryInfo2.setReCheckDate(ProjectUtil.getDate("2013-08-08"));
 		adjustRepositoryInfo2.setRemark("备注信息");
-		adjustRepositoryInfo2.setStoreName("物美超市");
+		adjustRepositoryInfo2.setShopName("物美超市");
 		adjustRepositoryInfo2.setItemList(createItemList());
 		
 		List<AdjustRepositoryInfo> adjustRepositoryInfos = new ArrayList<AdjustRepositoryInfo>();
@@ -140,7 +140,7 @@ public class MockDataFactory {
 		partSales1.setNo("20130627001");
 		partSales1.setRemark("备注信息");
 		partSales1.setSalesDate(ProjectUtil.getDate("2013-06-27"));
-		partSales1.setStorename("朝阳区十里铺店");
+		partSales1.setShopName("朝阳区十里铺店");
 		partSales1.setUserName("会员一");
 		
 		PartSales partSales2 = new PartSales();
@@ -156,7 +156,7 @@ public class MockDataFactory {
 		partSales2.setNo("20130627002");
 		partSales2.setRemark("备注信息");
 		partSales2.setSalesDate(ProjectUtil.getDate("2013-06-27"));
-		partSales2.setStorename("朝阳区十里铺店");
+		partSales2.setShopName("朝阳区十里铺店");
 		partSales2.setUserName("会员二");
 		
 		List<PartSales> partSalesList = new ArrayList<PartSales>();

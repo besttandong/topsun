@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * ÁãÊÛĞÅÏ¢
+ * é›¶å”®ä¿¡æ¯
  * 
  * @author Dong
  *
@@ -17,31 +17,31 @@ public class PartSales implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String storename; //µêÆÌÃû³Æ
+	private String shopName; //åº—é“ºåç§°
 	
-	private String no;//µ¥¾İ±àºÅ
+	private String no;//å•æ®ç¼–å·
 	
-	private String balloter;//ÊÕÒøÔ±
+	private String balloter;//æ”¶é“¶å‘˜
 	
-	private String ballotNo;//ÊÕÒøÆ±ºÅ
+	private String ballotNo;//æ”¶é“¶ç¥¨å·
 	
-	private String remark;// ±¸×¢
+	private String remark;// å¤‡æ³¨
 	
-	private Date salesDate;//ÏúÊÛÈÕÆÚ
+	private Date salesDate;//é”€å”®æ—¥æœŸ
 	
-	private Date checkDate; //ÉóºËÈÕÆÚ
+	private Date checkDate; //å®¡æ ¸æ—¥æœŸ
 	
-	private String userName; //»áÔ±
+	private String userName; //ä¼šå‘˜
 	
-	private String cardNo;// »áÔ±¿¨ºÅ
+	private String cardNo;// ä¼šå‘˜å¡å·
 	
-	private String enableBalance; //¿ÉÓÃÓà¶î
+	private String enableBalance; //å¯ç”¨ä½™é¢
 
-	private String enablePoint; //¿ÉÓÃ»ı·Ö
+	private String enablePoint; //å¯ç”¨ç§¯åˆ†
 	
-	private String applyUser;//ÖÆµ¥ÈË
+	private String applyUser;//åˆ¶å•äºº
 	
-	private String checker;//ÉóºËÈË
+	private String checker;//å®¡æ ¸äºº
 	
 	private List<Item> itemList;
 	
@@ -109,12 +109,12 @@ public class PartSales implements Serializable {
 		this.checker = checker;
 	}
 
-	public String getStorename() {
-		return storename;
+	public String getShopName() {
+		return shopName;
 	}
 
-	public void setStorename(String storename) {
-		this.storename = storename;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
 	public String getNo() {

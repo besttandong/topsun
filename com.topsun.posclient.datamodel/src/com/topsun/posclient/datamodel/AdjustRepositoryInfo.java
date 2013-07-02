@@ -4,34 +4,34 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * µ÷²ÖĞÅÏ¢
+ * è°ƒä»“ä¿¡æ¯
  * 
  * @author Dong
  *
  */
 public class AdjustRepositoryInfo {
 	
-	private String id; //±êÊ¶
+	private String id; //æ ‡è¯†
 	
-	private String storeName; //»Ø²ÖµêÆÌ
+	private String shopName; //å›ä»“åº—é“º
 	
-	private String orderNo; //µ¥¾İ±àºÅ
+	private String orderNo; //å•æ®ç¼–å·
 	
-	private String deliver; //·¢»õÈË
+	private String deliver; //å‘è´§äºº
 	
-	private Date backDate; //µ÷²ÖÈÕÆÚ
+	private Date backDate; //è°ƒä»“æ—¥æœŸ
 	
-	private String receiveRepository; // ÊÕ»ñ²Ö¿â
+	private String receiveRepository; // æ”¶è·ä»“åº“
 	
-	private Date checkDate;//ÉóºËÈÕÆÚ
+	private Date checkDate;//å®¡æ ¸æ—¥æœŸ
 	
-	private String backReason;//»Ø²ÖÔ­Òò
+	private String backReason;//å›ä»“åŸå› 
 	
-	private Date reCheckDate; //¸´ºËÈÕÆÚ
+	private Date reCheckDate; //å¤æ ¸æ—¥æœŸ
 	
-	private String remark;//±¸×¢
+	private String remark;//å¤‡æ³¨
 	
-	private List<Item> itemList; // ÉÌÆ·ÁĞ±í
+	private List<Item> itemList; // å•†å“åˆ—è¡¨
 	
 	public String getId() {
 		return id;
@@ -49,12 +49,12 @@ public class AdjustRepositoryInfo {
 		this.itemList = itemList;
 	}
 
-	public String getStoreName() {
-		return storeName;
+	public String getShopName() {
+		return shopName;
 	}
 
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
 	public String getOrderNo() {

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.topsun.posclient.datamodel.AdjustStoreInfo;
+import com.topsun.posclient.datamodel.AdjustShopInfo;
 
 /**
  * @author Dong
@@ -28,16 +28,16 @@ public class AdjustStoreDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<AdjustStoreInfo> adjustStoreInfos;
+	private List<AdjustShopInfo> adjustStoreInfos;
 
 	@XmlElements({
-        @XmlElement(name = "adjustStoreInfo", type = AdjustStoreInfo.class)
+        @XmlElement(name = "adjustStoreInfo", type = AdjustShopInfo.class)
     })
-	public List<AdjustStoreInfo> getAdjustStoreInfos() {
+	public List<AdjustShopInfo> getAdjustStoreInfos() {
 		return adjustStoreInfos;
 	}
 
-	public void setAdjustStoreInfos(List<AdjustStoreInfo> adjustStoreInfos) {
+	public void setAdjustStoreInfos(List<AdjustShopInfo> adjustStoreInfos) {
 		this.adjustStoreInfos = adjustStoreInfos;
 	}
 

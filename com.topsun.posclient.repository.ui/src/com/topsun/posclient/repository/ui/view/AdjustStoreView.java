@@ -29,7 +29,7 @@ import com.topsun.widget.calendar.CalendarCombo;
 import com.topsun.widget.calendar.DefaultSettings;
 
 /**
- * µ÷µêÊÓÍ¼
+ * è°ƒåº—è§†å›¾
  * 
  * @author Dong
  *
@@ -42,19 +42,19 @@ public class AdjustStoreView extends ViewPart {
 
 	public AdjustRepositoryInfo adjustRepositoryInfo;
 
-	public Combo storeName;//µ÷²ÖµêÆÌ
-	public Text orderNo; //µ¥¾İ±àºÅ
-	public Combo deliver;//·¢»õÈË
-	public Combo receiveRepository;//ÊÕ»õ²Ö¿â
-	public Text backReason;//»Ø²ÖÔ­Òò
+	public Combo storeName;//è°ƒä»“åº—é“º
+	public Text orderNo; //å•æ®ç¼–å·
+	public Combo deliver;//å‘è´§äºº
+	public Combo receiveRepository;//æ”¶è´§ä»“åº“
+	public Text backReason;//å›ä»“åŸå› 
 	
-	public CalendarCombo backDate;//»Ø²ÖÈÕÆÚ
-	public CalendarCombo checkDate;//ÉóºËÈÕÆÚ
-	public CalendarCombo reCheckDate;//¸´ºËÈÕÆÚ
+	public CalendarCombo backDate;//å›ä»“æ—¥æœŸ
+	public CalendarCombo checkDate;//å®¡æ ¸æ—¥æœŸ
+	public CalendarCombo reCheckDate;//å¤æ ¸æ—¥æœŸ
 
-	public Text applyUser;//ÖÆµ¥ÈË
-	public Text checker;//ÉóºËÈË
-	public Text remark;//±¸×¢
+	public Text applyUser;//åˆ¶å•äºº
+	public Text checker;//å®¡æ ¸äºº
+	public Text remark;//å¤‡æ³¨
 
 	public TableViewer tableViewer;
 
@@ -78,7 +78,7 @@ public class AdjustStoreView extends ViewPart {
 
 		{
 			Button button = new Button(operation, SWT.NONE);
-			button.setText("±£´æ");
+			button.setText("ä¿å­˜");
 			// button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID,
 			// "ok.gif"));
 			GridData data = new GridData();
@@ -90,7 +90,7 @@ public class AdjustStoreView extends ViewPart {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					adjustRepositoryInfo = new AdjustRepositoryInfo();
-					adjustRepositoryInfo.setStoreName(storeName.getText());
+					adjustRepositoryInfo.setShopName(storeName.getText());
 					adjustRepositoryInfo.setOrderNo(orderNo.getText());
 					adjustRepositoryInfo.setDeliver(deliver.getText());
 					adjustRepositoryInfo.setBackDate(new Date(backDate.getDateAsString()));
@@ -124,7 +124,7 @@ public class AdjustStoreView extends ViewPart {
 
 		{
 			Button button = new Button(operation, SWT.NONE);
-			button.setText("È¡Ïû");
+			button.setText("å–æ¶ˆ");
 			// button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID,
 			// "nook.png"));
 			GridData data = new GridData();
@@ -142,7 +142,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("ÖÆ×÷ÈË£º");
+			label.setText("åˆ¶ä½œäººï¼š");
 		}
 		{
 			applyUser = new Text(recodeComposite, SWT.BORDER);
@@ -151,14 +151,14 @@ public class AdjustStoreView extends ViewPart {
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
 			applyUser.setLayoutData(data);
-			applyUser.setText("ÕÅÈı");
+			applyUser.setText("å¼ ä¸‰");
 		}
 		{
 			Label label = new Label(recodeComposite, SWT.NONE);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("ÉóºËÈË£º");
+			label.setText("å®¡æ ¸äººï¼š");
 		}
 		{
 			checker = new Text(recodeComposite, SWT.BORDER);
@@ -167,7 +167,7 @@ public class AdjustStoreView extends ViewPart {
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
 			checker.setLayoutData(data);
-			checker.setText("ÕÅÈı");
+			checker.setText("å¼ ä¸‰");
 		}
 
 	}
@@ -180,7 +180,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("ÊıÁ¿ºÏ¼Æ£º");
+			label.setText("æ•°é‡åˆè®¡ï¼š");
 		}
 		{
 			Text text = new Text(caculatorComposite, SWT.BORDER);
@@ -194,7 +194,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("½ğ¶îºÏ¼Æ£º");
+			label.setText("é‡‘é¢åˆè®¡ï¼š");
 		}
 		{
 			Text text = new Text(caculatorComposite, SWT.BORDER);
@@ -209,7 +209,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("¿â´æÁ¿£º");
+			label.setText("åº“å­˜é‡ï¼š");
 		}
 		{
 			Text text = new Text(caculatorComposite, SWT.BORDER);
@@ -229,7 +229,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("ÌõĞÎÂëÊäÈë£º");
+			label.setText("æ¡å½¢ç è¾“å…¥ï¼š");
 		}
 		{
 			Text text = new Text(printCompoiste, SWT.BORDER);
@@ -243,7 +243,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("ÊıÁ¿£º");
+			label.setText("æ•°é‡ï¼š");
 		}
 		{
 			Text text = new Text(printCompoiste, SWT.BORDER);
@@ -255,7 +255,7 @@ public class AdjustStoreView extends ViewPart {
 
 		{
 			Button button = new Button(printCompoiste, SWT.NONE);
-			button.setText("É¨Ãè¼ÆÊıÄ£Ê½");
+			button.setText("æ‰«æè®¡æ•°æ¨¡å¼");
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -282,7 +282,7 @@ public class AdjustStoreView extends ViewPart {
 
 		{
 			Button button = new Button(printCompoiste, SWT.NONE);
-			button.setText("¶¨³¤É¨Ãè");
+			button.setText("å®šé•¿æ‰«æ");
 			//button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "sales.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
@@ -296,7 +296,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("Ô¤Éè³¤¶È£º");
+			label.setText("é¢„è®¾é•¿åº¦ï¼š");
 		}
 		{
 			Spinner spinner = new Spinner(printCompoiste, SWT.BORDER);
@@ -309,7 +309,7 @@ public class AdjustStoreView extends ViewPart {
 
 	private void buildProductInfo(Composite parent) {
 		Group productInfo = new Group(parent, SWT.NONE);
-		productInfo.setText("ÉÌÆ·ĞÅÏ¢");
+		productInfo.setText("å•†å“ä¿¡æ¯");
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginLeft = 20;
 		// gridLayout.horizontalSpacing = 20;
@@ -333,52 +333,52 @@ public class AdjustStoreView extends ViewPart {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("ÉÌÆ·ËÑË÷");
+			column.setText("å•†å“æœç´¢");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("¿îºÅ");
+			column.setText("æ¬¾å·");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("ÊıÁ¿");
+			column.setText("æ•°é‡");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("¼Û¸ñÇåµ¥");
+			column.setText("ä»·æ ¼æ¸…å•");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("ÁãÊÛ¼Û");
+			column.setText("é›¶å”®ä»·");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("ÕÛ¿ÛÂÊ");
+			column.setText("æŠ˜æ‰£ç‡");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("ÕÛ¿Û½ğ¶î");
+			column.setText("æŠ˜æ‰£é‡‘é¢");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("µ¥¼Û");
+			column.setText("å•ä»·");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("½ğ¶î");
+			column.setText("é‡‘é¢");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("µ¥Æ·»ı·Ö");
+			column.setText("å•å“ç§¯åˆ†");
 		}
 
 	}
@@ -386,7 +386,7 @@ public class AdjustStoreView extends ViewPart {
 	private void buildBaseInfo(Composite parent) {
 		Group baseInfo = new Group(parent, SWT.NONE);
 
-		baseInfo.setText("»ù±¾ĞÅÏ¢£º");
+		baseInfo.setText("åŸºæœ¬ä¿¡æ¯ï¼š");
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = 30;
 		// gridLayout.horizontalSpacing = 50;
@@ -412,7 +412,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("»Ø²ÖµêÆÌ£º");
+			label.setText("å›ä»“åº—é“ºï¼š");
 		}
 		{
 			storeName = new Combo(leftComposite, SWT.NONE);
@@ -421,7 +421,7 @@ public class AdjustStoreView extends ViewPart {
 			data.horizontalSpan = 3;
 			storeName.select(0);
 			storeName.setLayoutData(data);
-			storeName.setItems(new String[] { "ÉÏº£", "±±¾©" });
+			storeName.setItems(new String[] { "ä¸Šæµ·", "åŒ—äº¬" });
 		}
 
 		{
@@ -429,7 +429,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("µ¥¾İ±àºÅ£º");
+			label.setText("å•æ®ç¼–å·ï¼š");
 		}
 		{
 			orderNo = new Text(rightCompoiste, SWT.BORDER);
@@ -445,7 +445,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("·¢»õÈË£º");
+			lable.setText("å‘è´§äººï¼š");
 		}
 		{
 			deliver = new Combo(leftComposite, SWT.NONE);
@@ -453,7 +453,7 @@ public class AdjustStoreView extends ViewPart {
 			data.horizontalSpan = 3;
 			data.widthHint = 185;
 			deliver.setLayoutData(data);
-			deliver.setItems(new String[] { "ÏúÊÛ" });
+			deliver.setItems(new String[] { "é”€å”®" });
 			deliver.select(0);
 		}
 		{
@@ -461,7 +461,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("µ÷²ÖÈÕÆÚ£º");
+			lable.setText("è°ƒä»“æ—¥æœŸï¼š");
 		}
 		{
 			backDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY, new Settings(), null);
@@ -476,7 +476,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("ÊÕ»õ²Ö¿â£º");
+			lable.setText("æ”¶è´§ä»“åº“ï¼š");
 		}
 		{
 			receiveRepository = new Combo(leftComposite, SWT.NONE);
@@ -484,7 +484,7 @@ public class AdjustStoreView extends ViewPart {
 			data.widthHint = 185;
 			data.horizontalSpan = 3;
 			receiveRepository.setLayoutData(data);
-			receiveRepository.setItems(new String[] { "ÏúÊÛ" });
+			receiveRepository.setItems(new String[] { "é”€å”®" });
 			receiveRepository.select(0);
 		}
 
@@ -493,7 +493,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("ÉóºËÈÕÆÚ£º");
+			lable.setText("å®¡æ ¸æ—¥æœŸï¼š");
 		}
 		{
 			checkDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY,
@@ -509,7 +509,7 @@ public class AdjustStoreView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("»Ø²ÖÔ­Òò£º");
+			lable.setText("å›ä»“åŸå› ï¼š");
 		}
 		{
 			backReason = new Text(leftComposite, SWT.BORDER);
@@ -522,7 +522,7 @@ public class AdjustStoreView extends ViewPart {
 
 		{
 			Label lable = new Label(rightCompoiste, SWT.NONE);
-			lable.setText("¸´ºËÈÕÆÚ£º");
+			lable.setText("å¤æ ¸æ—¥æœŸï¼š");
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -537,7 +537,7 @@ public class AdjustStoreView extends ViewPart {
 		}
 		{
 			Label lable = new Label(underCompsite, SWT.NONE);
-			lable.setText("×¢ÊÍ£º");
+			lable.setText("æ³¨é‡Šï¼š");
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);

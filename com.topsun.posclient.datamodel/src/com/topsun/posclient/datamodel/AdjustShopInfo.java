@@ -4,34 +4,34 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 调店信息
+ * 璋冨簵淇℃伅
  * 
  * @author Dong
  *
  */
-public class AdjustStoreInfo {
+public class AdjustShopInfo {
 	
-	private String id; //标识
+	private String id; //鏍囪瘑
 	
-	private String outStore; //调出店铺
+	private String outShop; //璋冨嚭搴楅摵
 	
-	private String intoStore;//调入店铺
+	private String intoShop;//璋冨叆搴楅摵
 	
-	private String voucherNo; //单据编号
+	private String voucherNo; //鍗曟嵁缂栧彿
 	
-	private Date callDate; //调拨日期
+	private Date callDate; //璋冩嫧鏃ユ湡
 	
-	private String callType; // 调拨类型
+	private String callType; // 璋冩嫧绫诲瀷
 	
-	private Date checkDate;//审核日期
+	private Date checkDate;//瀹℃牳鏃ユ湡
 	
-	private Date reCheckDate; //复核日期
+	private Date reCheckDate; //澶嶆牳鏃ユ湡
 	
-	private String remark;//备注
+	private String remark;//澶囨敞
 	
-	private int itemNum; //调货数量 取goosList的size
+	private int itemNum; //璋冭揣鏁伴噺 鍙杇oosList鐨剆ize
 	
-	private List<Item> itemList; // 商品列表
+	private List<Item> itemList; // 鍟嗗搧鍒楄〃
 	
 	public String getId() {
 		return id;
@@ -81,20 +81,20 @@ public class AdjustStoreInfo {
 		this.remark = remark;
 	}
 
-	public String getOutStore() {
-		return outStore;
+	public String getOutShop() {
+		return outShop;
 	}
 
-	public void setOutStore(String outStore) {
-		this.outStore = outStore;
+	public void setOutShop(String outShop) {
+		this.outShop = outShop;
 	}
 
-	public String getIntoStore() {
-		return intoStore;
+	public String getIntoShop() {
+		return intoShop;
 	}
 
-	public void setIntoStore(String intoStore) {
-		this.intoStore = intoStore;
+	public void setIntoShop(String intoShop) {
+		this.intoShop = intoShop;
 	}
 
 	public Date getCallDate() {
