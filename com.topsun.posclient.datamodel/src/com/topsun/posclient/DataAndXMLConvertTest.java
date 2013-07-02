@@ -11,8 +11,10 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Function;
 import com.topsun.posclient.datamodel.User;
+import com.topsun.posclient.datamodel.dto.CashierModeDTO;
 import com.topsun.posclient.datamodel.dto.UserDTO;
 
 public class DataAndXMLConvertTest {
@@ -22,20 +24,20 @@ public class DataAndXMLConvertTest {
 		Function child1 = new Function();
 		child1.setId(3);
 		child1.setActionURL("com.topsun.posclient.sales.PartSalesView");
-		child1.setFunctionName("ÁãÊÛ");
-		child1.setDescription("¹¦ÄÜÃèÊö");
+		child1.setFunctionName("é›¶å”®");
+		child1.setDescription("åŠŸèƒ½æè¿°");
 		
 		Function child2 = new Function();
 		child2.setId(4);
 		child2.setActionURL("com.topsun.posclient.sales.ReceiveView");
-		child2.setFunctionName("ÊÕ¿î");
-		child2.setDescription("¹¦ÄÜÃèÊö");
+		child2.setFunctionName("æ”¶æ¬¾");
+		child2.setDescription("åŠŸèƒ½æè¿°");
 		
 		Function child3 = new Function();
 		child3.setId(5);
 		child3.setActionURL("com.topsun.posclient.sales.PaymentView");
-		child3.setFunctionName("¸¶¿î");
-		child3.setDescription("¹¦ÄÜÃèÊö");
+		child3.setFunctionName("ä»˜æ¬¾");
+		child3.setDescription("åŠŸèƒ½æè¿°");
 		
 		List<Function> childs1 = new ArrayList<Function>();
 		childs1.add(child1);
@@ -47,15 +49,15 @@ public class DataAndXMLConvertTest {
 		Function function1 = new Function();
 		function1.setId(1);
 		function1.setActionURL("com.topsun.posclient.sales");
-		function1.setFunctionName("ÏúÊÛÄ£¿é");
-		function1.setDescription("¹¦ÄÜÃèÊö");
+		function1.setFunctionName("é”€å”®æ¨¡å—");
+		function1.setDescription("åŠŸèƒ½æè¿°");
 		function1.setChilds(childs1);
 		
 		Function function2 = new Function();
 		function2.setId(2);
 		function2.setActionURL("com.topsun.posclient.finance");
-		function2.setFunctionName("²ÆÎñÄ£¿é");
-		function2.setDescription("¹¦ÄÜÃèÊö");
+		function2.setFunctionName("è´¢åŠ¡æ¨¡å—");
+		function2.setDescription("åŠŸèƒ½æè¿°");
 		function2.setChilds(childs2);
 		
 		List<Function> functionList = new ArrayList<Function>();
@@ -70,9 +72,9 @@ public class DataAndXMLConvertTest {
 		user1.setUserCode("10010");
 		user1.setUserName("zhangsan");
 		user1.setDeptId(1);
-		user1.setDeptName("ÓªÒµ²¿");
+		user1.setDeptName("è¥ä¸šéƒ¨");
 		user1.setEmployeeId(1);
-		user1.setEmployeeName("ÕÅÈı");
+		user1.setEmployeeName("å¼ ä¸‰");
 		user1.setPassWord("123456");
 		user1.setFunctionList(functionList);
 		
@@ -81,9 +83,9 @@ public class DataAndXMLConvertTest {
 		user2.setUserCode("10010");
 		user2.setUserName("lisi");
 		user2.setDeptId(1);
-		user2.setDeptName("ÓªÒµ²¿");
+		user2.setDeptName("è¥ä¸šéƒ¨");
 		user2.setEmployeeId(1);
-		user2.setEmployeeName("ÀîËÄ");
+		user2.setEmployeeName("æå››");
 		user2.setPassWord("123456");
 		user2.setFunctionList(functionList);
 		
@@ -93,7 +95,27 @@ public class DataAndXMLConvertTest {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUserList(userList);
 		
+		CashierModel model1 = new CashierModel();
+		model1.setId(1);
+		model1.setTypeName("ç°é‡‘");
+		CashierModel model2 = new CashierModel();
+		model2.setId(2);
+		model2.setTypeName("é“¶è¡Œå¡");
+		CashierModel model3 = new CashierModel();
+		model3.setId(3);
+		model3.setTypeName("æ”¯ç¥¨");
+		CashierModel model4 = new CashierModel();
+		model4.setId(4);
+		model4.setTypeName("ä»£é‡‘åˆ¸");
 		
+		List<CashierModel> cashierModeList = new ArrayList<CashierModel>();
+		cashierModeList.add(model1);
+		cashierModeList.add(model2);
+		cashierModeList.add(model3);
+		cashierModeList.add(model4);
+		
+		CashierModeDTO cashierModeDTO = new CashierModeDTO();
+		cashierModeDTO.setCashierModeList(cashierModeList);
 		
 		/**
 		 * 

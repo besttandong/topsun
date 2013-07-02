@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.topsun.posclient.datamodel.CashierMode;
+import com.topsun.posclient.datamodel.CashierModel;
 
 /**
  * @author Dong
@@ -28,16 +28,16 @@ public class CashierModeDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<CashierMode> cashierModeList;
+	private List<CashierModel> cashierModeList;
 
 	@XmlElements({
-        @XmlElement(name = "cashierMode", type = CashierMode.class)
+        @XmlElement(name = "cashierMode", type = CashierModel.class)
     })
-	public List<CashierMode> getCashierModeList() {
+	public List<CashierModel> getCashierModeList() {
 		return cashierModeList;
 	}
 
-	public void setCashierModeList(List<CashierMode> cashierModeList) {
+	public void setCashierModeList(List<CashierModel> cashierModeList) {
 		this.cashierModeList = cashierModeList;
 	}
     
