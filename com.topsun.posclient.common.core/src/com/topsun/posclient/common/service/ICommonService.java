@@ -2,10 +2,10 @@ package com.topsun.posclient.common.service;
 
 import java.util.List;
 
-import com.topsun.posclient.datamodel.CashierMode;
+import com.topsun.posclient.datamodel.CashierModel;
 
 /**
- * ¹«¹²·þÎñ½Ó¿Ú
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
  * 
  * @author Dong
  *
@@ -13,19 +13,19 @@ import com.topsun.posclient.datamodel.CashierMode;
 public interface ICommonService {
 	
 	/**
-	 * ¸ù¾ÝÓÃ»§ID»ñÈ¡ËùÔÚµêÆÌ
-	 * @param userId ÓÃ»§ID
-	 * @return µêÆÌ¶ÔÏó
+	 * ï¿½ï¿½ï¿½ï¿½Ã»ï¿½IDï¿½ï¿½È¡ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½
+	 * @param userId ï¿½Ã»ï¿½ID
+	 * @return ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½
 	 * @throws Exception
 	 */
 	public String getShopNameByUserId(int userId) throws Exception;
 	
 	/**
-	 * »ñÈ¡ËùÓÐ½áËã·½Ê½
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ð½ï¿½ï¿½ã·½Ê½
 	 * 
-	 * @return ½áËã·½Ê½ÁÐ±í
+	 * @return ï¿½ï¿½ï¿½ã·½Ê½ï¿½Ð±ï¿½
 	 * @throws Exception
 	 */
-	public List<CashierMode> getAllCashierMode() throws Exception;
+	public List<CashierModel> getAllCashierMode() throws Exception;
 
 }

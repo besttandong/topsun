@@ -5,11 +5,12 @@ import java.util.List;
 
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.AdjustStoreInfo;
+import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
 
 /**
- * Ä£ÄâÊı¾İ¹¤³§
+ * æ¨¡æ‹Ÿæ•°æ®å·¥å‚
  * 
  * @author Dong
  *
@@ -23,7 +24,7 @@ public class MockDataFactory {
 		item1.setBrandId(1);
 		item1.setClassId(1);
 		item1.setItemCode("00909787");
-		item1.setItemName("³¤Ğä");
+		item1.setItemName("é•¿è¢–");
 		item1.setDivisionId(1);
 		item1.setPurchasePrice(200D);
 		item1.setGuidePrice(300D);
@@ -35,7 +36,7 @@ public class MockDataFactory {
 		item1.setSectionId(1);
 		
 		Item item2 = new Item();
-		item2.setItemName("µç·çÉÈ");
+		item2.setItemName("ç”µé£æ‰‡");
 		item2.setId(1);
 		item2.setArea(1);
 		item2.setBrandId(1);
@@ -65,8 +66,8 @@ public class MockDataFactory {
 		adjustStoreInfo1.setCheckDate(ProjectUtil.getDate("2013-06-25"));
 		adjustStoreInfo1.setItemNum(2);
 		adjustStoreInfo1.setId("00101");
-		adjustStoreInfo1.setIntoStore("ÀÖÌì³¬ÊĞ³¿¹â¼ÒÔ°µê");
-		adjustStoreInfo1.setOutStore("ÀÖÌì³¬ÊĞ¶«Ö±ÃÅµê");
+		adjustStoreInfo1.setIntoStore("ä¹å¤©è¶…å¸‚æ™¨å…‰å®¶å›­åº—");
+		adjustStoreInfo1.setOutStore("ä¹å¤©è¶…å¸‚ä¸œç›´é—¨åº—");
 		adjustStoreInfo1.setReCheckDate(ProjectUtil.getDate("2013-06-25"));
 		adjustStoreInfo1.setVoucherNo("20130625001");
 		adjustStoreInfo1.setItemList(createItemList());
@@ -77,8 +78,8 @@ public class MockDataFactory {
 		adjustStoreInfo2.setCheckDate(ProjectUtil.getDate("2013-06-24"));
 		adjustStoreInfo2.setItemNum(2);
 		adjustStoreInfo2.setId("00102");
-		adjustStoreInfo2.setIntoStore("ÃÀÁ®ÃÀ³¬ÊĞ³¿¹â¼ÒÔ°µê");
-		adjustStoreInfo2.setOutStore("ÃÀÁ®ÃÀ³¬ÊĞ¶«Ö±ÃÅµê");
+		adjustStoreInfo2.setIntoStore("ç¾å»‰ç¾è¶…å¸‚æ™¨å…‰å®¶å›­åº—");
+		adjustStoreInfo2.setOutStore("ç¾å»‰ç¾è¶…å¸‚ä¸œç›´é—¨åº—");
 		adjustStoreInfo2.setReCheckDate(ProjectUtil.getDate("2013-06-24"));
 		adjustStoreInfo2.setVoucherNo("20130625002");
 		adjustStoreInfo2.setItemList(createItemList());
@@ -95,27 +96,27 @@ public class MockDataFactory {
 		AdjustRepositoryInfo adjustRepositoryInfo1 = new AdjustRepositoryInfo();
 		adjustRepositoryInfo1.setId("00101");
 		adjustRepositoryInfo1.setBackDate(ProjectUtil.getDate("2013-09-08"));
-		adjustRepositoryInfo1.setBackReason("»Ø²ÖÔ­ÒòXXXXXXXXXX");
+		adjustRepositoryInfo1.setBackReason("å›ä»“åŸå› XXXXXXXXXX");
 		adjustRepositoryInfo1.setCheckDate(ProjectUtil.getDate("2013-09-08"));
-		adjustRepositoryInfo1.setDeliver("ÕÅÈı");
+		adjustRepositoryInfo1.setDeliver("å¼ ä¸‰");
 		adjustRepositoryInfo1.setOrderNo("20130908001");
-		adjustRepositoryInfo1.setReceiveRepository("³¯ÑôÇøÊ®ÀïÆÌ²Ö¿â");
+		adjustRepositoryInfo1.setReceiveRepository("æœé˜³åŒºåé‡Œé“ºä»“åº“");
 		adjustRepositoryInfo1.setReCheckDate(ProjectUtil.getDate("2013-09-08"));
-		adjustRepositoryInfo1.setRemark("±¸×¢ĞÅÏ¢");
-		adjustRepositoryInfo1.setStoreName("ÎïÃÀ³¬ÊĞ");
+		adjustRepositoryInfo1.setRemark("å¤‡æ³¨ä¿¡æ¯");
+		adjustRepositoryInfo1.setStoreName("ç‰©ç¾è¶…å¸‚");
 		adjustRepositoryInfo1.setItemList(createItemList());
 		
 		AdjustRepositoryInfo adjustRepositoryInfo2 = new AdjustRepositoryInfo();
 		adjustRepositoryInfo2.setId("00102");
 		adjustRepositoryInfo2.setBackDate(ProjectUtil.getDate("2013-08-08"));
-		adjustRepositoryInfo2.setBackReason("»Ø²ÖÔ­ÒòXXXXXXXXXX");
+		adjustRepositoryInfo2.setBackReason("å›ä»“åŸå› XXXXXXXXXX");
 		adjustRepositoryInfo2.setCheckDate(ProjectUtil.getDate("2013-08-08"));
-		adjustRepositoryInfo2.setDeliver("ÀîËÄ");
+		adjustRepositoryInfo2.setDeliver("æå››");
 		adjustRepositoryInfo2.setOrderNo("20130808001");
-		adjustRepositoryInfo2.setReceiveRepository("¶«³ÇÇøºÍÆ½Àï²Ö¿â");
+		adjustRepositoryInfo2.setReceiveRepository("ä¸œåŸåŒºå’Œå¹³é‡Œä»“åº“");
 		adjustRepositoryInfo2.setReCheckDate(ProjectUtil.getDate("2013-08-08"));
-		adjustRepositoryInfo2.setRemark("±¸×¢ĞÅÏ¢");
-		adjustRepositoryInfo2.setStoreName("ÎïÃÀ³¬ÊĞ");
+		adjustRepositoryInfo2.setRemark("å¤‡æ³¨ä¿¡æ¯");
+		adjustRepositoryInfo2.setStoreName("ç‰©ç¾è¶…å¸‚");
 		adjustRepositoryInfo2.setItemList(createItemList());
 		
 		List<AdjustRepositoryInfo> adjustRepositoryInfos = new ArrayList<AdjustRepositoryInfo>();
@@ -127,41 +128,63 @@ public class MockDataFactory {
 	
 	public static List<PartSales> createPartSalesList(){
 		PartSales partSales1 = new PartSales();
-		partSales1.setApplyUser("ÕÅÈı");
-		partSales1.setBalloter("ÀîËÄ");
+		partSales1.setApplyUser("å¼ ä¸‰");
+		partSales1.setBalloter("æå››");
 		partSales1.setBallotNo("20130627001");
 		partSales1.setCardNo("99988722647");
 		partSales1.setCheckDate(ProjectUtil.getDate("2013-06-27"));
-		partSales1.setChecker("ÕÅÈı");
+		partSales1.setChecker("å¼ ä¸‰");
 		partSales1.setEnableBalance("200.00");
 		partSales1.setEnablePoint("30");
 		partSales1.setItemList(createItemList());
 		partSales1.setNo("20130627001");
-		partSales1.setRemark("±¸×¢ĞÅÏ¢");
+		partSales1.setRemark("å¤‡æ³¨ä¿¡æ¯");
 		partSales1.setSalesDate(ProjectUtil.getDate("2013-06-27"));
-		partSales1.setStorename("³¯ÑôÇøÊ®ÀïÆÌµê");
-		partSales1.setUserName("»áÔ±Ò»");
+		partSales1.setStorename("æœé˜³åŒºåé‡Œé“ºåº—");
+		partSales1.setUserName("ä¼šå‘˜ä¸€");
 		
 		PartSales partSales2 = new PartSales();
-		partSales2.setApplyUser("ÕÅÈı");
-		partSales2.setBalloter("ÀîËÄ");
+		partSales2.setApplyUser("å¼ ä¸‰");
+		partSales2.setBalloter("æå››");
 		partSales2.setBallotNo("20130627002");
 		partSales2.setCardNo("99988722222");
 		partSales2.setCheckDate(ProjectUtil.getDate("2013-06-27"));
-		partSales2.setChecker("ÕÅÈı");
+		partSales2.setChecker("å¼ ä¸‰");
 		partSales2.setEnableBalance("100.00");
 		partSales2.setEnablePoint("100");
 		partSales2.setItemList(createItemList());
 		partSales2.setNo("20130627002");
-		partSales2.setRemark("±¸×¢ĞÅÏ¢");
+		partSales2.setRemark("å¤‡æ³¨ä¿¡æ¯");
 		partSales2.setSalesDate(ProjectUtil.getDate("2013-06-27"));
-		partSales2.setStorename("³¯ÑôÇøÊ®ÀïÆÌµê");
-		partSales2.setUserName("»áÔ±¶ş");
+		partSales2.setStorename("æœé˜³åŒºåé‡Œé“ºåº—");
+		partSales2.setUserName("ä¼šå‘˜äºŒ");
 		
 		List<PartSales> partSalesList = new ArrayList<PartSales>();
 		partSalesList.add(partSales1);
 		partSalesList.add(partSales2);
 		
 		return partSalesList;
+	}
+	
+	public List<CashierModel> createCashierModelList(){
+		CashierModel model1 = new CashierModel();
+		model1.setId(1);
+		model1.setTypeName("ç°é‡‘");
+		CashierModel model2 = new CashierModel();
+		model2.setId(2);
+		model2.setTypeName("é“¶è¡Œå¡");
+		CashierModel model3 = new CashierModel();
+		model3.setId(3);
+		model3.setTypeName("æ”¯ç¥¨");
+		CashierModel model4 = new CashierModel();
+		model4.setId(4);
+		model4.setTypeName("ä»£é‡‘åˆ¸");
+		
+		List<CashierModel> cashierModeList = new ArrayList<CashierModel>();
+		cashierModeList.add(model1);
+		cashierModeList.add(model2);
+		cashierModeList.add(model3);
+		cashierModeList.add(model4);
+		return cashierModeList;
 	}
 }

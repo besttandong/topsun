@@ -4,13 +4,12 @@ import java.util.List;
 
 import com.topsun.posclient.common.dao.CommonDao;
 import com.topsun.posclient.common.service.ICommonService;
-import com.topsun.posclient.datamodel.CashierMode;
+import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.CashierModeDTO;
 import com.topsun.posclient.datamodel.dto.UserDTO;
 
 /**
- * 公共服务实现
  * 
  * @author Dong
  *
@@ -22,7 +21,7 @@ public class CommonServiceImpl implements ICommonService {
 	/* (non-Javadoc)
 	 * @see com.topsun.posclient.common.service.ICommonService#getAllCashierMode()
 	 */
-	public List<CashierMode> getAllCashierMode() throws Exception {
+	public List<CashierModel> getAllCashierMode() throws Exception {
 		CashierModeDTO  cashierModeDTO = commonDao.getAllCashierMode();
 		return cashierModeDTO.getCashierModeList();
 	}
