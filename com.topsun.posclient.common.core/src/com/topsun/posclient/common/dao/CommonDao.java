@@ -15,7 +15,7 @@ import com.topsun.posclient.datamodel.dto.UserDTO;
 public class CommonDao extends BaseDao {
 
 	/**
-	 * 
+	 * 获取用户
 	 * @return
 	 * @throws Exception
 	 */
@@ -33,8 +33,7 @@ public class CommonDao extends BaseDao {
 	}
 
 	/**
-	 * 
-	 * @param userId �û�ID
+	 * 根据ID获取用户信息
 	 * @return
 	 * @throws Exception
 	 */
@@ -48,7 +47,8 @@ public class CommonDao extends BaseDao {
 	}
 
 	/**
-	 * 
+	 * 获取所有结算方式
+	 * @return
 	 * @throws Exception
 	 */
 	public CashierModeDTO getAllCashierMode() throws Exception {
