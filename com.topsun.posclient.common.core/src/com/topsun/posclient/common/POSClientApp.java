@@ -23,7 +23,7 @@ public class POSClientApp {
 	
 	private POSClientApp(){}
 	
-	static POSClientApp get(){
+	public static POSClientApp get(){
 		if(null == posClientApp){
 			return new POSClientApp();
 		}
