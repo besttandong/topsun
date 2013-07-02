@@ -2,30 +2,30 @@ package com.topsun.posclient.repository.service.impl;
 
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
-import com.topsun.posclient.datamodel.dto.AdjustStoreDTO;
-import com.topsun.posclient.repository.dao.AdjustStoreDao;
-import com.topsun.posclient.repository.service.IAdjustStoreService;
+import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
+import com.topsun.posclient.repository.dao.AdjustShopDao;
+import com.topsun.posclient.repository.service.IAdjustShopService;
 
 /**
- * µ˜µÍ∑˛ŒÒΩ”ø⁄
+ * ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ”øÔøΩ
  * 
  * @author Dong
  *
  */
-public class AdjustStoreServiceImpl extends BaseServiceImpl implements IAdjustStoreService {
+public class AdjustShopServiceImpl extends BaseServiceImpl implements IAdjustShopService {
 
-	AdjustStoreDao adjustStoreDao = new AdjustStoreDao();
+	AdjustShopDao adjustStoreDao = new AdjustShopDao();
 	
 	/* (non-Javadoc)
 	 * @see com.topsun.posclient.repository.service.IAdjustStoreService#saveAdjustStoreInfo(com.topsun.posclient.repository.dto.AdjustStoreDTO)
 	 */
-	public void saveAdjustStoreInfo(AdjustStoreDTO adjustStoreDTO)
+	public void saveAdjustStoreInfo(AdjustShopDTO adjustStoreDTO)
 			throws POSException {
 		try{
 			adjustStoreDao.saveAdjustStore(adjustStoreDTO);
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new POSException("µ˜µÍ≥ˆ¥Ì£°");
+			throw new POSException("‰øùÂ≠òË∞ÉÂ∫óÊï∞ÊçÆÂ§±Ë¥•");
 		}
 	}
 

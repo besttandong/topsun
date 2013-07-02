@@ -2,20 +2,19 @@ package com.topsun.posclient.repository.service;
 
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.IBaseService;
-import com.topsun.posclient.datamodel.dto.AdjustStoreDTO;
+import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
 
 /**
- * µ÷µê½Ó¿Ú
  * 
  * @author Dong
  *
  */
-public interface IAdjustStoreService extends IBaseService {
+public interface IAdjustShopService extends IBaseService {
 	
 	/**
 	 * @param adjustStoreDTO
 	 * @throws POSException
 	 */
-	public void saveAdjustStoreInfo(AdjustStoreDTO adjustStoreDTO) throws POSException;
+	public void saveAdjustStoreInfo(AdjustShopDTO adjustStoreDTO) throws POSException;
 
 }
