@@ -5,7 +5,7 @@ import com.topsun.posclient.common.service.IBaseService;
 import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 
 /**
- * ÁãÊÛ½Ó¿Ú
+ * é›¶å”®æ¥å£
  * 
  * @author Dong
  *
@@ -13,7 +13,7 @@ import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 public interface IPartSaleService extends IBaseService {
 	
 	/**
-	 * ±£´æÏúÊÛÊı¾İ
+	 * ä¿å­˜é”€å”®æ•°æ®
 	 * 
 	 * @param partSalesList
 	 * @throws Exception

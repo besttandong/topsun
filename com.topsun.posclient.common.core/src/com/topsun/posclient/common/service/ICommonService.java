@@ -2,7 +2,9 @@ package com.topsun.posclient.common.service;
 
 import java.util.List;
 
+import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.datamodel.CashierModel;
+import com.topsun.posclient.datamodel.Item;
 
 /**
  * 公共服务接口
@@ -17,13 +19,20 @@ public interface ICommonService {
 	 * 
 	 * @throws Exception
 	 */
-	public String getShopNameByUserId(int userId) throws Exception;
+	public String getShopNameByUserId(int userId) throws POSException;
 	
 	/**
 	 * 获取所有结算方式
 	 * @return
 	 * @throws Exception
 	 */
-	public List<CashierModel> getAllCashierMode() throws Exception;
+	public List<CashierModel> getAllCashierMode() throws POSException;
+	
+	/**
+	 * 根据款号获取商品信息
+	 * @return
+	 * @throws POSException
+	 */
+	public Item getItemByCode(String code) throws POSException;
 
 }
