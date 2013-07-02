@@ -21,6 +21,10 @@ public class AppConstants {
 	
 	public static String DATA_CASHIERMODE_FILENAME = "data\\download\\data_cashiermode.xml";
 	
+	public static String DATA_SHOP_FILENAME = "data\\download\\data_shop.xml";
+	
+	public static String DATA_ITEM_FILENAME = "data\\download\\data_item.xml";
+	
 	static String DATA_COMMON_PATH = "data\\download\\";
 	
 	
@@ -30,7 +34,7 @@ public class AppConstants {
 	
 	public static String DATA_PARTSALES_PATH = "data\\upload\\partsales_data\\";
 	
-	public static String DATA_ADJUSTSTORE_PATH = "data\\upload\\adjuststore_data\\";
+	public static String DATA_ADJUSTSTORE_PATH = "data\\upload\\adjustshop_data\\";
 	
 	public static String DATA_ADJUSTREPOSITORY_PATH = "data\\upload\\adjustrepository_data\\";
 	

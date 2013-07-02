@@ -21,7 +21,9 @@ public class POSClientApp {
 	 */
 	private Map<String, Object> contextData = new HashMap<String, Object>();
 	
-	public static POSClientApp get(){
+	private POSClientApp(){}
+	
+	static POSClientApp get(){
 		if(null == posClientApp){
 			return new POSClientApp();
 		}
