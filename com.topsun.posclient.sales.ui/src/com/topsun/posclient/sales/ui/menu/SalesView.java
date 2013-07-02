@@ -2,11 +2,21 @@ package com.topsun.posclient.sales.ui.menu;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -14,21 +24,23 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.topsun.posclient.common.MockDataFactory;
 import com.topsun.posclient.common.POSClientApp;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.PartSalesDTO;
-import com.topsun.posclient.sales.dialog.SalesPayDialog;
 import com.topsun.posclient.sales.service.IPartSaleService;
 import com.topsun.posclient.sales.service.impl.PartSaleServiceImpl;
 import com.topsun.posclient.sales.ui.table.SalesTableContentProvider;
@@ -40,7 +52,7 @@ public class SalesView extends ViewPart {
 	
 	public IPartSaleService partSaleService = new PartSaleServiceImpl();
 	
-	List<Item> goodsSales = new ArrayList();
+	List<Item> itemsList = new ArrayList();
 //		SalesDataFactory.initGoodsSales(); 
 		
 	public PartSales partSales;
@@ -62,7 +74,10 @@ public class SalesView extends ViewPart {
 	public Text checker;
 	public Text remark;
 	
-	public TableViewer tableViewer;
+	public Text numberTotal;
+	public Text priceTotal;
+	public SalesItemBuilder builder = new SalesItemBuilder();
+
 	public SalesView() {
 		// TODO Auto-generated constructor stub
 	}
@@ -72,7 +87,7 @@ public class SalesView extends ViewPart {
 		parent.setLayout(new GridLayout(1,false));
 		buildBaseInfo(parent);
 		buildPrintInfo(parent);
-		buildProductInfo(parent);
+		builder.buildProductInfo(parent);
 		buildCaculator(parent);
 		buildRecodeInfo(parent);
 		buildOperation(parent);
@@ -96,28 +111,50 @@ public class SalesView extends ViewPart {
 				
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					
 					Button saveButton = (Button)e.getSource();
-					SalesPayDialog dialog = new SalesPayDialog(saveButton.getShell());
-					dialog.open();
+					String salesName = sales.getText();
+					if(salesName == null || "".equals(salesName.trim())){
+						MessageDialog.openError(saveButton.getShell(), "提示", "导购不能为空");
+						return;
+					}
 					
+					if(salesDate.getDateAsString()== null || "".equals(salesDate.getDateAsString().trim())){
+						MessageDialog.openError(saveButton.getShell(), "提示", "销售日期不能为空");
+						return;
+					}
+					
+					if(checkDate.getDateAsString()== null || "".equals(checkDate.getDateAsString().trim())){
+						MessageDialog.openError(saveButton.getShell(), "提示", "审核日期不能为空");
+						return;
+					}
+				
+//					SalesPayDialog dialog = new SalesPayDialog(saveButton.getShell());
+//					dialog.open();
+					MockDataFactory dataFactory = new MockDataFactory();
 					partSales = new PartSales();
 					partSales.setApplyUser(applyUser.getText());
 					//partSales.setBalance(balance)
 					partSales.setBalloter(casher.getText());
 					partSales.setBallotNo(casherNo.getText());
 					partSales.setCardNo(cardNo.getText());
-					partSales.setCheckDate(new Date(checkDate.getDateAsString()));
+					
+					Calendar checkCal= checkDate.getDate();
+					partSales.setCheckDate(checkCal.getTime());
+					
 					partSales.setChecker(checker.getText());
 					partSales.setEnableBalance(enableBalance.getText());
 					partSales.setEnablePoint(enablePoint.getText());
 					partSales.setNo(orderNo.getText());
 					partSales.setRemark(remark.getText());
-					partSales.setSalesDate(new Date(salesDate.getDateAsString()));
+					
+					Calendar salesCal= checkDate.getDate();
+					partSales.setCheckDate(salesCal.getTime());
+					
 					partSales.setShopName(shopName.getText());
 					partSales.setUserName(userName.getText());
-					if(tableViewer.getInput() instanceof List){
-						List list = (List)tableViewer.getInput();
+//					List<Item> saveItems = builder.getTableViewer().getInput();
+					if(builder.getTableViewer().getInput() instanceof List){
+						List list = (List)builder.getTableViewer().getInput();
 						partSales.setItemList(list);
 					};
 					
@@ -154,6 +191,7 @@ public class SalesView extends ViewPart {
 	
 	private void buildRecodeInfo(Composite parent){
 		Composite recodeComposite = new Composite(parent, SWT.NONE);
+		User user = POSClientApp.get().getLoginUser();
 		recodeComposite.setLayout(new GridLayout(4,false));
 		{
 			Label label = new Label(recodeComposite, SWT.NONE);
@@ -169,7 +207,7 @@ public class SalesView extends ViewPart {
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
 			applyUser.setLayoutData(data);
-			applyUser.setText("张三");
+			applyUser.setText(user.getUserName());
 		}
 		{
 			Label label = new Label(recodeComposite, SWT.NONE);
@@ -185,7 +223,7 @@ public class SalesView extends ViewPart {
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
 			checker.setLayoutData(data);
-			checker.setText("张三");
+			checker.setText(user.getUserName());
 		}
 	
 	}
@@ -201,11 +239,12 @@ public class SalesView extends ViewPart {
 			label.setText("数量合计：");
 		}
 		{
-			Text text = new Text(caculatorComposite, SWT.BORDER);
+			numberTotal = new Text(caculatorComposite, SWT.BORDER);
+			numberTotal.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
-			text.setLayoutData(data);
+			numberTotal.setLayoutData(data);
 		}
 		{
 			Label label = new Label(caculatorComposite, SWT.NONE);
@@ -215,15 +254,17 @@ public class SalesView extends ViewPart {
 			label.setText("金额合计：");
 		}
 		{
-			Text text = new Text(caculatorComposite, SWT.BORDER);
+			priceTotal = new Text(caculatorComposite, SWT.BORDER);
+			priceTotal.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
-			text.setLayoutData(data);
+			priceTotal.setLayoutData(data);
 		}
 		
 		{
 			Label label = new Label(caculatorComposite, SWT.NONE);
+			
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
@@ -231,12 +272,12 @@ public class SalesView extends ViewPart {
 		}
 		{
 			Text text = new Text(caculatorComposite, SWT.BORDER);
+			text.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
 			text.setLayoutData(data);
 		}
-		
 		
 	}
 	
@@ -286,10 +327,28 @@ public class SalesView extends ViewPart {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					
-					if(tableViewer.getInput() != null){
-						goodsSales.add(((List<Item>)tableViewer.getInput()).get(0));
+					if(builder.getTableViewer().getInput() == null){
+						itemsList = MockDataFactory.createItemList();
+						builder.getTableViewer().setInput(itemsList);
+					}else{
+						List<Item> items = (List<Item>)builder.getTableViewer().getInput();
+						itemsList.add(items.get(0));
+						builder.getTableViewer().setInput(itemsList);
 					}
-					tableViewer.setInput(goodsSales);
+					int totalNum = 0;
+					for (Item item : itemsList) {
+						int num = item.getNum();
+						totalNum = totalNum+num;
+					}
+					numberTotal.setText(String.valueOf(totalNum));
+					
+					double totalPrice = 0;
+					for (Item item : itemsList) {
+						int num = item.getNum();
+						double price  = item.getRetailPrice()* num;
+						totalPrice = totalPrice + price;
+					}
+					priceTotal.setText(String.valueOf(totalPrice));
 				}
 				
 				@Override
@@ -328,88 +387,6 @@ public class SalesView extends ViewPart {
 			data.horizontalSpan = 1;
 			spinner.setLayoutData(data);
 		}
-	}
-	
-	/**
-	 * 商品信息
-	 * @param parent
-	 */
-	private void buildProductInfo(Composite parent){
-		Group productInfo = new Group(parent, SWT.NONE);
-		productInfo.setText("商品信息");
-		GridLayout gridLayout = new GridLayout(1,false);
-		gridLayout.marginLeft = 20;
-		//gridLayout.horizontalSpacing = 20;
-		productInfo.setLayout(gridLayout);
-		GridData data = new GridData(GridData.FILL_BOTH);
-//		data.heightHint = 300;
-		productInfo.setLayoutData(data);
-		
-		
-		tableViewer = new TableViewer(productInfo);
-		tableViewer.setContentProvider(new SalesTableContentProvider());
-		tableViewer.setLabelProvider(new SalesTableLableProvider());
-		Table table = tableViewer.getTable();
-		{
-			GridData tableData = new GridData(GridData.FILL_HORIZONTAL);
-			tableData.heightHint = 200;
-			table.setLayoutData(tableData);
-			table.setHeaderVisible(true);
-			table.setLinesVisible(true);
-		}
-		
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("商品搜索");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("款号");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("数量");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("价格清单");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("零售价");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("折扣率");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("折扣金额");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("单价");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("金额");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("单品积分");
-		}
-	
-		
 	}
 	
 
@@ -532,7 +509,8 @@ public class SalesView extends ViewPart {
 			data.widthHint = 185;
 			data.horizontalSpan = 3;
 			sales.setLayoutData(data);
-			sales.setItems(new String[]{"销售"});
+			String loginName = loginUser.getUserName();
+			sales.setItems(new String[]{loginName});
 			sales.select(0);
 		}
 		
@@ -628,7 +606,7 @@ public class SalesView extends ViewPart {
 			data.widthHint = 200;
 			enableBalance.setLayoutData(data);
 			enableBalance.setText("0.0");
-			enableBalance.setEditable(false);
+//			enableBalance.setEditable(false);
 		}
 		
 		{

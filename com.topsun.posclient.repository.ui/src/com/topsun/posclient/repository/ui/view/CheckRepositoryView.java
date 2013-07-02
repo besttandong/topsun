@@ -4,7 +4,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
 /**
- * ø‚¥Ê≈Ãµ„ ”Õº
  * 
  * @author Dong
  *

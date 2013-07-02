@@ -41,17 +41,12 @@ public class SalesTableLableProvider implements ITableLabelProvider {
 	@Override
 	public String getColumnText(Object element, int columnIndex) {
 		if (element instanceof Item) {
-			Item goodsSales = (Item) element;
-			String productName = goodsSales.getItemName();
-			String type = goodsSales.getItemCode();
-//			double number = goodsSales.getn
-//			String listPrice = goodsSales.getListPrice();
-//			double retailPrice = goodsSales.getRetailPrice();
-//			double disB = goodsSales.getDiscountB();
-//			double disA = goodsSales.getDiscountA();
-//			double unitPrice = goodsSales.getUnitPrice();
-//			double amount = goodsSales.getAmount();
-//			double singlePoints = goodsSales.getSinglePoints();
+			Item item = (Item) element;
+			String productName = item.getItemName();
+			String type = item.getItemCode();
+			int number = item.getNum();
+			double retailPrice = item.getRetailPrice();
+			double total = retailPrice * number;
 
 			switch (columnIndex) {
 			case 0:
@@ -59,21 +54,11 @@ public class SalesTableLableProvider implements ITableLabelProvider {
 			case 1:
 				return type;
 			case 2:
-				return String.valueOf("");
+				return String.valueOf(number);
 			case 3:
-				return "";
+				return String.valueOf(retailPrice);
 			case 4:
-				return String.valueOf("");
-			case 5:
-				return String.valueOf("");
-			case 6:
-				return String.valueOf("");
-			case 7:
-				return String.valueOf("");
-			case 8:
-				return String.valueOf("");
-			case 9:
-				return String.valueOf("");
+				return String.valueOf(total);
 
 			default:
 				return "";
