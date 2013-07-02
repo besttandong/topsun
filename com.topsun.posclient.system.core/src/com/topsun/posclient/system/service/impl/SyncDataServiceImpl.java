@@ -1,18 +1,10 @@
 package com.topsun.posclient.system.service.impl;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.net.URL;
-
-import javax.xml.namespace.QName;
-
-import com.topsun.posclient.common.AppConstants;
-import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.system.service.ISyncDataService;
 
 /**
+ * 同步数据服务实现
  * @author Dong
  * 
  */
