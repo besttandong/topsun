@@ -3,7 +3,6 @@ package com.topsun.posclient.datamodel;
 import java.io.Serializable;
 
 /**
- * ¸¶¿î
  * 
  * @author Dong
  *

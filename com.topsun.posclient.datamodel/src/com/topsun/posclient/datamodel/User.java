@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * ÓÃ»§
+ * ç”¨æˆ·
  * 
  * @author Dong
  *
@@ -16,23 +16,23 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int id;//Ö÷¼ü ±êÊ¶
+	private int id;//ä¸»é”® æ ‡è¯†
 	
-	private String userCode;//ÓÃ»§±àÂë
+	private String userCode;//ç”¨æˆ·ç¼–ç 
 	
-	private String userName;//ÓÃ»§Ãû
+	private String userName;//ç”¨æˆ·å
 	
-	private String passWord;//ÃÜÂë
+	private String passWord;//å¯†ç 
 	
-	private int employeeId;//¹ØÁªÔ±¹¤ID
+	private int employeeId;//å…³è”å‘˜å·¥ID
 	
-	private String employeeName;//¹ØÁªÔ±¹¤Ãû³Æ
+	private String employeeName;//å…³è”å‘˜å·¥åç§°
 	
-	private int deptId;//ËùÊô²¿ÃÅID
+	private int deptId;//æ‰€å±éƒ¨é—¨ID
 	
-	private String deptName;//ËùÊô²¿ÃÅÃû³Æ
+	private String deptName;//æ‰€å±éƒ¨é—¨åç§°
 	
-	private List<Function> functionList;//¹¦ÄÜÄ£¿éÈ¨ÏŞ
+	private List<Function> functionList;//åŠŸèƒ½æ¨¡å—æƒé™
 
 	public int getId() {
 		return id;

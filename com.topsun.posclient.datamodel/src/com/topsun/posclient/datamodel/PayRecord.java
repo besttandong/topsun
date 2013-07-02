@@ -3,7 +3,7 @@ package com.topsun.posclient.datamodel;
 import java.io.Serializable;
 
 /**
- * ½É¿î¼ÇÂ¼
+ * ç¼´æ¬¾è®°å½•
  * 
  * @author Dong
  * 
@@ -16,23 +16,23 @@ public class PayRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 
-	private String id; //±êÊ¶
+	private String id; //æ ‡è¯†
 	
-	private String payDate; //½É¿îÊ±¼ä
+	private String payDate; //ç¼´æ¬¾æ—¶é—´
 	
-	private String bankName;//´æ¿îÒøĞĞ
+	private String bankName;//å­˜æ¬¾é“¶è¡Œ
 	
-	private String account;//ÒøĞĞÕÊºÅ
+	private String account;//é“¶è¡Œå¸å·
 	
-	private double amount;//´æ¿î½ğ¶î
+	private double amount;//å­˜æ¬¾é‡‘é¢
 	
-	private String payer;//´æ¿îÈË
+	private String payer;//å­˜æ¬¾äºº
 	
-	private String approve;//ÉóºËÈË
+	private String approve;//å®¡æ ¸äºº
 	
-	private String approveDate;//ÉóºËÊ±¼ä
+	private String approveDate;//å®¡æ ¸æ—¶é—´
 	
-	private String remark; //±¸×¢
+	private String remark; //å¤‡æ³¨
 
 	public String getPayDate() {
 		return payDate;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * ¹¦ÄÜÄ£¿é
+ * åŠŸèƒ½æ¨¡å—
  * 
  * @author Dong
  *
@@ -20,11 +20,11 @@ public class Function implements Serializable {
 	
 	private String actionURL;//ActionURL
 	
-	private String functionName;//¹¦ÄÜÃû
+	private String functionName;//åŠŸèƒ½å
 	
-	private String description;//¹¦ÄÜÃèÊö
+	private String description;//åŠŸèƒ½æè¿°
 	
-	private List<Function> childs;//×ÓÄ£¿é
+	private List<Function> childs;//å­æ¨¡å—
 	
 	public int getId() {
 		return id;

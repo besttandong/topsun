@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * µêÆÌ
+ * åº—é“º
  * 
  * @author Dong
  *
@@ -16,75 +16,63 @@ public class Shop implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int id;//ID±àºÅ	Primary Key
+	private int id;//IDç¼–å·	Primary Key
 	
-	private String shpCode;//µêÆÌ±àÂë
+	private String shpCode;//åº—é“ºç¼–ç 
 	
-	private String shpName;//µêÆÌÃû³Æ
+	private String shpName;//åº—é“ºåç§°
 	
-	private int shpTypeID;//¾­ÓªÀàĞÍ
+	private int shpTypeID;//ç»è¥ç±»å‹
 	
-	private int shpClassID;//µêÆÌÀàĞÍ
+	private int shpClassID;//åº—é“ºç±»å‹
 	
-	private int depEntryID;//ËùÊô²¿ÃÅ
+	private int depEntryID;//æ‰€å±éƒ¨é—¨
 	
-	private int cusEntryID;//ËùÊô¿Í»§
+	private int cusEntryID;//æ‰€å±å®¢æˆ·
 	
-	private String brandList;//¾­ÓªÆ·ÅÆ
+	private String brandList;//ç»è¥å“ç‰Œ
 	
-	private long isStock;//¹ÜÀí¿â´æ
+	private long isStock;//ç®¡ç†åº“å­˜
 	
-	private int areaID;//ÇøÓò
+	private int areaID;//åŒºåŸŸ
 	
-	private int provinceID;//Ê¡·İ
+	private int provinceID;//çœä»½
 	
-	private int cityID;//³ÇÊĞ
+	private int cityID;//åŸå¸‚
 	
-	private int cityAreaID;//Ê¡ÊĞ/³ÇÇø
+	private int cityAreaID;//çœå¸‚/åŸåŒº
 	
-	private String address;//µØÖ·
+	private String address;//åœ°å€
 	
-	private String shopTel;//µêÆÌµç»°
+	private String shopTel;//åº—é“ºç”µè¯
 	
-	private String director;//Ö÷¹Ü
+	private String director;//ä¸»ç®¡
 	
-	private String dtel;//Ö÷¹Üµç»°
+	private String dtel;//ä¸»ç®¡ç”µè¯
 	
-	private String passWord;//µêÆÌÃÜÂë
+	private String passWord;//åº—é“ºå¯†ç 
 	
-	private String controlID;//¸º¿â´æ¿ØÖÆ
+	private String controlID;//è´Ÿåº“å­˜æ§åˆ¶
 	
-	private Date startDate;//¿ªµêÈÕÆÚ
+	private Date startDate;//å¼€åº—æ—¥æœŸ
 	
-	private Date startTime;//Ã¿ÈÕ¿ªÆÌ
+	private Date startTime;//æ¯æ—¥å¼€é“º
 	
 	private Date endTime;//
 	
-	private int empDutyID;//´óÇø¾­Àí
+	private int empDutyID;//å¤§åŒºç»ç†
 	
-	private int empID;//Æ¬ÇøÖ÷¹Ü
+	private int empID;//ç‰‡åŒºä¸»ç®¡
 	
-	private int isInvalid;//Í£ÓÃ±êÊ¶
+	private int isInvalid;//åœç”¨æ ‡è¯†
 	
-	private int paymentID;//ÊÕÒø·½Ê½
+	private int paymentID;//æ”¶é“¶æ–¹å¼
 	
-	private String bank;//½É¿îÒøĞĞ
+	private String bank;//ç¼´æ¬¾é“¶è¡Œ
 	
-	private String accountNO;//ÒøĞĞÕËºÅ
+	private String accountNO;//é“¶è¡Œè´¦å·
 	
-	private String forbidden;//¹¦ÄÜ½ûÓÃÏî
-	
-	private int delFlg;//É¾³ı±êÊ¶£¨Ä¬ÈÏÎª0£©
-	
-	private int creater;//´´½¨Õß
-	
-	private Date createdTime;//´´½¨Ê±¼ä	
-	
-	private int updater;//×îºóĞŞ¸ÄÕß
-	
-	private Date lastUpdatedTime;//×îºóĞŞ¸ÄÊ±¼ä	
-	
-	private String revision;//°æ±¾´Á
+	private String forbidden;//åŠŸèƒ½ç¦ç”¨é¡¹
 
 	public int getId() {
 		return id;
@@ -316,53 +304,5 @@ public class Shop implements Serializable {
 
 	public void setForbidden(String forbidden) {
 		this.forbidden = forbidden;
-	}
-
-	public int getDelFlg() {
-		return delFlg;
-	}
-
-	public void setDelFlg(int delFlg) {
-		this.delFlg = delFlg;
-	}
-
-	public int getCreater() {
-		return creater;
-	}
-
-	public void setCreater(int creater) {
-		this.creater = creater;
-	}
-
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
-
-	public int getUpdater() {
-		return updater;
-	}
-
-	public void setUpdater(int updater) {
-		this.updater = updater;
-	}
-
-	public Date getLastUpdatedTime() {
-		return lastUpdatedTime;
-	}
-
-	public void setLastUpdatedTime(Date lastUpdatedTime) {
-		this.lastUpdatedTime = lastUpdatedTime;
-	}
-
-	public String getRevision() {
-		return revision;
-	}
-
-	public void setRevision(String revision) {
-		this.revision = revision;
 	}
 }
