@@ -18,27 +18,28 @@ import com.topsun.posclient.datamodel.AdjustShopInfo;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="data")
-@XmlType(name = "AdjustStoreDTO", propOrder = {
-    "adjustStoreInfos"
-},namespace="http://com.topsun.posclient/AdjustStoreDTO")
-public class AdjustStoreDTO implements Serializable {
+@XmlType(name = "AdjustShopDTO", propOrder = {
+    "adjustShopList"
+},namespace="http://com.topsun.posclient/AdjustShopDTO")
+public class AdjustShopDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<AdjustShopInfo> adjustStoreInfos;
+	private List<AdjustShopInfo> adjustShopList;
 
 	@XmlElements({
-        @XmlElement(name = "adjustStoreInfo", type = AdjustShopInfo.class)
+        @XmlElement(name = "adjustShopList", type = AdjustShopInfo.class)
     })
-	public List<AdjustShopInfo> getAdjustStoreInfos() {
-		return adjustStoreInfos;
+	public List<AdjustShopInfo> getAdjustShopList() {
+		return adjustShopList;
 	}
 
-	public void setAdjustStoreInfos(List<AdjustShopInfo> adjustStoreInfos) {
-		this.adjustStoreInfos = adjustStoreInfos;
+	public void setAdjustShopList(List<AdjustShopInfo> adjustShopList) {
+		this.adjustShopList = adjustShopList;
 	}
+
 
 }

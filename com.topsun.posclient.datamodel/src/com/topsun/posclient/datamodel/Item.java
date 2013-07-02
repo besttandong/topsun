@@ -1,7 +1,6 @@
 package com.topsun.posclient.datamodel;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 商品
@@ -24,19 +23,33 @@ public class Item implements Serializable {
 	
 	private int classId;//大类ID编号
 	
+	private String className;//大类名称
+	
 	private int divisionId;//中类ID编号
 	
-	private int sectionId;//小类ID编号	
+	private String divisionName;//中类名称
+	
+	private int sectionId;//小类ID编号
+	
+	private String sectionName;//小类名称
 	
 	private int unitId;//单位ID编号
 	
+	private String unitName;//单位名称
+	
 	private int stdId;//规格型号ID编号	
 	
-	private int supplierId;//供应商ID编号	
+	private int supplierId;//供应商ID编号
+	
+	private String supplierName; //供应商名称
 	
 	private int BrandId;//品牌ID编号	
 	
+	private String BrandName;//品牌名称
+	
 	private int area;//产地
+	
+	private String areaName;//产地名称
 	
 	private String description;//商品描述
 	
@@ -50,17 +63,15 @@ public class Item implements Serializable {
 	
 	private double guidePrice;//指导价
 	
-	private int delFlg;//删除标识（默认为0）
+	private int num; //数量
 	
-	private int creater;//创建者
-	
-	private Date createdTime;//创建时间	
-	
-	private int updater;//最后修改者
-	
-	private Date lastUpdatedTime;//最后修改时间	
-	
-	private String revision;//版本戳
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
 
 	public int getId() {
 		return id;
@@ -198,51 +209,59 @@ public class Item implements Serializable {
 		this.guidePrice = guidePrice;
 	}
 
-	public int getDelFlg() {
-		return delFlg;
+	public String getClassName() {
+		return className;
 	}
 
-	public void setDelFlg(int delFlg) {
-		this.delFlg = delFlg;
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
-	public int getCreater() {
-		return creater;
+	public String getDivisionName() {
+		return divisionName;
 	}
 
-	public void setCreater(int creater) {
-		this.creater = creater;
+	public void setDivisionName(String divisionName) {
+		this.divisionName = divisionName;
 	}
 
-	public Date getCreatedTime() {
-		return createdTime;
+	public String getSectionName() {
+		return sectionName;
 	}
 
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
+	public void setSectionName(String sectionName) {
+		this.sectionName = sectionName;
 	}
 
-	public int getUpdater() {
-		return updater;
+	public String getUnitName() {
+		return unitName;
 	}
 
-	public void setUpdater(int updater) {
-		this.updater = updater;
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
 
-	public Date getLastUpdatedTime() {
-		return lastUpdatedTime;
+	public String getSupplierName() {
+		return supplierName;
 	}
 
-	public void setLastUpdatedTime(Date lastUpdatedTime) {
-		this.lastUpdatedTime = lastUpdatedTime;
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
 	}
 
-	public String getRevision() {
-		return revision;
+	public String getBrandName() {
+		return BrandName;
 	}
 
-	public void setRevision(String revision) {
-		this.revision = revision;
+	public void setBrandName(String brandName) {
+		BrandName = brandName;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 }
