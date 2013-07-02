@@ -1,6 +1,7 @@
 package com.topsun.posclient.common;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
@@ -9,8 +10,10 @@ import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Function;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
+import com.topsun.posclient.datamodel.Shop;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.ItemDTO;
+import com.topsun.posclient.datamodel.dto.ShopDTO;
 
 /**
  * 模拟数据工厂
@@ -19,6 +22,33 @@ import com.topsun.posclient.datamodel.dto.ItemDTO;
  *
  */
 public class MockDataFactory {
+	
+	public static List<Shop> createShopList(){
+		List<Shop> shopList = new ArrayList<Shop>();
+		Shop shop1 = new Shop();
+		shop1.setAccountNO("6225667888900987");
+		shop1.setAddress("北京市朝阳区石佛营路");
+		shop1.setAreaID(1);
+		shop1.setBank("CCB");
+		shop1.setBrandList("XXXXXXXXXXXX");
+		shop1.setCityAreaID(1);
+		shop1.setCityID(1);
+		shop1.setControlID("1");
+		shop1.setCusEntryID(1);
+		shop1.setDepEntryID(1);
+		shop1.setDirector("zhangsan");
+		shop1.setDtel("18201501085");
+		shop1.setEmpDutyID(1);
+		shop1.setEmpID(1);
+		shop1.setEndTime(new Date());
+		
+		Shop shop2 = new Shop();
+		
+		shopList.add(shop1);
+		shopList.add(shop2);
+		
+		return shopList;
+	}
 	
 	public static List<Item> createItemList(){
 		Item item1 = new Item();
@@ -43,6 +73,7 @@ public class MockDataFactory {
 		item1.setDivisionName("XXXX");
 		item1.setBrandName("丹尼尔斯");
 		item1.setSupplierName("XXXXXXXXX工厂");
+		item1.setNum(200);
 		
 		Item item2 = new Item();
 		item2.setItemName("电风扇");
@@ -66,6 +97,7 @@ public class MockDataFactory {
 		item2.setDivisionName("XXXX");
 		item2.setBrandName("TCL");
 		item2.setSupplierName("XXXXXXXXX工厂");
+		item2.setNum(100);
 		
 		List<Item> itemList = new ArrayList<Item>();
 		itemList.add(item1);
@@ -285,5 +317,11 @@ public class MockDataFactory {
 		ItemDTO itemDTO = new ItemDTO();
 		itemDTO.setItemList(createItemList());
 		return itemDTO;
+	}
+	
+	public static ShopDTO createShopDTO(){
+		ShopDTO shopDTO = new ShopDTO();
+		shopDTO.setShopList(createShopList());
+		return shopDTO;
 	}
 }
