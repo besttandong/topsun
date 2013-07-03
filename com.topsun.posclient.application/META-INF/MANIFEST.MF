@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  org.junit4;bundle-version="4.8.1",
  com.topsun.posclient.common.core;bundle-version="1.0.0",
  com.topsun.posclient.system.core;bundle-version="1.0.0",
- com.topsun.posclient.datamodel;bundle-version="1.0.0"
+ com.topsun.posclient.datamodel;bundle-version="1.0.0",
+ com.topsun.posclient.common.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.topsun.posclient.application;
