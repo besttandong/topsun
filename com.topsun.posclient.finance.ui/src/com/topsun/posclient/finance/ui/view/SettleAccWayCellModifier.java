@@ -4,6 +4,8 @@ import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Composite;
 
+import com.topsun.posclient.datamodel.PayRecord;
+
 public class SettleAccWayCellModifier implements ICellModifier
 {
 	  private TableViewer tv;
@@ -19,7 +21,7 @@ public class SettleAccWayCellModifier implements ICellModifier
 	  }
 
 	  public Object getValue(Object element, String property) {
-//		 SettleAccWayInfo p = (SettleAccWayInfo)element;
+		  PayRecord p = (PayRecord)element;
 //	    if (property.equals("settleAccWay"))
 //	      return p.getSettleAccWay();
 //	    if (property.equals("payCustomer"))
@@ -43,8 +45,6 @@ public class SettleAccWayCellModifier implements ICellModifier
 	    for (int i = 0; i < SETTLEACC_WAY.length; ++i)
 	      if (SETTLEACC_WAY[i].equals(name))
 	        return i;
-
-
 	    return -1;
 	  }
 
