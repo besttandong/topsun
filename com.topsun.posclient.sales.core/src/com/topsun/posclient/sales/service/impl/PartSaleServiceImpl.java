@@ -22,7 +22,7 @@ public class PartSaleServiceImpl extends BaseServiceImpl implements IPartSaleSer
 			partSaleDao.saveSalesData(salesDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception("保存零售数据失败");
+			throw new Exception("淇濆瓨闆跺敭鏁版嵁澶辫触");
 		}
 	}
 

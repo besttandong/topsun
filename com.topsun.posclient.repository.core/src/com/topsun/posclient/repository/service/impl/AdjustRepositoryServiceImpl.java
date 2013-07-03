@@ -1,23 +1,34 @@
 package com.topsun.posclient.repository.service.impl;
 
+import java.util.List;
+
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
+import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.dto.AdjustRepositoryDTO;
 import com.topsun.posclient.repository.dao.AdjustRepositoryDao;
 import com.topsun.posclient.repository.service.IAdjustRepositoryService;
 
 /**
- * µ˜≤÷Ω”ø⁄ µœ÷
+ * Ë∞É‰ªìÊé•Âè£ÂÆûÁé∞
  * 
  * @author Dong
- *
+ * 
  */
-public class AdjustRepositoryServiceImpl extends BaseServiceImpl implements IAdjustRepositoryService {
+public class AdjustRepositoryServiceImpl extends BaseServiceImpl implements
+		IAdjustRepositoryService {
 
+	/**
+	 * 
+	 */
 	AdjustRepositoryDao adjustRepositoryDao = new AdjustRepositoryDao();
-	
-	/* (non-Javadoc)
-	 * @see com.topsun.posclient.repository.service.IAdjustRepositoryService#saveAdjustRepositoryInfo(com.topsun.posclient.repository.dto.AdjustRepositoryDTO)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.topsun.posclient.repository.service.IAdjustRepositoryService#
+	 * saveAdjustRepositoryInfo
+	 * (com.topsun.posclient.repository.dto.AdjustRepositoryDTO)
 	 */
 	public void saveAdjustRepositoryInfo(AdjustRepositoryDTO adjustRepositoryDTO)
 			throws POSException {
@@ -25,10 +36,25 @@ public class AdjustRepositoryServiceImpl extends BaseServiceImpl implements IAdj
 			adjustRepositoryDao.saveAdjustRepository(adjustRepositoryDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new POSException("µ˜≤÷≥ˆ¥Ì£°");
+			throw new POSException("Ë∞É‰ªìÂá∫ÈîôÔºÅ");
 		}
 	}
 
-	
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.topsun.posclient.repository.service.IAdjustRepositoryService#
+	 * queryAdjustShopList(com.topsun.posclient.datamodel.AdjustShopInfo)
+	 */
+	public List<AdjustRepositoryInfo> queryAdjustShopList(
+			AdjustRepositoryInfo adjustRepositoryInfo) throws POSException {
+		List<AdjustRepositoryInfo> adjustRepositoryList = null;
+		try {
+			adjustRepositoryList = adjustRepositoryDao.queryAdjustRepository(adjustRepositoryInfo);
+		} catch (Exception e) {
+			throw new POSException("Êü•ËØ¢Â§±Ë¥•");
+		}
+		return adjustRepositoryList;
+	}
+
 }
