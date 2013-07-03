@@ -5,6 +5,7 @@ import java.io.File;
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.datamodel.dto.CashierModeDTO;
+import com.topsun.posclient.datamodel.dto.ItemDTO;
 import com.topsun.posclient.datamodel.dto.UserDTO;
 
 /**
@@ -59,5 +60,17 @@ public class CommonDao extends BaseDao {
 						CashierModeDTO.class);
 		return cashierModeDTO;
 	}
-
+	
+	/**
+	 * 获取所有商品信息
+	 * @return
+	 * @throws Exception
+	 */
+	public ItemDTO getAllItem() throws Exception {
+		File file = new File(ProjectUtil.getRuntimeClassPath()
+				+ AppConstants.DATA_ITEM_FILENAME);
+		ItemDTO itemDTO = (ItemDTO) getLocalProcessor()
+				.getObjectFromXml(getLocalProcessor().getDataFileContent(file), ItemDTO.class);
+		return itemDTO;
+	}
 }
