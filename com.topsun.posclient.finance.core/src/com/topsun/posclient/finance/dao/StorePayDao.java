@@ -12,6 +12,7 @@ import com.topsun.posclient.datamodel.dto.PayRecordDTO;
 public class StorePayDao extends BaseDao {
 
 	/**
+	 * 保存缴款记录
 	 * @param payRecordDTO
 	 * @throws Exception
 	 * @throws POSException 

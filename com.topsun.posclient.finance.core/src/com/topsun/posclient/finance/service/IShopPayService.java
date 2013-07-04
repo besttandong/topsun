@@ -5,17 +5,17 @@ import com.topsun.posclient.common.service.IBaseService;
 import com.topsun.posclient.datamodel.dto.PayRecordDTO;
 
 /**
- * 店铺缴款服务接口
  * 
+ * 搴楅摵缂存鏈嶅姟鎺ュ彛
  * @author Dong
  *
  */
-public interface IStorePayService extends IBaseService {
+public interface IShopPayService extends IBaseService {
 
 	/**
-	 * 保存缴款记录
+	 * 淇濆瓨缂存璁板綍
 	 * @param payRecordDTO
 	 * @throws Exception
 	 */
-	public void saveStorePay(PayRecordDTO payRecordDTO) throws POSException;
+	public void saveShopPay(PayRecordDTO payRecordDTO) throws POSException;
 }
