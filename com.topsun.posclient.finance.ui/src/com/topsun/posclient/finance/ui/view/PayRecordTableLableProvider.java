@@ -4,6 +4,8 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
 
+import com.topsun.posclient.datamodel.PayRecord;
+
 public class PayRecordTableLableProvider implements ITableLabelProvider {
 
 	public void addListener(ILabelProviderListener arg0) {
@@ -27,35 +29,38 @@ public class PayRecordTableLableProvider implements ITableLabelProvider {
 	}
 
 	public String getColumnText(Object element, int columnIndex) {
-//		if (element instanceof SettleAccWayInfo) {
-//			SettleAccWayInfo settleAccInfo = (SettleAccWayInfo) element;
-//			int settleAccWay = settleAccInfo.getSettleAccWay();
-//			String payCustomer = settleAccInfo.getPayCustomer();
-//			String receiveCustomer = settleAccInfo.getReceiveCustomer();
-//			String posId = settleAccInfo.getPosId();
-//			String bankName = settleAccInfo.getBankName();
-//			String account = settleAccInfo.getAccount();
-//			String remark = settleAccInfo.getRemark();
-//
-//			switch (columnIndex) {
-//			case 0:
-//				return String.valueOf(settleAccWay);
-//			case 1:
-//				return payCustomer;
-//			case 2:
-//				return receiveCustomer;
-//			case 3:
-//				return posId;
-//			case 4:
-//				return bankName;
-//			case 5:
-//				return account;
-//			case 6:
-//				return remark;
-//			default:
-//				return "";
-//			}
-//		}
+		if (element instanceof PayRecord) {
+			PayRecord record = (PayRecord) element;
+			String payDate = record.getPayDate();
+			String bankName = record.getBankName();
+			String account = record.getAccount();
+			double amount = record.getAmount();
+			String payer = record.getPayer();
+			String approver = record.getApprove();
+			String approveDate = record.getApproveDate();
+			String remark = record.getRemark();
+
+			switch (columnIndex) {
+			case 0:
+				return payDate;
+			case 1:
+				return bankName;
+			case 2:
+				return account;
+			case 3:
+				return String.valueOf(amount);
+			case 4:
+				return payer;
+			case 5:
+				return approver;
+			case 6:
+				return approveDate;
+			case 7:
+				return remark;
+			default:
+				return "";
+			}
+		}
 
 		return element.toString();
 	}
