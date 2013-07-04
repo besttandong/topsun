@@ -4,7 +4,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-public class SettleAccWayTableLableProvider implements ITableLabelProvider {
+public class PayRecordTableLableProvider implements ITableLabelProvider {
 
 	public void addListener(ILabelProviderListener arg0) {
 		

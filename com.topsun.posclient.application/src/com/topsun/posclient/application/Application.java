@@ -4,15 +4,21 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
+import com.topsun.posclient.common.listener.IKeyListener;
+import com.topsun.posclient.common.listener.KeyListenerManager;
+
 /**
  * This class controls all aspects of the application's execution
  */
-public class Application implements IApplication {
+public class Application implements IApplication{
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
@@ -28,8 +34,20 @@ public class Application implements IApplication {
 //		} finally {
 //			display.dispose();
 //		}
+		 
+
 		
 		Display display = PlatformUI.createDisplay();
+		display.addFilter(SWT.KeyDown, new Listener()
+	    {
+	     public void handleEvent(Event e)
+	     {
+	      if (e.keyCode == SWT.INSERT)
+	      {
+	    	  KeyListenerManager.getInstance().fireChange("INSERT");
+	      }
+	     }
+	    });;
 		try {
 			Shell shell = Display.getCurrent().getActiveShell();
 

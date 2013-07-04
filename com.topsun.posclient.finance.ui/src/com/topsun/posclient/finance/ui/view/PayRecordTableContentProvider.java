@@ -8,7 +8,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
  * @author Dong
  *
  */
-public class SettleAccWayTableContentProvider extends ArrayContentProvider {
+public class PayRecordTableContentProvider extends ArrayContentProvider {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ArrayContentProvider#getElements(java.lang.Object)

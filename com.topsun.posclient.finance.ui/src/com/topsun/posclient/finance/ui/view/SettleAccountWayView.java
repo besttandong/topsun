@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.part.ViewPart;
 
 /**
- * ½áËã·½Ê½ÊÓÍ¼
+ * ï¿½ï¿½ï¿½ã·½Ê½ï¿½ï¿½Í¼ 
  * 
  * @author Dong
  *
@@ -24,7 +24,7 @@ import org.eclipse.ui.part.ViewPart;
 public class SettleAccountWayView extends ViewPart {
 	
 	/**
-	 * ½áËã·½Ê½ÁÐ±í
+	 * ï¿½ï¿½ï¿½ã·½Ê½ï¿½Ð±ï¿½
 	 */
 	public TableViewer tableViewer;
 
@@ -43,8 +43,8 @@ public class SettleAccountWayView extends ViewPart {
 		parent.setLayoutData(data);
 		
 		tableViewer = new TableViewer(parent);
-		tableViewer.setContentProvider(new SettleAccWayTableContentProvider());
-		tableViewer.setLabelProvider(new SettleAccWayTableLableProvider());
+		tableViewer.setContentProvider(new PayRecordTableContentProvider());
+		tableViewer.setLabelProvider(new PayRecordTableLableProvider());
 		Table table = tableViewer.getTable();
 		{
 			GridData tableData = new GridData(GridData.FILL_BOTH);
@@ -55,42 +55,42 @@ public class SettleAccountWayView extends ViewPart {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("½áËã·½Ê½");
+			column.setText("ï¿½ï¿½ï¿½ã·½Ê½");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("Ó¦ÓÃµ½¸¶¿î");
+			column.setText("Ó¦ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("Ó¦ÓÃµ½ÊÕ¿î");
+			column.setText("Ó¦ï¿½Ãµï¿½ï¿½Õ¿ï¿½");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("Ó¦ÓÃµ½POS·ÑÓÃ");
+			column.setText("Ó¦ï¿½Ãµï¿½POSï¿½ï¿½ï¿½ï¿½");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("ÒøÐÐ");
+			column.setText("ï¿½ï¿½ï¿½ï¿½");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(120);
-			column.setText("ÒøÐÐÕÊºÅ");
+			column.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Êºï¿½");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(120);
-			column.setText("±¸×¢");
+			column.setText("ï¿½ï¿½×¢");
 		}
 		
 		table.addListener(SWT.MouseDoubleClick, new Listener() {
 			public void handleEvent(Event event) {
-				//Êó±êË«»÷ÊÂ¼þ
+				//ï¿½ï¿½ï¿½Ë«ï¿½ï¿½ï¿½Â¼ï¿½
 			} 
 		});
 		

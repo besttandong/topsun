@@ -6,8 +6,11 @@ import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -15,8 +18,11 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.part.ViewPart;
 
+import com.topsun.posclient.common.ui.utils.ImageUtils;
+import com.topsun.posclient.finance.ui.FinanceUIActivator;
+
 /**
- * µêÆÌ½É¿îÊÓÍ¼
+ * åº—é“ºç¼´æ¬¾è§†å›¾
  * 
  * @author Dong
  *
@@ -24,27 +30,69 @@ import org.eclipse.ui.part.ViewPart;
 public class StorePayView extends ViewPart {
 
 	/**
-	 * µêÆÌ½É¿î¼ÇÂ¼ÁĞ±í
+	 * åº—é“ºç¼´æ¬¾è®°å½•åˆ—è¡¨
 	 */
 	public TableViewer tableViewer;
 
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1,false));
-		buildTableViewer(parent);
+		Composite opertaionArea = new Composite(parent, SWT.NONE);
+		Composite payRecodeArea = new Composite(parent, SWT.NONE);
+		Composite saveAndCancelArea = new Composite(parent, SWT.NONE);
+		buildOperation(opertaionArea);
+		buildTableViewer(payRecodeArea);
+	}
+	
+	public void buildOperation(Composite parent){
+		GridLayout gridLayout = new GridLayout(2,true);
+		parent.setLayout(gridLayout);
+		{
+			Button button = new Button(parent, SWT.NONE);
+			button.setText("æ–°å¢");
+			button.setImage(ImageUtils.createImage(FinanceUIActivator.PLUGIN_ID, "icons//ok.gif"));
+			GridData data = new GridData();
+			data.heightHint = 28;
+			data.widthHint = 120;
+			button.setLayoutData(data);
+			button.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		}
+		
+		{
+			Button button = new Button(parent, SWT.NONE);
+			button.setText("åˆ é™¤");
+			button.setImage(ImageUtils.createImage(FinanceUIActivator.PLUGIN_ID, "icons//nook.png"));
+			GridData data = new GridData();
+			data.heightHint = 28;
+			data.widthHint = 120;
+			button.setLayoutData(data);
+		}
+		
 	}
 
 	public void setFocus() {}
 	
 	public void buildTableViewer(Composite parent){
-		
 		GridLayout gridLayout = new GridLayout(1,false);
 		parent.setLayout(gridLayout);
 		GridData data = new GridData(GridData.FILL_BOTH);
 		parent.setLayoutData(data);
 		
 		tableViewer = new TableViewer(parent);
-		tableViewer.setContentProvider(new SettleAccWayTableContentProvider());
-		tableViewer.setLabelProvider(new SettleAccWayTableLableProvider());
+		tableViewer.setContentProvider(new PayRecordTableContentProvider());
+		tableViewer.setLabelProvider(new PayRecordTableLableProvider());
 		Table table = tableViewer.getTable();
 		{
 			GridData tableData = new GridData(GridData.FILL_BOTH);
@@ -55,47 +103,47 @@ public class StorePayView extends ViewPart {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("½É¿îÊ±¼ä");
+			column.setText("ç¼´æ¬¾æ—¶é—´");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("´æ¿îÒøĞĞ");
+			column.setText("å­˜æ¬¾é“¶è¡Œ ");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("ÒøĞĞÕÊºÅ");
+			column.setText("é“¶è¡Œå¸å·");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("´æ¿î½ğ¶î");
+			column.setText("å­˜æ¬¾é‡‘é¢");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(100);
-			column.setText("´æ¿îÈË");
+			column.setText("å­˜æ¬¾äºº");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(120);
-			column.setText("ÉóºËÈË");
+			column.setText("å®¡æ ¸äºº");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(120);
-			column.setText("ÉóºËÊ±¼ä");
+			column.setText("å®¡æ ¸æ—¶é—´");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(120);
-			column.setText("±¸×¢");
+			column.setText("å¤‡æ³¨");
 		}
 		
 		table.addListener(SWT.MouseDoubleClick, new Listener() {
 			public void handleEvent(Event event) {
-				//Êó±êË«»÷ÊÂ¼ş
+				//é¼ æ ‡åŒå‡»äº‹ä»¶
 			} 
 		});
 		
@@ -110,8 +158,8 @@ public class StorePayView extends ViewPart {
 	    cellEditor[6] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[7] = new TextCellEditor(this.tableViewer.getTable());
 	    tableViewer.setCellEditors(cellEditor);
+	    ICellModifier modifier = new SettleAccWayCellModifier(tableViewer, parent);
 	    
-		ICellModifier modifier = new SettleAccWayCellModifier(tableViewer, parent);
 		tableViewer.setCellModifier(modifier);
 	}
 }

@@ -56,8 +56,14 @@ public class SalesTableLableProvider implements ITableLabelProvider {
 			case 2:
 				return String.valueOf(number);
 			case 3:
+				if(retailPrice == 0){
+					return "";
+				}
 				return String.valueOf(retailPrice);
 			case 4:
+				if(total == 0){
+					return "";
+				}
 				return String.valueOf(total);
 
 			default:
