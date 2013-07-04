@@ -1,6 +1,8 @@
 package com.topsun.posclient.repository.dao;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.topsun.posclient.common.AppConstants;
@@ -35,20 +37,31 @@ public class AdjustShopDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public List<AdjustShopInfo> queryAdjustShopInfo(AdjustShopInfo adjustShopInfo) throws Exception {
-		File file = new File(ProjectUtil.getRuntimeClassPath()
-				+ AppConstants.DATA_ADJUSTSTORE_PATH);
-		//TODO 遍历所有调店信息文件
-		AdjustShopDTO adjustShopDTO = (AdjustShopDTO)this.getLocalProcessor()
-				.getObjectFromXml(
-						this.getLocalProcessor().getDataFileContent(file),
-						AdjustShopDTO.class);
 		
-		List<AdjustShopInfo> returnList = adjustShopDTO.getAdjustShopList();
-		List<AdjustShopInfo> adjustShopInfoList = adjustShopDTO.getAdjustShopList();
-		for(AdjustShopInfo asi : adjustShopInfoList){
-			// TODO 查询条件判断，调拨日期在开始日期和结束日期之间
-			System.out.println(asi.getCallDate());
+		List<AdjustShopInfo> returnList = new ArrayList<AdjustShopInfo>();
+		List<AdjustShopDTO> adjustShopDTOList = new ArrayList<AdjustShopDTO>();
+		
+		File file = new File(ProjectUtil.getRuntimeClassPath() + AppConstants.DATA_ADJUSTSTORE_PATH);
+		File[] dataFiles = file.listFiles();
+		if(dataFiles.length > 0){
+			AdjustShopDTO adjustShopDTO = (AdjustShopDTO)this.getLocalProcessor()
+			.getObjectFromXml(getLocalProcessor().getDataFileContent(file), AdjustShopDTO.class);
+			adjustShopDTOList.add(adjustShopDTO);
 		}
+		
+		for(AdjustShopDTO adjustShopDTO : adjustShopDTOList){
+			List<AdjustShopInfo> adjustShopInfoList = adjustShopDTO.getAdjustShopList();
+			for(AdjustShopInfo asi : adjustShopInfoList){
+				Date startDate = new Date();
+				Date endDate = new Date();
+				
+				//时间区间判断
+				if(asi.getCallDate().before(startDate) && asi.getCallDate().after(endDate)){
+					returnList.add(asi);
+				}
+			}
+		}
+		
 		return returnList;
 	}
 
