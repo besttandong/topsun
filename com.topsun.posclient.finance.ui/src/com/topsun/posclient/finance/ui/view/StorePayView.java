@@ -1,5 +1,8 @@
 package com.topsun.posclient.finance.ui.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
@@ -19,6 +22,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.part.ViewPart;
 
 import com.topsun.posclient.common.ui.utils.ImageUtils;
+import com.topsun.posclient.datamodel.PayRecord;
 import com.topsun.posclient.finance.ui.FinanceUIActivator;
 
 /**
@@ -29,6 +33,8 @@ import com.topsun.posclient.finance.ui.FinanceUIActivator;
  */
 public class StorePayView extends ViewPart {
 
+	public List<PayRecord> payRecords = new ArrayList<PayRecord>();
+	
 	/**
 	 * 店铺缴款记录列表
 	 */
@@ -58,7 +64,20 @@ public class StorePayView extends ViewPart {
 				
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
+					
+					if(tableViewer.getInput()!=null){
+						List<PayRecord> list = (List<PayRecord>)tableViewer.getInput();
+						PayRecord input = new PayRecord();
+						list.add(input);
+						payRecords.add(input);
+						tableViewer.setInput(list);
+					}else{
+						PayRecord input = new PayRecord();
+						payRecords.add(input);
+						tableViewer.setInput(payRecords);
+					}
+					
+			
 					
 				}
 				
@@ -90,7 +109,7 @@ public class StorePayView extends ViewPart {
 		GridData data = new GridData(GridData.FILL_BOTH);
 		parent.setLayoutData(data);
 		
-		tableViewer = new TableViewer(parent);
+		tableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER|SWT.FULL_SELECTION);
 		tableViewer.setContentProvider(new PayRecordTableContentProvider());
 		tableViewer.setLabelProvider(new PayRecordTableLableProvider());
 		Table table = tableViewer.getTable();
@@ -147,9 +166,8 @@ public class StorePayView extends ViewPart {
 			} 
 		});
 		
-		tableViewer.setColumnProperties(new String[] { "payDate", "bankName", "account", "amount", "payer", "approve", "approveDate", "remark" });
 	    CellEditor[] cellEditor = new CellEditor[8];
-	    cellEditor[0] = new ComboBoxCellEditor(this.tableViewer.getTable(), SettleAccWayCellModifier.SETTLEACC_WAY, 8);
+	    cellEditor[0] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[1] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[2] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[3] = new TextCellEditor(this.tableViewer.getTable());
@@ -158,8 +176,9 @@ public class StorePayView extends ViewPart {
 	    cellEditor[6] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[7] = new TextCellEditor(this.tableViewer.getTable());
 	    tableViewer.setCellEditors(cellEditor);
-	    ICellModifier modifier = new SettleAccWayCellModifier(tableViewer, parent);
-	    
+	    String[] properties =  new String[] { "payDate", "bankName", "account", "amount", "payer", "approve", "approveDate", "remark" };
+	    tableViewer.setColumnProperties(properties);
+	    ICellModifier modifier = new PayReCordCellModifier(tableViewer, parent);
 		tableViewer.setCellModifier(modifier);
 	}
 }

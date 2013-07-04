@@ -96,7 +96,7 @@ public class SettleAccountWayView extends ViewPart {
 		
 		tableViewer.setColumnProperties(new String[] { "settleAccWay", "payCustomer", "receiveCustomer", "posId", "bankName", "account", "remark" });
 	    CellEditor[] cellEditor = new CellEditor[6];
-	    cellEditor[0] = new ComboBoxCellEditor(this.tableViewer.getTable(), SettleAccWayCellModifier.SETTLEACC_WAY, 8);
+//	    cellEditor[0] = new ComboBoxCellEditor(this.tableViewer.getTable(), PayReCordCellModifier.SETTLEACC_WAY, 8);
 	    cellEditor[1] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[2] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[3] = new TextCellEditor(this.tableViewer.getTable());
@@ -104,7 +104,7 @@ public class SettleAccountWayView extends ViewPart {
 	    cellEditor[5] = new TextCellEditor(this.tableViewer.getTable());
 	    tableViewer.setCellEditors(cellEditor);
 	    
-		ICellModifier modifier = new SettleAccWayCellModifier(tableViewer, parent);
+		ICellModifier modifier = new PayReCordCellModifier(tableViewer, parent);
 		tableViewer.setCellModifier(modifier);
 	}
 }
