@@ -105,6 +105,7 @@ public class MockDataFactory {
 		item1.setPurchasePrice(200D);
 		item1.setGuidePrice(300D);
 		item1.setChannelPrice(200D);
+		item1.setRetailPrice(200D);
 		item1.setWholesalePrice(300D);
 		item1.setUnitId(1);
 		item1.setSupplierId(1);
@@ -127,6 +128,7 @@ public class MockDataFactory {
 		item2.setItemCode("00909787");
 		item2.setDivisionId(1);
 		item2.setPurchasePrice(200D);
+		item2.setRetailPrice(200D);
 		item2.setGuidePrice(300D);
 		item2.setChannelPrice(200D);
 		item2.setWholesalePrice(300D);

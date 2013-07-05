@@ -3,8 +3,8 @@ package com.topsun.posclient.finance.ui.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
@@ -21,8 +21,12 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.part.ViewPart;
 
+import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
 import com.topsun.posclient.datamodel.PayRecord;
+import com.topsun.posclient.datamodel.dto.PayRecordDTO;
+import com.topsun.posclient.finance.service.IShopPayService;
+import com.topsun.posclient.finance.service.impl.ShopPayServiceImpl;
 import com.topsun.posclient.finance.ui.FinanceUIActivator;
 
 /**
@@ -32,6 +36,8 @@ import com.topsun.posclient.finance.ui.FinanceUIActivator;
  *
  */
 public class StorePayView extends ViewPart {
+	
+	public IShopPayService shopPayService = new ShopPayServiceImpl();
 
 	public List<PayRecord> payRecords = new ArrayList<PayRecord>();
 	
@@ -50,7 +56,7 @@ public class StorePayView extends ViewPart {
 	}
 	
 	public void buildOperation(Composite parent){
-		GridLayout gridLayout = new GridLayout(2,true);
+		GridLayout gridLayout = new GridLayout(3,true);
 		parent.setLayout(gridLayout);
 		{
 			Button button = new Button(parent, SWT.NONE);
@@ -97,6 +103,32 @@ public class StorePayView extends ViewPart {
 			data.heightHint = 28;
 			data.widthHint = 120;
 			button.setLayoutData(data);
+		}
+		
+		{
+			Button button = new Button(parent, SWT.NONE);
+			button.setText("保存");
+			button.setImage(ImageUtils.createImage(FinanceUIActivator.PLUGIN_ID, "icons//ok.gif"));
+			GridData data = new GridData();
+			data.heightHint = 28;
+			data.widthHint = 120;
+			button.setLayoutData(data);
+			button.addSelectionListener(new SelectionListener() {
+				public void widgetSelected(SelectionEvent e) {
+					try {
+						PayRecordDTO payRecordDTO = new PayRecordDTO();
+						payRecordDTO.setPayRecordList(payRecords);
+						shopPayService.saveShopPay(payRecordDTO);
+					} catch (POSException e1) {
+						Button saveButton = (Button)e.getSource();
+						MessageDialog.openError(saveButton.getShell(), "提示", e1.getMessage());
+						return;
+					}
+				}
+				public void widgetDefaultSelected(SelectionEvent e) {
+					
+				}
+			});
 		}
 		
 	}

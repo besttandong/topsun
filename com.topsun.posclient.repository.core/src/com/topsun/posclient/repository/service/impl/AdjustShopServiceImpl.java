@@ -56,4 +56,11 @@ public class AdjustShopServiceImpl extends BaseServiceImpl implements
 		return adjustShopList;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.topsun.posclient.repository.service.IAdjustShopService#getAllAdjustShopInfo()
+	 */
+	public List<AdjustShopInfo> getAllAdjustShopInfo() throws POSException {
+		return null;
+	}
+
 }

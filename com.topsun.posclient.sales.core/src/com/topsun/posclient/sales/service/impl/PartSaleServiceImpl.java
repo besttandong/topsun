@@ -12,6 +12,9 @@ import com.topsun.posclient.sales.service.IPartSaleService;
  */
 public class PartSaleServiceImpl extends BaseServiceImpl implements IPartSaleService {
 	
+	/**
+	 * 
+	 */
 	private PartSaleDao partSaleDao = new PartSaleDao();
 
 	/* (non-Javadoc)

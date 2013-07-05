@@ -19,7 +19,7 @@
             icons="icons/type-list-1.png"
             index="2"
             menuid="finance.menu"
-            name="结算方式"
+            name="收款"
             treeid="account.tree"
             viewid="com.topsun.posclient.finance.ui.SettleAccountWayView">
       </tree>

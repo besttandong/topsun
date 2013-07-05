@@ -29,6 +29,33 @@ public class AdjustShopDao extends BaseDao {
 		this.getLocalProcessor().createXmlFileFromObject(adjustStoreDTO,
 				"data_adjustStore", AppConstants.DATA_ADJUSTSTORE_PATH);
 	}
+	
+	/**
+	 * 获取所有调店信息
+	 * @return 调店信息集合
+	 * @throws Exception
+	 */
+	public List<AdjustShopInfo> getAllAdjustShopInfo() throws Exception{
+		List<AdjustShopInfo> returnList = new ArrayList<AdjustShopInfo>();
+		List<AdjustShopDTO> adjustShopDTOList = new ArrayList<AdjustShopDTO>();
+		
+		File file = new File(ProjectUtil.getRuntimeClassPath() + AppConstants.DATA_ADJUSTSTORE_PATH);
+		File[] dataFiles = file.listFiles();
+		if(dataFiles.length > 0){
+			AdjustShopDTO adjustShopDTO = (AdjustShopDTO)this.getLocalProcessor()
+			.getObjectFromXml(getLocalProcessor().getDataFileContent(file), AdjustShopDTO.class);
+			adjustShopDTOList.add(adjustShopDTO);
+		}
+		
+		for(AdjustShopDTO adjustShopDTO : adjustShopDTOList){
+			List<AdjustShopInfo> adjustShopInfoList = adjustShopDTO.getAdjustShopList();
+			for(AdjustShopInfo asi : adjustShopInfoList){
+				returnList.add(asi);
+			}
+		}
+		
+		return returnList;
+	}
 
 	/**
 	 * 查询调店信息

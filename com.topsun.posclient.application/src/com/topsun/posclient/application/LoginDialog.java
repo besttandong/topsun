@@ -69,7 +69,7 @@ public class LoginDialog extends TitleAreaDialog {
 		passwordText.setLayoutData(gd_passwordText);
 		passwordText.setText("123456");
 
-		setTitle("POS");
+		setTitle("POS零售系统客户端");
 		return area;
 	}
 
@@ -93,7 +93,7 @@ public class LoginDialog extends TitleAreaDialog {
 
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("POS客户端登录");
+		newShell.setText("用户登录");
 	}
 
 	protected void buttonPressed(int buttonId) {

@@ -23,6 +23,13 @@ public interface IAdjustShopService extends IBaseService {
 	 */
 	public void saveAdjustStoreInfo(AdjustShopDTO adjustStoreDTO)
 			throws POSException;
+	
+	/**
+	 * 获取所有调店信息
+	 * @return 调店信息集合
+	 * @throws POSException
+	 */
+	public List<AdjustShopInfo> getAllAdjustShopInfo() throws POSException;
 
 	/**
 	 * 查询调店信息
