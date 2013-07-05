@@ -27,7 +27,7 @@ public class AdjustShopDao extends BaseDao {
 	 */
 	public void saveAdjustStore(AdjustShopDTO adjustStoreDTO) throws Exception {
 		this.getLocalProcessor().createXmlFileFromObject(adjustStoreDTO,
-				"data_adjustStore", AppConstants.DATA_ADJUSTSTORE_PATH);
+				"data_adjustShop", AppConstants.DATA_ADJUSTSHOP_PATH);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class AdjustShopDao extends BaseDao {
 		List<AdjustShopInfo> returnList = new ArrayList<AdjustShopInfo>();
 		List<AdjustShopDTO> adjustShopDTOList = new ArrayList<AdjustShopDTO>();
 		
-		File file = new File(ProjectUtil.getRuntimeClassPath() + AppConstants.DATA_ADJUSTSTORE_PATH);
+		File file = new File(ProjectUtil.getRuntimeClassPath() + AppConstants.DATA_ADJUSTSHOP_PATH);
 		File[] dataFiles = file.listFiles();
 		if(dataFiles.length > 0){
 			AdjustShopDTO adjustShopDTO = (AdjustShopDTO)this.getLocalProcessor()
@@ -68,7 +68,7 @@ public class AdjustShopDao extends BaseDao {
 		List<AdjustShopInfo> returnList = new ArrayList<AdjustShopInfo>();
 		List<AdjustShopDTO> adjustShopDTOList = new ArrayList<AdjustShopDTO>();
 		
-		File file = new File(ProjectUtil.getRuntimeClassPath() + AppConstants.DATA_ADJUSTSTORE_PATH);
+		File file = new File(ProjectUtil.getRuntimeClassPath() + AppConstants.DATA_ADJUSTSHOP_PATH);
 		File[] dataFiles = file.listFiles();
 		if(dataFiles.length > 0){
 			AdjustShopDTO adjustShopDTO = (AdjustShopDTO)this.getLocalProcessor()

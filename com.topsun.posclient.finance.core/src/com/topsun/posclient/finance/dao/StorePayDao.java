@@ -21,7 +21,7 @@ public class StorePayDao extends BaseDao {
 		if (checkConnection()) {
 			// IPosService webService = this.getCallServerProcessor().getWebService();
 		} else {
-			this.getLocalProcessor().createXmlFileFromObject(payRecordDTO, "data_payRecord", AppConstants.DATA_STOREPAY_PATH);
+			this.getLocalProcessor().createXmlFileFromObject(payRecordDTO, "data_payRecord", AppConstants.DATA_SHOPPAY_PATH);
 		}
 		
 	}

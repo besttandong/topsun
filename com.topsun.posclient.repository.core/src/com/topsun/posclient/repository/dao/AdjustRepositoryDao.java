@@ -22,11 +22,12 @@ public class AdjustRepositoryDao extends BaseDao {
 	 * @param adjustRepositoryDTO 回仓信息
 	 * @throws Exception
 	 */
-	public void saveAdjustRepository(AdjustRepositoryDTO adjustRepositoryDTO)
-			throws Exception {
-		this.getLocalProcessor().createXmlFileFromObject(adjustRepositoryDTO,
-				"data_adjustRepository",
-				AppConstants.DATA_ADJUSTREPOSITORY_PATH);
+	public void saveAdjustRepository(AdjustRepositoryDTO adjustRepositoryDTO) throws Exception {
+		if (checkConnection()) {
+			
+		}else{
+			this.getLocalProcessor().createXmlFileFromObject(adjustRepositoryDTO, "data_adjustRepository", AppConstants.DATA_ADJUSTREPOSITORY_PATH);
+		}
 	}
 	
 	/**
