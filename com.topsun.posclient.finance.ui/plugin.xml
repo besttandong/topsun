@@ -7,7 +7,7 @@
             name="结算方式" restorable="true">
       </view>
       
-      <view allowMultiple="true" class="com.topsun.posclient.finance.ui.view.StorePayView"
+      <view allowMultiple="true" class="com.topsun.posclient.finance.ui.view.ShopPayView"
             icon="icons/type-list-1.png" id="com.topsun.posclient.finance.ui.StorePayView"
             name="店铺缴款" restorable="true">
       </view>

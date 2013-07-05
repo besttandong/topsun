@@ -35,7 +35,7 @@ import com.topsun.posclient.finance.ui.FinanceUIActivator;
  * @author Dong
  *
  */
-public class StorePayView extends ViewPart {
+public class ShopPayView extends ViewPart {
 	
 	public IShopPayService shopPayService = new ShopPayServiceImpl();
 
@@ -121,7 +121,7 @@ public class StorePayView extends ViewPart {
 						shopPayService.saveShopPay(payRecordDTO);
 					} catch (POSException e1) {
 						Button saveButton = (Button)e.getSource();
-						MessageDialog.openError(saveButton.getShell(), "提示", e1.getMessage());
+						MessageDialog.openError(saveButton.getShell(), "提示", e1.getErrorMessage());
 						return;
 					}
 				}

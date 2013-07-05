@@ -3,7 +3,7 @@ package com.topsun.posclient.finance.service.impl;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.datamodel.dto.PayRecordDTO;
-import com.topsun.posclient.finance.dao.StorePayDao;
+import com.topsun.posclient.finance.dao.ShopPayDao;
 import com.topsun.posclient.finance.service.IShopPayService;
 
 /**
@@ -12,7 +12,7 @@ import com.topsun.posclient.finance.service.IShopPayService;
  */
 public class ShopPayServiceImpl extends BaseServiceImpl implements IShopPayService {
 
-	StorePayDao storePayLocalDao = new StorePayDao();
+	ShopPayDao storePayLocalDao = new ShopPayDao();
 	
 	/* (non-Javadoc)
 	 * @see com.topsun.posclient.finance.service.IStorePayService#saveStorePay(com.topsun.posclient.finance.dto.PayRecordDTO)

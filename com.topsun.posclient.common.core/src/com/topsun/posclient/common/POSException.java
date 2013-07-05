@@ -1,7 +1,7 @@
 package com.topsun.posclient.common;
 
 /**
- * POS�쳣
+ * POS�쳣
  * 
  * @author Dong
  *
@@ -13,19 +13,35 @@ public class POSException extends Throwable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	String code;
+	String errorCode;
 
-	String message;
+	String errorMessage;
 
 	public POSException(){}
 
-	public POSException(String code, String message){
-		this.code = code;
-		this.message = message;
+	public POSException(String errorCode, String errorMessage){
+		this.errorCode = errorCode;
+		this.errorMessage = errorMessage;
 	}
 
-	public POSException(String message){
-		this.message = message;
+	public POSException(String errorMessage){
+		this.errorMessage = errorMessage;
+	}
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 
 }

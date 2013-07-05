@@ -10,8 +10,8 @@ public class AppConstants {
 	public static String LOGIN_USER = "loginUser";
 	public static String APPLICATION_ID = "posclient";
 	
+	public static String SEETING_FILE = "data\\system\\posclient.properties";
 	public static String DATA_USER_PATH = "data\\download\\user_data\\";
-	public static String DATA_SETTLEACCWAY_PATH = "data\\download\\settleaccway_data\\";
 	public static String DATA_USER_FILENAME = "data\\download\\data_user.xml";
 	public static String DATA_REPOSITORY_PATH = "data\\download\\repository_data\\";
 	public static String DATA_CASHIERMODE_FILENAME = "data\\download\\data_cashiermode.xml";
@@ -25,6 +25,7 @@ public class AppConstants {
 	public static String DATA_SHOPPAY_PATH = "data\\upload\\shoppay_data\\";
 	public static String DATA_SHOPPAY_PATH_BACK = "data\\upload\\shoppay_data\\back\\";
 	public static String DATA_PARTSALES_PATH = "data\\upload\\partsales_data\\";
+	public static String DATA_PARTSALES_PATH_BACK = "data\\upload\\partsales_data\\back\\";
 	public static String DATA_ADJUSTSHOP_PATH = "data\\upload\\adjustshop_data\\";
 	public static String DATA_ADJUSTSHOP_PATH_BACK = "data\\upload\\adjustshop_data\\back\\";
 	public static String DATA_ADJUSTREPOSITORY_PATH = "data\\upload\\adjustrepository_data\\";

@@ -8,8 +8,6 @@ import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.common.webservice.IPosWebServiceService;
 
 /**
- * POSServer������
- * ��������POSServer��webservice�ӿ�
  * 
  * @author Dong
  *
