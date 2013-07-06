@@ -19,9 +19,12 @@ public class SyncDataServiceImpl extends BaseServiceImpl implements ISyncDataSer
 	public void syncData() throws POSException {
 		
 		try {
-			syncDataDao.syncData();
+			if(syncDataDao.checkConnection()){
+				syncDataDao.syncData();
+			}else{
+				throw new POSException("当前处于离线状态，不能进行数据同步！请尝试连接服务器！");
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new POSException("数据同步失败");
 		}
 	}

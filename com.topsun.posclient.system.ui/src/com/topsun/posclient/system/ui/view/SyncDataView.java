@@ -1,5 +1,6 @@
 package com.topsun.posclient.system.ui.view;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -14,6 +15,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.system.service.ISyncDataService;
 import com.topsun.posclient.system.service.impl.SyncDataServiceImpl;
 import com.topsun.widget.calendar.CalendarCombo;
@@ -141,6 +143,13 @@ public class SyncDataView extends ViewPart {
 			button.addSelectionListener(new SelectionListener() {
 
 				public void widgetSelected(SelectionEvent e) {
+					Button saveButton = (Button)e.getSource();
+					try {
+						syncDataService.syncData();
+					} catch (POSException e1) {
+						MessageDialog.openError(saveButton.getShell(), "提示", e1.getErrorMessage());
+						return;
+					}
 //					try {
 //						StringBuffer buffer = new StringBuffer();
 //						buffer.append("正在同步数据.....\n");
