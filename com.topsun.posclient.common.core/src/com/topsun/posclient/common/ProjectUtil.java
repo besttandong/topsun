@@ -92,7 +92,7 @@ public class ProjectUtil {
 		return value;
 	}
 	
-	public static boolean doCheck() {
+	public static boolean checkConnection() {
 		boolean status = false;
 		try {
 			String host = ProjectUtil.readValue(ProjectUtil.getRuntimeClassPath()+AppConstants.SEETING_FILE, "serverIP");

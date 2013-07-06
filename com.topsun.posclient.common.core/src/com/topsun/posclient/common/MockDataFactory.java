@@ -14,6 +14,7 @@ import com.topsun.posclient.datamodel.Shop;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.ItemDTO;
 import com.topsun.posclient.datamodel.dto.ShopDTO;
+import com.topsun.posclient.datamodel.dto.UserDTO;
 
 /**
  * 模拟数据工厂
@@ -22,6 +23,12 @@ import com.topsun.posclient.datamodel.dto.ShopDTO;
  *
  */
 public class MockDataFactory {
+	
+	public static UserDTO createUserDTO() {
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUserList(createUserList());
+		return userDTO;
+	}
 	
 	public static List<Shop> createShopList(){
 		List<Shop> shopList = new ArrayList<Shop>();

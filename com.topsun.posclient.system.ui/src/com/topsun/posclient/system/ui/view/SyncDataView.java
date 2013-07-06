@@ -141,29 +141,29 @@ public class SyncDataView extends ViewPart {
 			button.addSelectionListener(new SelectionListener() {
 
 				public void widgetSelected(SelectionEvent e) {
-					try {
-						StringBuffer buffer = new StringBuffer();
-						buffer.append("正在同步数据.....\n");
-						remark.setText(buffer.toString());
-						String type = dataType.getText();
-						if(type.equals("用户数据")){
-							buffer.append("同步用户数据.....\n");
-							remark.setText(buffer.toString());
-							syncDataService.syncUserData();
-						}else if(type.equals("库存")){
-							buffer.append("同步库存.....\n");
-							remark.setText(buffer.toString());
-							syncDataService.syncRepositoryData();
-						}else if(type.equals("促销方案")){
-							buffer.append("同步促销方案.....\n");
-							remark.setText(buffer.toString());
-						}else{
-							syncDataService.syncAll();
-						}
-						remark.setText("同步完成");
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+//					try {
+//						StringBuffer buffer = new StringBuffer();
+//						buffer.append("正在同步数据.....\n");
+//						remark.setText(buffer.toString());
+//						String type = dataType.getText();
+//						if(type.equals("用户数据")){
+//							buffer.append("同步用户数据.....\n");
+//							remark.setText(buffer.toString());
+//							syncDataService.syncUserData();
+//						}else if(type.equals("库存")){
+//							buffer.append("同步库存.....\n");
+//							remark.setText(buffer.toString());
+//							syncDataService.syncRepositoryData();
+//						}else if(type.equals("促销方案")){
+//							buffer.append("同步促销方案.....\n");
+//							remark.setText(buffer.toString());
+//						}else{
+//							syncDataService.syncAll();
+//						}
+//						remark.setText("同步完成");
+//					} catch (Exception e1) {
+//						e1.printStackTrace();
+//					}
 				}
 
 				public void widgetDefaultSelected(SelectionEvent e) {

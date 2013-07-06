@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<data>
+<users>
 	<user>
 		<deptId>1</deptId>
-		<deptName>营业部</deptName>
+		<deptName>朝阳区石佛营店</deptName>
 		<employeeId>1</employeeId>
 		<employeeName>张三</employeeName>
 		<functionList>
@@ -38,11 +38,11 @@
 		<id>1</id>
 		<passWord>123456</passWord>
 		<userCode>10010</userCode>
-		<userName>admin</userName>
+		<userName>zhangsan</userName>
 	</user>
 	<user>
 		<deptId>1</deptId>
-		<deptName>yinyebu</deptName>
+		<deptName>朝阳区石佛营店</deptName>
 		<employeeId>1</employeeId>
 		<employeeName>李四</employeeName>
 		<functionList>
@@ -80,4 +80,4 @@
 		<userCode>10010</userCode>
 		<userName>lisi</userName>
 	</user>
-</data>
+</users>

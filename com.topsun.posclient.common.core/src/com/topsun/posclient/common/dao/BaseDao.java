@@ -18,7 +18,7 @@ public class BaseDao {
 	 * @throws POSException 
 	 */
 	public boolean checkConnection() {
-		return ProjectUtil.doCheck();
+		return ProjectUtil.checkConnection();
 	}
 
 

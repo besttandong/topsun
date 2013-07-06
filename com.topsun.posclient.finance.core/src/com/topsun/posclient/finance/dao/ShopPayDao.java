@@ -27,7 +27,7 @@ public class ShopPayDao extends BaseDao {
 			File file = this.getLocalProcessor().createXmlFileFromObject(payRecordDTO, "data_payRecord", AppConstants.DATA_SHOPPAY_PATH_BACK);
 			String saveData = this.getLocalProcessor().getDataFileContent(file);
 			IPosWebService webservice = this.getServerCaller().getWebService();
-			webservice.saveStorePay(saveData);
+			webservice.saveShopPay(saveData);
 		}else{
 			this.getLocalProcessor().createXmlFileFromObject(payRecordDTO, "data_payRecord", AppConstants.DATA_SHOPPAY_PATH);
 		}

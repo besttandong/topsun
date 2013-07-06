@@ -1,5 +1,6 @@
 package com.topsun.posclient.system.ui.view;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -13,6 +14,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.datamodel.SettingData;
+import com.topsun.posclient.system.service.ISettingService;
+import com.topsun.posclient.system.service.impl.SettingServiceImpl;
 import com.topsun.widget.calendar.DefaultSettings;
 
 /**
@@ -23,11 +28,13 @@ import com.topsun.widget.calendar.DefaultSettings;
  */
 public class SettingView extends ViewPart {
 	
+	private ISettingService settingService = new SettingServiceImpl();
+	
 	public Text status;
 	public Text serverIP;
 	public Text serverPort;
 	public Combo reconnection;
-
+	
 	public TableViewer tableViewer;
 
 	public SettingView() {
@@ -117,7 +124,7 @@ public class SettingView extends ViewPart {
 			reconnection.setLayoutData(data);
 			reconnection.setItems(new String[] { "5分钟", "10分钟", "半个小时", "1个小时" });
 		}
-
+		
 	}
 
 	private void buildOperation(Composite parent) {
@@ -135,6 +142,26 @@ public class SettingView extends ViewPart {
 
 			button.addSelectionListener(new SelectionListener() {
 				public void widgetSelected(SelectionEvent e) {
+					Button saveButton = (Button)e.getSource();
+					String ipAdd = serverIP.getText();
+					if(null == ipAdd || ("").equals(ipAdd)){
+						MessageDialog.openError(saveButton.getShell(), "提示", "请输入[服务器IP地址]");
+						return;
+					}
+					String port = serverPort.getText();
+					if(null == port || ("").equals(port)){
+						MessageDialog.openError(saveButton.getShell(), "提示", "请输入[服务器端口]");
+						return;
+					}
+					SettingData settingData = new SettingData();
+					settingData.setIp(ipAdd);
+					settingData.setPort(port);
+					try {
+						settingService.saveSetting(settingData);
+					} catch (POSException e1) {
+						MessageDialog.openError(saveButton.getShell(), "提示", e1.getErrorMessage());
+						return;
+					}
 				}
 				public void widgetDefaultSelected(SelectionEvent e) {
 				}

@@ -13,10 +13,10 @@ import javax.xml.bind.annotation.XmlType;
 import com.topsun.posclient.datamodel.User;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlRootElement(name="data")
+@XmlRootElement(name="users")
 @XmlType(name = "UserDTO", propOrder = {
     "userList"
-},namespace="http://com.topsun.posclient/UserDTO")
+})
 public class UserDTO implements Serializable {
 
 	/**

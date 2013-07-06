@@ -1,6 +1,7 @@
 package com.topsun.posclient.common;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -108,5 +109,15 @@ public class LocalDataProcessor {
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.marshal(data, fos);
 		return file;
+	}
+	
+	public String getStringFromObject(Object data) throws JAXBException, IOException {
+		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		JAXBContext context = JAXBContext.newInstance(data.getClass());
+		Marshaller marshaller = context.createMarshaller();
+		marshaller.marshal(data, baos);
+		return baos.toString();
+		
 	}
 }
