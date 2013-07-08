@@ -13,3 +13,4 @@ Export-Package: com.topsun.posclient,
  com.topsun.posclient.datamodel,
  com.topsun.posclient.datamodel.dto,
  com.topsun.posclient.datamodel.dto.webservice
+Bundle-ClassPath: com.topsun.posclient.datamodel.jar

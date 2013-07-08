@@ -14,3 +14,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.topsun.posclient.system.service,
  com.topsun.posclient.system.service.impl
+Bundle-ClassPath: com.topsun.posclient.system.core.jar

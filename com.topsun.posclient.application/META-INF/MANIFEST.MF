@@ -26,3 +26,4 @@ Export-Package: com.topsun.posclient.application;
    org.eclipse.swt.widgets,
    org.eclipse.jface.dialogs",
  com.topsun.posclient.application.common
+Bundle-ClassPath: com.topsun.posclient.application.jar

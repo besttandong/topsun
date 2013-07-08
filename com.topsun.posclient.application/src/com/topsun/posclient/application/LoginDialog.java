@@ -52,7 +52,7 @@ public class LoginDialog extends TitleAreaDialog {
 		final Label label = new Label(container, SWT.RIGHT);
 		// label.setImage(CacheImage.getINSTANCE().getImage(AppConstants.APPLICATION_ID,
 		// ImageKey.USER_NAME));
-		label.setText("用户名");
+		label.setText("UserName");
 
 		userNameText = new Text(container, SWT.BORDER);
 		final GridData gd_userNameText = new GridData(SWT.FILL, SWT.CENTER,
@@ -61,7 +61,7 @@ public class LoginDialog extends TitleAreaDialog {
 		userNameText.setText("admin");
 
 		final Label label_1 = new Label(container, SWT.RIGHT);
-		label_1.setText("密码");
+		label_1.setText("PassWord");
 
 		passwordText = new Text(container, SWT.BORDER);
 		final GridData gd_passwordText = new GridData(SWT.FILL, SWT.CENTER,
@@ -69,7 +69,7 @@ public class LoginDialog extends TitleAreaDialog {
 		passwordText.setLayoutData(gd_passwordText);
 		passwordText.setText("123456");
 
-		setTitle("POS零售系统客户端");
+		setTitle("POSClient");
 		return area;
 	}
 
@@ -80,8 +80,8 @@ public class LoginDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "登录", true);
-		createButton(parent, IDialogConstants.CANCEL_ID, "取消", false);
+		createButton(parent, IDialogConstants.OK_ID, "Login", true);
+		createButton(parent, IDialogConstants.CANCEL_ID, "Cancel", false);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class LoginDialog extends TitleAreaDialog {
 
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("用户登录");
+		newShell.setText("UserLogin");
 	}
 
 	protected void buttonPressed(int buttonId) {
@@ -102,7 +102,7 @@ public class LoginDialog extends TitleAreaDialog {
 				login(userNameText.getText(), passwordText.getText());
 				okPressed();
 			} catch (Exception e) {
-				MessageDialog.openError(getShell(), "登录失败", e.getMessage());
+				MessageDialog.openError(getShell(), "Login failer", e.getMessage());
 				e.printStackTrace();
 				return;
 			}
@@ -127,7 +127,7 @@ public class LoginDialog extends TitleAreaDialog {
 			if (null != operator){
 				return;
 			}else{
-				throw new Exception("错误的用户名和密");
+				throw new Exception("username or password is error!");
 			}
 		} catch (POSException e) {
 			// TODO Auto-generated catch block

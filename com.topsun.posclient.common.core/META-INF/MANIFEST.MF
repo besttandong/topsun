@@ -16,3 +16,4 @@ Export-Package: com.topsun.posclient.common,
  com.topsun.posclient.common.service,
  com.topsun.posclient.common.service.impl,
  com.topsun.posclient.common.webservice
+Bundle-ClassPath: com.topsun.posclient.common.core.jar

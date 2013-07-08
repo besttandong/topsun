@@ -15,3 +15,4 @@ Export-Package: com.topsun.posclient.sales.core,
  com.topsun.posclient.sales.dao,
  com.topsun.posclient.sales.service,
  com.topsun.posclient.sales.service.impl
+Bundle-ClassPath: com.topsun.posclient.sales.core.jar

@@ -17,3 +17,4 @@ Export-Package: com.topsun.posclient.finance,
  com.topsun.posclient.finance.service,
  com.topsun.posclient.finance.service.impl,
  com.topsun.posclient.finance.webservice
+Bundle-ClassPath: com.topsun.posclient.finance.core.jar
