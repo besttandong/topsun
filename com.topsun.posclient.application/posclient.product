@@ -11,11 +11,18 @@
    </launcherArgs>
 
    <plugins>
-      <plugin id="com.topsun.poclient.application" fragment=""/>
-      <plugin id="com.topsun.posclient.finance" fragment=""/>
-      <plugin id="com.topsun.posclient.repository" fragment=""/>
-      <plugin id="com.topsun.posclient.sales" fragment=""/>
-      <plugin id="com.topsun.posclient.system" fragment=""/>
+      <plugin id="com.topsun.posclient.application"/>
+      <plugin id="com.topsun.posclient.common.core"/>
+      <plugin id="com.topsun.posclient.common.ui"/>
+      <plugin id="com.topsun.posclient.datamodel"/>
+      <plugin id="com.topsun.posclient.finance.core"/>
+      <plugin id="com.topsun.posclient.finance.ui"/>
+      <plugin id="com.topsun.posclient.repository.core"/>
+      <plugin id="com.topsun.posclient.repository.ui"/>
+      <plugin id="com.topsun.posclient.sales.core"/>
+      <plugin id="com.topsun.posclient.sales.ui"/>
+      <plugin id="com.topsun.posclient.system.core"/>
+      <plugin id="com.topsun.posclient.system.ui"/>
       <plugin id="com.topsun.posclient.widget"/>
    </plugins>
 
