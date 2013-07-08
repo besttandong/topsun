@@ -27,7 +27,6 @@ import org.eclipse.ui.internal.WorkbenchPage;
 
 /**
  * 
- * 锁定两个视图中的SASH。固定视图位置
  *
  * @author Carrod.yu (mailto:haha.opensource@gmail.com)
  */
