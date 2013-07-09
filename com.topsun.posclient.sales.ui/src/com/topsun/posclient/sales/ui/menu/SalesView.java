@@ -168,22 +168,22 @@ public class SalesView extends ViewPart implements IKeyListener {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("款号搜索");
+			column.setText(MessageResources.message_ui_text_code_search);
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("款号");
+			column.setText(MessageResources.message_ui_text_code);
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("数量");
+			column.setText(MessageResources.message_ui_text_num);
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("零售价");
+			column.setText(MessageResources.message_ui_text_retailPrice);
 		}
 //		{
 //			TableColumn column = new TableColumn(table, SWT.NONE);
@@ -198,7 +198,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("金额");
+			column.setText(MessageResources.message_ui_text_amount);
 		}
 	}
 
@@ -243,7 +243,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{
 			Button button = new Button(operation, SWT.NONE);
-			button.setText("收银[END]");
+			button.setText(MessageResources.message_ui_button_cashier+"[END]");
 			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//ok.gif"));
 			GridData data = new GridData();
 			data.heightHint = 28;
@@ -257,7 +257,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 					Button saveButton = (Button)e.getSource();
 					String salesName = sales.getText();
 					if(salesName == null || "".equals(salesName.trim())){
-						MessageDialog.openError(saveButton.getShell(), "提示", "导购不能为空");
+						MessageDialog.openError(saveButton.getShell(), MessageResources.message_ui_tips, MessageResources.message_ui_tips_guideisnotnull);
 						return;
 					}
 					
@@ -321,7 +321,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{
 			Button button = new Button(operation, SWT.NONE);
-			button.setText("整单取消[ESC]");
+			button.setText(MessageResources.message_ui_button_cancel+"[ESC]");
 			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//nook.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
@@ -356,7 +356,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("制作人：");
+			label.setText(MessageResources.message_ui_lable_maker);
 		}
 		{
 			applyUser  = new Text(recodeComposite, SWT.BORDER);
@@ -372,7 +372,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("审核人：");
+			label.setText(MessageResources.message_ui_label_checker);
 		}
 		{
 			checker = new Text(recodeComposite, SWT.BORDER);
@@ -394,7 +394,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("数量合计：");
+			label.setText(MessageResources.message_ui_label_numcount);
 		}
 		{
 			numberTotal = new Text(caculatorComposite, SWT.BORDER);
@@ -409,7 +409,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("金额合计：");
+			label.setText(MessageResources.message_ui_label_amountcount);
 		}
 		{
 			priceTotal = new Text(caculatorComposite, SWT.BORDER);
@@ -426,7 +426,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("库存量：");
+			label.setText(MessageResources.message_ui_label_repositorynum);
 		}
 		{
 			Text text = new Text(caculatorComposite, SWT.BORDER);
@@ -465,7 +465,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("条形码输入：");
+			label.setText(MessageResources.message_ui_label_inputbarcode);
 		}
 		{
 			Text text = new Text(printCompoiste, SWT.BORDER);
@@ -479,7 +479,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("数量：");
+			label.setText(MessageResources.message_ui_label_num);
 		}
 		{
 			Text text = new Text(printCompoiste, SWT.BORDER);
@@ -491,7 +491,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{
 			Button button = new Button(printCompoiste, SWT.NONE);
-			button.setText("扫描计数模式");
+			button.setText(MessageResources.message_ui_label_saomiao);
 			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//sales.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
@@ -529,7 +529,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{
 			Button button = new Button(printCompoiste, SWT.NONE);
-			button.setText("定长扫描");
+			button.setText(MessageResources.message_ui_label_saomiaolen);
 			button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID, "icons//sales.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
@@ -544,7 +544,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("预设长度：");
+			label.setText(MessageResources.message_ui_label_length);
 		}
 		{
 		 Spinner spinner = new Spinner(printCompoiste, SWT.BORDER);
@@ -562,7 +562,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		Group baseInfo = new Group(parent, SWT.NONE);
 	
-		baseInfo.setText("基本信息：");
+		baseInfo.setText(MessageResources.message_ui_group_baseinfo);
 		GridLayout gridLayout = new GridLayout(2,false);
 		gridLayout.marginLeft = 30;
 		//gridLayout.horizontalSpacing = 50;
@@ -589,7 +589,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("店铺：");
+			label.setText(MessageResources.message_ui_label_shop);
 		}
 		{
 			shopName = new Combo(leftComposite, SWT.NONE);
@@ -608,7 +608,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("单据编号：");
+			label.setText(MessageResources.message_ui_label_no);
 		}
 		{
 			orderNo = new Text(rightCompoiste, SWT.BORDER);
@@ -627,7 +627,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("收银员：");
+			lable.setText(MessageResources.message_ui_label_balloter);
 		}
 		{
 			casher = new Combo(leftComposite, SWT.NONE);
@@ -645,7 +645,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("收银票号：");
+			lable.setText(MessageResources.message_ui_label_ballotNo);
 		}
 		
 		{
@@ -667,7 +667,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("导购：");
+			lable.setText(MessageResources.message_ui_label_guide);
 		}
 		{
 			sales = new Combo(leftComposite, SWT.NONE);
@@ -685,7 +685,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("销售日期：");
+			lable.setText(MessageResources.message_ui_label_salesDate);
 		}
 		{
 			salesDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY, new Settings(), null);
@@ -703,7 +703,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("会员卡号：");
+			lable.setText(MessageResources.message_ui_label_vipcardno);
 		}
 		{
 			cardNo = new Text(leftComposite, SWT.BORDER);
@@ -716,7 +716,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{ 
 			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText("姓名：");
+			lable.setText(MessageResources.message_ui_label_vipname);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -745,7 +745,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText("可用积分：");
+			lable.setText(MessageResources.message_ui_label_point);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -762,7 +762,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{
 			Label lable = new Label(rightCompoiste, SWT.NONE);
-			lable.setText("可用余额：");
+			lable.setText(MessageResources.message_ui_label_blance);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -779,7 +779,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 		{
 			Label lable = new Label(underCompsite, SWT.NONE);
-			lable.setText("注释：");
+			lable.setText(MessageResources.message_ui_label_remark);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
