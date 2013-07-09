@@ -39,9 +39,10 @@ public class ProjectUtil {
 	}
 
 	public static String getRuntimeClassPath() {
-		String path = Platform.getBundle(CommonCoreActivator.PLUGIN_ID)
-				.getLocation().replace("initial@reference:file:", "")
-				+ "bin\\";
+//		String path = Platform.getBundle(CommonCoreActivator.PLUGIN_ID)
+//				.getLocation().replace("initial@reference:file:", "")
+//				+ "bin\\";
+		String path = Platform.getInstanceLocation().getURL().getFile();
 		return path;
 	}
 

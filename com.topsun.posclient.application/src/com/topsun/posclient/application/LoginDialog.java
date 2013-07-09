@@ -52,7 +52,7 @@ public class LoginDialog extends TitleAreaDialog {
 		final Label label = new Label(container, SWT.RIGHT);
 		// label.setImage(CacheImage.getINSTANCE().getImage(AppConstants.APPLICATION_ID,
 		// ImageKey.USER_NAME));
-		label.setText("UserName");
+		label.setText(MessageResources.message_username);
 
 		userNameText = new Text(container, SWT.BORDER);
 		final GridData gd_userNameText = new GridData(SWT.FILL, SWT.CENTER,
@@ -61,7 +61,7 @@ public class LoginDialog extends TitleAreaDialog {
 		userNameText.setText("admin");
 
 		final Label label_1 = new Label(container, SWT.RIGHT);
-		label_1.setText("PassWord");
+		label_1.setText(MessageResources.message_password);
 
 		passwordText = new Text(container, SWT.BORDER);
 		final GridData gd_passwordText = new GridData(SWT.FILL, SWT.CENTER,
@@ -69,7 +69,7 @@ public class LoginDialog extends TitleAreaDialog {
 		passwordText.setLayoutData(gd_passwordText);
 		passwordText.setText("123456");
 
-		setTitle("POSClient");
+		setTitle(MessageResources.message_posclient);
 		return area;
 	}
 
@@ -80,8 +80,8 @@ public class LoginDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "Login", true);
-		createButton(parent, IDialogConstants.CANCEL_ID, "Cancel", false);
+		createButton(parent, IDialogConstants.OK_ID, MessageResources.message_login, true);
+		createButton(parent, IDialogConstants.CANCEL_ID, MessageResources.message_cancel, false);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class LoginDialog extends TitleAreaDialog {
 
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("UserLogin");
+		newShell.setText(MessageResources.message_title);
 	}
 
 	protected void buttonPressed(int buttonId) {
@@ -102,7 +102,7 @@ public class LoginDialog extends TitleAreaDialog {
 				login(userNameText.getText(), passwordText.getText());
 				okPressed();
 			} catch (Exception e) {
-				MessageDialog.openError(getShell(), "Login failer", e.getMessage());
+				MessageDialog.openError(getShell(), MessageResources.message_message_tips_loginfailer, e.getMessage());
 				e.printStackTrace();
 				return;
 			}
@@ -127,7 +127,7 @@ public class LoginDialog extends TitleAreaDialog {
 			if (null != operator){
 				return;
 			}else{
-				throw new Exception("username or password is error!");
+				throw new Exception(MessageResources.message_message_tips_loginfailer);
 			}
 		} catch (POSException e) {
 			// TODO Auto-generated catch block

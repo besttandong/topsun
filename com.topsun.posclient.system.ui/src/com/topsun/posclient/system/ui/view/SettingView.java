@@ -18,6 +18,7 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.datamodel.SettingData;
 import com.topsun.posclient.system.service.ISettingService;
 import com.topsun.posclient.system.service.impl.SettingServiceImpl;
+import com.topsun.posclient.system.ui.MessageResources;
 import com.topsun.widget.calendar.DefaultSettings;
 
 /**
@@ -68,7 +69,7 @@ public class SettingView extends ViewPart {
 		
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText("当前连接状态：");
+			lable.setText(MessageResources.message_currentconnstatus);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -82,7 +83,7 @@ public class SettingView extends ViewPart {
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText("主机IP：");
+			lable.setText(MessageResources.message_serverip);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -96,7 +97,7 @@ public class SettingView extends ViewPart {
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText("端口：");
+			lable.setText(MessageResources.message_port);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -110,7 +111,7 @@ public class SettingView extends ViewPart {
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText("自动重连策略：");
+			lable.setText(MessageResources.message_reconnection);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
@@ -122,7 +123,7 @@ public class SettingView extends ViewPart {
 			data.horizontalSpan = 3;
 			reconnection.select(0);
 			reconnection.setLayoutData(data);
-			reconnection.setItems(new String[] { "5分钟", "10分钟", "半个小时", "1个小时" });
+			reconnection.setItems(new String[] { "5 minutes", "10 minutes", "30 minutes", "1 hours" });
 		}
 		
 	}
@@ -134,7 +135,7 @@ public class SettingView extends ViewPart {
 
 		{
 			Button button = new Button(operation, SWT.NONE);
-			button.setText("保存");
+			button.setText(MessageResources.message_save);
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -145,12 +146,12 @@ public class SettingView extends ViewPart {
 					Button saveButton = (Button)e.getSource();
 					String ipAdd = serverIP.getText();
 					if(null == ipAdd || ("").equals(ipAdd)){
-						MessageDialog.openError(saveButton.getShell(), "提示", "请输入[服务器IP地址]");
+						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_inputserverip);
 						return;
 					}
 					String port = serverPort.getText();
 					if(null == port || ("").equals(port)){
-						MessageDialog.openError(saveButton.getShell(), "提示", "请输入[服务器端口]");
+						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_inputport);
 						return;
 					}
 					SettingData settingData = new SettingData();
@@ -159,7 +160,7 @@ public class SettingView extends ViewPart {
 					try {
 						settingService.saveSetting(settingData);
 					} catch (POSException e1) {
-						MessageDialog.openError(saveButton.getShell(), "提示", e1.getErrorMessage());
+						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, e1.getErrorMessage());
 						return;
 					}
 				}
