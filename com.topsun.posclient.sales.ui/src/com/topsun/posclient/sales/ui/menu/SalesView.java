@@ -39,6 +39,7 @@ import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.PartSalesDTO;
+import com.topsun.posclient.sales.MessageResources;
 import com.topsun.posclient.sales.dialog.SalesPayDialog;
 import com.topsun.posclient.sales.service.IPartSaleService;
 import com.topsun.posclient.sales.service.impl.PartSaleServiceImpl;
@@ -103,7 +104,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		KeyListenerManager.getInstance().addKeyListener(this);
 		
 		Group productInfo = new Group(parent, SWT.NONE);
-		productInfo.setText("商品信息");
+		productInfo.setText(MessageResources.message_ui_group_iteminfo);
 		GridLayout gridLayout = new GridLayout(1,false);
 		gridLayout.marginLeft = 20;
 		//gridLayout.horizontalSpacing = 20;
