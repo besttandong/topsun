@@ -18,7 +18,7 @@ public class MessageResources extends NLS
 	  public static String message_cancel;
 	  public static String message_posclient;
 	  public static String message_title;
-	  public static String message_message_tips_loginfailer;
+	  public static String message_tips_loginfailer;
 
 	  static {
 	    NLS.initializeMessages(BUNDLE_NAME, MessageResources.class);

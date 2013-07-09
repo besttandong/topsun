@@ -102,7 +102,7 @@ public class LoginDialog extends TitleAreaDialog {
 				login(userNameText.getText(), passwordText.getText());
 				okPressed();
 			} catch (Exception e) {
-				MessageDialog.openError(getShell(), MessageResources.message_message_tips_loginfailer, e.getMessage());
+				MessageDialog.openError(getShell(), MessageResources.message_tips_loginfailer, e.getMessage());
 				e.printStackTrace();
 				return;
 			}
@@ -127,7 +127,7 @@ public class LoginDialog extends TitleAreaDialog {
 			if (null != operator){
 				return;
 			}else{
-				throw new Exception(MessageResources.message_message_tips_loginfailer);
+				throw new Exception(MessageResources.message_tips_loginfailer);
 			}
 		} catch (POSException e) {
 			// TODO Auto-generated catch block
