@@ -21,8 +21,10 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import com.topsun.posclient.common.POSClientApp;
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.Item;
+import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.repository.service.IAdjustRepositoryService;
 import com.topsun.posclient.repository.service.impl.AdjustRepositoryServiceImpl;
 import com.topsun.widget.calendar.CalendarCombo;
@@ -35,6 +37,8 @@ import com.topsun.widget.calendar.CalendarCombo;
  */
 public class AdjustRepositoryView extends ViewPart {
 
+	User loginUser = POSClientApp.get().getLoginUser();
+	
 	public IAdjustRepositoryService goodsRepositoryervice = new AdjustRepositoryServiceImpl();
 
 	List<Item> goodsList = null;
@@ -411,16 +415,20 @@ public class AdjustRepositoryView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("回仓店铺：");
+			label.setText("调出店铺：");
 		}
 		{
 			storeName = new Combo(leftComposite, SWT.NONE);
 			GridData data = new GridData();
 			data.widthHint = 185;
 			data.horizontalSpan = 3;
-			storeName.select(0);
+			String leaveShopName = loginUser.getDeptName();
 			storeName.setLayoutData(data);
-			storeName.setItems(new String[] { "上海", "北京" });
+			storeName.setItems(new String[] {leaveShopName});
+			storeName.setEnabled(false);
+			
+			storeName.select(0);
+			
 		}
 
 		{
