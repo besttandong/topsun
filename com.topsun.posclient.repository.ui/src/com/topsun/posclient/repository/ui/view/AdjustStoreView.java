@@ -28,6 +28,7 @@ import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.common.service.impl.CommonServiceImpl;
 import com.topsun.posclient.datamodel.AdjustShopInfo;
 import com.topsun.posclient.datamodel.Item;
+import com.topsun.posclient.datamodel.Shop;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
 import com.topsun.posclient.repository.service.IAdjustShopService;
@@ -667,14 +668,25 @@ public class AdjustStoreView extends ViewPart {
 			lable.setLayoutData(data);
 			lable.setText("调入店铺：");
 		}
+		List<String> shopNames = new ArrayList<String>();
 		{
 			ICommonService commonService = new CommonServiceImpl();
-			inStoreName = new Combo(leftComposite, SWT.NONE);
+			try {
+				List<Shop> shops = commonService.getAllShop();
+				for (Shop shop : shops) {
+					shopNames.add(shop.getShpName());
+				}
+			} catch (POSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			inStoreName = new Combo(leftComposite, SWT.NONE|SWT.READ_ONLY);
 			GridData data = new GridData();
 			data.horizontalSpan = 3;
 			data.widthHint = 155;
 			inStoreName.setLayoutData(data);
-			inStoreName.setItems(new String[] {""});
+			
+			inStoreName.setItems(shopNames.toArray(new String[]{}));
 			inStoreName.select(0);
 		}
 		{
