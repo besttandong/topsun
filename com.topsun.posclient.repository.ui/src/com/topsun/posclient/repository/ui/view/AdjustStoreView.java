@@ -1,7 +1,6 @@
 package com.topsun.posclient.repository.ui.view;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.viewers.CellEditor;
@@ -33,6 +32,8 @@ import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
 import com.topsun.posclient.repository.service.IAdjustShopService;
 import com.topsun.posclient.repository.service.impl.AdjustShopServiceImpl;
+import com.topsun.posclient.repository.ui.table.AdjustShopSearchContentProvider;
+import com.topsun.posclient.repository.ui.table.AdjustShopSearchLableProvider;
 import com.topsun.posclient.repository.ui.table.AdjustStoreCellModify;
 import com.topsun.posclient.repository.ui.table.AdjustStoreContentProvider;
 import com.topsun.posclient.repository.ui.table.AdjustStoreLableProvider;
@@ -67,7 +68,9 @@ public class AdjustStoreView extends ViewPart {
 	public Text checker;//审核人
 	public Text remark;//备注
 
-	public TableViewer tableViewer;
+	public TableViewer recordViewer;//录入tableview
+	
+	public TableViewer searchViewer;//
 	private Text numberTotal;
 	private Text priceTotal;
 
@@ -151,7 +154,8 @@ public class AdjustStoreView extends ViewPart {
 						
 						AdjustShopInfo adjustShopInfo = new AdjustShopInfo();
 						adjustShopInfo.setVoucherNo("12345678");
-						adjShopSerivice.queryAdjustShopList(adjustShopInfo);
+						List<AdjustShopInfo> adjustShopInfos  = adjShopSerivice.queryAdjustShopList(adjustShopInfo);
+						searchViewer.setInput(adjustShopInfos);
 					} catch (POSException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -195,8 +199,8 @@ public class AdjustStoreView extends ViewPart {
 					adjustShopInfo.setCheckDate(checkDate.getDate().getTime());
 					adjustShopInfo.setReCheckDate(reCheckDate.getDate().getTime());
 					adjustShopInfo.setRemark(remark.getText());
-					if (tableViewer.getInput() instanceof List) {
-						List list = (List) tableViewer.getInput();
+					if (recordViewer.getInput() instanceof List) {
+						List list = (List) recordViewer.getInput();
 						adjustShopInfo.setItemList(list);
 					};
 
@@ -400,10 +404,10 @@ public class AdjustStoreView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 					List<AdjustShopInfo> list = MockDataFactory.createAdjustShopInfoList();
 					
-					if (tableViewer.getInput() != null) {
-						items.add(((List<Item>) tableViewer.getInput()).get(0));
+					if (recordViewer.getInput() != null) {
+						items.add(((List<Item>) recordViewer.getInput()).get(0));
 					}
-					tableViewer.setInput(MockDataFactory.createItemList());
+					recordViewer.setInput(MockDataFactory.createItemList());
 				}
 
 				@Override
@@ -420,13 +424,13 @@ public class AdjustStoreView extends ViewPart {
 		
 		int totalNum = 0;
 		double totalPrice = 0;
-		for (Item item : (List<Item>)tableViewer.getInput()) {
+		for (Item item : (List<Item>)recordViewer.getInput()) {
 			int num = item.getNum();
 			totalNum = totalNum+num;
 		}
 		numberTotal.setText(String.valueOf(totalNum));
 		
-		for (Item item : (List<Item>)tableViewer.getInput()) {
+		for (Item item : (List<Item>)recordViewer.getInput()) {
 			int num = item.getNum();
 			double price  = item.getRetailPrice()* num;
 			totalPrice = totalPrice + price;
@@ -447,22 +451,22 @@ public class AdjustStoreView extends ViewPart {
 		productInfo.setLayoutData(data);
 		buildPrintInfo(productInfo);
 		
-		tableViewer = new TableViewer(productInfo,SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER|SWT.FULL_SELECTION);
-		tableViewer.setContentProvider(new AdjustStoreContentProvider());
-		tableViewer.setLabelProvider(new AdjustStoreLableProvider());
+		recordViewer = new TableViewer(productInfo,SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER|SWT.FULL_SELECTION);
+		recordViewer.setContentProvider(new AdjustStoreContentProvider());
+		recordViewer.setLabelProvider(new AdjustStoreLableProvider());
 //		TableViewerKeyBoardSupporter boardSupporter = new TableViewerKeyBoardSupporter(tableViewer);
 //		boardSupporter.startSupport();
 		String[] cloumsProperties = new String[]{"itemName","itemCode","productName","num"};
-		tableViewer.setColumnProperties(cloumsProperties);
-		Table table = tableViewer.getTable();
+		recordViewer.setColumnProperties(cloumsProperties);
+		Table table = recordViewer.getTable();
 		CellEditor[] editors = new CellEditor[4];
 		
 		editors[0] = new TextCellEditor(table);
 		editors[1] = new TextCellEditor(table);
 		editors[2] = new TextCellEditor(table);
 		editors[3] = new TextCellEditor(table);
-		tableViewer.setCellEditors(editors);
-		tableViewer.setCellModifier(new AdjustStoreCellModify(tableViewer));
+		recordViewer.setCellEditors(editors);
+		recordViewer.setCellModifier(new AdjustStoreCellModify(recordViewer));
 		
 		
 		
@@ -522,10 +526,10 @@ public class AdjustStoreView extends ViewPart {
 		GridData data = new GridData(GridData.FILL_BOTH);
 		productInfo.setLayoutData(data);
 		buildSerachInfo(productInfo);
-		tableViewer = new TableViewer(productInfo);
-		tableViewer.setContentProvider(new AdjustRepositoryTableContentProvider());
-		tableViewer.setLabelProvider(new AdjustRepositoryTableLableProvider());
-		Table table = tableViewer.getTable();
+		searchViewer = new TableViewer(productInfo);
+		searchViewer.setContentProvider(new AdjustShopSearchContentProvider());
+		searchViewer.setLabelProvider(new AdjustShopSearchLableProvider());
+		Table table = searchViewer.getTable();
 		{
 			GridData tableData = new GridData(GridData.FILL_HORIZONTAL);
 			tableData.heightHint = 100;
