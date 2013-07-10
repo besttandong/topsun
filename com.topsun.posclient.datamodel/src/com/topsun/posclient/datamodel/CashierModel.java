@@ -18,6 +18,8 @@ public class CashierModel implements Serializable {
 	
 	private String typeName;//结算方式名称
 	
+	private double amount; // 金额
+	
 	public int getId() {
 		return id;
 	}
@@ -32,5 +34,13 @@ public class CashierModel implements Serializable {
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 }

@@ -6,6 +6,8 @@ import javax.xml.namespace.QName;
 
 import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.common.webservice.IPosWebServiceService;
+import com.topsun.posclient.common.webservice.IRMSServices;
+import com.topsun.posclient.common.webservice.Services;
 import com.topsun.posclient.datamodel.dto.webservice.UserCredential;
 import com.topsun.posclient.datamodel.dto.webservice.UserInfoReq;
 
@@ -27,6 +29,30 @@ public class POSServerCaller {
 		IPosWebServiceService ss = new IPosWebServiceService(wsdlURL, SERVICE_NAME);
         IPosWebService webservice = ss.getIPosWebServicePort();
 		return webservice;
+	}
+	
+	public IRMSServices getRMService() throws Exception {
+		QName SERVICE_NAME = new QName("http://tempuri.org/", "Services");
+		// 调用服务器WebService接口获取最新用户数据
+		URL wsdlURL = IPosWebServiceService.WSDL_LOCATION;
+		Services ss = new Services(wsdlURL, SERVICE_NAME);
+		IRMSServices rmservices = ss.getBasicHttpBindingIRMSServices();
+		return rmservices;
+	}
+	
+	
+	public static void main(String[] args){
+		UserCredential userCredential = new UserCredential();
+		userCredential.setUserName("test");
+		userCredential.setPassWord("123456");
+		UserInfoReq req = new UserInfoReq();
+		req.setUserCode("1");
+		req.setUserCredential(userCredential);
+		try {
+			new POSServerCaller().getRMService().getUserInfo(req);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

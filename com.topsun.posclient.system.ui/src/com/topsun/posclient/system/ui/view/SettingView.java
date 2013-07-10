@@ -8,7 +8,6 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -31,10 +30,8 @@ public class SettingView extends ViewPart {
 	
 	private ISettingService settingService = new SettingServiceImpl();
 	
-	public Text status;
 	public Text serverIP;
 	public Text serverPort;
-	public Combo reconnection;
 	
 	public TableViewer tableViewer;
 
@@ -66,21 +63,6 @@ public class SettingView extends ViewPart {
 		GridData data2 = new GridData(GridData.FILL_BOTH);
 		data2.horizontalSpan = 2;
 		underCompsite.setLayoutData(data2);
-		
-		{
-			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText(MessageResources.message_currentconnstatus);
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			lable.setLayoutData(data);
-		}
-		{
-			status = new Text(leftComposite, SWT.MULTI | SWT.BORDER);
-			GridData data = new GridData();
-			data.horizontalSpan = 3;
-			data.widthHint = 210;
-			status.setLayoutData(data);
-		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
 			lable.setText(MessageResources.message_serverip);
@@ -109,23 +91,6 @@ public class SettingView extends ViewPart {
 			data.widthHint = 210;
 			serverPort.setLayoutData(data);
 		}
-		{
-			Label lable = new Label(leftComposite, SWT.NONE);
-			lable.setText(MessageResources.message_reconnection);
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			lable.setLayoutData(data);
-		}
-		{
-			reconnection = new Combo(leftComposite, SWT.NONE);
-			GridData data = new GridData();
-			data.widthHint = 195;
-			data.horizontalSpan = 3;
-			reconnection.select(0);
-			reconnection.setLayoutData(data);
-			reconnection.setItems(new String[] { "5 minutes", "10 minutes", "30 minutes", "1 hours" });
-		}
-		
 	}
 
 	private void buildOperation(Composite parent) {

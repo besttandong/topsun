@@ -33,6 +33,36 @@ public class AdjustShopInfo {
 	
 	private List<Item> itemList; // 商品列表
 	
+	private String applyUser;//制单人
+	
+	private String checker;//审核人
+	
+	private String reChecker;//复核人
+	
+	public String getApplyUser() {
+		return applyUser;
+	}
+
+	public void setApplyUser(String applyUser) {
+		this.applyUser = applyUser;
+	}
+
+	public String getChecker() {
+		return checker;
+	}
+
+	public void setChecker(String checker) {
+		this.checker = checker;
+	}
+
+	public String getReChecker() {
+		return reChecker;
+	}
+
+	public void setReChecker(String reChecker) {
+		this.reChecker = reChecker;
+	}
+
 	public String getId() {
 		return id;
 	}

@@ -10,6 +10,7 @@ public class SyncDataTask extends Thread {
 	}
 
 	public void uncaughtException(Thread thread, Throwable e) {
+		System.out.println("---------------------->> 同步失败\n\n\n");
 		e.printStackTrace();
 	}
 

@@ -12,31 +12,12 @@ import java.util.Properties;
 
 import org.eclipse.core.runtime.Platform;
 
-import com.topsun.posclient.common.core.CommonCoreActivator;
-
 public class ProjectUtil {
 
 	static SimpleDateFormat defaultFmt = new SimpleDateFormat("yyyy-MM-dd");
 
 	static SimpleDateFormat defaultTimeFmt = new SimpleDateFormat(
 			"yyyy-MM-dd hh:mm:ss");
-
-	private static Properties getProperties(String fileName) {
-		InputStream in = ProjectUtil.class.getClassLoader()
-				.getResourceAsStream(fileName);
-		Properties p = new Properties();
-		try {
-			p.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return p;
-	}
-
-	public static Object getPropertiesValue(String keyName, String fileName) {
-		Properties p = getProperties(fileName);
-		return p.get(keyName);
-	}
 
 	public static String getRuntimeClassPath() {
 //		String path = Platform.getBundle(CommonCoreActivator.PLUGIN_ID)
@@ -76,7 +57,23 @@ public class ProjectUtil {
 		}
 		return date;
 	}
+	
+	private static Properties getProperties(String fileName) {
+		InputStream in = ProjectUtil.class.getClassLoader()
+				.getResourceAsStream(fileName);
+		Properties p = new Properties();
+		try {
+			p.load(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
 
+	public static Object getPropertiesValue(String keyName, String fileName) {
+		Properties p = getProperties(fileName);
+		return p.get(keyName);
+	}
 	public static void writeProperties(String filePath, String parameterName,
 			String parameterValue) throws Exception {
 		Properties prop = new Properties();
@@ -104,4 +101,16 @@ public class ProjectUtil {
 		} 
 		return status;
 	}
+	
+	public static void main(String[] args){
+		String filepath = ProjectUtil.getRuntimeClassPath()+AppConstants.SEETING_FILE;
+		
+		System.out.println("----------------->>> File full path is "+filepath);
+		String serverIP = ProjectUtil.getPropertiesValue("serverIP", filepath).toString();
+		System.out.println("----------------->>> "+serverIP);
+		
+		String port = ProjectUtil.getPropertiesValue("port", filepath).toString();
+		System.out.println("----------------->>> "+port);
+	}
+	
 }
