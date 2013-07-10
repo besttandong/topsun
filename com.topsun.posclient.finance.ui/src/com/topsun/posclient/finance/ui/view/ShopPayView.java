@@ -28,6 +28,7 @@ import com.topsun.posclient.datamodel.dto.PayRecordDTO;
 import com.topsun.posclient.finance.service.IShopPayService;
 import com.topsun.posclient.finance.service.impl.ShopPayServiceImpl;
 import com.topsun.posclient.finance.ui.FinanceUIActivator;
+import com.topsun.posclient.finance.ui.cell.DateCellEditor;
 
 /**
  * 店铺缴款视图
@@ -153,7 +154,7 @@ public class ShopPayView extends ViewPart {
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
+			column.setWidth(120);
 			column.setText("缴款时间");
 		}
 		{
@@ -199,7 +200,7 @@ public class ShopPayView extends ViewPart {
 		});
 		
 	    CellEditor[] cellEditor = new CellEditor[8];
-	    cellEditor[0] = new TextCellEditor(this.tableViewer.getTable());
+	    cellEditor[0] = new DateCellEditor(this.tableViewer.getTable());
 	    cellEditor[1] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[2] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[3] = new TextCellEditor(this.tableViewer.getTable());
