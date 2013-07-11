@@ -21,13 +21,13 @@ public class SyncDataDao extends BaseDao {
 	 */
 	public void syncData() throws Exception{
 		new SyncDataTask(){
-			public void run(){
-				try {
-					downloadUserData();
+			public void run() {
+					try {
+						downloadUserData();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					System.out.println("--------------------------->>> 更新离线用户数据\n\n\n\n");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		}.start();
 		new SyncDataTask(){
