@@ -36,6 +36,7 @@ public interface ICommonService {
 	 */
 	public Item getItemByCode(String code) throws POSException;
 	
+	
 	public List<Shop> getAllShop() throws POSException;
 
 }

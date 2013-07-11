@@ -104,6 +104,7 @@ public class CommonServiceImpl implements ICommonService {
 	 * @see com.topsun.posclient.common.service.ICommonService#getAllShop()
 	 */
 	public List<Shop> getAllShop() throws POSException {
+		
 		ShopDTO itemDto = null;
 		List<Shop> itemList = null;
 		try {
