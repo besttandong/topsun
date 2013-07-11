@@ -5,6 +5,7 @@ import java.util.List;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Item;
+import com.topsun.posclient.datamodel.Shop;
 
 /**
  * 公共服务接口
@@ -34,5 +35,7 @@ public interface ICommonService {
 	 * @throws POSException
 	 */
 	public Item getItemByCode(String code) throws POSException;
+	
+	public List<Shop> getAllShop() throws POSException;
 
 }
