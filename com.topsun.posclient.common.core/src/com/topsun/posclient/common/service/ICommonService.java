@@ -3,6 +3,7 @@ package com.topsun.posclient.common.service;
 import java.util.List;
 
 import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.datamodel.AllotStyle;
 import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.Shop;
@@ -38,10 +39,17 @@ public interface ICommonService {
 	
 	
 	/**
-	 * getAllShop
+	 * 获取所有店铺信息
 	 * @return
 	 * @throws POSException
 	 */
 	public List<Shop> getAllShop() throws POSException;
+	
+	/**
+	 * 获取所有调拨类型
+	 * @return
+	 * @throws POSException
+	 */
+	public List<AllotStyle> getAllotStyle() throws POSException;
 
 }

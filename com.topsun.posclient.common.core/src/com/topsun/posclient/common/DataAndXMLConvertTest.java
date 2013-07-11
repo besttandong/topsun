@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-import com.topsun.posclient.datamodel.dto.ShopDTO;
+import com.topsun.posclient.datamodel.dto.AllotStyleDTO;
 import com.topsun.posclient.datamodel.dto.UserDTO;
 
 public class DataAndXMLConvertTest {
@@ -68,17 +68,29 @@ public class DataAndXMLConvertTest {
 //		Marshaller marshaller = context.createMarshaller();
 //		marshaller.marshal(itemDTO, fos);
 		
-		UserDTO userDTO = MockDataFactory.createUserDTO();
+//		UserDTO userDTO = MockDataFactory.createUserDTO();
+//		String filePath = DataAndXMLConvertTest.class.getClassLoader().getResource("").getFile();
+//		File file = new File(filePath + AppConstants.DATA_USER_FILENAME);
+//		
+//		if (!file.exists()) {
+//			file.createNewFile();
+//		}
+//		FileOutputStream fos = new FileOutputStream(file.getAbsoluteFile());
+//		JAXBContext context = JAXBContext.newInstance(UserDTO.class);
+//		Marshaller marshaller = context.createMarshaller();
+//		marshaller.marshal(userDTO, fos);
+		
+		AllotStyleDTO allotStyleDTO = MockDataFactory.createAllotStyleDTO();
 		String filePath = DataAndXMLConvertTest.class.getClassLoader().getResource("").getFile();
-		File file = new File(filePath + AppConstants.DATA_USER_FILENAME);
+		File file = new File(filePath + AppConstants.DATA_ALLOTSTYLE_FILENAME);
 		
 		if (!file.exists()) {
 			file.createNewFile();
 		}
 		FileOutputStream fos = new FileOutputStream(file.getAbsoluteFile());
-		JAXBContext context = JAXBContext.newInstance(UserDTO.class);
+		JAXBContext context = JAXBContext.newInstance(AllotStyleDTO.class);
 		Marshaller marshaller = context.createMarshaller();
-		marshaller.marshal(userDTO, fos);
+		marshaller.marshal(allotStyleDTO, fos);
 		
 	}
 

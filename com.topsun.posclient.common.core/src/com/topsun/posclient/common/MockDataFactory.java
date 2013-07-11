@@ -6,12 +6,14 @@ import java.util.List;
 
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.AdjustShopInfo;
+import com.topsun.posclient.datamodel.AllotStyle;
 import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Function;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
 import com.topsun.posclient.datamodel.Shop;
 import com.topsun.posclient.datamodel.User;
+import com.topsun.posclient.datamodel.dto.AllotStyleDTO;
 import com.topsun.posclient.datamodel.dto.ItemDTO;
 import com.topsun.posclient.datamodel.dto.ShopDTO;
 import com.topsun.posclient.datamodel.dto.UserDTO;
@@ -23,6 +25,37 @@ import com.topsun.posclient.datamodel.dto.UserDTO;
  *
  */
 public class MockDataFactory {
+	
+	public static AllotStyleDTO createAllotStyleDTO() {
+		
+		AllotStyle allotStyle1 = new AllotStyle();
+		allotStyle1.setAllotBase("SHP");
+		allotStyle1.setId(1);
+		allotStyle1.setStyleCode(10101);
+		allotStyle1.setStyleName("类型一");
+		
+		AllotStyle allotStyle2 = new AllotStyle();
+		allotStyle2.setAllotBase("SHP");
+		allotStyle2.setId(2);
+		allotStyle2.setStyleCode(10102);
+		allotStyle2.setStyleName("类型二");
+		
+		AllotStyle allotStyle3 = new AllotStyle();
+		allotStyle3.setAllotBase("SHP");
+		allotStyle3.setId(3);
+		allotStyle3.setStyleCode(10103);
+		allotStyle3.setStyleName("类型三");
+		
+		List<AllotStyle> allotStyleList = new ArrayList<AllotStyle>();
+		allotStyleList.add(allotStyle1);
+		allotStyleList.add(allotStyle2);
+		allotStyleList.add(allotStyle3);
+		
+		AllotStyleDTO allotStyleDTO = new AllotStyleDTO();
+		allotStyleDTO.setAllotStyleList(allotStyleList);
+		return allotStyleDTO;
+	}
+	
 	
 	public static UserDTO createUserDTO() {
 		UserDTO userDTO = new UserDTO();

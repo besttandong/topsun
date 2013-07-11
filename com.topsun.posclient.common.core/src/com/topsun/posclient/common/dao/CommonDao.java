@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
+import com.topsun.posclient.datamodel.dto.AllotStyleDTO;
 import com.topsun.posclient.datamodel.dto.CashierModeDTO;
 import com.topsun.posclient.datamodel.dto.ItemDTO;
 import com.topsun.posclient.datamodel.dto.ShopDTO;
@@ -60,6 +61,19 @@ public class CommonDao extends BaseDao {
 				.getObjectFromXml(getLocalProcessor().getDataFileContent(file),
 						CashierModeDTO.class);
 		return cashierModeDTO;
+	}
+	
+	/**
+	 * 获取所有调拨类型
+	 * @return
+	 * @throws Exception
+	 */
+	public AllotStyleDTO getAllAllotStyle() throws Exception {
+		File file = new File(ProjectUtil.getRuntimeClassPath()
+				+ AppConstants.DATA_ALLOTSTYLE_FILENAME);
+		AllotStyleDTO allotStyleDTO = (AllotStyleDTO) getLocalProcessor()
+				.getObjectFromXml(getLocalProcessor().getDataFileContent(file), AllotStyleDTO.class);
+		return allotStyleDTO;
 	}
 	
 	/**

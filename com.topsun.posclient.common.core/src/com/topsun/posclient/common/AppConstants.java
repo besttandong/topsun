@@ -15,6 +15,7 @@ public class AppConstants {
 	public static String DATA_USER_FILENAME = "data\\download\\data_user.xml";
 	public static String DATA_REPOSITORY_PATH = "data\\download\\repository_data\\";
 	public static String DATA_CASHIERMODE_FILENAME = "data\\download\\data_cashiermode.xml";
+	public static String DATA_ALLOTSTYLE_FILENAME = "data\\download\\data_allotstyle.xml";
 	public static String DATA_SHOP_FILENAME = "data\\download\\data_shop.xml";
 	public static String DATA_ITEM_FILENAME = "data\\download\\data_item.xml";
 	public static String DATA_COMMON_PATH = "data\\download\\";

@@ -9,7 +9,7 @@ import com.topsun.posclient.common.webservice.IPosWebServiceService;
 import com.topsun.posclient.common.webservice.IRMSServices;
 import com.topsun.posclient.common.webservice.Services;
 import com.topsun.posclient.datamodel.dto.webservice.UserCredential;
-import com.topsun.posclient.datamodel.dto.webservice.UserInfoReq;
+import com.topsun.posclient.datamodel.dto.webservice.GetUserInfoReq;
 
 /**
  * 
@@ -43,9 +43,9 @@ public class POSServerCaller {
 	
 	public static void main(String[] args){
 		UserCredential userCredential = new UserCredential();
-		userCredential.setUserName("test");
-		userCredential.setPassWord("123456");
-		UserInfoReq req = new UserInfoReq();
+		userCredential.setUserName("admin");
+		userCredential.setPassWord("000000");
+		GetUserInfoReq req = new GetUserInfoReq();
 		req.setUserCode("1");
 		req.setUserCredential(userCredential);
 		try {
@@ -58,7 +58,7 @@ public class POSServerCaller {
 	/**
 	 * @return
 	 */
-	public UserInfoReq buildUserInfoReq(){
+	public GetUserInfoReq buildUserInfoReq(){
 		
 		String userName = POSClientApp.get().getLoginUser().getUserName();
 		String passWord = POSClientApp.get().getLoginUser().getPassWord();
@@ -68,7 +68,7 @@ public class POSServerCaller {
 		userCredential.setUserName(userName);
 		userCredential.setPassWord(passWord);
 		
-		UserInfoReq userInfoReq = new UserInfoReq();
+		GetUserInfoReq userInfoReq = new GetUserInfoReq();
 		userInfoReq.setUserCode(userCode);
 		userInfoReq.setUserCredential(userCredential);
 		
