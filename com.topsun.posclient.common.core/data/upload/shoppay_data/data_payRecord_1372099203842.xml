@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data>
+	<payRecord>
+		<account>6225666678900985</account>
+		<amount>70000.0</amount>
+		<approve>张三</approve>
+		<approveDate>2013-06-24</approveDate>
+		<bankName>中国建设银行</bankName>
+		<id>00101</id>
+		<payDate>2013-06-24</payDate>
+		<payer>李四</payer>
+		<remark>备注信息</remark>
+	</payRecord>
+	<payRecord>
+		<account>6225666678903456</account>
+		<amount>70000.0</amount>
+		<approve>张三</approve>
+		<approveDate>2013-06-30</approveDate>
+		<bankName>中国建设银行</bankName>
+		<id>00102</id>
+		<payDate>2013-06-30</payDate>
+		<payer>王五</payer>
+		<remark>备注信息</remark>
+	</payRecord>
+</data>
