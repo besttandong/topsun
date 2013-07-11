@@ -6,7 +6,7 @@
             class="com.topsun.posclient.repository.ui.view.AdjustRepositoryView"
             icon="icons/type-list-1.png"
             id="com.topsun.posclient.repository.ui.AdjustRepositoryView"
-            name="仓调仓" restorable="true">
+            name="回仓" restorable="true">
       	</view>
       	<view allowMultiple="true"
             class="com.topsun.posclient.repository.ui.view.AdjustStoreView"
@@ -19,13 +19,15 @@
       point="com.topsun.tree">
    <tree
          icons="icons/type-list-1.png"
+         index="1"
          menuid="repository.menu"
-         name="仓调仓"
+         name="回仓"
          treeid="rep2rep.tree"
          viewid="com.topsun.posclient.repository.ui.AdjustRepositoryView">
    </tree>
    <tree
          icons="icons/type-list-1.png"
+         index="2"
          menuid="repository.menu"
          name="店调店"
          treeid="shop2shop.tree"
