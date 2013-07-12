@@ -5,10 +5,12 @@ import java.util.List;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.dao.CommonDao;
 import com.topsun.posclient.common.service.ICommonService;
+import com.topsun.posclient.datamodel.AllotStyle;
 import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.Shop;
 import com.topsun.posclient.datamodel.User;
+import com.topsun.posclient.datamodel.dto.AllotStyleDTO;
 import com.topsun.posclient.datamodel.dto.CashierModeDTO;
 import com.topsun.posclient.datamodel.dto.ItemDTO;
 import com.topsun.posclient.datamodel.dto.ShopDTO;
@@ -117,5 +119,23 @@ public class CommonServiceImpl implements ICommonService {
 			throw new POSException("获取店铺信息失败");
 		}
 		return itemList;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.topsun.posclient.common.service.ICommonService#getAllotStyle()
+	 */
+	public List<AllotStyle> getAllotStyle() throws POSException {
+		AllotStyleDTO allotStyleDTO = null;
+		
+		List<AllotStyle> allotStyleList = null;
+		try {
+			allotStyleDTO = commonDao.getAllAllotStyle();
+			if (null != allotStyleDTO) {
+				allotStyleList = allotStyleDTO.getAllotStyleList();
+			}
+		} catch (Exception e) {
+			throw new POSException("获取调拨类型信息失败");
+		}
+		return allotStyleList;
 	}
 }

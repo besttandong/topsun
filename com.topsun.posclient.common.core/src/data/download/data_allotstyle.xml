@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data>
+	<allotStyle>
+		<allotBase>SHP</allotBase>
+		<id>1</id>
+		<styleCode>10101</styleCode>
+		<styleName>类型一</styleName>
+	</allotStyle>
+	<allotStyle>
+		<allotBase>SHP</allotBase>
+		<id>2</id>
+		<styleCode>10102</styleCode>
+		<styleName>类型二</styleName>
+	</allotStyle>
+	<allotStyle>
+		<allotBase>SHP</allotBase>
+		<id>3</id>
+		<styleCode>10103</styleCode>
+		<styleName>类型三</styleName>
+	</allotStyle>
+</data>
