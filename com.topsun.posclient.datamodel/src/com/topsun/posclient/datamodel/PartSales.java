@@ -43,7 +43,7 @@ public class PartSales implements Serializable {
 	
 	private String checker;//审核人
 	
-	private List<Item> itemList;
+	private List<Item> itemList; // 
 	
 	public List<Item> getItemList() {
 		return itemList;

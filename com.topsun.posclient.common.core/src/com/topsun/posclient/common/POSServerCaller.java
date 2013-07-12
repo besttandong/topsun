@@ -24,7 +24,6 @@ public class POSServerCaller {
 	 */
 	public IPosWebService getWebService() throws Exception {
 		QName SERVICE_NAME = new QName("http://service.pos.webservice.topsunit.com/", "IPosWebServiceService");
-		// 调用服务器WebService接口获取最新用户数据
 		URL wsdlURL = IPosWebServiceService.WSDL_LOCATION;
 		IPosWebServiceService ss = new IPosWebServiceService(wsdlURL, SERVICE_NAME);
         IPosWebService webservice = ss.getIPosWebServicePort();
@@ -33,8 +32,7 @@ public class POSServerCaller {
 	
 	public IRMSServices getRMService() throws Exception {
 		QName SERVICE_NAME = new QName("http://tempuri.org/", "Services");
-		// 调用服务器WebService接口获取最新用户数据
-		URL wsdlURL = IPosWebServiceService.WSDL_LOCATION;
+		URL wsdlURL = Services.WSDL_LOCATION;
 		Services ss = new Services(wsdlURL, SERVICE_NAME);
 		IRMSServices rmservices = ss.getBasicHttpBindingIRMSServices();
 		return rmservices;

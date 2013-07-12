@@ -7,6 +7,10 @@ import com.topsun.posclient.common.dao.BaseDao;
 import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 
+/**
+ * @author Dong
+ *
+ */
 public class PartSaleDao extends BaseDao {
 
 	/**

@@ -25,7 +25,7 @@ public class SyncDataDao extends BaseDao {
 					try {
 						downloadUserData();
 					} catch (Exception e) {
-						e.printStackTrace();
+						throw new RuntimeException();
 					}
 					System.out.println("--------------------------->>> 更新离线用户数据\n\n\n\n");
 			}
@@ -36,7 +36,7 @@ public class SyncDataDao extends BaseDao {
 					downloadShopData();
 					System.out.println("--------------------------->>> 更新离线店铺数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -47,6 +47,7 @@ public class SyncDataDao extends BaseDao {
 					System.out.println("--------------------------->>> 更新离线库存数据\n\n\n\n");
 				} catch (Exception e) {
 					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -57,6 +58,7 @@ public class SyncDataDao extends BaseDao {
 					System.out.println("--------------------------->>> 更新离线结算方式数据\n\n\n\n");
 				} catch (Exception e) {
 					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -68,6 +70,7 @@ public class SyncDataDao extends BaseDao {
 					System.out.println("--------------------------->>> 上传零售数据\n\n\n\n");
 				} catch (Exception e) {
 					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -79,6 +82,7 @@ public class SyncDataDao extends BaseDao {
 					System.out.println("--------------------------->>> 上传缴款记录数据\n\n\n\n");
 				} catch (Exception e) {
 					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -90,6 +94,7 @@ public class SyncDataDao extends BaseDao {
 					System.out.println("--------------------------->>> 上传调店数据\n\n\n\n");
 				} catch (Exception e) {
 					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -101,6 +106,7 @@ public class SyncDataDao extends BaseDao {
 					System.out.println("--------------------------->>> 上传回仓数据\n\n\n\n");
 				} catch (Exception e) {
 					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -201,13 +207,19 @@ public class SyncDataDao extends BaseDao {
 	private void saveLocalFile(String filepath, String fileContent) throws Exception{
 		File file = new File(ProjectUtil.getRuntimeClassPath()+filepath);
     	file.deleteOnExit();
+    	BufferedWriter output = null;
     	try {
 			file.createNewFile();
-			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			
+			output = new BufferedWriter(new FileWriter(file));
 		    output.write(fileContent);
-		    output.close();
+		    
 		} catch (Exception e) {
 			throw new Exception("更新本地离线数据文件失败");
+		}finally{
+			if(null != output){
+				output.close();
+			}
 		}
 	}
 
