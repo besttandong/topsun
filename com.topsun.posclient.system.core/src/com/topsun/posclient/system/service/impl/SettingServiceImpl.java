@@ -9,10 +9,11 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.datamodel.SettingData;
+import com.topsun.posclient.system.MessageResources;
 import com.topsun.posclient.system.service.ISettingService;
 
 /**
- * @author Dong
+ * @author LiLei
  * 
  */
 public class SettingServiceImpl extends BaseServiceImpl implements ISettingService {
@@ -26,7 +27,6 @@ public class SettingServiceImpl extends BaseServiceImpl implements ISettingServi
 	 */
 	public void saveSetting(SettingData settingData) throws POSException {
 		String filepath = ProjectUtil.getRuntimeClassPath()+AppConstants.SEETING_FILE;
-		System.out.println("------------>>> "+filepath);
 		try{
 			Properties prop = new Properties();
 			OutputStream outputStream = new FileOutputStream(filepath);  
@@ -36,7 +36,7 @@ public class SettingServiceImpl extends BaseServiceImpl implements ISettingServi
 	        outputStream.close();  
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new POSException("保存失败");
+			throw new POSException(MessageResources.message_error_savefailer);
 		}
 	}
 }
