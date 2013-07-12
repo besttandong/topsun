@@ -8,7 +8,7 @@ import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.dao.BaseDao;
 import com.topsun.posclient.common.webservice.IPosWebService;
-import com.topsun.posclient.datamodel.dto.webservice.UserInfoReq;
+import com.topsun.posclient.datamodel.dto.webservice.GetUserInfoReq;
 
 /**
  * @author Lilei
@@ -107,7 +107,7 @@ public class SyncDataDao extends BaseDao {
 	}
 	
 	private void downloadUserData() throws Exception {
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadUserData(userInfoReqStr);
@@ -117,7 +117,7 @@ public class SyncDataDao extends BaseDao {
 	
 	private void downloadShopData() throws Exception{
 		
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadShopData(userInfoReqStr);
@@ -127,7 +127,7 @@ public class SyncDataDao extends BaseDao {
 	
 	private void downloadItemData() throws Exception{
 		
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadItemData(userInfoReqStr);
@@ -136,7 +136,7 @@ public class SyncDataDao extends BaseDao {
 	}
 	
 	private void downloadCashierModeData() throws Exception{
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadCashierModeData(userInfoReqStr);

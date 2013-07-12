@@ -42,17 +42,19 @@ public class POSServerCaller {
 	
 	
 	public static void main(String[] args){
+		
 		UserCredential userCredential = new UserCredential();
 		userCredential.setUserName("admin");
 		userCredential.setPassWord("000000");
 		GetUserInfoReq req = new GetUserInfoReq();
-		req.setUserCode("1");
+		req.setUserCode("admin");
 		req.setUserCredential(userCredential);
 		try {
 			new POSServerCaller().getRMService().getUserInfo(req);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	/**

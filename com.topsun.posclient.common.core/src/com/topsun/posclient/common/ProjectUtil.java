@@ -2,8 +2,10 @@ package com.topsun.posclient.common;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -77,9 +79,10 @@ public class ProjectUtil {
 	public static void writeProperties(String filePath, String parameterName,
 			String parameterValue) throws Exception {
 		Properties prop = new Properties();
-		InputStream fis = new FileInputStream(filePath);
-		prop.load(fis);
-		prop.setProperty(parameterName, parameterValue);
+		OutputStream outputStream = new FileOutputStream(filePath);  
+		prop.setProperty(parameterName, parameterValue);  
+		prop.store(outputStream, "author: topsun");  
+        outputStream.close();  
 	}
 
 	public static String readValue(String filePath, String key) throws Exception {
