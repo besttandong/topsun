@@ -32,8 +32,11 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.topsun.posclient.common.MockDataFactory;
 import com.topsun.posclient.common.POSClientApp;
+import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.listener.IKeyListener;
 import com.topsun.posclient.common.listener.KeyListenerManager;
+import com.topsun.posclient.common.service.ICommonService;
+import com.topsun.posclient.common.service.impl.CommonServiceImpl;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
@@ -51,8 +54,9 @@ import com.topsun.widget.calendar.DefaultSettings;
 public class SalesView extends ViewPart implements IKeyListener {
 	
 	public IPartSaleService partSaleService = new PartSaleServiceImpl();
+	public ICommonService commonService = new CommonServiceImpl();
 	
-	List<Item> itemsList = new ArrayList();
+	List<Item> itemsList = new ArrayList<Item>();
 		
 	public PartSales partSales;
 	
@@ -507,6 +511,11 @@ public class SalesView extends ViewPart implements IKeyListener {
 						itemsList = MockDataFactory.createItemList();
 						tableViewer.setInput(itemsList);
 					}else{
+						List list = (List)tableViewer.getInput() ;
+						if(list.size() == 0){
+							itemsList = MockDataFactory.createItemList();
+							tableViewer.setInput(itemsList);
+						}
 						List<Item> items = (List<Item>)tableViewer.getInput();
 						itemsList.add(items.get(0));
 						tableViewer.setInput(itemsList);
@@ -620,7 +629,12 @@ public class SalesView extends ViewPart implements IKeyListener {
 			Date currentTime = new Date();  
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");  
 			String dateString = formatter.format(currentTime);
-			orderNo.setText(dateString);
+			try {
+				orderNo.setText(commonService.createNo());
+			} catch (POSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
@@ -658,7 +672,12 @@ public class SalesView extends ViewPart implements IKeyListener {
 			Date currentTime = new Date();  
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");  
 			String dateString = formatter.format(currentTime);
-			casherNo.setText(dateString);
+			try {
+				casherNo.setText(commonService.createNo());
+			} catch (POSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		

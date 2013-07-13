@@ -1,6 +1,7 @@
 package com.topsun.posclient.repository.ui.view;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -50,9 +51,9 @@ import com.topsun.widget.calendar.DefaultSettings;
  *
  */
 public class AdjustStoreView extends ViewPart {
-	User loginUser = POSClientApp.get().getLoginUser();
+	public User loginUser = POSClientApp.get().getLoginUser();
 	public IAdjustShopService adjShopSerivice = new AdjustShopServiceImpl();
-
+	public ICommonService commonService = new CommonServiceImpl();
 	List<Item> items = null;
 
 	public AdjustShopInfo adjustShopInfo;
@@ -193,6 +194,8 @@ public class AdjustStoreView extends ViewPart {
 			button.addSelectionListener(new SelectionListener() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
+					Button button = (Button)e.getSource();
+					
 					adjustShopInfo = new AdjustShopInfo();
 					adjustShopInfo.setOutShop(leaveStoreName.getText());
 					adjustShopInfo.setIntoShop(inStoreName.getText());
@@ -221,8 +224,9 @@ public class AdjustStoreView extends ViewPart {
 					caculatorNumAndPrice();
 					try {
 						adjShopSerivice.saveAdjustStoreInfo(adjShopDTO);
+						MessageDialog.openInformation(button.getShell(), "提示", "保存成功");
 					} catch (POSException e1) {
-						// TODO Auto-generated catch block
+						MessageDialog.openError(button.getShell(), "错误", e1.getErrorMessage());
 						e1.printStackTrace();
 					}
 				}
@@ -664,11 +668,17 @@ public class AdjustStoreView extends ViewPart {
 		}
 		{
 			orderNo = new Text(rightCompoiste, SWT.BORDER);
+			orderNo.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 160;
 			data.horizontalSpan = 3;
 			orderNo.setLayoutData(data);
-//			orderNo.setText("01234567");
+			try {
+				orderNo.setText(commonService.createNo());
+			} catch (POSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
@@ -711,6 +721,7 @@ public class AdjustStoreView extends ViewPart {
 			data.widthHint = 170;
 			data.horizontalSpan = 3;
 			callDate.setLayoutData(data);
+			callDate.setDate(Calendar.getInstance());
 		}
 
 		{
@@ -755,6 +766,7 @@ public class AdjustStoreView extends ViewPart {
 			data.widthHint = 170;
 			data.horizontalSpan = 3;
 			checkDate.setLayoutData(data);
+			checkDate.setDate(Calendar.getInstance());
 		}
 
 //		{
@@ -800,6 +812,7 @@ public class AdjustStoreView extends ViewPart {
 			data.widthHint = 170;
 			data.horizontalSpan = 3;
 			reCheckDate.setLayoutData(data);
+			reCheckDate.setDate(Calendar.getInstance());
 		}
 		
 

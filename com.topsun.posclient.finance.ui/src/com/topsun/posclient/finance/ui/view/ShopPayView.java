@@ -6,6 +6,8 @@ import java.util.List;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
@@ -23,6 +25,7 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
+import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PayRecord;
 import com.topsun.posclient.datamodel.dto.PayRecordDTO;
 import com.topsun.posclient.finance.service.IShopPayService;
@@ -73,11 +76,9 @@ public class ShopPayView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 					
 					if(tableViewer.getInput()!=null){
-						List<PayRecord> list = (List<PayRecord>)tableViewer.getInput();
 						PayRecord input = new PayRecord();
-						list.add(input);
 						payRecords.add(input);
-						tableViewer.setInput(list);
+						tableViewer.setInput(payRecords);
 					}else{
 						PayRecord input = new PayRecord();
 						payRecords.add(input);
@@ -104,6 +105,30 @@ public class ShopPayView extends ViewPart {
 			data.heightHint = 28;
 			data.widthHint = 120;
 			button.setLayoutData(data);
+			
+			button.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					ISelection iSelection = tableViewer.getSelection();
+					if(!iSelection.isEmpty()){
+						Object obj = ((StructuredSelection)iSelection).getFirstElement();
+						if(obj instanceof PayRecord){
+							PayRecord item = (PayRecord)obj;
+							List<PayRecord> items = (List<PayRecord>)tableViewer.getInput();
+							items.remove(item);
+							tableViewer.setInput(items);
+						}
+					}
+					
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
 		
 		{

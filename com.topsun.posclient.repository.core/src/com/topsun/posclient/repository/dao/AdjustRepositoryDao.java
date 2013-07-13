@@ -62,7 +62,7 @@ public class AdjustRepositoryDao extends BaseDao {
 				if(dataFile.isFile()){
 					AdjustRepositoryDTO adjustRepositoryDTO = (AdjustRepositoryDTO)this.getLocalProcessor()
 					.getObjectFromXml(
-							this.getLocalProcessor().getDataFileContent(file), AdjustRepositoryDTO.class);
+							this.getLocalProcessor().getDataFileContent(dataFile), AdjustRepositoryDTO.class);
 					adjustRepositoryDtoList.add(adjustRepositoryDTO);
 				}
 			}
