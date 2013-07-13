@@ -206,7 +206,7 @@ public class ShopPayView extends ViewPart {
 	    cellEditor[3] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[4] = new TextCellEditor(this.tableViewer.getTable());
 	    cellEditor[5] = new TextCellEditor(this.tableViewer.getTable());
-	    cellEditor[6] = new TextCellEditor(this.tableViewer.getTable());
+	    cellEditor[6] = new DateCellEditor(this.tableViewer.getTable());
 	    cellEditor[7] = new TextCellEditor(this.tableViewer.getTable());
 	    tableViewer.setCellEditors(cellEditor);
 	    String[] properties =  new String[] { "payDate", "bankName", "account", "amount", "payer", "approve", "approveDate", "remark" };
