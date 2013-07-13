@@ -134,6 +134,7 @@ public class CommonServiceImpl implements ICommonService {
 				allotStyleList = allotStyleDTO.getAllotStyleList();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new POSException("获取调拨类型信息失败");
 		}
 		return allotStyleList;
