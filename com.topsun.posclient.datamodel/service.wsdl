@@ -1,0 +1,45 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing"
+	xmlns:tns="http://tempuri.org/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+	xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+	xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:i0="http://www.topsunit.com/rms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	name="Services" targetNamespace="http://tempuri.org/">
+	<wsdl:import namespace="http://www.topsunit.com/rms"
+		location="http://114.80.119.77:8088/RMS/Service.svc?wsdl=wsdl0" />
+	<wsdl:types />
+	<wsdl:binding name="BasicHttpBinding_IRMSServices" type="i0:IRMSServices">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getUserInfo">
+			<soap:operation
+				soapAction="http://www.topsunit.com/rms/IRMSServices/getUserInfo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="savePartSales">
+			<soap:operation
+				soapAction="http://www.topsunit.com/rms/IRMSServices/savePartSales"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Services">
+		<wsdl:port name="BasicHttpBinding_IRMSServices" binding="tns:BasicHttpBinding_IRMSServices">
+			<soap:address location="http://114.80.119.77:8088/RMS/Service.svc" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
