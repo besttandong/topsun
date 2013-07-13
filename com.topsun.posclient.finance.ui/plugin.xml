@@ -3,12 +3,12 @@
 <plugin>
    <extension point="org.eclipse.ui.views">
       <view allowMultiple="true" class="com.topsun.posclient.finance.ui.view.SettleAccountWayView"
-            icon="icons/type-list-1.png" id="com.topsun.posclient.finance.ui.SettleAccountWayView"
+            icon="icons/stock_table-optimize.png" id="com.topsun.posclient.finance.ui.SettleAccountWayView"
             name="结算方式" restorable="true">
       </view>
       
       <view allowMultiple="true" class="com.topsun.posclient.finance.ui.view.ShopPayView"
-            icon="icons/type-list-1.png" id="com.topsun.posclient.finance.ui.StorePayView"
+            icon="icons/gtk-sort-descending-14.png" id="com.topsun.posclient.finance.ui.StorePayView"
             name="店铺缴款" restorable="true">
       </view>
       
@@ -16,7 +16,7 @@
    <extension
          point="com.topsun.tree">
       <tree
-            icons="icons/type-list-1.png"
+            icons="icons/stock_table-optimize.png"
             index="2"
             menuid="finance.menu"
             name="收款"
@@ -24,7 +24,7 @@
             viewid="com.topsun.posclient.finance.ui.SettleAccountWayView">
       </tree>
       <tree
-            icons="icons/type-list-1.png"
+            icons="icons/gtk-sort-descending-14.png"
             index="1"
             menuid="finance.menu"
             name="店铺缴款"
@@ -35,7 +35,7 @@
    <extension
          point="com.topsun.menu">
       <menu
-            icon="icons/type-list-1.png"
+            icon="icons/finance.png"
             index="200"
             menuid="finance.menu"
             name="财务管理">

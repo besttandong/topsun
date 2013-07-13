@@ -6,9 +6,13 @@ import java.util.List;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -57,6 +61,9 @@ public class AdjustStoreView extends ViewPart {
 	List<Item> items = null;
 
 	public AdjustShopInfo adjustShopInfo;
+	
+	public CalendarCombo startDate;
+	public CalendarCombo endDate;
 
 	public Combo leaveStoreName;//调出店铺
 	public Text orderNo; //单据编号
@@ -103,7 +110,7 @@ public class AdjustStoreView extends ViewPart {
 			label.setText("开始日期：");
 		}
 		{
-			CalendarCombo startDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
+			startDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
 			GridData data = new GridData();
 			startDate.setLayoutData(data);
 		}
@@ -114,9 +121,9 @@ public class AdjustStoreView extends ViewPart {
 			label.setText("结束日期：");
 		}
 		{
-			CalendarCombo startDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
+			endDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
 			GridData data = new GridData();
-			startDate.setLayoutData(data);
+			endDate.setLayoutData(data);
 		}
 		{
 			Label label = new Label(serachComposite, SWT.NONE);
@@ -157,7 +164,7 @@ public class AdjustStoreView extends ViewPart {
 					try {
 						
 						AdjustShopInfo adjustShopInfo = new AdjustShopInfo();
-						adjustShopInfo.setVoucherNo("12345678");
+						adjustShopInfo.setVoucherNo(orderNo.getText());
 						List<AdjustShopInfo> adjustShopInfos  = adjShopSerivice.queryAdjustShopList(adjustShopInfo);
 						searchViewer.setInput(adjustShopInfos);
 					} catch (POSException e1) {
@@ -169,7 +176,6 @@ public class AdjustStoreView extends ViewPart {
 				
 				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
 					
 				}
 			});
@@ -184,8 +190,6 @@ public class AdjustStoreView extends ViewPart {
 		{
 			Button button = new Button(operation, SWT.NONE);
 			button.setText("确定");
-			// button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID,
-			// "ok.gif"));
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -194,8 +198,8 @@ public class AdjustStoreView extends ViewPart {
 			button.addSelectionListener(new SelectionListener() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
+				
 					Button button = (Button)e.getSource();
-					
 					adjustShopInfo = new AdjustShopInfo();
 					adjustShopInfo.setOutShop(leaveStoreName.getText());
 					adjustShopInfo.setIntoShop(inStoreName.getText());
@@ -211,7 +215,7 @@ public class AdjustStoreView extends ViewPart {
 					
 					adjustShopInfo.setRemark(remark.getText());
 					if (recordViewer.getInput() instanceof List) {
-						List list = (List) recordViewer.getInput();
+						List<Item> list = (List<Item>) recordViewer.getInput();
 						adjustShopInfo.setItemList(list);
 					};
 
@@ -233,7 +237,6 @@ public class AdjustStoreView extends ViewPart {
 
 				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
 
 				}
 			});
@@ -242,8 +245,6 @@ public class AdjustStoreView extends ViewPart {
 		{
 			Button button = new Button(operation, SWT.NONE);
 			button.setText("取消");
-			// button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID,
-			// "nook.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -253,8 +254,6 @@ public class AdjustStoreView extends ViewPart {
 		{
 			Button button = new Button(operation, SWT.NONE);
 			button.setText("打印小票");
-			// button.setImage(ImageUtils.createImage(SalesActivator.PLUGIN_ID,
-			// "nook.png"));
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -453,7 +452,7 @@ public class AdjustStoreView extends ViewPart {
 	}
 	
 	private void buildProductRecordInfo(Composite parent){
-		
+
 		Group productInfo = new Group(parent, SWT.NONE);
 		productInfo.setText("商品信息");
 		GridLayout gridLayout = new GridLayout(1,false);
@@ -461,29 +460,52 @@ public class AdjustStoreView extends ViewPart {
 		//gridLayout.horizontalSpacing = 20;
 		productInfo.setLayout(gridLayout);
 		GridData data = new GridData(GridData.FILL_BOTH);
-//		data.heightHint = 300;
+		//		data.heightHint = 300;
 		productInfo.setLayoutData(data);
 		buildPrintInfo(productInfo);
-		
+
 		recordViewer = new TableViewer(productInfo,SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER|SWT.FULL_SELECTION);
 		recordViewer.setContentProvider(new AdjustStoreContentProvider());
 		recordViewer.setLabelProvider(new AdjustStoreLableProvider());
-//		TableViewerKeyBoardSupporter boardSupporter = new TableViewerKeyBoardSupporter(tableViewer);
-//		boardSupporter.startSupport();
+		//		TableViewerKeyBoardSupporter boardSupporter = new TableViewerKeyBoardSupporter(tableViewer);
+		//		boardSupporter.startSupport();
 		String[] cloumsProperties = new String[]{"itemName","itemCode","productName","num"};
 		recordViewer.setColumnProperties(cloumsProperties);
 		Table table = recordViewer.getTable();
 		CellEditor[] editors = new CellEditor[4];
-		
+
 		editors[0] = new TextCellEditor(table);
 		editors[1] = new TextCellEditor(table);
 		editors[2] = new TextCellEditor(table);
 		editors[3] = new TextCellEditor(table);
 		recordViewer.setCellEditors(editors);
 		recordViewer.setCellModifier(new AdjustStoreCellModify(recordViewer));
-		
-		
-		
+
+		table.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(SWT.DEL == e.character){
+					ISelection iSelection = recordViewer.getSelection();
+					if(!iSelection.isEmpty()){
+						Object obj = ((StructuredSelection)iSelection).getFirstElement();
+						if(obj instanceof Item){
+							Item item = (Item)obj;
+							List<Item> items = (List<Item>)recordViewer.getInput();
+							items.remove(item);
+							recordViewer.setInput(items);
+							caculatorNumAndPrice();
+						}
+					}
+				}
+
+			}
+		});
+
 		{
 			GridData tableData = new GridData(GridData.FILL_HORIZONTAL);
 			tableData.heightHint = 100;
@@ -491,7 +513,7 @@ public class AdjustStoreView extends ViewPart {
 			table.setHeaderVisible(true);
 			table.setLinesVisible(true);
 		}
-		
+
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
@@ -527,7 +549,7 @@ public class AdjustStoreView extends ViewPart {
 			column.setWidth(200);
 			column.setText("备注");
 		}
-		
+
 		buildCaculator(productInfo);
 	}
 	

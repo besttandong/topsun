@@ -4,13 +4,13 @@
 <extension point="org.eclipse.ui.views">
          <view allowMultiple="true"
             class="com.topsun.posclient.repository.ui.view.AdjustRepositoryView"
-            icon="icons/type-list-1.png"
+            icon="icons/gtk-quit.png"
             id="com.topsun.posclient.repository.ui.AdjustRepositoryView"
             name="回仓" restorable="true">
       	</view>
       	<view allowMultiple="true"
             class="com.topsun.posclient.repository.ui.view.AdjustStoreView"
-            icon="icons/type-list-1.png"
+            icon="icons/gtk-refresh-4.png"
             id="com.topsun.posclient.repository.ui.AdjustStoreView"
             name="店调店" restorable="true">
       	</view>
@@ -18,7 +18,7 @@
 <extension
       point="com.topsun.tree">
    <tree
-         icons="icons/type-list-1.png"
+         icons="icons/gtk-quit.png"
          index="1"
          menuid="repository.menu"
          name="回仓"
@@ -26,7 +26,7 @@
          viewid="com.topsun.posclient.repository.ui.AdjustRepositoryView">
    </tree>
    <tree
-         icons="icons/type-list-1.png"
+         icons="icons/gtk-refresh-4.png"
          index="2"
          menuid="repository.menu"
          name="店调店"
@@ -37,7 +37,7 @@
 <extension
       point="com.topsun.menu">
    <menu
-         icon="icons/type-list-1.png"
+         icon="icons/resp.png"
          index="300"
          menuid="repository.menu"
          name="库存">

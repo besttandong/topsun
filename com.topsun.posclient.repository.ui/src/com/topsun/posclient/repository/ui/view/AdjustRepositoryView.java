@@ -6,9 +6,13 @@ import java.util.List;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -68,6 +72,9 @@ public class AdjustRepositoryView extends ViewPart {
 	public CalendarCombo checkDate;//审核日期
 	public CalendarCombo reCheckDate;//复核日期
 	
+	public CalendarCombo startDate;
+	public CalendarCombo endDate;
+	
 	public Text remark;//备注
 
 	public Text applyUser;//制单人
@@ -87,11 +94,8 @@ public class AdjustRepositoryView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		buildBaseInfo(parent);
-//		buildSerachInfo(parent);
 		buildProductInfo(parent);
-	
 		buildProductRecordInfo(parent);
-	
 		buildRecodeInfo(parent);
 		buildOperation(parent);
 	}
@@ -105,7 +109,7 @@ public class AdjustRepositoryView extends ViewPart {
 			label.setText("开始日期：");
 		}
 		{
-			CalendarCombo startDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
+		    startDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
 			GridData data = new GridData();
 			startDate.setLayoutData(data);
 		}
@@ -116,9 +120,9 @@ public class AdjustRepositoryView extends ViewPart {
 			label.setText("结束日期：");
 		}
 		{
-			CalendarCombo startDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
+			endDate = new CalendarCombo(serachComposite, SWT.READ_ONLY, new Settings(), null);
 			GridData data = new GridData();
-			startDate.setLayoutData(data);
+			endDate.setLayoutData(data);
 		}
 		{
 			Label label = new Label(serachComposite, SWT.NONE);
@@ -416,9 +420,19 @@ public class AdjustRepositoryView extends ViewPart {
 					List<AdjustRepositoryInfo> list = MockDataFactory.createAdjustRepositoryInfoList();
 					
 					if (recordViewer.getInput() != null) {
-						items.add(((List<Item>) recordViewer.getInput()).get(0));
+						List<Item> items = (List<Item>) recordViewer.getInput();
+						if(items.size()==0){
+							Item item = new Item();
+							items.add(item);
+							recordViewer.setInput(items);
+							
+						}else{
+							items.add(items.get(0));
+							recordViewer.setInput(items);
+						}
+					}else{
+						recordViewer.setInput(MockDataFactory.createItemList());
 					}
-					recordViewer.setInput(MockDataFactory.createItemList());
 					
 				}
 
@@ -480,7 +494,29 @@ public class AdjustRepositoryView extends ViewPart {
 		recordViewer.setCellEditors(editors);
 		recordViewer.setCellModifier(new AdjustStoreCellModify(recordViewer));
 		
-		
+		table.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(SWT.DEL == e.character){
+					ISelection iSelection = recordViewer.getSelection();
+					if(!iSelection.isEmpty()){
+						Object obj = ((StructuredSelection)iSelection).getFirstElement();
+						if(obj instanceof Item){
+							Item item = (Item)obj;
+							List<Item> items = (List<Item>)recordViewer.getInput();
+							items.remove(item);
+							recordViewer.setInput(items);
+						}
+					}
+				}
+
+			}
+		});
 		
 		{
 			GridData tableData = new GridData(GridData.FILL_HORIZONTAL);

@@ -5,7 +5,7 @@
          point="org.eclipse.ui.views">
       <view allowMultiple="true"
             class="com.topsun.posclient.sales.ui.menu.SalesView"
-            icon="icons/type-list-1.png"
+            icon="icons/shopcartapply_24x24.png"
             id="com.topsun.posclient.sales.ui.menu.SalesView"
             name="零售" restorable="true">
       </view>
@@ -13,7 +13,7 @@
    <extension
          point="com.topsun.menu">
       <menu
-            icon="icons/sales.png"
+            icon="icons/shopping_basket red-2.png"
             index="100"
             menuid="sales"
             name="销售">
@@ -23,7 +23,7 @@
          point="com.topsun.tree">
       <tree
       		treeid=""
-            icons="icons/type-list-1.png"
+            icons="icons/shopcartapply_24x24.png"
             index="1"
             menuid="sales"
             name="零售"

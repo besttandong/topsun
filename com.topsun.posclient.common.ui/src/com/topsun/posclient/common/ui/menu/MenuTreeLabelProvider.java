@@ -30,7 +30,7 @@ public class MenuTreeLabelProvider extends LabelProvider {
 	public String getText(Object element) {
 		if(element instanceof TopSunTreeModel){
 			TopSunTreeModel sunTree = (TopSunTreeModel)element;	
-			return sunTree.getTreeName();
+			return "  "+sunTree.getTreeName();
 		}
 		return element.toString();
 	}
