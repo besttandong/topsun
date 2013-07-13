@@ -32,6 +32,7 @@ public class SettingView extends ViewPart {
 	
 	public Text serverIP;
 	public Text serverPort;
+	public Text reconnectionTime;
 	
 	public TableViewer tableViewer;
 
@@ -91,6 +92,20 @@ public class SettingView extends ViewPart {
 			data.widthHint = 210;
 			serverPort.setLayoutData(data);
 		}
+		{
+			Label lable = new Label(leftComposite, SWT.NONE);
+			lable.setText(MessageResources.message_reconnection);
+			GridData data = new GridData();
+			data.horizontalSpan = 1;
+			lable.setLayoutData(data);
+		}
+		{
+			reconnectionTime = new Text(leftComposite, SWT.MULTI | SWT.BORDER);
+			GridData data = new GridData();
+			data.horizontalSpan = 3;
+			data.widthHint = 210;
+			reconnectionTime.setLayoutData(data);
+		}
 	}
 
 	private void buildOperation(Composite parent) {
@@ -119,9 +134,15 @@ public class SettingView extends ViewPart {
 						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_inputport);
 						return;
 					}
+					String time = reconnectionTime.getText();
+					if(null == reconnectionTime || ("").equals(reconnectionTime)){
+						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_inputreconnectiontime);
+						return;
+					}
 					SettingData settingData = new SettingData();
 					settingData.setIp(ipAdd);
 					settingData.setPort(port);
+					settingData.setReconnectionTime(time);
 					try {
 						settingService.saveSetting(settingData);
 					} catch (POSException e1) {
