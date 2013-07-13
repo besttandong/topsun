@@ -139,4 +139,11 @@ public class CommonServiceImpl implements ICommonService {
 		}
 		return allotStyleList;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.topsun.posclient.common.service.ICommonService#createNo()
+	 */
+	public String createNo() throws POSException {
+		return String.valueOf(System.currentTimeMillis());
+	}
 }

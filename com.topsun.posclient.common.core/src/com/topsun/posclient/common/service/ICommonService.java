@@ -17,6 +17,13 @@ import com.topsun.posclient.datamodel.Shop;
 public interface ICommonService {
 	
 	/**
+	 * 生成单据编号
+	 * @return
+	 * @throws POSException
+	 */
+	public String createNo() throws POSException;
+	
+	/**
 	 * 根据用户ID获取店铺名称
 	 * 
 	 * @throws Exception
