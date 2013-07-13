@@ -3,6 +3,7 @@ package com.topsun.posclient.repository.ui.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
@@ -27,6 +28,7 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.common.service.impl.CommonServiceImpl;
 import com.topsun.posclient.datamodel.AdjustShopInfo;
+import com.topsun.posclient.datamodel.AllotStyle;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.Shop;
 import com.topsun.posclient.datamodel.User;
@@ -60,7 +62,7 @@ public class AdjustStoreView extends ViewPart {
 	public Combo inStoreName;//调入店铺
 	public Combo adjustType;//调拨类型
 	public Text backReason;//回仓原因
-	
+	public Text reviewer;//复核人
 	public CalendarCombo callDate;//调拨日期
 	public CalendarCombo checkDate;//审核日期
 	public CalendarCombo reCheckDate;//复核日期
@@ -158,7 +160,7 @@ public class AdjustStoreView extends ViewPart {
 						List<AdjustShopInfo> adjustShopInfos  = adjShopSerivice.queryAdjustShopList(adjustShopInfo);
 						searchViewer.setInput(adjustShopInfos);
 					} catch (POSException e1) {
-						// TODO Auto-generated catch block
+						MessageDialog.openError(((Button)e.getSource()).getShell(), "错误", e1.getErrorMessage());
 						e1.printStackTrace();
 					}
 					
@@ -199,6 +201,11 @@ public class AdjustStoreView extends ViewPart {
 					adjustShopInfo.setCallDate(callDate.getDate().getTime());
 					adjustShopInfo.setCheckDate(checkDate.getDate().getTime());
 					adjustShopInfo.setReCheckDate(reCheckDate.getDate().getTime());
+					adjustShopInfo.setItemNum(Integer.valueOf(numberTotal.getText()));
+					adjustShopInfo.setChecker(checker.getText());
+					adjustShopInfo.setReChecker(reviewer.getText());
+					adjustShopInfo.setApplyUser(applyUser.getText());
+					
 					adjustShopInfo.setRemark(remark.getText());
 					if (recordViewer.getInput() instanceof List) {
 						List list = (List) recordViewer.getInput();
@@ -211,7 +218,7 @@ public class AdjustStoreView extends ViewPart {
 					
 					AdjustShopDTO  adjShopDTO = new AdjustShopDTO();
 					adjShopDTO.setAdjustShopList(goodsRepositoryList);
-					
+					caculatorNumAndPrice();
 					try {
 						adjShopSerivice.saveAdjustStoreInfo(adjShopDTO);
 					} catch (POSException e1) {
@@ -296,7 +303,7 @@ public class AdjustStoreView extends ViewPart {
 		}
 		
 		{
-			Text reviewer = new Text(recodeComposite, SWT.BORDER);
+			reviewer = new Text(recodeComposite, SWT.BORDER);
 			reviewer.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 100;
@@ -318,12 +325,12 @@ public class AdjustStoreView extends ViewPart {
 			label.setText("数量合计：");
 		}
 		{
-			Text text = new Text(caculatorComposite, SWT.BORDER);
-			text.setEditable(false);
+			numberTotal = new Text(caculatorComposite, SWT.BORDER);
+			numberTotal.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
-			text.setLayoutData(data);
+			numberTotal.setLayoutData(data);
 		}
 		{
 			Label label = new Label(caculatorComposite, SWT.NONE);
@@ -333,12 +340,12 @@ public class AdjustStoreView extends ViewPart {
 			label.setText("金额合计：");
 		}
 		{
-			Text text = new Text(caculatorComposite, SWT.BORDER);
-			text.setEditable(false);
+			priceTotal = new Text(caculatorComposite, SWT.BORDER);
+			priceTotal.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
-			text.setLayoutData(data);
+			priceTotal.setLayoutData(data);
 		}
 
 		{
@@ -409,6 +416,8 @@ public class AdjustStoreView extends ViewPart {
 						items.add(((List<Item>) recordViewer.getInput()).get(0));
 					}
 					recordViewer.setInput(MockDataFactory.createItemList());
+					
+					caculatorNumAndPrice();
 				}
 
 				@Override
@@ -712,12 +721,23 @@ public class AdjustStoreView extends ViewPart {
 			lable.setText("调拨类型：");
 		}
 		{
-			adjustType = new Combo(leftComposite, SWT.NONE);
+			adjustType = new Combo(leftComposite, SWT.NONE|SWT.READ_ONLY);
 			GridData data = new GridData();
 			data.widthHint = 155;
 			data.horizontalSpan = 3;
 			adjustType.setLayoutData(data);
-			adjustType.setItems(new String[] { "" });
+			ICommonService commonService = new CommonServiceImpl();
+			try {
+				List<AllotStyle> allotStyles = commonService.getAllotStyle();
+				String [] types = new String[allotStyles.size()];
+				for (int i = 0; i <allotStyles.size();i++) {
+					types[i] = allotStyles.get(i).getStyleName();
+				}
+				adjustType.setItems(types);
+			} catch (POSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			adjustType.select(0);
 		}
 
