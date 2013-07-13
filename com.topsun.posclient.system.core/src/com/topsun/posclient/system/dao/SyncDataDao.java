@@ -11,30 +11,32 @@ import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.datamodel.dto.webservice.GetUserInfoReq;
 
 /**
+ * 数据同步处理
+ * 
  * @author Lilei
  *
  */
 public class SyncDataDao extends BaseDao {
 	
 	/**
+	 * 数据同步（多线程）
+	 * 
 	 * @throws Exception
 	 */
 	public void syncData() throws Exception{
 		new SyncDataTask(){
 			public void run() {
-					try {
-						downloadUserData();
-					} catch (Exception e) {
-						throw new RuntimeException();
-					}
-					System.out.println("--------------------------->>> 更新离线用户数据\n\n\n\n");
+				try {
+					downloadUserData();
+				} catch (Exception e) {
+					throw new RuntimeException();
+				}
 			}
 		}.start();
 		new SyncDataTask(){
 			public void run(){
 				try {
 					downloadShopData();
-					System.out.println("--------------------------->>> 更新离线店铺数据\n\n\n\n");
 				} catch (Exception e) {
 					throw new RuntimeException();
 				}
@@ -44,9 +46,7 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					downloadItemData();
-					System.out.println("--------------------------->>> 更新离线库存数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
 					throw new RuntimeException();
 				}
 			}
@@ -55,9 +55,7 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					downloadCashierModeData();
-					System.out.println("--------------------------->>> 更新离线结算方式数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
 					throw new RuntimeException();
 				}
 			}
@@ -67,9 +65,7 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadPartSalesData();
-					System.out.println("--------------------------->>> 上传零售数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
 					throw new RuntimeException();
 				}
 			}
@@ -79,9 +75,7 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadPayRecordData();
-					System.out.println("--------------------------->>> 上传缴款记录数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
 					throw new RuntimeException();
 				}
 			}
@@ -91,9 +85,7 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadAdjustShopData();
-					System.out.println("--------------------------->>> 上传调店数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
 					throw new RuntimeException();
 				}
 			}
@@ -103,9 +95,7 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadAdjustRepositoryData();
-					System.out.println("--------------------------->>> 上传回仓数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
 					throw new RuntimeException();
 				}
 			}
