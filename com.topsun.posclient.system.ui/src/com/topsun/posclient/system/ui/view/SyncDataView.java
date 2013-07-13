@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
@@ -25,24 +26,14 @@ public class SyncDataView extends ViewPart {
 	
 	private ISyncDataService syncDataService = new SyncDataServiceImpl();
 
+	public ProgressBar bar;
+	
 	public Combo dataType;
-	public Text orderNo;
-	public Combo casher;
-	public Text casherNo;
-	public Combo sales;
-	public Text cardNo;
-	public Text userName;
-	public Text enableAccount;
-	public Text enablePoint;
 
 	public CalendarCombo salesDate;
-	public CalendarCombo checkDate;
 
-	public Text applyUser;
-	public Text checker;
-	public Text remark;
+	public Text infoText;
 
-	public TableViewer tableViewer;
 
 	public SyncDataView() {
 		// TODO Auto-generated constructor stub
@@ -63,68 +54,77 @@ public class SyncDataView extends ViewPart {
 		baseInfo.setLayout(gridLayout);
 		baseInfo.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		Composite leftComposite = new Composite(baseInfo, SWT.NONE);
-		leftComposite.setLayout(new GridLayout(4, false));
-		leftComposite.setLayoutData(new GridData(GridData.FILL_BOTH));
+		Composite composite = new Composite(baseInfo, SWT.NONE);
+		composite.setLayout(new GridLayout(4, false));
+		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		Composite rightCompoiste = new Composite(baseInfo, SWT.NONE);
-		rightCompoiste.setLayout(new GridLayout(4, false));
-		rightCompoiste.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		Composite underCompsite = new Composite(baseInfo, SWT.NONE);
-		underCompsite.setLayout(new GridLayout(4, false));
-		GridData data2 = new GridData(GridData.FILL_BOTH);
-		data2.horizontalSpan = 2;
-		underCompsite.setLayoutData(data2);
 
 		{
-			Label label = new Label(leftComposite, SWT.NONE);
+			Label label = new Label(composite, SWT.NONE);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
 			label.setText("数据类型：");
 		}
 		{
-			dataType = new Combo(leftComposite, SWT.NONE);
+			dataType = new Combo(composite, SWT.NONE);
 			GridData data = new GridData();
 			data.widthHint = 185;
-			data.horizontalSpan = 3;
+			data.horizontalSpan = 1;
 			dataType.select(0);
 			dataType.setLayoutData(data);
 			dataType.setItems(new String[] { "所有", "库存", "促销方案", "用户数据" });
 		}
 		{
-			Label lable = new Label(rightCompoiste, SWT.NONE);
+			Label lable = new Label(composite, SWT.NONE);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
 			lable.setText("日期：");
 		}
 		{
-			salesDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY,
+			salesDate = new CalendarCombo(composite, SWT.READ_ONLY,
 					new Settings(), null);
 			GridData data = new GridData();
 			data.widthHint = 210;
-			data.horizontalSpan = 3;
+			data.horizontalSpan = 1;
 			salesDate.setLayoutData(data);
 		}
 		{
-			Label lable = new Label(underCompsite, SWT.NONE);
+			Label lable = new Label(composite, SWT.NONE);
+			lable.setText("进度：");
+			GridData data = new GridData();
+			data.horizontalSpan = 1;
+			lable.setLayoutData(data);
+		}
+		
+		{
+			bar = new ProgressBar(composite, SWT.HORIZONTAL);
+			bar.setMaximum(100);//设置最大值
+			bar.setMinimum(0);//设置最小值
+			GridData data = new GridData();
+			data.horizontalSpan = 3;
+			data.heightHint = 30;
+			data.widthHint = 750;
+			bar.setLayoutData(data);
+		}
+		{
+			Label lable = new Label(composite, SWT.NONE);
 			lable.setText("信息：");
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
 		}
-
+		
 		{
-			remark = new Text(underCompsite, SWT.MULTI | SWT.BORDER);
+			infoText = new Text(composite, SWT.MULTI | SWT.BORDER);
 			GridData data = new GridData();
 			data.horizontalSpan = 3;
-			data.heightHint = 400;
+			data.heightHint = 450;
 			data.widthHint = 740;
-			remark.setLayoutData(data);
+			infoText.setLayoutData(data);
 		}
-
 	}
 
 	private void buildOperation(Composite parent) {
@@ -145,7 +145,8 @@ public class SyncDataView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 					Button saveButton = (Button)e.getSource();
 					try {
-						syncDataService.syncData();
+						bar.setSelection(10);
+						syncDataService.syncData(bar,infoText);
 					} catch (POSException e1) {
 						MessageDialog.openError(saveButton.getShell(), "提示", e1.getErrorMessage());
 						return;

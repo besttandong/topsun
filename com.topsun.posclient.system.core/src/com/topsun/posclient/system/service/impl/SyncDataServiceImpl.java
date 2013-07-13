@@ -1,5 +1,8 @@
 package com.topsun.posclient.system.service.impl;
 
+import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Text;
+
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.system.MessageResources;
@@ -17,14 +20,14 @@ public class SyncDataServiceImpl extends BaseServiceImpl implements ISyncDataSer
 	/* (non-Javadoc)
 	 * @see com.topsun.posclient.system.service.ISyncDataService#syncData()
 	 */
-	public void syncData() throws POSException {
+	public void syncData(ProgressBar bar ,Text infoText) throws POSException {
 		
 		try {
-			if(syncDataDao.checkConnection()){
-				syncDataDao.syncData();
-			}else{
-				throw new POSException(MessageResources.message_error_notconnection);
-			}
+		//	if(syncDataDao.checkConnection()){
+				syncDataDao.syncData(bar,infoText);
+//			}else{
+//				throw new POSException(MessageResources.message_error_notconnection);
+//			}
 		} catch (Exception e) {
 			throw new POSException(MessageResources.message_error_failer);
 		}
