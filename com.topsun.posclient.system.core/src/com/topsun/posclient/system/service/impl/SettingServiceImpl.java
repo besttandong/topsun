@@ -32,10 +32,10 @@ public class SettingServiceImpl extends BaseServiceImpl implements ISettingServi
 			OutputStream outputStream = new FileOutputStream(filepath);  
 			prop.setProperty("serverIP", settingData.getIp());  
 			prop.setProperty("serverPort", settingData.getPort());  
+			prop.setProperty("reconnectionTime", settingData.getReconnectionTime());  
 			prop.store(outputStream, "author: topsun");  
 	        outputStream.close();  
 		}catch(Exception e){
-			e.printStackTrace();
 			throw new POSException(MessageResources.message_error_savefailer);
 		}
 	}

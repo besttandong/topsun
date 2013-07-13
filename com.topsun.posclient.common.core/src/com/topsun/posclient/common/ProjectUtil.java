@@ -2,10 +2,8 @@ package com.topsun.posclient.common;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.InetAddress;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -76,15 +74,7 @@ public class ProjectUtil {
 		Properties p = getProperties(fileName);
 		return p.get(keyName);
 	}
-	public static void writeProperties(String filePath, String parameterName,
-			String parameterValue) throws Exception {
-		Properties prop = new Properties();
-		OutputStream outputStream = new FileOutputStream(filePath);  
-		prop.setProperty(parameterName, parameterValue);  
-		prop.store(outputStream, "author: topsun");  
-        outputStream.close();  
-	}
-
+	
 	public static String readValue(String filePath, String key) throws Exception {
 		Properties props = new Properties();
 		InputStream in = new BufferedInputStream(new FileInputStream(filePath));
@@ -97,7 +87,7 @@ public class ProjectUtil {
 		boolean status = false;
 		try {
 			String host = ProjectUtil.readValue(ProjectUtil.getRuntimeClassPath()+AppConstants.SEETING_FILE, "serverIP");
-			String timeOut = ProjectUtil.readValue(ProjectUtil.getRuntimeClassPath()+AppConstants.SEETING_FILE, "timeOut");
+			String timeOut = ProjectUtil.readValue(ProjectUtil.getRuntimeClassPath()+AppConstants.SEETING_FILE, "reconnectionTime");
 			status = InetAddress.getByName(host).isReachable(Integer.valueOf(timeOut));
 		} catch (Exception e) {
 			e.printStackTrace();
