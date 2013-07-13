@@ -8,35 +8,37 @@ import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.dao.BaseDao;
 import com.topsun.posclient.common.webservice.IPosWebService;
-import com.topsun.posclient.datamodel.dto.webservice.UserInfoReq;
+import com.topsun.posclient.datamodel.dto.webservice.GetUserInfoReq;
 
 /**
+ * 数据同步处理
+ * 
  * @author Lilei
  *
  */
 public class SyncDataDao extends BaseDao {
 	
 	/**
+	 * 数据同步（多线程）
+	 * 
 	 * @throws Exception
 	 */
 	public void syncData() throws Exception{
 		new SyncDataTask(){
 			public void run() {
-					try {
-						downloadUserData();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					System.out.println("--------------------------->>> 更新离线用户数据\n\n\n\n");
+				try {
+					downloadUserData();
+				} catch (Exception e) {
+					throw new RuntimeException();
+				}
 			}
 		}.start();
 		new SyncDataTask(){
 			public void run(){
 				try {
 					downloadShopData();
-					System.out.println("--------------------------->>> 更新离线店铺数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -44,9 +46,8 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					downloadItemData();
-					System.out.println("--------------------------->>> 更新离线库存数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -54,9 +55,8 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					downloadCashierModeData();
-					System.out.println("--------------------------->>> 更新离线结算方式数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -65,9 +65,8 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadPartSalesData();
-					System.out.println("--------------------------->>> 上传零售数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -76,9 +75,8 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadPayRecordData();
-					System.out.println("--------------------------->>> 上传缴款记录数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -87,9 +85,8 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadAdjustShopData();
-					System.out.println("--------------------------->>> 上传调店数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
@@ -98,16 +95,15 @@ public class SyncDataDao extends BaseDao {
 			public void run(){
 				try {
 					uploadAdjustRepositoryData();
-					System.out.println("--------------------------->>> 上传回仓数据\n\n\n\n");
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException();
 				}
 			}
 		}.start();
 	}
 	
 	private void downloadUserData() throws Exception {
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadUserData(userInfoReqStr);
@@ -117,7 +113,7 @@ public class SyncDataDao extends BaseDao {
 	
 	private void downloadShopData() throws Exception{
 		
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadShopData(userInfoReqStr);
@@ -127,7 +123,7 @@ public class SyncDataDao extends BaseDao {
 	
 	private void downloadItemData() throws Exception{
 		
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadItemData(userInfoReqStr);
@@ -136,7 +132,7 @@ public class SyncDataDao extends BaseDao {
 	}
 	
 	private void downloadCashierModeData() throws Exception{
-		UserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
+		GetUserInfoReq userInfoReq = this.getServerCaller().buildUserInfoReq();
 		String userInfoReqStr = this.getLocalProcessor().getStringFromObject(userInfoReq);
 		IPosWebService webservice = this.getServerCaller().getWebService();
 		String returnVal = webservice.downloadCashierModeData(userInfoReqStr);
@@ -201,13 +197,19 @@ public class SyncDataDao extends BaseDao {
 	private void saveLocalFile(String filepath, String fileContent) throws Exception{
 		File file = new File(ProjectUtil.getRuntimeClassPath()+filepath);
     	file.deleteOnExit();
+    	BufferedWriter output = null;
     	try {
 			file.createNewFile();
-			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			
+			output = new BufferedWriter(new FileWriter(file));
 		    output.write(fileContent);
-		    output.close();
+		    
 		} catch (Exception e) {
 			throw new Exception("更新本地离线数据文件失败");
+		}finally{
+			if(null != output){
+				output.close();
+			}
 		}
 	}
 

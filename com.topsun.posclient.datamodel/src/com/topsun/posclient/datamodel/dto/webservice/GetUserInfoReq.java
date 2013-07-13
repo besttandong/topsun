@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="UserInfoReq",namespace="http://com.topsun.posclient/rms")
-public class UserInfoReq implements Serializable {
+@XmlRootElement(name="getUserInfoReq",namespace="http://www.topsunit.com/rms")
+public class GetUserInfoReq implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

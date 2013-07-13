@@ -20,7 +20,7 @@ public class Test {
 		userCredential.setUserName("UserName_0");
 		userCredential.setPassWord("PassWord_0");
 		
-		UserInfoReq req = new UserInfoReq();
+		GetUserInfoReq req = new GetUserInfoReq();
 		req.setUserCode("UserCode_0");
 		req.setUserCredential(userCredential);
 		
@@ -31,7 +31,7 @@ public class Test {
 			file.delete();
 		}
 		FileOutputStream fos = new FileOutputStream(file.getAbsoluteFile());
-		JAXBContext context = JAXBContext.newInstance(UserInfoReq.class);
+		JAXBContext context = JAXBContext.newInstance(GetUserInfoReq.class);
 		Marshaller marshaller = context.createMarshaller();
 //		NamespacePrefixMapper mapper = new PreferredMapper();  
 //		marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", mapper);  

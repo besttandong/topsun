@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.topsun.posclient.common.LoggerUtil;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.system.service.ILoginService;
@@ -127,11 +128,12 @@ public class LoginDialog extends TitleAreaDialog {
 			if (null != operator){
 				return;
 			}else{
+				LoggerUtil.logError(TopSunApplicationActivator.PLUGIN_ID, MessageResources.message_tips_loginfailer);
 				throw new Exception(MessageResources.message_tips_loginfailer);
 			}
 		} catch (POSException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LoggerUtil.logError(TopSunApplicationActivator.PLUGIN_ID, e.getErrorMessage());
 		}
 		
 	}

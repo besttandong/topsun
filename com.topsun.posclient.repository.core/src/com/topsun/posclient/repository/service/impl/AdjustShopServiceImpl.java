@@ -32,7 +32,7 @@ public class AdjustShopServiceImpl extends BaseServiceImpl implements
 	public void saveAdjustStoreInfo(AdjustShopDTO adjustStoreDTO)
 			throws POSException {
 		try {
-			adjustStoreDao.saveAdjustStore(adjustStoreDTO);
+			adjustStoreDao.saveAdjustShop(adjustStoreDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new POSException("保存调店数据失败");

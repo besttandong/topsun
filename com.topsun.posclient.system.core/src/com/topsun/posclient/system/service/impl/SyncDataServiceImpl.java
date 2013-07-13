@@ -2,6 +2,7 @@ package com.topsun.posclient.system.service.impl;
 
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
+import com.topsun.posclient.system.MessageResources;
 import com.topsun.posclient.system.dao.SyncDataDao;
 import com.topsun.posclient.system.service.ISyncDataService;
 
@@ -22,10 +23,10 @@ public class SyncDataServiceImpl extends BaseServiceImpl implements ISyncDataSer
 			if(syncDataDao.checkConnection()){
 				syncDataDao.syncData();
 			}else{
-				throw new POSException("当前处于离线状态，不能进行数据同步！请尝试连接服务器！");
+				throw new POSException(MessageResources.message_error_notconnection);
 			}
 		} catch (Exception e) {
-			throw new POSException("数据同步失败");
+			throw new POSException(MessageResources.message_error_failer);
 		}
 	}
 
