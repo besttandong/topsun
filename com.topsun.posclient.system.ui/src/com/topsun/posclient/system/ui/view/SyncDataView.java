@@ -17,14 +17,15 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
 import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.system.SyncProgress;
 import com.topsun.posclient.system.service.ISyncDataService;
+import com.topsun.posclient.system.service.SyncDataManager;
 import com.topsun.posclient.system.service.impl.SyncDataServiceImpl;
 import com.topsun.widget.calendar.CalendarCombo;
 import com.topsun.widget.calendar.DefaultSettings;
 
 public class SyncDataView extends ViewPart {
 	
-	private ISyncDataService syncDataService = new SyncDataServiceImpl();
 
 	public ProgressBar bar;
 	
@@ -119,6 +120,7 @@ public class SyncDataView extends ViewPart {
 		
 		{
 			infoText = new Text(composite, SWT.MULTI | SWT.BORDER);
+			infoText.setEditable(false);
 			GridData data = new GridData();
 			data.horizontalSpan = 3;
 			data.heightHint = 450;
@@ -145,8 +147,12 @@ public class SyncDataView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 					Button saveButton = (Button)e.getSource();
 					try {
-						bar.setSelection(10);
-						syncDataService.syncData(bar,infoText);
+						
+						String type = dataType.getText();
+						SyncDataManager.getInstance().setSyncType(type);
+						SyncProgress progress = new SyncProgress(bar, infoText);
+						SyncDataManager.getInstance().doSyncData(progress);
+						
 					} catch (POSException e1) {
 						MessageDialog.openError(saveButton.getShell(), "提示", e1.getErrorMessage());
 						return;
@@ -157,6 +163,29 @@ public class SyncDataView extends ViewPart {
 
 				}
 			});
+		}
+		
+		{
+			Button button = new Button(operation, SWT.NONE);
+			button.setText("清除日志");
+			GridData data = new GridData();
+			data.heightHint = 28;
+			data.widthHint = 120;
+			button.setLayoutData(data);
+			button.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					infoText.setText("");
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+
 		}
 	}
 
