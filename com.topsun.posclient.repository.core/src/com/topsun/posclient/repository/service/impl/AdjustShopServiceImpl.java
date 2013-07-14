@@ -51,6 +51,7 @@ public class AdjustShopServiceImpl extends BaseServiceImpl implements
 		try {
 			adjustShopList = adjustStoreDao.queryAdjustShopInfo(adjustShopInfo);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new POSException("查询失败");
 		}
 		return adjustShopList;

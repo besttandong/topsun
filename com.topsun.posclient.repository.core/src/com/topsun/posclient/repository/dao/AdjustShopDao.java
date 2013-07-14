@@ -89,7 +89,7 @@ public class AdjustShopDao extends BaseDao {
 				File dataFile = dataFiles[i];
 				if(dataFile.isFile()){
 					AdjustShopDTO adjustShopDTO = (AdjustShopDTO)this.getLocalProcessor()
-					.getObjectFromXml(getLocalProcessor().getDataFileContent(file), AdjustShopDTO.class);
+					.getObjectFromXml(getLocalProcessor().getDataFileContent(dataFile), AdjustShopDTO.class);
 					adjustShopDTOList.add(adjustShopDTO);
 				}
 			}
