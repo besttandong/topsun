@@ -20,8 +20,6 @@ import com.topsun.posclient.system.service.impl.SyncUserDataServiceImpl;
 
 public class SyncDataManager implements ISyncDataListener{
 	
-	public String syncType;
-	
 	public Stack<ISyncDataService> syncStack  = new Stack<ISyncDataService>();
 	
 	public SyncProgress progress;
@@ -40,18 +38,9 @@ public class SyncDataManager implements ISyncDataListener{
 		SyncDataListenerManager.getInstance().addKeyListener(this);
 	}
 	
-	
-	public String getSyncType() {
-		return syncType;
-	}
-
-	public void setSyncType(String syncType) {
-		this.syncType = syncType;
-	}
-
 	public void doSyncData(final SyncProgress progress) throws POSException{
 		this.progress = progress;
-		checkRegistrySyncType(syncType);
+		checkRegistrySyncType();
 		progress.getInfoText().setText("");
 		
 		int size = syncStack.size();
@@ -85,7 +74,7 @@ public class SyncDataManager implements ISyncDataListener{
 		syncStack.push(dataService);
 	}
 	
-	public void checkRegistrySyncType(String syncType){
+	public void checkRegistrySyncType(){
 		regsitryService(new SyncUserDataServiceImpl());
 		regsitryService(new SyncShopDataServiceImpl());
 		regsitryService(new SyncPayRecordDataServiceImpl());

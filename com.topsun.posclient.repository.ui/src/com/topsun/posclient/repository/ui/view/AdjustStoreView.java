@@ -410,23 +410,15 @@ public class AdjustStoreView extends ViewPart {
 			data.horizontalSpan = 1;
 			button.setLayoutData(data);
 			button.addSelectionListener(new SelectionListener() {
-
-				@Override
 				public void widgetSelected(SelectionEvent e) {
 					List<AdjustShopInfo> list = MockDataFactory.createAdjustShopInfoList();
-					
 					if (recordViewer.getInput() != null) {
 						items.add(((List<Item>) recordViewer.getInput()).get(0));
 					}
 					recordViewer.setInput(MockDataFactory.createItemList());
-					
 					caculatorNumAndPrice();
 				}
-
-				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
-
 				}
 			});
 		}
