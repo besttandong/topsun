@@ -15,5 +15,12 @@ public interface ISettingService extends IBaseService {
 	 * @throws POSException
 	 */
 	public void saveSetting(SettingData settingData) throws POSException;
+	
+	/**
+	 * 获取系统配置信息
+	 * @return
+	 * @throws POSException
+	 */
+	public SettingData getSetting() throws POSException;
 
 }

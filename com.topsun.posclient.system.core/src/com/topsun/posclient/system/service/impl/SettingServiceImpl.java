@@ -39,4 +39,23 @@ public class SettingServiceImpl extends BaseServiceImpl implements ISettingServi
 			throw new POSException(MessageResources.message_error_savefailer);
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see com.topsun.posclient.system.service.ISettingService#getSetting()
+	 */
+	public SettingData getSetting() throws POSException {
+		String filepath = ProjectUtil.getRuntimeClassPath()+AppConstants.SEETING_FILE;
+		try{
+			String serverIP = ProjectUtil.readValue(filepath, "serverIP");
+			String serverPort = ProjectUtil.readValue(filepath, "serverPort");
+			String reconnectionTime = ProjectUtil.readValue(filepath, "reconnectionTime");
+			SettingData settingData = new SettingData();
+			settingData.setIp(serverIP);
+			settingData.setPort(serverPort);
+			settingData.setReconnectionTime(reconnectionTime);
+			return settingData;
+		}catch(Exception e){
+			throw new POSException(MessageResources.message_error_savefailer);
+		}
+	}
 }
