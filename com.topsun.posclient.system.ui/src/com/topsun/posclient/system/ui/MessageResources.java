@@ -21,6 +21,9 @@ public class MessageResources extends NLS
 	  public static String message_tips_inputserverip;
 	  public static String message_tips_inputport;
 	  public static String message_tips_inputreconnectiontime;
+	  
+	  public static String message_tips_success;
+	  public static String message_tips_failer;
 
 	  static {
 	    NLS.initializeMessages(BUNDLE_NAME, MessageResources.class);

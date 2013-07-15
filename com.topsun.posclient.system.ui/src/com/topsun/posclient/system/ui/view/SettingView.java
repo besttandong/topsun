@@ -23,7 +23,7 @@ import com.topsun.widget.calendar.DefaultSettings;
 /**
  * Setting View
  * 
- * @author Dong
+ * @author LiLei
  *
  */
 public class SettingView extends ViewPart {
@@ -36,8 +36,7 @@ public class SettingView extends ViewPart {
 	
 	public TableViewer tableViewer;
 
-	public SettingView() {
-	}
+	public SettingView() {}
 
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
@@ -46,6 +45,13 @@ public class SettingView extends ViewPart {
 	}
 
 	private void buildBaseInfo(Composite parent) {
+		SettingData defaultSettingData = null;
+		try {
+			defaultSettingData = settingService.getSetting();
+		} catch (POSException e) {
+			MessageDialog.openError(parent.getShell(), MessageResources.message_tips, e.getErrorMessage());
+		}
+		
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = 30;
 		parent.setLayout(gridLayout);
@@ -77,6 +83,7 @@ public class SettingView extends ViewPart {
 			data.horizontalSpan = 3;
 			data.widthHint = 210;
 			serverIP.setLayoutData(data);
+			serverIP.setText(defaultSettingData.getIp());
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
@@ -91,6 +98,7 @@ public class SettingView extends ViewPart {
 			data.horizontalSpan = 3;
 			data.widthHint = 210;
 			serverPort.setLayoutData(data);
+			serverPort.setText(defaultSettingData.getPort());
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
@@ -105,6 +113,7 @@ public class SettingView extends ViewPart {
 			data.horizontalSpan = 3;
 			data.widthHint = 210;
 			reconnectionTime.setLayoutData(data);
+			reconnectionTime.setText(defaultSettingData.getReconnectionTime());
 		}
 	}
 
@@ -127,16 +136,19 @@ public class SettingView extends ViewPart {
 					String ipAdd = serverIP.getText();
 					if(null == ipAdd || ("").equals(ipAdd)){
 						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_inputserverip);
+						serverIP.forceFocus();
 						return;
 					}
 					String port = serverPort.getText();
 					if(null == port || ("").equals(port)){
 						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_inputport);
+						serverPort.forceFocus();
 						return;
 					}
 					String time = reconnectionTime.getText();
-					if(null == reconnectionTime || ("").equals(reconnectionTime)){
+					if(null == time || ("").equals(time)){
 						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_inputreconnectiontime);
+						reconnectionTime.forceFocus();
 						return;
 					}
 					SettingData settingData = new SettingData();
@@ -145,9 +157,9 @@ public class SettingView extends ViewPart {
 					settingData.setReconnectionTime(time);
 					try {
 						settingService.saveSetting(settingData);
+						MessageDialog.openInformation(saveButton.getShell(), MessageResources.message_tips, MessageResources.message_tips_success);
 					} catch (POSException e1) {
 						MessageDialog.openError(saveButton.getShell(), MessageResources.message_tips, e1.getErrorMessage());
-						return;
 					}
 				}
 				public void widgetDefaultSelected(SelectionEvent e) {
