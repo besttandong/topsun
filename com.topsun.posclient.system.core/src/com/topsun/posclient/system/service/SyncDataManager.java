@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.system.MessageResources;
 import com.topsun.posclient.system.SyncProgress;
 import com.topsun.posclient.system.service.impl.SyncAdjustRepositoryDataServiceImpl;
 import com.topsun.posclient.system.service.impl.SyncAdjustShopDataServiceImpl;
@@ -20,10 +21,6 @@ import com.topsun.posclient.system.service.impl.SyncUserDataServiceImpl;
 public class SyncDataManager implements ISyncDataListener{
 	
 	public String syncType;
-	public static final String SYNC_ALL = "所有";
-	public static final String SYNC_RESPOITORY = "库存";
-	public static final String SYNC_CASHIER_MODE = "促销方案";
-	public static final String SYNC_USER_DATA = "用户数据";
 	
 	public Stack<ISyncDataService> syncStack  = new Stack<ISyncDataService>();
 	
@@ -76,7 +73,7 @@ public class SyncDataManager implements ISyncDataListener{
 			public void run() {
 				Shell shell = progress.getBar().getShell();
 				progress.getBar().setSelection(100);
-				MessageDialog.openInformation(shell, "提示", "同步完成");
+				MessageDialog.openInformation(shell, MessageResources.message_tips, MessageResources.message_tips_sync_success);
 			}
 		});
 
@@ -89,32 +86,14 @@ public class SyncDataManager implements ISyncDataListener{
 	}
 	
 	public void checkRegistrySyncType(String syncType){
-		if(syncType.equals(SYNC_ALL)){
-			
-			regsitryService(new SyncUserDataServiceImpl());
-			regsitryService(new SyncShopDataServiceImpl());
-			regsitryService(new SyncPayRecordDataServiceImpl());
-			regsitryService(new SyncPartSalesDataServiceImpl());
-			regsitryService(new SyncItemDataServiceImpl());
-			regsitryService(new SyncCashierModeDataServiceImpl());
-			regsitryService(new SyncAdjustRepositoryDataServiceImpl());
-			regsitryService(new SyncAdjustShopDataServiceImpl());
-			
-		}
-		
-		if(syncType.equals(SYNC_RESPOITORY)){
-			regsitryService(new SyncAdjustRepositoryDataServiceImpl());
-			regsitryService(new SyncAdjustShopDataServiceImpl());
-		}
-		
-		if(syncType.equals(SYNC_CASHIER_MODE)){
-			regsitryService(new SyncCashierModeDataServiceImpl());
-		}
-		
-		if(syncType.equals(SYNC_USER_DATA)){
-			regsitryService(new SyncUserDataServiceImpl());
-			regsitryService(new SyncShopDataServiceImpl());
-		}
+		regsitryService(new SyncUserDataServiceImpl());
+		regsitryService(new SyncShopDataServiceImpl());
+		regsitryService(new SyncPayRecordDataServiceImpl());
+		regsitryService(new SyncPartSalesDataServiceImpl());
+		regsitryService(new SyncItemDataServiceImpl());
+		regsitryService(new SyncCashierModeDataServiceImpl());
+		regsitryService(new SyncAdjustRepositoryDataServiceImpl());
+		regsitryService(new SyncAdjustShopDataServiceImpl());
 	}
 
 

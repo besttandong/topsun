@@ -13,8 +13,10 @@ import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
 import com.topsun.posclient.datamodel.Shop;
 import com.topsun.posclient.datamodel.User;
+import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
 import com.topsun.posclient.datamodel.dto.AllotStyleDTO;
 import com.topsun.posclient.datamodel.dto.ItemDTO;
+import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 import com.topsun.posclient.datamodel.dto.ShopDTO;
 import com.topsun.posclient.datamodel.dto.UserDTO;
 
@@ -61,6 +63,12 @@ public class MockDataFactory {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUserList(createUserList());
 		return userDTO;
+	}
+	
+	public static AdjustShopDTO createAdjustShopDTO() {
+		AdjustShopDTO adjustShopDTO = new AdjustShopDTO();
+		adjustShopDTO.setAdjustShopList(createAdjustShopInfoList());
+		return adjustShopDTO;
 	}
 	
 	public static List<Shop> createShopList(){
@@ -255,6 +263,12 @@ public class MockDataFactory {
 		adjustRepositoryInfos.add(adjustRepositoryInfo2);
 		
 		return adjustRepositoryInfos;
+	}
+	
+	public static PartSalesDTO createPartSalesDTO(){
+		PartSalesDTO partSalesDto = new PartSalesDTO();
+		partSalesDto.setPartSalesList(createPartSalesList());
+		return partSalesDto;
 	}
 	
 	public static List<PartSales> createPartSalesList(){

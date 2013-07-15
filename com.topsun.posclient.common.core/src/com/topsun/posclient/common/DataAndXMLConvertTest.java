@@ -6,8 +6,7 @@ import java.io.FileOutputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-import com.topsun.posclient.datamodel.dto.AllotStyleDTO;
-import com.topsun.posclient.datamodel.dto.UserDTO;
+import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 
 public class DataAndXMLConvertTest {
 
@@ -80,17 +79,42 @@ public class DataAndXMLConvertTest {
 //		Marshaller marshaller = context.createMarshaller();
 //		marshaller.marshal(userDTO, fos);
 		
-		AllotStyleDTO allotStyleDTO = MockDataFactory.createAllotStyleDTO();
-		String filePath = DataAndXMLConvertTest.class.getClassLoader().getResource("").getFile();
-		File file = new File(filePath + AppConstants.DATA_ALLOTSTYLE_FILENAME);
+//		AllotStyleDTO allotStyleDTO = MockDataFactory.createAllotStyleDTO();
+//		String filePath = DataAndXMLConvertTest.class.getClassLoader().getResource("").getFile();
+//		File file = new File(filePath + AppConstants.DATA_ALLOTSTYLE_FILENAME);
+//		
+//		if (!file.exists()) {
+//			file.createNewFile();
+//		}
+//		FileOutputStream fos = new FileOutputStream(file.getAbsoluteFile());
+//		JAXBContext context = JAXBContext.newInstance(AllotStyleDTO.class);
+//		Marshaller marshaller = context.createMarshaller();
+//		marshaller.marshal(allotStyleDTO, fos);
 		
+//		AdjustShopDTO adjustShopDTO = MockDataFactory.createAdjustShopDTO();
+//		String filePath = DataAndXMLConvertTest.class.getClassLoader().getResource("").getFile();
+//		File file = new File(filePath + AppConstants.DATA_ADJUSTSHOP_PATH+ "adjustShop_data_"+ System.currentTimeMillis() + ".xml");
+//		System.out.println(file.getPath());
+//		if (!file.exists()) {
+//			file.createNewFile();
+//		}
+//		FileOutputStream fos = new FileOutputStream(file.getAbsoluteFile());
+//		JAXBContext context = JAXBContext.newInstance(AdjustShopDTO.class);
+//		Marshaller marshaller = context.createMarshaller();
+//		marshaller.marshal(adjustShopDTO, fos);
+		
+		
+		PartSalesDTO partSalesDTO = MockDataFactory.createPartSalesDTO();
+		String filePath = DataAndXMLConvertTest.class.getClassLoader().getResource("").getFile();
+		File file = new File(filePath + AppConstants.DATA_PARTSALES_PATH+ "data_PartSales"+ System.currentTimeMillis() + ".xml");
+		System.out.println(file.getPath());
 		if (!file.exists()) {
 			file.createNewFile();
 		}
 		FileOutputStream fos = new FileOutputStream(file.getAbsoluteFile());
-		JAXBContext context = JAXBContext.newInstance(AllotStyleDTO.class);
+		JAXBContext context = JAXBContext.newInstance(PartSalesDTO.class);
 		Marshaller marshaller = context.createMarshaller();
-		marshaller.marshal(allotStyleDTO, fos);
+		marshaller.marshal(partSalesDTO, fos);
 		
 	}
 

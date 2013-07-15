@@ -4,7 +4,6 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.system.MessageResources;
 import com.topsun.posclient.system.SyncProgress;
-import com.topsun.posclient.system.dao.SyncDataDao;
 import com.topsun.posclient.system.service.ISyncDataService;
 
 /**
@@ -13,7 +12,7 @@ import com.topsun.posclient.system.service.ISyncDataService;
  */
 public class SyncDataServiceImpl extends BaseServiceImpl implements ISyncDataService {
 	
-	private SyncDataDao syncDataDao = new SyncDataDao();
+//	private SyncDataDao syncDataDao = new SyncDataDao();
 	
 
 	/* (non-Javadoc)

@@ -1,14 +1,12 @@
 package com.topsun.posclient.system.ui.view;
 
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -18,10 +16,7 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.system.SyncProgress;
-import com.topsun.posclient.system.service.ISyncDataService;
 import com.topsun.posclient.system.service.SyncDataManager;
-import com.topsun.posclient.system.service.impl.SyncDataServiceImpl;
-import com.topsun.widget.calendar.CalendarCombo;
 import com.topsun.widget.calendar.DefaultSettings;
 
 public class SyncDataView extends ViewPart {
@@ -29,10 +24,6 @@ public class SyncDataView extends ViewPart {
 
 	public ProgressBar bar;
 	
-	public Combo dataType;
-
-	public CalendarCombo salesDate;
-
 	public Text infoText;
 
 
@@ -58,40 +49,6 @@ public class SyncDataView extends ViewPart {
 		Composite composite = new Composite(baseInfo, SWT.NONE);
 		composite.setLayout(new GridLayout(4, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-
-
-
-		{
-			Label label = new Label(composite, SWT.NONE);
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			label.setLayoutData(data);
-			label.setText("数据类型：");
-		}
-		{
-			dataType = new Combo(composite, SWT.NONE);
-			GridData data = new GridData();
-			data.widthHint = 185;
-			data.horizontalSpan = 1;
-			dataType.select(0);
-			dataType.setLayoutData(data);
-			dataType.setItems(new String[] { "所有", "库存", "促销方案", "用户数据" });
-		}
-		{
-			Label lable = new Label(composite, SWT.NONE);
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			lable.setLayoutData(data);
-			lable.setText("日期：");
-		}
-		{
-			salesDate = new CalendarCombo(composite, SWT.READ_ONLY,
-					new Settings(), null);
-			GridData data = new GridData();
-			data.widthHint = 210;
-			data.horizontalSpan = 1;
-			salesDate.setLayoutData(data);
-		}
 		{
 			Label lable = new Label(composite, SWT.NONE);
 			lable.setText("进度：");
@@ -147,9 +104,6 @@ public class SyncDataView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 					Button saveButton = (Button)e.getSource();
 					try {
-						
-						String type = dataType.getText();
-						SyncDataManager.getInstance().setSyncType(type);
 						SyncProgress progress = new SyncProgress(bar, infoText);
 						SyncDataManager.getInstance().doSyncData(progress);
 						
@@ -164,7 +118,6 @@ public class SyncDataView extends ViewPart {
 				}
 			});
 		}
-		
 		{
 			Button button = new Button(operation, SWT.NONE);
 			button.setText("清除日志");
@@ -173,15 +126,10 @@ public class SyncDataView extends ViewPart {
 			data.widthHint = 120;
 			button.setLayoutData(data);
 			button.addSelectionListener(new SelectionListener() {
-				
-				@Override
 				public void widgetSelected(SelectionEvent e) {
 					infoText.setText("");
 				}
-				
-				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
 					
 				}
 			});

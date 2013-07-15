@@ -3,10 +3,6 @@ package com.topsun.posclient.system.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.widgets.Listener;
-
-import com.topsun.posclient.system.SyncProgress;
-
 /**
  * 监听管理sss
  * @author Administrator
