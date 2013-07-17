@@ -43,7 +43,10 @@ public class PartSales implements Serializable {
 	
 	private String checker;//审核人
 	
-	private List<Item> itemList; // 
+	private List<Item> itemList; //零售明细，商品列表
+	
+	private List<PartSalesCashier> psCashierList;//零售结算
+	
 	
 	public List<Item> getItemList() {
 		return itemList;
@@ -157,4 +160,11 @@ public class PartSales implements Serializable {
 		this.remark = remark;
 	}
 
+	public List<PartSalesCashier> getPsCashierList() {
+		return psCashierList;
+	}
+
+	public void setPsCashierList(List<PartSalesCashier> psCashierList) {
+		this.psCashierList = psCashierList;
+	}
 }

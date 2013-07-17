@@ -3,6 +3,7 @@ package com.topsun.posclient.finance.service.impl;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.datamodel.dto.PaymentDTO;
+import com.topsun.posclient.finance.MessageResources;
 import com.topsun.posclient.finance.dao.PaymentDao;
 import com.topsun.posclient.finance.service.IPaymentService;
 
@@ -17,7 +18,7 @@ public class PaymentServiceImpl extends BaseServiceImpl implements IPaymentServi
 		try {
 			paymentDao.savePayment(paymentDTO);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new POSException(MessageResources.message_tips_save_error);
 		}
 	}
 }

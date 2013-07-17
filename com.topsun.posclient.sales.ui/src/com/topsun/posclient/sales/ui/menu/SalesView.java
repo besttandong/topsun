@@ -1,9 +1,7 @@
 package com.topsun.posclient.sales.ui.menu;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -38,8 +36,10 @@ import com.topsun.posclient.common.listener.KeyListenerManager;
 import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.common.service.impl.CommonServiceImpl;
 import com.topsun.posclient.common.ui.utils.ImageUtils;
+import com.topsun.posclient.datamodel.CashierModel;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.PartSales;
+import com.topsun.posclient.datamodel.PartSalesCashier;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.PartSalesDTO;
 import com.topsun.posclient.sales.MessageResources;
@@ -97,7 +97,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 	}
 
 	public SalesView() {
-	
+		
 	}
 
 	/**
@@ -265,20 +265,9 @@ public class SalesView extends ViewPart implements IKeyListener {
 						return;
 					}
 					
-//					if(salesDate.getDateAsString()== null || "".equals(salesDate.getDateAsString().trim())){
-//						MessageDialog.openError(saveButton.getShell(), "提示", "销售日期不能为空");
-//						return;
-//					}
-					
-//					if(checkDate.getDateAsString()== null || "".equals(checkDate.getDateAsString().trim())){
-//						MessageDialog.openError(saveButton.getShell(), "提示", "审核日期不能为空");
-//						return;
-//					}
-				
 					SalesPayDialog dialog = new SalesPayDialog(saveButton.getShell());
 					dialog.open();
 					
-					MockDataFactory dataFactory = new MockDataFactory();
 					partSales = new PartSales();
 					partSales.setApplyUser(applyUser.getText());
 					//partSales.setBalance(balance)
@@ -302,6 +291,20 @@ public class SalesView extends ViewPart implements IKeyListener {
 						List list = (List)tableViewer.getInput();
 						partSales.setItemList(list);
 					};
+					if(tableViewer.getInput() instanceof List){
+						List<CashierModel> cashierModelList = (List<CashierModel>)dialog.getTableViewer().getInput();
+						if(null != cashierModelList){
+							List<PartSalesCashier> psCashierList = new ArrayList<PartSalesCashier>();
+							for(CashierModel cashModel : cashierModelList){
+								PartSalesCashier salesCashier = new PartSalesCashier();
+								salesCashier.setDocNum(partSales.getNo());
+								salesCashier.setPayModelId(cashModel.getId());
+								salesCashier.setSum(cashModel.getAmount());
+								psCashierList.add(salesCashier);
+							}
+							partSales.setPsCashierList(psCashierList);
+						}
+					};
 					
 					List<PartSales> partSalesList = new ArrayList<PartSales>();
 					partSalesList.add(partSales);
@@ -315,14 +318,11 @@ public class SalesView extends ViewPart implements IKeyListener {
 					}
 				}
 				
-				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
 					
 				}
 			});
 		}
-		
 		{
 			Button button = new Button(operation, SWT.NONE);
 			button.setText(MessageResources.message_ui_button_cancel+"[ESC]");
@@ -334,7 +334,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			
 			button.addSelectionListener(new SelectionListener() {
 				
-				@Override
 				public void widgetSelected(SelectionEvent e) {
 					tableViewer.setInput(null);
 					priceTotal.setText("");
@@ -342,9 +341,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 					
 				}
 				
-				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
 					
 				}
 			});
@@ -444,7 +441,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 	}
 	
 	private void caculatorNumAndPrice() {
-		
 		int totalNum = 0;
 		double totalPrice = 0;
 		for (Item item : (List<Item>)tableViewer.getInput()) {
@@ -503,8 +499,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.horizontalSpan = 1;
 			button.setLayoutData(data);
 			button.addSelectionListener(new SelectionListener() {
-				
-				@Override
 				public void widgetSelected(SelectionEvent e) {
 					
 					if(tableViewer.getInput() == null){
@@ -524,18 +518,11 @@ public class SalesView extends ViewPart implements IKeyListener {
 					caculatorNumAndPrice();
 				}
 
-				
-				
-				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
-					// TODO Auto-generated method stub
 					
 				}
 			});
 		}
-		
-		
-		
 		{
 			Button button = new Button(printCompoiste, SWT.NONE);
 			button.setText(MessageResources.message_ui_label_saomiaolen);
@@ -546,8 +533,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.horizontalSpan = 1;
 			button.setLayoutData(data);
 		}
-		
-		
 		{
 			Label label = new Label(printCompoiste, SWT.NONE);
 			GridData data = new GridData();
@@ -563,9 +548,15 @@ public class SalesView extends ViewPart implements IKeyListener {
 			spinner.setLayoutData(data);
 		}
 	}
-	
 
 	private void buildBaseInfo(Composite parent) {
+		
+		String no = "";
+		try {
+			no = commonService.createNo();
+		} catch (POSException e1) {
+			MessageDialog.openError(parent.getShell(), MessageResources.message_ui_tips, e1.getErrorMessage());
+		}
 		
 		User loginUser = POSClientApp.get().getLoginUser();
 		
@@ -574,10 +565,8 @@ public class SalesView extends ViewPart implements IKeyListener {
 		baseInfo.setText(MessageResources.message_ui_group_baseinfo);
 		GridLayout gridLayout = new GridLayout(2,false);
 		gridLayout.marginLeft = 30;
-		//gridLayout.horizontalSpacing = 50;
 		baseInfo.setLayout(gridLayout);
 		baseInfo.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
 		
 		Composite leftComposite = new Composite(baseInfo,SWT.NONE);
 		leftComposite.setLayout(new GridLayout(4,false));
@@ -592,7 +581,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 		GridData data2 = new GridData(GridData.FILL_BOTH);
 		data2.horizontalSpan = 2;
 		underCompsite.setLayoutData(data2);
-		
 		{
 			Label label = new Label(leftComposite, SWT.NONE);
 			GridData data = new GridData();
@@ -611,7 +599,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			shopName.setEnabled(false);
 			shopName.select(0);
 		}
-		
 		{
 			Label label = new Label(rightCompoiste, SWT.NONE);
 			GridData data = new GridData();
@@ -626,15 +613,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.horizontalSpan = 3;
 			orderNo.setLayoutData(data);
 			orderNo.setEditable(false);
-			Date currentTime = new Date();  
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");  
-			String dateString = formatter.format(currentTime);
-			try {
-				orderNo.setText(commonService.createNo());
-			} catch (POSException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			orderNo.setText(no);
 		}
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
@@ -661,7 +640,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			lable.setLayoutData(data);
 			lable.setText(MessageResources.message_ui_label_ballotNo);
 		}
-		
 		{
 			casherNo = new Text(rightCompoiste, SWT.BORDER);
 			casherNo.setEditable(false);
@@ -669,18 +647,8 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.horizontalSpan = 3;
 			data.widthHint = 200;
 			casherNo.setLayoutData(data);
-			Date currentTime = new Date();  
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");  
-			String dateString = formatter.format(currentTime);
-			try {
-				casherNo.setText(commonService.createNo());
-			} catch (POSException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			casherNo.setText(no);
 		}
-		
-		
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
 			GridData data = new GridData();
@@ -698,7 +666,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			sales.setItems(new String[]{loginName});
 			sales.select(0);
 		}
-		
 		{
 			Label lable = new Label(rightCompoiste, SWT.NONE);
 			GridData data = new GridData();
@@ -715,8 +682,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.horizontalSpan = 3;
 			salesDate.setLayoutData(data);
 		}
-		
-		
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
 			GridData data = new GridData();
@@ -732,7 +697,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			cardNo.setLayoutData(data);
 			cardNo.setText("");
 		}
-		
 		{ 
 			Label lable = new Label(leftComposite, SWT.NONE);
 			lable.setText(MessageResources.message_ui_label_vipname);
@@ -747,21 +711,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.widthHint = 75;
 			userName.setLayoutData(data);
 		}
-//		{
-//			Label lable = new Label(rightCompoiste, SWT.NONE);
-//			lable.setText("审核日期：");
-//			GridData data = new GridData();
-//			data.horizontalSpan = 1;
-//			lable.setLayoutData(data);
-//		}
-//		{
-//			checkDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY, new Settings(), null);
-//			GridData data = new GridData();
-//			data.widthHint = 210;
-//			data.horizontalSpan = 3;
-//			checkDate.setLayoutData(data);
-//		}
-		
 		{
 			Label lable = new Label(leftComposite, SWT.NONE);
 			lable.setText(MessageResources.message_ui_label_point);
@@ -793,7 +742,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.widthHint = 200;
 			enableBalance.setLayoutData(data);
 			enableBalance.setText("0.0");
-//			enableBalance.setEditable(false);
 		}
 		
 		{
@@ -803,7 +751,6 @@ public class SalesView extends ViewPart implements IKeyListener {
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
 		}
-		
 		{
 			remark = new Text(underCompsite, SWT.BORDER);
 			GridData data = new GridData();
@@ -815,22 +762,14 @@ public class SalesView extends ViewPart implements IKeyListener {
 		
 	}
 
-	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
 
 	}
 
 }
 class Settings extends DefaultSettings {
 	
-	/*			public Locale getLocale() {
-					//return Locale.GERMAN;
-				}
-	*/
-				public boolean keyboardNavigatesCalendar() {
-					return false;
-				}
-
-				
-			}
+	public boolean keyboardNavigatesCalendar() {
+		return false;
+	}
+}

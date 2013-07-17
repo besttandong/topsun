@@ -13,9 +13,14 @@ public class ReceiveDao extends BaseDao {
 	public void saveReceive(ReceiveDTO receiveDTO) throws Exception {
 		if (checkConnection()) {
 			//TODO
+			getLocalProcessor().createXmlFileFromObject(receiveDTO, "data_receive", AppConstants.DATA_PAYMENT_PATH_BACK);
 		} else {
-			this.getLocalProcessor().createXmlFileFromObject(receiveDTO, "data_receive", AppConstants.DATA_PAYMENT_PATH);
+			getLocalProcessor().createXmlFileFromObject(receiveDTO, "data_receive", AppConstants.DATA_PAYMENT_PATH);
 		}
 		
+	}
+	
+	public ReceiveDTO queryReceive(ReceiveDTO receiveDTO) throws Exception {
+		return null;
 	}
 }

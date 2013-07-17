@@ -17,8 +17,9 @@ public class PaymentDao extends BaseDao {
 	public void savePayment(PaymentDTO paymentDTO) throws Exception {
 		if (checkConnection()) {
 			//TODO
+			getLocalProcessor().createXmlFileFromObject(paymentDTO, "data_payment", AppConstants.DATA_PAYMENT_PATH_BACK);
 		} else {
-			this.getLocalProcessor().createXmlFileFromObject(paymentDTO, "data_payment", AppConstants.DATA_PAYMENT_PATH);
+			getLocalProcessor().createXmlFileFromObject(paymentDTO, "data_payment", AppConstants.DATA_PAYMENT_PATH);
 		}
 		
 	}
