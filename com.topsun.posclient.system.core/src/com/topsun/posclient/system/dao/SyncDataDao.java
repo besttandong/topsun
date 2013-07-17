@@ -25,7 +25,7 @@ import com.topsun.posclient.system.service.SyncDataListenerManager;
  */
 public class SyncDataDao extends BaseDao {
 	
-	public void downloadUserData(final SyncProgress progress) throws Exception  {
+	public void downloadUserData(final SyncProgress progress,final int count) throws Exception  {
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
 				public void run() {
@@ -41,12 +41,12 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncuser);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncuser,count);
 				}
 			});
 	}
 	
-	public void downloadShopData(SyncProgress progress) throws Exception{
+	public void downloadShopData(SyncProgress progress,final int count) throws Exception{
 		
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
@@ -62,12 +62,12 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncshop);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncshop,count);
 				}
 			});
 	}
 	
-	public void downloadItemData(SyncProgress progress) throws Exception{
+	public void downloadItemData(SyncProgress progress,final int count) throws Exception{
 		
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
@@ -83,12 +83,12 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncitem);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncitem,count);
 				}
 			});
 	}
 	
-	public void downloadCashierModeData(SyncProgress progress) throws Exception{
+	public void downloadCashierModeData(SyncProgress progress,final int count) throws Exception{
 		
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
@@ -104,12 +104,12 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsynccashiermode);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsynccashiermode,count);
 				}
 			});
 	}
 	
-	public void uploadPartSalesData(SyncProgress progress) throws Exception{
+	public void uploadPartSalesData(SyncProgress progress,final int count) throws Exception{
 		
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
@@ -129,12 +129,12 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncsales);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncsales,count);
 				}
 			});
 	}
 	
-	public void uploadPayRecordData(SyncProgress progress) throws Exception{
+	public void uploadPayRecordData(SyncProgress progress,final int count) throws Exception{
 		
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
@@ -154,12 +154,12 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncpayment);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncpayment,count);
 				}
 			});
 	}
 	
-	public void uploadAdjustShopData(SyncProgress progress) throws Exception{
+	public void uploadAdjustShopData(SyncProgress progress,final int count) throws Exception{
 	
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
@@ -179,12 +179,12 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncadjustshop);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncadjustshop,count);
 				}
 			});
 	}
 	
-	public void uploadAdjustRepositoryData(SyncProgress progress) throws Exception{
+	public void uploadAdjustRepositoryData(SyncProgress progress,final int count) throws Exception{
 		
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
@@ -204,7 +204,7 @@ public class SyncDataDao extends BaseDao {
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
-					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncadjustrepository);
+					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_endsyncadjustrepository,count);
 				}
 			});
 		

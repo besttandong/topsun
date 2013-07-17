@@ -12,12 +12,12 @@ public class SyncPartSalesDataServiceImpl extends BaseServiceImpl implements ISy
 	private SyncDataDao syncDataDao = new SyncDataDao();
 	
 	@Override
-	public void syncData(SyncProgress progress)
+	public void syncData(SyncProgress progress,int count)
 			throws POSException {
 		
 		if(syncDataDao.checkConnection()){
 			try {
-				syncDataDao.uploadPartSalesData(progress);
+				syncDataDao.uploadPartSalesData(progress,count);
 			} catch (Exception e) {
 				throw new POSException(MessageResources.message_error_failer);
 			}

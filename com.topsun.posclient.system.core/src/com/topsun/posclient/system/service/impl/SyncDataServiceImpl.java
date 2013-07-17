@@ -18,7 +18,7 @@ public class SyncDataServiceImpl extends BaseServiceImpl implements ISyncDataSer
 	/* (non-Javadoc)
 	 * @see com.topsun.posclient.system.service.ISyncDataService#syncData()
 	 */
-	public void syncData(SyncProgress progress) throws POSException {
+	public void syncData(SyncProgress progress,int count) throws POSException {
 		
 		try {
 		//	if(syncDataDao.checkConnection()){

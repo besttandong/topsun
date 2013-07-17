@@ -12,11 +12,11 @@ public class SyncCashierModeDataServiceImpl extends BaseServiceImpl implements I
 	private SyncDataDao syncDataDao = new SyncDataDao();
 	
 	@Override
-	public void syncData(SyncProgress progress)
+	public void syncData(SyncProgress progress,int count)
 			throws POSException {
 		if(syncDataDao.checkConnection()){
 			try {
-				syncDataDao.downloadCashierModeData(progress);
+				syncDataDao.downloadCashierModeData(progress,count);
 			} catch (Exception e) {
 				throw new POSException(MessageResources.message_error_failer);
 			}

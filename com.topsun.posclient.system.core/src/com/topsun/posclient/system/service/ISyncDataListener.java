@@ -7,6 +7,8 @@ package com.topsun.posclient.system.service;
  */
 public interface ISyncDataListener{
 	
+	void onChange(String message,int count);
+	
 	void onChange(String message);
 
 }

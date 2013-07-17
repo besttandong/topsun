@@ -11,6 +11,6 @@ import com.topsun.posclient.system.SyncProgress;
  */
 public interface ISyncDataService extends IBaseService {
 	
-	public void syncData(SyncProgress progress) throws POSException;
+	public void syncData(SyncProgress progress,int count) throws POSException;
 
 }

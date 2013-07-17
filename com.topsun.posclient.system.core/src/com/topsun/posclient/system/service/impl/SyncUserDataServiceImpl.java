@@ -12,10 +12,10 @@ public class SyncUserDataServiceImpl extends BaseServiceImpl implements ISyncDat
 	private SyncDataDao syncDataDao = new SyncDataDao();
 
 	@Override
-	public void syncData(final SyncProgress progress) throws POSException {
+	public void syncData(final SyncProgress progress,int count) throws POSException {
 		if(syncDataDao.checkConnection()){
 			try {
-				syncDataDao.downloadUserData(progress);
+				syncDataDao.downloadUserData(progress,count);
 			} catch (Exception e) {
 				throw new POSException(MessageResources.message_error_failer);
 			}

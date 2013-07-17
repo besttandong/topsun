@@ -12,12 +12,12 @@ public class SyncAdjustShopDataServiceImpl extends BaseServiceImpl implements IS
 	private SyncDataDao syncDataDao = new SyncDataDao();
 	
 	@Override
-	public void syncData(SyncProgress progress)
+	public void syncData(SyncProgress progress, int count)
 			throws POSException {
 		
 		if(syncDataDao.checkConnection()){
 			try {
-				syncDataDao.uploadAdjustShopData(progress);
+				syncDataDao.uploadAdjustShopData(progress,count);
 			} catch (Exception e) {
 				throw new POSException(MessageResources.message_error_failer);
 			}

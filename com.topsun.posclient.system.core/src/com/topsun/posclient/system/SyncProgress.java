@@ -8,7 +8,32 @@ public class SyncProgress {
 	
 	private Text infoText;
 	private ProgressBar bar;
+	private int serviceSize;
+	private int serviceIndex;
 	
+	
+	
+	
+	public int getServiceSize() {
+		return serviceSize;
+	}
+
+
+	public void setServiceSize(int serviceSize) {
+		this.serviceSize = serviceSize;
+	}
+
+
+	public int getServiceIndex() {
+		return serviceIndex;
+	}
+
+
+	public void setServiceIndex(int serviceIndex) {
+		this.serviceIndex = serviceIndex;
+	}
+
+
 	public SyncProgress( ProgressBar bar,Text infoText){
 		this.bar = bar;
 		this.infoText = infoText;

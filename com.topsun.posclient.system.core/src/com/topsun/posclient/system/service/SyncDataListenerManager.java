@@ -30,6 +30,12 @@ public class SyncDataListenerManager {
 		listeners.remove(iKeyListener);
 	}
 	
+	public void fireChange(String message,int count){
+		for (ISyncDataListener keyListener : listeners) {
+			keyListener.onChange(message,count);
+		}
+	}
+	
 	public void fireChange(String message){
 		for (ISyncDataListener keyListener : listeners) {
 			keyListener.onChange(message);

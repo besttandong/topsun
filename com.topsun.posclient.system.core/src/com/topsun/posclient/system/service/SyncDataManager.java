@@ -41,21 +41,19 @@ public class SyncDataManager implements ISyncDataListener{
 	public void doSyncData(final SyncProgress progress) throws POSException{
 		this.progress = progress;
 		checkRegistrySyncType();
-		progress.getInfoText().setText("");
-		
 		int size = syncStack.size();
 		int count = 0;
+		progress.getInfoText().setText("");
 		
 		progress.getBar().setVisible(true);
 		for (int i = 0; i < syncStack.size(); i++) {
-			syncStack.get(i).syncData(progress);
 			count = count + (100/size);
-			progress.getBar().setSelection(count);
+			syncStack.get(i).syncData(progress,count);
+			
 		}
 		
 		syncStack.clear();
 		
-		progress.getBar().getSize();
 		Display.getDefault().asyncExec(new Runnable() {
 			
 			@Override
@@ -63,6 +61,7 @@ public class SyncDataManager implements ISyncDataListener{
 				Shell shell = progress.getBar().getShell();
 				progress.getBar().setSelection(100);
 				MessageDialog.openInformation(shell, MessageResources.message_tips, MessageResources.message_tips_sync_success);
+				progress.getBar().setSelection(0);
 			}
 		});
 
@@ -87,11 +86,12 @@ public class SyncDataManager implements ISyncDataListener{
 
 
 	@Override
-	public void onChange(final String message) {
+	public void onChange(final String message,int count) {
 		
 		String str  = progress.getInfoText().getText() + "\r\n";
 		progress.getInfoText().setText(str + message);
-		
+		progress.getBar().setSelection(count);
+		System.err.println(str + message + "::::::::::" + count);
 //		Display.getDefault().asyncExec(new Runnable() {
 //			@Override
 //			public void run() {
@@ -100,6 +100,12 @@ public class SyncDataManager implements ISyncDataListener{
 //			}
 //		});
 	
+	}
+
+	@Override
+	public void onChange(String message) {
+		String str  = progress.getInfoText().getText() + "\r\n";
+		progress.getInfoText().setText(str + message);
 	}
 	
 }
