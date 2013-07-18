@@ -264,9 +264,14 @@ public class SalesView extends ViewPart implements IKeyListener {
 						MessageDialog.openError(saveButton.getShell(), MessageResources.message_ui_tips, MessageResources.message_ui_tips_guideisnotnull);
 						return;
 					}
-					
+					String price = priceTotal.getText();
 					SalesPayDialog dialog = new SalesPayDialog(saveButton.getShell());
-					dialog.open();
+					dialog.setPrice(price);
+					int retrunType =dialog.open();
+					
+					if(retrunType == 1){
+						return;
+					}
 					
 					partSales = new PartSales();
 					partSales.setApplyUser(applyUser.getText());
@@ -292,7 +297,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 						partSales.setItemList(list);
 					};
 					if(tableViewer.getInput() instanceof List){
-						List<CashierModel> cashierModelList = (List<CashierModel>)dialog.getTableViewer().getInput();
+						List<CashierModel> cashierModelList = dialog.getCashierModels();
 						if(null != cashierModelList){
 							List<PartSalesCashier> psCashierList = new ArrayList<PartSalesCashier>();
 							for(CashierModel cashModel : cashierModelList){

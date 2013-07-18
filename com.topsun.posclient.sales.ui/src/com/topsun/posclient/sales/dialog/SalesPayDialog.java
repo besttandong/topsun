@@ -1,12 +1,10 @@
 package com.topsun.posclient.sales.dialog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
@@ -26,7 +24,6 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.common.service.impl.CommonServiceImpl;
 import com.topsun.posclient.datamodel.CashierModel;
-import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.sales.MessageResources;
 import com.topsun.posclient.sales.ui.table.CashierModelItemCellModify;
 import com.topsun.posclient.sales.ui.table.CashierModelTableContentProvider;
@@ -39,15 +36,50 @@ import com.topsun.posclient.sales.ui.table.CashierModelTableLableProvider;
  *
  */
 public class SalesPayDialog extends Dialog{
-	
+	CashierModelItemCellModify cashierModelItemCellModify;
 	ICommonService commonService = new CommonServiceImpl();
 	
 	public TableViewer tableViewer;
+	
+	private List<CashierModel> cashierModels ;
+	
+	private String price;
+	
+	public Text cashBack;
+	
+
+	public List<CashierModel> getCashierModels() {
+		return cashierModels;
+	}
+
+	public void setCashierModels(List<CashierModel> cashierModels) {
+		this.cashierModels = cashierModels;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
 
 	public SalesPayDialog(Shell parent) {
 		super(parent);
 	}
 	
+	
+	
+	@Override
+	protected void okPressed() {
+		Object obj = getTableViewer().getInput();
+		if(obj instanceof List){
+			List<CashierModel> cashierModels = (List<CashierModel>)obj;
+			this.cashierModels = cashierModels;
+		}
+		super.okPressed();
+	}
+
 	@Override
 	protected Control createContents(Composite parent) {
 		String no = "";
@@ -112,11 +144,11 @@ public class SalesPayDialog extends Dialog{
 			text.setLayoutData(data);
 			text.setFont(font);
 			text.setEditable(false);
-			text.setText("198.00");
+			text.setText(getPrice());
 		}
 		
 		{
-			tableViewer = new TableViewer(compsite);
+			tableViewer = new TableViewer(compsite,SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER | SWT.FULL_SELECTION);
 			tableViewer.setContentProvider(new CashierModelTableContentProvider());
 			tableViewer.setLabelProvider(new CashierModelTableLableProvider());
 			String[] cloumsProperties = new String[]{"typeName","amount"};
@@ -131,9 +163,11 @@ public class SalesPayDialog extends Dialog{
 			editors[0] = new TextCellEditor(table);
 			editors[1] = new TextCellEditor(table);
 			tableViewer.setCellEditors(editors);
-			tableViewer.setCellModifier(new CashierModelItemCellModify(tableViewer));
 			
 			table.setLayoutData(data);
+			
+			cashierModelItemCellModify  = new CashierModelItemCellModify(tableViewer,cashBack,getPrice());
+			tableViewer.setCellModifier(cashierModelItemCellModify);
 			table.setLinesVisible(true);
 			table.setHeaderVisible(true);
 			{
@@ -162,15 +196,16 @@ public class SalesPayDialog extends Dialog{
 			label.setText("现金找补:");
 		}
 		{
-			Text text = new Text(compsite, SWT.BORDER);
+			cashBack = new Text(compsite, SWT.BORDER);
 			GridData data = new GridData(GridData.FILL_HORIZONTAL);
 			data.horizontalSpan = 2;
 			data.widthHint = 150;
-			text.setLayoutData(data);
-			text.setFont(font);
-			text.setEditable(false);
-			text.setText("20.00");
+			cashBack.setLayoutData(data);
+			cashBack.setFont(font);
+			cashBack.setEditable(false);
+			cashBack.setText("");
 		}
+		cashierModelItemCellModify.setCashBack(cashBack);
 		return super.createContents(parent);
 	}
 
