@@ -9,10 +9,11 @@ import com.topsun.posclient.datamodel.CashierModel;
 public class CashierModelItemCellModify implements ICellModifier {
 
 	public TableViewer tableViewer;
+	
 	public CashierModelItemCellModify(TableViewer tableViewer){
 		this.tableViewer = tableViewer;
 	}
-	@Override
+	
 	public boolean canModify(Object element, String property) {
 		if("amount".equals(property)){
 			return true;
@@ -20,7 +21,6 @@ public class CashierModelItemCellModify implements ICellModifier {
 		return false;
 	}
 
-	@Override
 	public Object getValue(Object element, String property) {
 		if(element instanceof CashierModel){
 			CashierModel cashierModel = (CashierModel)element;
@@ -32,7 +32,6 @@ public class CashierModelItemCellModify implements ICellModifier {
 		return null;
 	}
 
-	@Override
 	public void modify(Object element, String property, Object value) {
 		if(element instanceof TableItem){
 			TableItem item = (TableItem)element;

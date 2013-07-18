@@ -6,6 +6,7 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.datamodel.Receive;
 import com.topsun.posclient.datamodel.dto.ReceiveDTO;
+import com.topsun.posclient.finance.MessageResources;
 import com.topsun.posclient.finance.dao.ReceiveDao;
 import com.topsun.posclient.finance.service.IReceiveService;
 
@@ -24,12 +25,18 @@ public class ReceiveServiceImpl extends BaseServiceImpl implements IReceiveServi
 		try {
 			receiveDao.saveReceive(receiveDTO);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new POSException(MessageResources.message_tips_save_error);
 		}
 	}
 
-	public List<Receive> queryReceive() throws POSException {
-		return null;
+	public List<Receive> queryReceive(ReceiveDTO receiveDTO) throws POSException {
+		ReceiveDTO returnDTO = null;
+		try {
+			returnDTO = receiveDao.queryReceive(receiveDTO);
+		} catch (Exception e) {
+			throw new POSException(MessageResources.message_tips_query_error);
+		}
+		return returnDTO.getReceiveList();
 	}
 	
 	

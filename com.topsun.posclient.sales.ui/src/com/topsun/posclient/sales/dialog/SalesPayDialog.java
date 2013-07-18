@@ -1,11 +1,12 @@
 package com.topsun.posclient.sales.dialog;
 
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
@@ -25,6 +26,7 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.common.service.impl.CommonServiceImpl;
 import com.topsun.posclient.datamodel.CashierModel;
+import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.sales.MessageResources;
 import com.topsun.posclient.sales.ui.table.CashierModelItemCellModify;
 import com.topsun.posclient.sales.ui.table.CashierModelTableContentProvider;
@@ -39,13 +41,22 @@ import com.topsun.posclient.sales.ui.table.CashierModelTableLableProvider;
 public class SalesPayDialog extends Dialog{
 	
 	ICommonService commonService = new CommonServiceImpl();
+	
+	public TableViewer tableViewer;
 
 	public SalesPayDialog(Shell parent) {
 		super(parent);
 	}
-
+	
 	@Override
 	protected Control createContents(Composite parent) {
+		String no = "";
+		try {
+			no = commonService.createNo();
+		} catch (POSException e1) {
+			MessageDialog.openError(parent.getShell(), MessageResources.message_ui_tips, e1.getErrorMessage());
+		}
+		
 		Font font = new Font(parent.getDisplay(),"黑体", 12, SWT.BOLD);
 		Composite compsite = new Composite(parent, SWT.BORDER);
 		
@@ -67,7 +78,7 @@ public class SalesPayDialog extends Dialog{
 			data.widthHint = 150;
 			text.setLayoutData(data);
 			text.setEditable(false);
-			text.setText("1234567");
+			text.setText(no);
 		}
 		{
 			Button addBtn = new Button(compsite, SWT.NONE);
@@ -85,7 +96,7 @@ public class SalesPayDialog extends Dialog{
 			data.horizontalSpan = 2;
 			data.widthHint = 150;
 			text.setLayoutData(data);
-			text.setText("1234567");
+			text.setText(no);
 		}
 		{
 			Label label = new Label(compsite, SWT.NONE);
@@ -105,7 +116,7 @@ public class SalesPayDialog extends Dialog{
 		}
 		
 		{
-			TableViewer tableViewer = new TableViewer(compsite);
+			tableViewer = new TableViewer(compsite);
 			tableViewer.setContentProvider(new CashierModelTableContentProvider());
 			tableViewer.setLabelProvider(new CashierModelTableLableProvider());
 			String[] cloumsProperties = new String[]{"typeName","amount"};
@@ -162,12 +173,12 @@ public class SalesPayDialog extends Dialog{
 		}
 		return super.createContents(parent);
 	}
-	
-	public static void main(String[] args) {
-		DecimalFormat df = new DecimalFormat();
-		String style = ",000.0#";
-		df.applyPattern(style);
-		System.out.println(df.format(19));
+
+	public TableViewer getTableViewer() {
+		return tableViewer;
 	}
 
+	public void setTableViewer(TableViewer tableViewer) {
+		this.tableViewer = tableViewer;
+	}
 }

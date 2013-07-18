@@ -11,5 +11,5 @@ public interface IReceiveService extends IBaseService {
 
 	public void saveReceive(ReceiveDTO receiveDTO) throws POSException;
 	
-	public List<Receive> queryReceive() throws POSException;
+	public List<Receive> queryReceive(ReceiveDTO receiveDTO) throws POSException;
 }
