@@ -234,6 +234,7 @@
 				<include name="META-INF/"/>
 				<include name="plugin.xml"/>
 				<include name="com.topsun.posclient.system.ui.jar"/>
+				<include name="icons/"/>
 			</fileset>
 		</copy>
 		<eclipse.versionReplacer path="${destination.temp.folder}/com.topsun.posclient.system.ui_1.0.0.201307272319" version="1.0.0.201307272319"/>
