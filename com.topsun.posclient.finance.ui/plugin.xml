@@ -20,7 +20,6 @@
             restorable="true">
       </view>
       <view
-            allowMultiple="true"
             class="com.topsun.posclient.finance.ui.view.DisbursementView"
             icon="icons/stock_table-optimize.png"
             id="com.topsun.posclient.finance.ui.Disbursementview"
