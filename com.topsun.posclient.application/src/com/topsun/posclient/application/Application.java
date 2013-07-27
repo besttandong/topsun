@@ -51,6 +51,7 @@ public class Application implements IApplication{
 		try {
 			Shell shell = Display.getCurrent().getActiveShell();
 
+
 		      try {
 		        if (!doLogin(shell)) {
 		          Platform.endSplash();
@@ -90,6 +91,7 @@ public class Application implements IApplication{
 	
 	private boolean doLogin(Shell shell) {
 	    LoginDialog dialog = new LoginDialog(shell);
+	    
 	    int result = dialog.open();
 	    if (result != Dialog.OK) {
 	      return false;
