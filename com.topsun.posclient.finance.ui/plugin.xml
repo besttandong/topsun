@@ -11,6 +11,22 @@
             icon="icons/gtk-sort-descending-14.png" id="com.topsun.posclient.finance.ui.StorePayView"
             name="店铺缴款" restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.topsun.posclient.finance.ui.view.IncomeView"
+            icon="icons/stock_table-optimize.png"
+            id="com.topsun.posclient.finance.ui.income"
+            name="收入"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="true"
+            class="com.topsun.posclient.finance.ui.view.DisbursementView"
+            icon="icons/stock_table-optimize.png"
+            id="com.topsun.posclient.finance.ui.Disbursementview"
+            name="支出"
+            restorable="true">
+      </view>
       
    </extension>
    <extension
@@ -30,6 +46,22 @@
             name="店铺缴款"
             treeid="sotrepay.tree"
             viewid="com.topsun.posclient.finance.ui.StorePayView">
+      </tree>
+      <tree
+            icons="icons/stock_table-optimize.png"
+            index="3"
+            menuid="finance.menu"
+            name="支出"
+            treeid="com.topsun.posclient.finance.ui.Disbursement"
+            viewid="com.topsun.posclient.finance.ui.Disbursementview">
+      </tree>
+      <tree
+            icons="icons/stock_table-optimize.png"
+            index="4"
+            menuid="finance.menu"
+            name="收入"
+            treeid="com.topsun.posclient.finance.ui.income"
+            viewid="com.topsun.posclient.finance.ui.income">
       </tree>
    </extension>
    <extension
