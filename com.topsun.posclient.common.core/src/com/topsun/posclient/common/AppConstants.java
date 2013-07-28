@@ -32,6 +32,9 @@ public class AppConstants {
 	public static String DATA_ADJUSTREPOSITORY_PATH = "data\\upload\\adjustrepository_data\\";
 	public static String DATA_ADJUSTREPOSITORY_PATH_BACK = "data\\upload\\adjustrepository_data\\back\\";
 	
+	public static String DATA_CHECKREPOSITORY_PATH = "data\\upload\\checkrepository_data\\";
+	public static String DATA_CHECKREPOSITORY_PATH_BACK = "data\\upload\\checkrepository_data\\back\\";
+	
 	public static String DATA_PAYMENT_PATH = "data\\upload\\payment_data\\";
 	public static String DATA_PAYMENT_PATH_BACK = "data\\upload\\payment_data\\back\\";
 	public static String DATA_RECEIVE_PATH = "data\\upload\\receive_data\\";
