@@ -9,6 +9,12 @@
             id="com.topsun.posclient.sales.ui.menu.SalesView"
             name="零售" restorable="true">
       </view>
+      <view allowMultiple="true"
+            class="com.topsun.posclient.sales.ui.VipView"
+            icon="icons/shopcartapply_24x24.png"
+            id="com.topsun.posclient.sales.ui.VipView"
+            name="会员管理" restorable="true">
+      </view>
    </extension>
    <extension
          point="com.topsun.menu">
@@ -28,6 +34,14 @@
             menuid="sales"
             name="零售"
             viewid="com.topsun.posclient.sales.ui.menu.SalesView">
+      </tree>
+      <tree
+      		treeid=""
+            icons="icons/shopcartapply_24x24.png"
+            index="1"
+            menuid="sales"
+            name="会员管理"
+            viewid="com.topsun.posclient.sales.ui.VipView">
       </tree>
    </extension>
 

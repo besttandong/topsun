@@ -14,6 +14,12 @@
             id="com.topsun.posclient.repository.ui.AdjustStoreView"
             name="店调店" restorable="true">
       	</view>
+      	<view allowMultiple="true"
+            class="com.topsun.posclient.repository.ui.view.CheckRepositoryView"
+            icon="icons/gtk-refresh-4.png"
+            id="com.topsun.posclient.repository.ui.CheckRepositoryView"
+            name="库存盘点" restorable="true">
+      	</view>
    </extension>
 <extension
       point="com.topsun.tree">
@@ -32,6 +38,14 @@
          name="店调店"
          treeid="shop2shop.tree"
          viewid="com.topsun.posclient.repository.ui.AdjustStoreView">
+   </tree>
+   <tree
+         icons="icons/gtk-refresh-4.png"
+         index="2"
+         menuid="repository.menu"
+         name="库存盘点"
+         treeid="shop2shop.tree"
+         viewid="com.topsun.posclient.repository.ui.CheckRepositoryView">
    </tree>
 </extension>
 <extension
