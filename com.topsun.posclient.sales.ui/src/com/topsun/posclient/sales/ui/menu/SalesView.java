@@ -23,6 +23,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
@@ -568,8 +570,8 @@ public class SalesView extends ViewPart implements IKeyListener {
 		Group baseInfo = new Group(parent, SWT.NONE);
 	
 		baseInfo.setText(MessageResources.message_ui_group_baseinfo);
-		GridLayout gridLayout = new GridLayout(2,false);
-		gridLayout.marginLeft = 30;
+		GridLayout gridLayout = new GridLayout(3,false);
+		gridLayout.marginLeft = 5;
 		baseInfo.setLayout(gridLayout);
 		baseInfo.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
@@ -584,7 +586,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 		Composite underCompsite = new Composite(baseInfo,SWT.NONE);
 		underCompsite.setLayout(new GridLayout(4,false));
 		GridData data2 = new GridData(GridData.FILL_BOTH);
-		data2.horizontalSpan = 2;
+		data2.horizontalSpan = 1;
 		underCompsite.setLayoutData(data2);
 		{
 			Label label = new Label(leftComposite, SWT.NONE);
@@ -750,18 +752,86 @@ public class SalesView extends ViewPart implements IKeyListener {
 		}
 		
 		{
-			Label lable = new Label(underCompsite, SWT.NONE);
+			TabFolder folder  = new TabFolder(underCompsite, SWT.NONE);
+			GridData date = new GridData();
+			date.heightHint = 110;
+			date.widthHint = 300;
+			folder.setLayoutData(date);
+			
+			TabItem prom;
+			{
+				prom = new TabItem(folder, SWT.NONE);
+				prom.setText("促销方案");
+			}
+			{
+				TabItem item = new TabItem(folder, SWT.NONE);
+				item.setText("合计");
+			}
+			{
+				TabItem item = new TabItem(folder, SWT.NONE);
+				item.setText("价格");
+			}
+			{
+				TabItem item = new TabItem(folder, SWT.NONE);
+				item.setText("目标");
+			}
+			{
+				TabItem item = new TabItem(folder, SWT.NONE);
+				item.setText("会员");
+			}
+			
+			
+			TableViewer promotionTableView = new TableViewer(prom.getParent(),SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+			Table table = promotionTableView.getTable();
+			table.setLinesVisible(true);
+			table.setHeaderVisible(true);
+			
+			{
+				TableColumn column = new TableColumn(table, SWT.NONE);
+				column.setText("类型");
+				column.setWidth(80);
+			}
+			
+			{
+				TableColumn column = new TableColumn(table, SWT.NONE);
+				column.setText("方案名称");
+				column.setWidth(80);
+			}
+			
+			{
+				TableColumn column = new TableColumn(table, SWT.NONE);
+				column.setText("开始日期");
+				column.setWidth(80);
+			}
+			
+			{
+				TableColumn column = new TableColumn(table, SWT.NONE);
+				column.setText("结束日期");
+				column.setWidth(80);
+			}
+			
+			{
+				TableColumn column = new TableColumn(table, SWT.NONE);
+				column.setText("时段");
+				column.setWidth(80);
+			}
+			prom.setControl(promotionTableView.getControl());
+		}
+		
+		
+		{
+			Label lable = new Label(rightCompoiste, SWT.NONE);
 			lable.setText(MessageResources.message_ui_label_remark);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
 		}
 		{
-			remark = new Text(underCompsite, SWT.BORDER);
+			remark = new Text(rightCompoiste, SWT.BORDER);
 			GridData data = new GridData();
 			data.horizontalSpan = 3;
-			data.heightHint =40;
-			data.widthHint = 740;
+//			data.heightHint =30;
+			data.widthHint = 200;
 			remark.setLayoutData(data);
 		}
 		
