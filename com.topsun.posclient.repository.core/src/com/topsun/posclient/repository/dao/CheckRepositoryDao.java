@@ -6,7 +6,6 @@ import java.util.List;
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.dao.BaseDao;
-import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.datamodel.StockCheck;
 import com.topsun.posclient.datamodel.dto.StockCheckDTO;
 
@@ -28,11 +27,11 @@ public class CheckRepositoryDao extends BaseDao {
 			//保存本地备份数据
 			File file = this.getLocalProcessor().createXmlFileFromObject(stockCheckDTO, "data_stockCheckDTO", AppConstants.DATA_CHECKREPOSITORY_PATH_BACK);
 			String saveData = this.getLocalProcessor().getDataFileContent(file);
-			IPosWebService webservice = this.getServerCaller().getWebService();
-			webservice.saveShopPay(saveData);
+//			IPosWebService webservice = this.getServerCaller().getWebService();
+//			webservice.saveShopPay(saveData);
 		}else{
 			this.getLocalProcessor().createXmlFileFromObject(stockCheckDTO,
-					"data_stockCheckDTO", AppConstants.DATA_CHECKREPOSITORY_PATH);
+					"data_stockCheck", AppConstants.DATA_CHECKREPOSITORY_PATH);
 		}
 	}
 	

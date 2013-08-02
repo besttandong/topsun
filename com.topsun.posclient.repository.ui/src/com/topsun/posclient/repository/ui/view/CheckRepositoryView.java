@@ -33,20 +33,19 @@ import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.common.service.impl.CommonServiceImpl;
 import com.topsun.posclient.datamodel.AdjustShopInfo;
-import com.topsun.posclient.datamodel.AllotStyle;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.Shop;
+import com.topsun.posclient.datamodel.StockCheck;
 import com.topsun.posclient.datamodel.User;
-import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
-import com.topsun.posclient.repository.service.IAdjustShopService;
-import com.topsun.posclient.repository.service.impl.AdjustShopServiceImpl;
+import com.topsun.posclient.datamodel.dto.StockCheckDTO;
+import com.topsun.posclient.repository.service.ICheckRepositoryService;
+import com.topsun.posclient.repository.service.impl.CheckRepositoryServiceImpl;
 import com.topsun.posclient.repository.ui.table.AdjustShopSearchContentProvider;
 import com.topsun.posclient.repository.ui.table.AdjustShopSearchLableProvider;
 import com.topsun.posclient.repository.ui.table.AdjustStoreCellModify;
 import com.topsun.posclient.repository.ui.table.AdjustStoreContentProvider;
 import com.topsun.posclient.repository.ui.table.AdjustStoreLableProvider;
 import com.topsun.widget.calendar.CalendarCombo;
-import com.topsun.widget.calendar.DefaultSettings;
 
 /**
  * 库存盘点视图
@@ -56,27 +55,24 @@ import com.topsun.widget.calendar.DefaultSettings;
  */
 public class CheckRepositoryView extends ViewPart {
 	public User loginUser = POSClientApp.get().getLoginUser();
-	public IAdjustShopService adjShopSerivice = new AdjustShopServiceImpl();
+	public ICheckRepositoryService checkRepositoryService = new CheckRepositoryServiceImpl();
 	public ICommonService commonService = new CommonServiceImpl();
 	List<Item> items = null;
 
-	public AdjustShopInfo adjustShopInfo;
+	public StockCheck stockCheck;
 	
 	public CalendarCombo startDate;
 	public CalendarCombo endDate;
 
-	public Combo leaveStoreName;//调出店铺
-	public Text orderNo; //单据编号
-	public Combo inStoreName;//调入店铺
-	public Combo adjustType;//调拨类型
-	public Text backReason;//回仓原因
-	public Text reviewer;//复核人
-	public CalendarCombo callDate;//调拨日期
+	public Combo checkStoreName;//盘点店铺
+	public Text docNum; //单据编号
+	public Combo checkRange;//盘点范围ID
 	public CalendarCombo checkDate;//审核日期
-	public CalendarCombo reCheckDate;//复核日期
+	
+	public CalendarCombo stockDate;//盘点日期
 
 	public Text applyUser;//制单人
-	public Text checker;//审核人
+	public Text auditId;//最后审核人ID	
 	public Text remark;//备注
 
 	public TableViewer recordViewer;//录入tableview
@@ -158,15 +154,12 @@ public class CheckRepositoryView extends ViewPart {
 			searchBtn.setLayoutData(data);
 			searchBtn.setText("查询");
 			searchBtn.addSelectionListener(new SelectionListener() {
-				
-				@Override
 				public void widgetSelected(SelectionEvent e) {
 					try {
-						
-						AdjustShopInfo adjustShopInfo = new AdjustShopInfo();
-						adjustShopInfo.setVoucherNo(orderNo.getText());
-						List<AdjustShopInfo> adjustShopInfos  = adjShopSerivice.queryAdjustShopList(adjustShopInfo);
-						searchViewer.setInput(adjustShopInfos);
+						StockCheck stockCheck = new StockCheck();
+						stockCheck.setDocNum(docNum.getText());
+						List<StockCheck> stockChecks  = checkRepositoryService.queryAdjustShopList(stockCheck);
+						searchViewer.setInput(stockChecks);
 					} catch (POSException e1) {
 						MessageDialog.openError(((Button)e.getSource()).getShell(), "错误", e1.getErrorMessage());
 						e1.printStackTrace();
@@ -200,38 +193,31 @@ public class CheckRepositoryView extends ViewPart {
 				public void widgetSelected(SelectionEvent e) {
 				
 					Button button = (Button)e.getSource();
-					adjustShopInfo = new AdjustShopInfo();
-					adjustShopInfo.setOutShop(leaveStoreName.getText());
-					adjustShopInfo.setIntoShop(inStoreName.getText());
-					adjustShopInfo.setVoucherNo(orderNo.getText());
-					adjustShopInfo.setCallType(adjustType.getText());
-					adjustShopInfo.setCallDate(callDate.getDate().getTime());
-					adjustShopInfo.setCheckDate(checkDate.getDate().getTime());
-					adjustShopInfo.setReCheckDate(reCheckDate.getDate().getTime());
-					adjustShopInfo.setItemNum(Integer.valueOf(numberTotal.getText()));
-					adjustShopInfo.setChecker(checker.getText());
-					adjustShopInfo.setReChecker(reviewer.getText());
-					adjustShopInfo.setApplyUser(applyUser.getText());
+					stockCheck = new StockCheck();
+					stockCheck.setCheckShId(checkStoreName.getSelectionIndex());
+					stockCheck.setCheckDate(stockDate.getDate().getTime());
+					stockCheck.setAuditDate(checkDate.getDate().getTime());
+					stockCheck.setDocNum(docNum.getText());
+					stockCheck.setAuditId(Integer.valueOf(auditId.getText()));
 					
-					adjustShopInfo.setRemark(remark.getText());
+					stockCheck.setMemo(remark.getText());
 					if (recordViewer.getInput() instanceof List) {
 						List<Item> list = (List<Item>) recordViewer.getInput();
-						adjustShopInfo.setItemList(list);
+						stockCheck.setItemList(list);
 					};
 
-					List<AdjustShopInfo> goodsRepositoryList = new ArrayList<AdjustShopInfo>();
-					goodsRepositoryList.add(adjustShopInfo);
+					List<StockCheck> stockChecks = new ArrayList<StockCheck>();
+					stockChecks.add(stockCheck);
 					
 					
-					AdjustShopDTO  adjShopDTO = new AdjustShopDTO();
-					adjShopDTO.setAdjustShopList(goodsRepositoryList);
+					StockCheckDTO  stockCheckDTO = new StockCheckDTO();
+					stockCheckDTO.setStockCheckList(stockChecks);
 					caculatorNumAndPrice();
 					try {
-						adjShopSerivice.saveAdjustStoreInfo(adjShopDTO);
+						checkRepositoryService.saveStockCheck(stockCheckDTO);
 						MessageDialog.openInformation(button.getShell(), "提示", "保存成功");
 					} catch (POSException e1) {
 						MessageDialog.openError(button.getShell(), "错误", e1.getErrorMessage());
-						e1.printStackTrace();
 					}
 				}
 
@@ -253,7 +239,7 @@ public class CheckRepositoryView extends ViewPart {
 		
 		{
 			Button button = new Button(operation, SWT.NONE);
-			button.setText("打印小票");
+			button.setText("读取商品");
 			GridData data = new GridData();
 			data.heightHint = 28;
 			data.widthHint = 120;
@@ -288,33 +274,14 @@ public class CheckRepositoryView extends ViewPart {
 			label.setText("审核人：");
 		}
 		{
-			checker = new Text(recodeComposite, SWT.BORDER);
-			checker.setEditable(false);
+			auditId = new Text(recodeComposite, SWT.BORDER);
+			auditId.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 100;
 			data.horizontalSpan = 1;
-			checker.setLayoutData(data);
-			checker.setText(loginUser.getUserName());
+			auditId.setLayoutData(data);
+			auditId.setText(String.valueOf(loginUser.getId()));
 		}
-		
-		{
-			Label label = new Label(recodeComposite, SWT.NONE);
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			label.setLayoutData(data);
-			label.setText("复核人：");
-		}
-		
-		{
-			reviewer = new Text(recodeComposite, SWT.BORDER);
-			reviewer.setEditable(false);
-			GridData data = new GridData();
-			data.widthHint = 100;
-			data.horizontalSpan = 1;
-			reviewer.setLayoutData(data);
-			reviewer.setText(loginUser.getUserName());
-		}
-
 	}
 
 	private void buildCaculator(Composite parent) {
@@ -547,7 +514,7 @@ public class CheckRepositoryView extends ViewPart {
 	
 	private void buildProductInfo(Composite parent) {
 		Group productInfo = new Group(parent, SWT.NONE);
-		productInfo.setText("店调店查询");
+		productInfo.setText("单据查询");
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginLeft = 20;
 		productInfo.setLayout(gridLayout);
@@ -569,7 +536,7 @@ public class CheckRepositoryView extends ViewPart {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("发货日期");
+			column.setText("盘点日期");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
@@ -579,22 +546,12 @@ public class CheckRepositoryView extends ViewPart {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("调出店铺");
+			column.setText("盘点范围");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("调入店铺");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("调拨类型");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("调拨数量");
+			column.setText("盘点数量");
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
@@ -614,30 +571,18 @@ public class CheckRepositoryView extends ViewPart {
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
 			column.setWidth(80);
-			column.setText("复核人");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
-			column.setText("复核日期");
-		}
-		{
-			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
 			column.setText("备注");
 		}
 		
 	}
 
 	private void buildBaseInfo(Composite parent) {
-		
 	
 		Group baseInfo = new Group(parent, SWT.NONE);
 
 		baseInfo.setText("基本信息：");
 		GridLayout gridLayout = new GridLayout(3, false);
 		gridLayout.marginLeft = 20;
-		// gridLayout.horizontalSpacing = 50;
 		baseInfo.setLayout(gridLayout);
 		baseInfo.setLayoutData(new GridData(GridData.FILL_BOTH));
 
@@ -652,7 +597,6 @@ public class CheckRepositoryView extends ViewPart {
 		Composite underCompsite = new Composite(baseInfo, SWT.NONE);
 		underCompsite.setLayout(new GridLayout(4, false));
 		GridData data2 = new GridData(GridData.FILL_BOTH);
-//		data2.horizontalSpan = 2;
 		underCompsite.setLayoutData(data2);
 
 		{
@@ -660,17 +604,17 @@ public class CheckRepositoryView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			label.setLayoutData(data);
-			label.setText("调出店铺：");
+			label.setText("盘点店铺：");
 		}
 		{
-			leaveStoreName = new Combo(leftComposite, SWT.NONE);
-			leaveStoreName.setEnabled(false);
+			checkStoreName = new Combo(leftComposite, SWT.NONE);
+			checkStoreName.setEnabled(false);
 			GridData data = new GridData();
 			data.widthHint = 155;
 			data.horizontalSpan = 3;
-			leaveStoreName.setLayoutData(data);
-			leaveStoreName.setItems(new String[] {loginUser.getDeptName()});
-			leaveStoreName.select(0);
+			checkStoreName.setLayoutData(data);
+			checkStoreName.setItems(new String[] {loginUser.getDeptName()});
+			checkStoreName.select(0);
 		}
 
 		{
@@ -681,17 +625,16 @@ public class CheckRepositoryView extends ViewPart {
 			label.setText("单据编号：");
 		}
 		{
-			orderNo = new Text(rightCompoiste, SWT.BORDER);
-			orderNo.setEditable(false);
+			docNum = new Text(rightCompoiste, SWT.BORDER);
+			docNum.setEditable(false);
 			GridData data = new GridData();
 			data.widthHint = 160;
 			data.horizontalSpan = 3;
-			orderNo.setLayoutData(data);
+			docNum.setLayoutData(data);
 			try {
-				orderNo.setText(commonService.createNo());
+				docNum.setText(commonService.createNo());
 			} catch (POSException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				MessageDialog.openError(docNum.getShell(), "错误", e.getErrorMessage());
 			}
 		}
 		{
@@ -699,7 +642,7 @@ public class CheckRepositoryView extends ViewPart {
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("调入店铺：");
+			lable.setText("盘点范围：");
 		}
 		List<String> shopNames = new ArrayList<String>();
 		{
@@ -710,94 +653,47 @@ public class CheckRepositoryView extends ViewPart {
 					shopNames.add(shop.getShpName());
 				}
 			} catch (POSException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				MessageDialog.openError(checkRange.getShell(), "错误", e.getErrorMessage());
 			}
-			inStoreName = new Combo(leftComposite, SWT.NONE|SWT.READ_ONLY);
+			checkRange = new Combo(leftComposite, SWT.NONE|SWT.READ_ONLY);
 			GridData data = new GridData();
 			data.horizontalSpan = 3;
 			data.widthHint = 155;
-			inStoreName.setLayoutData(data);
+			checkRange.setLayoutData(data);
 			
-			inStoreName.setItems(shopNames.toArray(new String[]{}));
-			inStoreName.select(0);
+			checkRange.setItems(shopNames.toArray(new String[]{}));
+			checkRange.select(0);
 		}
 		{
 			Label lable = new Label(rightCompoiste, SWT.NONE);
 			GridData data = new GridData();
 			data.horizontalSpan = 1;
 			lable.setLayoutData(data);
-			lable.setText("调拨日期：");
+			lable.setText("盘点日期：");
 		}
 		{
-			callDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY, new Settings(), null);
+			stockDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY, new Settings(), null);
 			GridData data = new GridData();
 			data.widthHint = 170;
 			data.horizontalSpan = 3;
-			callDate.setLayoutData(data);
-			callDate.setDate(Calendar.getInstance());
-		}
-
-		{
-			Label lable = new Label(leftComposite, SWT.NONE);
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			lable.setLayoutData(data);
-			lable.setText("调拨类型：");
+			stockDate.setLayoutData(data);
+			stockDate.setDate(Calendar.getInstance());
 		}
 		{
-			adjustType = new Combo(leftComposite, SWT.NONE|SWT.READ_ONLY);
-			GridData data = new GridData();
-			data.widthHint = 155;
-			data.horizontalSpan = 3;
-			adjustType.setLayoutData(data);
-			ICommonService commonService = new CommonServiceImpl();
-			try {
-				List<AllotStyle> allotStyles = commonService.getAllotStyle();
-				String [] types = new String[allotStyles.size()];
-				for (int i = 0; i <allotStyles.size();i++) {
-					types[i] = allotStyles.get(i).getStyleName();
-				}
-				adjustType.setItems(types);
-			} catch (POSException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			adjustType.select(0);
-		}
-
-		{
-			Label lable = new Label(rightCompoiste, SWT.NONE);
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			lable.setLayoutData(data);
+			Label lable = new Label(underCompsite, SWT.NONE);
 			lable.setText("审核日期：");
+			GridData data = new GridData();
+			data.horizontalSpan = 1;
+			lable.setLayoutData(data);
 		}
 		{
-			checkDate = new CalendarCombo(rightCompoiste, SWT.READ_ONLY,
-					new Settings(), null);
+			checkDate = new CalendarCombo(underCompsite, SWT.MULTI | SWT.BORDER);
 			GridData data = new GridData();
 			data.widthHint = 170;
 			data.horizontalSpan = 3;
 			checkDate.setLayoutData(data);
 			checkDate.setDate(Calendar.getInstance());
 		}
-
-//		{
-//			Label lable = new Label(leftComposite, SWT.NONE);
-//			GridData data = new GridData();
-//			data.horizontalSpan = 1;
-//			lable.setLayoutData(data);
-//			lable.setText("回仓原因：");
-//		}
-//		{
-//			backReason = new Text(leftComposite, SWT.BORDER);
-//			GridData data = new GridData();
-//			data.horizontalSpan = 3;
-//			data.widthHint = 200;
-//			backReason.setLayoutData(data);
-//			backReason.setText("");
-//		}
 		{
 			Label lable = new Label(underCompsite, SWT.NONE);
 			lable.setText("备注：");
@@ -808,34 +704,14 @@ public class CheckRepositoryView extends ViewPart {
 		{
 			remark = new Text(underCompsite, SWT.MULTI | SWT.BORDER);
 			GridData data = new GridData(GridData.FILL_HORIZONTAL);
-			data.horizontalSpan = 3;
-			data.heightHint = 50;
+			data.horizontalSpan = 2;
+			data.heightHint = 30;
 			remark.setLayoutData(data);
 		}
-		{
-			Label lable = new Label(underCompsite, SWT.NONE);
-			lable.setText("复核日期：");
-			GridData data = new GridData();
-			data.horizontalSpan = 1;
-			lable.setLayoutData(data);
-		}
-		{
-			reCheckDate = new CalendarCombo(underCompsite, SWT.READ_ONLY,
-					new Settings(), null);
-			GridData data = new GridData();
-			data.widthHint = 170;
-			data.horizontalSpan = 3;
-			reCheckDate.setLayoutData(data);
-			reCheckDate.setDate(Calendar.getInstance());
-		}
-		
-
 	}
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
 
 	}
-
 }

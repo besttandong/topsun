@@ -8,7 +8,6 @@ import java.util.List;
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.dao.BaseDao;
-import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.dto.AdjustRepositoryDTO;
 
@@ -30,8 +29,8 @@ public class AdjustRepositoryDao extends BaseDao {
 			//保存本地备份数据
 			File file = this.getLocalProcessor().createXmlFileFromObject(adjustRepositoryDTO, "data_adjustRepository", AppConstants.DATA_ADJUSTREPOSITORY_PATH_BACK);
 			String saveData = this.getLocalProcessor().getDataFileContent(file);
-			IPosWebService webservice = this.getServerCaller().getWebService();
-			webservice.saveShopPay(saveData);
+//			IPosWebService webservice = this.getServerCaller().getWebService();
+//			webservice.saveShopPay(saveData);
 		}else{
 			this.getLocalProcessor().createXmlFileFromObject(adjustRepositoryDTO, "data_adjustRepository", AppConstants.DATA_ADJUSTREPOSITORY_PATH);
 		}

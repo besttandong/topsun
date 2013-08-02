@@ -135,7 +135,7 @@
 			<pathelement path="../com.topsun.posclient.common.ui/com.topsun.posclient.common.ui.jar"/>
 		</path>
 		<!-- compile the source code -->
-		<javac encoding="utf-8" destdir="${temp.folder}/com.topsun.posclient.repository.ui.jar.bin" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}"		>
+		<javac encoding="utf-8" destdir="${temp.folder}/com.topsun.posclient.repository.ui.jar.bin" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}">
 			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
 			<classpath refid="com.topsun.posclient.repository.ui.jar.classpath" />
 			<src path="src/"			/>

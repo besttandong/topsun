@@ -11,8 +11,6 @@ import org.eclipse.swt.widgets.Text;
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.dao.BaseDao;
-import com.topsun.posclient.common.webservice.IPosWebService;
-import com.topsun.posclient.datamodel.dto.webservice.GetUserInfoReq;
 import com.topsun.posclient.system.MessageResources;
 import com.topsun.posclient.system.SyncProgress;
 import com.topsun.posclient.system.service.SyncDataListenerManager;
@@ -31,12 +29,12 @@ public class SyncDataDao extends BaseDao {
 				public void run() {
 					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_startsyncuser);
 					try {
-						GetUserInfoReq userInfoReq = getServerCaller().buildUserInfoReq();
-						String userInfoReqStr = getLocalProcessor().getStringFromObject(userInfoReq);
-						IPosWebService webservice = getServerCaller().getWebService();
-						String returnVal = webservice.downloadUserData(userInfoReqStr);
-
-						saveLocalFile(AppConstants.DATA_USER_FILENAME, returnVal);
+//						GetUserInfo getUserInfo = getServerCaller().buildGetUserInfo();
+//						String userInfoReqStr = getLocalProcessor().getStringFromObject(getUserInfo);
+//						IPosWebService webservice = getServerCaller().getWebService();
+//						String returnVal = webservice.downloadUserData(userInfoReqStr);
+//
+//						saveLocalFile(AppConstants.DATA_USER_FILENAME, returnVal);
 						
 					} catch (Exception e) {
 						throw new RuntimeException();
@@ -53,12 +51,12 @@ public class SyncDataDao extends BaseDao {
 				public void run() {
 					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_startsyncshop);
 					try {
-						GetUserInfoReq userInfoReq = getServerCaller().buildUserInfoReq();
-						String userInfoReqStr = getLocalProcessor().getStringFromObject(userInfoReq);
-						IPosWebService webservice = getServerCaller().getWebService();
-						String returnVal = webservice.downloadShopData(userInfoReqStr);
-						
-						saveLocalFile(AppConstants.DATA_SHOP_FILENAME, returnVal);
+//						GetUserInfo getUserInfo = getServerCaller().buildGetUserInfo();
+//						String userInfoReqStr = getLocalProcessor().getStringFromObject(getUserInfo);
+//						IPosWebService webservice = getServerCaller().getWebService();
+//						String returnVal = webservice.downloadShopData(userInfoReqStr);
+//						
+//						saveLocalFile(AppConstants.DATA_SHOP_FILENAME, returnVal);
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
@@ -74,12 +72,12 @@ public class SyncDataDao extends BaseDao {
 				public void run() {
 					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_startsyncitem);
 					try {
-						GetUserInfoReq userInfoReq = getServerCaller().buildUserInfoReq();
-						String userInfoReqStr = getLocalProcessor().getStringFromObject(userInfoReq);
-						IPosWebService webservice = getServerCaller().getWebService();
-						String returnVal = webservice.downloadItemData(userInfoReqStr);
-						
-						saveLocalFile(AppConstants.DATA_ITEM_FILENAME, returnVal);
+//						GetUserInfo getUserInfo = getServerCaller().buildGetUserInfo();
+//						String userInfoReqStr = getLocalProcessor().getStringFromObject(getUserInfo);
+//						IPosWebService webservice = getServerCaller().getWebService();
+//						String returnVal = webservice.downloadItemData(userInfoReqStr);
+//						
+//						saveLocalFile(AppConstants.DATA_ITEM_FILENAME, returnVal);
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
@@ -95,12 +93,12 @@ public class SyncDataDao extends BaseDao {
 				public void run() {
 					SyncDataListenerManager.getInstance().fireChange("---------------> "+MessageResources.message_tips_startsynccashiermode);
 					try {
-						GetUserInfoReq userInfoReq = getServerCaller().buildUserInfoReq();
-						String userInfoReqStr = getLocalProcessor().getStringFromObject(userInfoReq);
-						IPosWebService webservice = getServerCaller().getWebService();
-						String returnVal = webservice.downloadCashierModeData(userInfoReqStr);
-						
-						saveLocalFile(AppConstants.DATA_CASHIERMODE_FILENAME, returnVal);
+//						GetUserInfo getUserInfo = getServerCaller().buildGetUserInfo();
+//						String userInfoReqStr = getLocalProcessor().getStringFromObject(getUserInfo);
+//						IPosWebService webservice = getServerCaller().getWebService();
+//						String returnVal = webservice.downloadCashierModeData(userInfoReqStr);
+//						
+//						saveLocalFile(AppConstants.DATA_CASHIERMODE_FILENAME, returnVal);
 					} catch (Exception e) {
 						throw new RuntimeException();
 					}
@@ -121,9 +119,9 @@ public class SyncDataDao extends BaseDao {
 						for(int i=0; i<dataFiles.length; i++){
 							File dataFile = dataFiles[i];
 							if(dataFile.isFile()){
-								String saveData = getLocalProcessor().getDataFileContent(dataFile);
-								IPosWebService webservice = getServerCaller().getWebService();
-								webservice.savePartSales(saveData);
+//								String saveData = getLocalProcessor().getDataFileContent(dataFile);
+//								IPosWebService webservice = getServerCaller().getWebService();
+//								webservice.savePartSales(saveData);
 							}
 						}
 					} catch (Exception e) {
@@ -146,9 +144,9 @@ public class SyncDataDao extends BaseDao {
 						for(int i=0; i<dataFiles.length; i++){
 							File dataFile = dataFiles[i];
 							if(dataFile.isFile()){
-								String saveData = getLocalProcessor().getDataFileContent(dataFile);
-								IPosWebService webservice = getServerCaller().getWebService();
-								webservice.saveShopPay(saveData);
+//								String saveData = getLocalProcessor().getDataFileContent(dataFile);
+//								IPosWebService webservice = getServerCaller().getWebService();
+//								webservice.saveShopPay(saveData);
 							}
 						}
 					} catch (Exception e) {
@@ -171,9 +169,9 @@ public class SyncDataDao extends BaseDao {
 						for(int i=0; i<dataFiles.length; i++){
 							File dataFile = dataFiles[i];
 							if(dataFile.isFile()){
-								String saveData = getLocalProcessor().getDataFileContent(dataFile);
-								IPosWebService webservice = getServerCaller().getWebService();
-								webservice.saveAdjustShop(saveData);
+//								String saveData = getLocalProcessor().getDataFileContent(dataFile);
+//								IPosWebService webservice = getServerCaller().getWebService();
+//								webservice.saveAdjustShop(saveData);
 							}
 						}
 					} catch (Exception e) {
@@ -196,9 +194,9 @@ public class SyncDataDao extends BaseDao {
 						for(int i=0; i<dataFiles.length; i++){
 							File dataFile = dataFiles[i];
 							if(dataFile.isFile()){
-								String saveData = getLocalProcessor().getDataFileContent(dataFile);
-								IPosWebService webservice = getServerCaller().getWebService();
-								webservice.saveAdjustRepository(saveData);
+//								String saveData = getLocalProcessor().getDataFileContent(dataFile);
+//								IPosWebService webservice = getServerCaller().getWebService();
+//								webservice.saveAdjustRepository(saveData);
 							}
 						}
 					} catch (Exception e) {

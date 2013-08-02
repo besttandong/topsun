@@ -8,7 +8,6 @@ import java.util.List;
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.dao.BaseDao;
-import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.datamodel.AdjustShopInfo;
 import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
 
@@ -31,8 +30,8 @@ public class AdjustShopDao extends BaseDao {
 			//保存本地备份数据
 			File file = this.getLocalProcessor().createXmlFileFromObject(adjustStoreDTO, "data_adjustShop", AppConstants.DATA_ADJUSTSHOP_PATH_BACK);
 			String saveData = this.getLocalProcessor().getDataFileContent(file);
-			IPosWebService webservice = this.getServerCaller().getWebService();
-			webservice.saveShopPay(saveData);
+//			IPosWebService webservice = this.getServerCaller().getWebService();
+//			webservice.saveShopPay(saveData);
 		}else{
 			this.getLocalProcessor().createXmlFileFromObject(adjustStoreDTO,
 					"data_adjustShop", AppConstants.DATA_ADJUSTSHOP_PATH);

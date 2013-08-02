@@ -5,7 +5,6 @@ import java.io.File;
 import com.topsun.posclient.common.AppConstants;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.dao.BaseDao;
-import com.topsun.posclient.common.webservice.IPosWebService;
 import com.topsun.posclient.datamodel.dto.PayRecordDTO;
 
 /**
@@ -26,8 +25,7 @@ public class ShopPayDao extends BaseDao {
 			//保存本地备份数据
 			File file = this.getLocalProcessor().createXmlFileFromObject(payRecordDTO, "data_payRecord", AppConstants.DATA_SHOPPAY_PATH_BACK);
 			String saveData = this.getLocalProcessor().getDataFileContent(file);
-			IPosWebService webservice = this.getServerCaller().getWebService();
-			webservice.saveShopPay(saveData);
+//			this.getServerCaller().getWebService().saveShopAllot(saveShopAllot6);
 		}else{
 			this.getLocalProcessor().createXmlFileFromObject(payRecordDTO, "data_payRecord", AppConstants.DATA_SHOPPAY_PATH);
 		}
