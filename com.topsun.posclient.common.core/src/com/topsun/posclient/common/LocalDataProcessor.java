@@ -107,6 +107,7 @@ public class LocalDataProcessor {
 		FileOutputStream fos = new FileOutputStream(file.getAbsoluteFile());
 		JAXBContext context = JAXBContext.newInstance(data.getClass());
 		Marshaller marshaller = context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 		marshaller.marshal(data, fos);
 		return file;
 	}
@@ -116,6 +117,7 @@ public class LocalDataProcessor {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		JAXBContext context = JAXBContext.newInstance(data.getClass());
 		Marshaller marshaller = context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 		marshaller.marshal(data, baos);
 		return baos.toString();
 		
