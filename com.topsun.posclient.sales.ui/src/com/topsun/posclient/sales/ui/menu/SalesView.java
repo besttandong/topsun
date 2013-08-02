@@ -763,22 +763,22 @@ public class SalesView extends ViewPart implements IKeyListener {
 				prom = new TabItem(folder, SWT.NONE);
 				prom.setText("促销方案");
 			}
-			{
-				TabItem item = new TabItem(folder, SWT.NONE);
-				item.setText("合计");
-			}
-			{
-				TabItem item = new TabItem(folder, SWT.NONE);
-				item.setText("价格");
-			}
-			{
-				TabItem item = new TabItem(folder, SWT.NONE);
-				item.setText("目标");
-			}
-			{
-				TabItem item = new TabItem(folder, SWT.NONE);
-				item.setText("会员");
-			}
+//			{
+//				TabItem item = new TabItem(folder, SWT.NONE);
+//				item.setText("合计");
+//			}
+//			{
+//				TabItem item = new TabItem(folder, SWT.NONE);
+//				item.setText("价格");
+//			}
+//			{
+//				TabItem item = new TabItem(folder, SWT.NONE);
+//				item.setText("目标");
+//			}
+//			{
+//				TabItem item = new TabItem(folder, SWT.NONE);
+//				item.setText("会员");
+//			}
 			
 			
 			TableViewer promotionTableView = new TableViewer(prom.getParent(),SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
