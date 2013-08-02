@@ -11,6 +11,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.topsun.posclient,
  com.topsun.posclient.datamodel,
- com.topsun.posclient.datamodel.dto,
- com.topsun.posclient.datamodel.dto.webservice
+ com.topsun.posclient.datamodel.dto
 Bundle-ClassPath: com.topsun.posclient.datamodel.jar

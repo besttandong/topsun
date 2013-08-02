@@ -2,8 +2,7 @@ package com.topsun.posclient.datamodel;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.xml.crypto.Data;
+import java.util.List;
 
 /**
  * 库存盘点信息
@@ -35,9 +34,19 @@ public class StockCheck implements Serializable {
 	
 	private String memo;//备注
 	
-	private Data auditDate;//最后审核日期	
+	private Date auditDate;//最后审核日期	
 	
 	private int auditId;//最后审核人ID	
+	
+	private List<Item> itemList; // 商品列表
+	
+	public List<Item> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(List<Item> itemList) {
+		this.itemList = itemList;
+	}
 
 	public String getDocNum() {
 		return docNum;
@@ -111,11 +120,11 @@ public class StockCheck implements Serializable {
 		this.memo = memo;
 	}
 
-	public Data getAuditDate() {
+	public Date getAuditDate() {
 		return auditDate;
 	}
 
-	public void setAuditDate(Data auditDate) {
+	public void setAuditDate(Date auditDate) {
 		this.auditDate = auditDate;
 	}
 
