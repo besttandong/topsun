@@ -3,7 +3,7 @@ package com.topsun.posclient.datamodel;
 import java.io.Serializable;
 
 /**
- * ÉÌÆ·
+ * å•†å“
  * 
  * @author Dong
  *
@@ -15,55 +15,55 @@ public class Item implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int id;//ID±àºÅ	Primary Key
+	private int id;//IDç¼–å·	Primary Key
 	
-	private String itemCode;//»õºÅ
+	private String itemCode;//è´§å·
 	
-	private String itemName;//ÉÌÆ·Ãû³Æ	
+	private String itemName;//å•†å“åç§°	
 	
-	private int classId;//´óÀàID±àºÅ
+	private int classId;//å¤§ç±»IDç¼–å·
 	
-	private String className;//´óÀàÃû³Æ
+	private String className;//å¤§ç±»åç§°
 	
-	private int divisionId;//ÖĞÀàID±àºÅ
+	private int divisionId;//ä¸­ç±»IDç¼–å·
 	
-	private String divisionName;//ÖĞÀàÃû³Æ
+	private String divisionName;//ä¸­ç±»åç§°
 	
-	private int sectionId;//Ğ¡ÀàID±àºÅ
+	private int sectionId;//å°ç±»IDç¼–å·
 	
-	private String sectionName;//Ğ¡ÀàÃû³Æ
+	private String sectionName;//å°ç±»åç§°
 	
-	private int unitId;//µ¥Î»ID±àºÅ
+	private int unitId;//å•ä½IDç¼–å·
 	
-	private String unitName;//µ¥Î»Ãû³Æ
+	private String unitName;//å•ä½åç§°
 	
-	private int stdId;//¹æ¸ñĞÍºÅID±àºÅ	
+	private int stdId;//è§„æ ¼å‹å·IDç¼–å·	
 	
-	private int supplierId;//¹©Ó¦ÉÌID±àºÅ
+	private int supplierId;//ä¾›åº”å•†IDç¼–å·
 	
-	private String supplierName; //¹©Ó¦ÉÌÃû³Æ
+	private String supplierName; //ä¾›åº”å•†åç§°
 	
-	private int BrandId;//Æ·ÅÆID±àºÅ	
+	private int BrandId;//å“ç‰ŒIDç¼–å·	
 	
-	private String BrandName;//Æ·ÅÆÃû³Æ
+	private String BrandName;//å“ç‰Œåç§°
 	
-	private int area;//²úµØ
+	private int area;//äº§åœ°
 	
-	private String areaName;//²úµØÃû³Æ
+	private String areaName;//äº§åœ°åç§°
 	
-	private String description;//ÉÌÆ·ÃèÊö
+	private String description;//å•†å“æè¿°
 	
-	private double wholesalePrice;//Åú·¢¼Û
+	private double wholesalePrice;//æ‰¹å‘ä»·
 	
-	private double retailPrice;//ÁãÊÛ¼Û
+	private double retailPrice;//é›¶å”®ä»·
 	
-	private double purchasePrice;//²É¹º¼Û
+	private double purchasePrice;//é‡‡è´­ä»·
 	
-	private double channelPrice;//ÇşµÀ¼Û
+	private double channelPrice;//æ¸ é“ä»·
 	
-	private double guidePrice;//Ö¸µ¼¼Û
+	private double guidePrice;//æŒ‡å¯¼ä»·
 	
-	private int num; //ÊıÁ¿
+	private int num; //æ•°é‡
 	
 	public int getNum() {
 		return num;

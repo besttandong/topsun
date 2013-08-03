@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.topsun.posclient.common.POSClientApp;
 import com.topsun.posclient.common.POSException;
-import com.topsun.posclient.common.dao.CommonDao;
+import com.topsun.posclient.common.dao.BaseDao;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.UserDTO;
@@ -18,7 +18,7 @@ import com.topsun.posclient.system.service.ILoginService;
  */
 public class LoginServiceImpl extends BaseServiceImpl implements ILoginService {
 	
-	private CommonDao commonDao = new CommonDao();
+	private BaseDao commonDao = new BaseDao();
 
 	
 	/* (non-Javadoc)

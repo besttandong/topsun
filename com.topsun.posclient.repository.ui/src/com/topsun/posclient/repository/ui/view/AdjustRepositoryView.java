@@ -32,6 +32,8 @@ import com.topsun.posclient.common.POSClientApp;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.common.service.impl.CommonServiceImpl;
+import com.topsun.posclient.common.ui.table.ItemTableContentProvider;
+import com.topsun.posclient.common.ui.table.ItemTableLableProvider;
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.Item;
 import com.topsun.posclient.datamodel.Shop;
@@ -39,11 +41,7 @@ import com.topsun.posclient.datamodel.User;
 import com.topsun.posclient.datamodel.dto.AdjustRepositoryDTO;
 import com.topsun.posclient.repository.service.IAdjustRepositoryService;
 import com.topsun.posclient.repository.service.impl.AdjustRepositoryServiceImpl;
-import com.topsun.posclient.repository.ui.table.AdjustShopSearchContentProvider;
-import com.topsun.posclient.repository.ui.table.AdjustShopSearchLableProvider;
 import com.topsun.posclient.repository.ui.table.AdjustStoreCellModify;
-import com.topsun.posclient.repository.ui.table.AdjustStoreContentProvider;
-import com.topsun.posclient.repository.ui.table.AdjustStoreLableProvider;
 import com.topsun.widget.calendar.CalendarCombo;
 
 /**
@@ -478,10 +476,9 @@ public class AdjustRepositoryView extends ViewPart {
 		buildPrintInfo(productInfo);
 		
 		recordViewer = new TableViewer(productInfo,SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER|SWT.FULL_SELECTION);
-		recordViewer.setContentProvider(new AdjustStoreContentProvider());
-		recordViewer.setLabelProvider(new AdjustStoreLableProvider());
-//		TableViewerKeyBoardSupporter boardSupporter = new TableViewerKeyBoardSupporter(tableViewer);
-//		boardSupporter.startSupport();
+		recordViewer.setContentProvider(new ItemTableContentProvider());
+		recordViewer.setLabelProvider(new ItemTableLableProvider());
+
 		String[] cloumsProperties = new String[]{"itemName","itemCode","productName","num"};
 		recordViewer.setColumnProperties(cloumsProperties);
 		Table table = recordViewer.getTable();
@@ -567,7 +564,7 @@ public class AdjustRepositoryView extends ViewPart {
 	
 	private void buildProductInfo(Composite parent) {
 		Group productInfo = new Group(parent, SWT.NONE);
-		productInfo.setText("店调店查询");
+		productInfo.setText("回仓查询");
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginLeft = 20;
 		productInfo.setLayout(gridLayout);
@@ -575,8 +572,8 @@ public class AdjustRepositoryView extends ViewPart {
 		productInfo.setLayoutData(data);
 		buildSerachInfo(productInfo);
 		searchViewer = new TableViewer(productInfo);
-		searchViewer.setContentProvider(new AdjustShopSearchContentProvider());
-		searchViewer.setLabelProvider(new AdjustShopSearchLableProvider());
+		searchViewer.setContentProvider(new AdjustRepositoryTableContentProvider());
+		searchViewer.setLabelProvider(new AdjustRepositoryTableLableProvider());
 		Table table = searchViewer.getTable();
 		{
 			GridData tableData = new GridData(GridData.FILL_HORIZONTAL);

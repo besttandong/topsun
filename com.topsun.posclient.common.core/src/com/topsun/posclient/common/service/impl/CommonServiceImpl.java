@@ -3,7 +3,7 @@ package com.topsun.posclient.common.service.impl;
 import java.util.List;
 
 import com.topsun.posclient.common.POSException;
-import com.topsun.posclient.common.dao.CommonDao;
+import com.topsun.posclient.common.dao.BaseDao;
 import com.topsun.posclient.common.service.ICommonService;
 import com.topsun.posclient.datamodel.AllotStyle;
 import com.topsun.posclient.datamodel.CashierModel;
@@ -24,10 +24,7 @@ import com.topsun.posclient.datamodel.dto.UserDTO;
  */
 public class CommonServiceImpl implements ICommonService {
 
-	/**
-	 * 公共数据访问
-	 */
-	private CommonDao commonDao = new CommonDao();
+	private BaseDao baseDao = new BaseDao();
 
 	/*
 	 * (non-Javadoc)
@@ -38,7 +35,7 @@ public class CommonServiceImpl implements ICommonService {
 	public List<CashierModel> getAllCashierMode() throws POSException {
 		CashierModeDTO cashierModeDTO = null;
 		try {
-			cashierModeDTO = commonDao.getAllCashierMode();
+			cashierModeDTO = baseDao.getAllCashierMode();
 		} catch (Exception e) {
 			throw new POSException("查询结算方式出错！");
 		}
@@ -55,7 +52,7 @@ public class CommonServiceImpl implements ICommonService {
 	public String getShopNameByUserId(int userId) throws POSException {
 		UserDTO userDto = null;
 		try {
-			userDto = commonDao.getUserById(userId);
+			userDto = baseDao.getUserById(userId);
 		} catch (Exception e) {
 			throw new POSException("查询店铺名称出错！");
 		}
@@ -81,7 +78,7 @@ public class CommonServiceImpl implements ICommonService {
 		Item returnItem = null;
 		ItemDTO itemDto = null;
 		try {
-			itemDto = commonDao.getAllItem();
+			itemDto = baseDao.getAllItem();
 
 			if (null != itemDto) {
 				List<Item> itemList = itemDto.getItemList();
@@ -111,7 +108,7 @@ public class CommonServiceImpl implements ICommonService {
 		
 		List<Shop> itemList = null;
 		try {
-			itemDto = commonDao.getAllShop();
+			itemDto = baseDao.getAllShop();
 			if (null != itemDto) {
 				itemList = itemDto.getShopList();
 			}
@@ -129,7 +126,7 @@ public class CommonServiceImpl implements ICommonService {
 		
 		List<AllotStyle> allotStyleList = null;
 		try {
-			allotStyleDTO = commonDao.getAllAllotStyle();
+			allotStyleDTO = baseDao.getAllAllotStyle();
 			if (null != allotStyleDTO) {
 				allotStyleList = allotStyleDTO.getAllotStyleList();
 			}

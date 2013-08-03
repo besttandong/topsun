@@ -16,5 +16,6 @@ Export-Package: com.topsun.posclient.common.listener,
  com.topsun.posclient.common.ui,
  com.topsun.posclient.common.ui.menu,
  com.topsun.posclient.common.ui.model,
+ com.topsun.posclient.common.ui.table,
  com.topsun.posclient.common.ui.utils
 Bundle-ClassPath: com.topsun.posclient.common.ui.jar

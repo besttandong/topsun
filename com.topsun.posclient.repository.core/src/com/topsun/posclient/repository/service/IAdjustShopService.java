@@ -1,5 +1,6 @@
 package com.topsun.posclient.repository.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.topsun.posclient.common.POSException;
@@ -25,21 +26,13 @@ public interface IAdjustShopService extends IBaseService {
 			throws POSException;
 	
 	/**
-	 * 获取所有调店信息
-	 * @return 调店信息集合
-	 * @throws POSException
-	 */
-	public List<AdjustShopInfo> getAllAdjustShopInfo() throws POSException;
-
-	/**
 	 * 查询调店信息
 	 * 
-	 * @param adjustShopInfo
+	 * @param queryParams
 	 *            调店信息
 	 * @return 调店信息集合
 	 * @throws POSException
 	 */
-	public List<AdjustShopInfo> queryAdjustShopList(
-			AdjustShopInfo adjustShopInfo) throws POSException;
+	public List<AdjustShopInfo> queryAdjustShopList(HashMap<String, Object> queryParams) throws POSException;
 
 }

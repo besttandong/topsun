@@ -2,6 +2,7 @@ package com.topsun.posclient.repository.ui.view;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -164,8 +165,10 @@ public class AdjustStoreView extends ViewPart {
 					try {
 						
 						AdjustShopInfo adjustShopInfo = new AdjustShopInfo();
+						//查询条件
+						HashMap<String, Object> queryParams = new HashMap<String, Object>();
 						adjustShopInfo.setVoucherNo(orderNo.getText());
-						List<AdjustShopInfo> adjustShopInfos  = adjShopSerivice.queryAdjustShopList(adjustShopInfo);
+						List<AdjustShopInfo> adjustShopInfos  = adjShopSerivice.queryAdjustShopList(queryParams);
 						searchViewer.setInput(adjustShopInfos);
 					} catch (POSException e1) {
 						MessageDialog.openError(((Button)e.getSource()).getShell(), "错误", e1.getErrorMessage());

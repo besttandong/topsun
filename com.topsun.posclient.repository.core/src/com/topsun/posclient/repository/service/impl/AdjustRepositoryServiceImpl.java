@@ -2,10 +2,12 @@ package com.topsun.posclient.repository.service.impl;
 
 import java.util.List;
 
+import com.topsun.posclient.common.LoggerUtil;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.dto.AdjustRepositoryDTO;
+import com.topsun.posclient.repository.RepositoryActivator;
 import com.topsun.posclient.repository.dao.AdjustRepositoryDao;
 import com.topsun.posclient.repository.service.IAdjustRepositoryService;
 
@@ -36,6 +38,7 @@ public class AdjustRepositoryServiceImpl extends BaseServiceImpl implements
 			adjustRepositoryDao.saveAdjustRepository(adjustRepositoryDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
+			LoggerUtil.logError(RepositoryActivator.PLUGIN_ID, e);
 			throw new POSException("调仓出错！");
 		}
 	}
@@ -52,6 +55,7 @@ public class AdjustRepositoryServiceImpl extends BaseServiceImpl implements
 		try {
 			adjustRepositoryList = adjustRepositoryDao.queryAdjustRepository(adjustRepositoryInfo);
 		} catch (Exception e) {
+			LoggerUtil.logError(RepositoryActivator.PLUGIN_ID, e);
 			throw new POSException("查询失败");
 		}
 		return adjustRepositoryList;

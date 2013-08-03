@@ -31,6 +31,8 @@ public class AdjustRepositoryInfo {
 	
 	private String remark;//备注
 	
+	private int num;//备注
+	
 	private List<Item> itemList; // 商品列表
 	
 	private String applyUser;//制单人
@@ -39,6 +41,14 @@ public class AdjustRepositoryInfo {
 	
 	private String reChecker;//复核人
 	
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
 	public String getApplyUser() {
 		return applyUser;
 	}

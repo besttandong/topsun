@@ -2,14 +2,20 @@ package com.topsun.posclient.repository.dao;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.topsun.posclient.common.AppConstants;
-import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.common.dao.BaseDao;
 import com.topsun.posclient.datamodel.AdjustRepositoryInfo;
 import com.topsun.posclient.datamodel.dto.AdjustRepositoryDTO;
+import com.topsun.posclient.webservice.POSServerCaller;
+import com.topsun.posclient.webservice.dto.ArrayOfbackWarehouse;
+import com.topsun.posclient.webservice.dto.BackWarehouse;
+import com.topsun.posclient.webservice.dto.QueryReturnRepository;
+import com.topsun.posclient.webservice.dto.QueryReturnRepositoryReq;
+import com.topsun.posclient.webservice.dto.QueryReturnRepositoryReqCondition;
+import com.topsun.posclient.webservice.dto.QueryReturnRepositoryResponse;
+import com.topsun.posclient.webservice.dto.QueryReturnRepositoryResult;
 
 /**
  * 回仓数据处理
@@ -43,40 +49,44 @@ public class AdjustRepositoryDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public List<AdjustRepositoryInfo> queryAdjustRepository(AdjustRepositoryInfo adjustRepositoryInfo) throws Exception {
-		
+		List<AdjustRepositoryInfo> resultList = null;
 		if (checkConnection()) {
-//			IPosWebService webservice = this.getServerCaller().getWebService();
-//			webservice.saveAdjustRepository(adjustRepositoryDTO));
+			//设置查询条件
+			QueryReturnRepositoryReqCondition condition = new QueryReturnRepositoryReqCondition();
 			
-			return null;
+			QueryReturnRepositoryReq req = new QueryReturnRepositoryReq();
+			req.setUserCredential(POSServerCaller.getDefaultUserCredential());
+			req.setCondition(condition);
 			
+			QueryReturnRepository queryReturnRepository = new QueryReturnRepository();
+			queryReturnRepository.setQueryReturnRepositoryReq(req);
+			QueryReturnRepositoryResponse response = POSServerCaller.getWebService().queryReturnRepository(queryReturnRepository);
+			System.out.println("--------->>> Call webservice finished!");
+			// 处理查询结果
+			QueryReturnRepositoryResult result = response.getQueryReturnRepositoryResult();
+			if(result.getResult().getFlag().equals("0")){
+				ArrayOfbackWarehouse aow = result.getBackWarehouses();
+				BackWarehouse[] bws = aow.getBackWarehouse();
+				
+				resultList = new ArrayList<AdjustRepositoryInfo>();
+				for(int i=0; i<bws.length; i++){
+					BackWarehouse bw = bws[i];
+					AdjustRepositoryInfo ari = new AdjustRepositoryInfo();
+					ari.setApplyUser(this.getEmployeeNameById(bw.getMakerID()));
+					ari.setBackReason(String.valueOf(bw.getBackWHID()));
+					ari.setShopName(this.getShopNameById(bw.getShopID()));
+					ari.setRemark(bw.getMemo());
+					ari.setReceiveRepository(String.valueOf(bw.getWarehouseID()));
+					ari.setOrderNo(bw.getDocNum());
+					ari.setDeliver(this.getEmployeeNameById(bw.getConsignorID()));
+					resultList.add(ari);
+				}
+			}else{
+				throw new Exception(result.getResult().getMsg());
+			}
+			return resultList;
 		}else{
-			List<AdjustRepositoryInfo> returnList = new ArrayList<AdjustRepositoryInfo>();
-			List<AdjustRepositoryDTO> adjustRepositoryDtoList = new ArrayList<AdjustRepositoryDTO>();
-			
-			File file = new File(ProjectUtil.getRuntimeClassPath() + AppConstants.DATA_ADJUSTREPOSITORY_PATH);
-			File[] dataFiles = file.listFiles();
-			for(int i=0; i<dataFiles.length; i++){
-				File dataFile = dataFiles[i];
-				if(dataFile.isFile()){
-					AdjustRepositoryDTO adjustRepositoryDTO = (AdjustRepositoryDTO)this.getLocalProcessor()
-					.getObjectFromXml(
-							this.getLocalProcessor().getDataFileContent(dataFile), AdjustRepositoryDTO.class);
-					adjustRepositoryDtoList.add(adjustRepositoryDTO);
-				}
-			}
-			for(AdjustRepositoryDTO adjustRepositoryDTO : adjustRepositoryDtoList){
-				List<AdjustRepositoryInfo> adjustRepositoryInfoList = adjustRepositoryDTO.getAdjustRepositoryInfos();
-				for(AdjustRepositoryInfo asi : adjustRepositoryInfoList){
-					Date startDate = new Date();
-					Date endDate = new Date();
-					//时间区间判断
-					if(asi.getBackDate().before(startDate) && asi.getBackDate().after(endDate)){
-						returnList.add(asi);
-					}
-				}
-			}
-			return returnList;
+			throw new Exception("联机失败！");
 		}
 	}
 }

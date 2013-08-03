@@ -4,6 +4,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
 
+import com.topsun.posclient.common.ProjectUtil;
 import com.topsun.posclient.datamodel.AdjustShopInfo;
 
 public class AdjustShopSearchLableProvider implements ITableLabelProvider {
@@ -31,15 +32,15 @@ public class AdjustShopSearchLableProvider implements ITableLabelProvider {
 	public String getColumnText(Object element, int columnIndex) {
 		if (element instanceof AdjustShopInfo) {
 			AdjustShopInfo adjustShopInfo = (AdjustShopInfo) element;
-			String callDate = adjustShopInfo.getCallDate().toString();
+			String callDate = ProjectUtil.getDateString(adjustShopInfo.getCallDate());
 			String outShopName = adjustShopInfo.getOutShop();
 			String intoShopName = adjustShopInfo.getIntoShop();
 			String orderNumber = adjustShopInfo.getVoucherNo();
 			String callType = adjustShopInfo.getCallType();
 			int callNum = adjustShopInfo.getItemNum();
 			String remark = adjustShopInfo.getRemark();
-			String checkDate = adjustShopInfo.getCheckDate().toString();
-			String recheckDate = adjustShopInfo.getReCheckDate().toString();
+			String checkDate = ProjectUtil.getDateString(adjustShopInfo.getCheckDate());
+			String recheckDate = ProjectUtil.getDateString(adjustShopInfo.getReCheckDate());
 			switch (columnIndex) {
 			case 0:
 				return callDate;

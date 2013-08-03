@@ -1,11 +1,14 @@
 package com.topsun.posclient.repository.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
+import com.topsun.posclient.common.LoggerUtil;
 import com.topsun.posclient.common.POSException;
 import com.topsun.posclient.common.service.impl.BaseServiceImpl;
 import com.topsun.posclient.datamodel.AdjustShopInfo;
 import com.topsun.posclient.datamodel.dto.AdjustShopDTO;
+import com.topsun.posclient.repository.RepositoryActivator;
 import com.topsun.posclient.repository.dao.AdjustShopDao;
 import com.topsun.posclient.repository.service.IAdjustShopService;
 
@@ -35,23 +38,18 @@ public class AdjustShopServiceImpl extends BaseServiceImpl implements
 			adjustStoreDao.saveAdjustShop(adjustStoreDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
+			LoggerUtil.logError(RepositoryActivator.PLUGIN_ID, e);
 			throw new POSException("保存调店数据失败");
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.topsun.posclient.repository.service.IAdjustShopService#
-	 * queryAdjustShopList(com.topsun.posclient.datamodel.AdjustShopInfo)
-	 */
-	public List<AdjustShopInfo> queryAdjustShopList(
-			AdjustShopInfo adjustShopInfo) throws POSException {
+	public List<AdjustShopInfo> queryAdjustShopList(HashMap<String, Object> queryParams) throws POSException {
 		List<AdjustShopInfo> adjustShopList = null;
 		try {
-			adjustShopList = adjustStoreDao.queryAdjustShopInfo(adjustShopInfo);
+			adjustShopList = adjustStoreDao.queryAdjustShopInfo(queryParams);
 		} catch (Exception e) {
 			e.printStackTrace();
+			LoggerUtil.logError(RepositoryActivator.PLUGIN_ID, e);
 			throw new POSException("查询失败");
 		}
 		return adjustShopList;
