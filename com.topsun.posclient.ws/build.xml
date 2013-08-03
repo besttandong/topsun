@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="com.topsun.posclient.ws" default="build.jars" basedir=".">
+
+	<property name="p2.build.repo" value="file:${buildDirectory}/buildRepo"/>
+	<property name="basews" value="${ws}"/>
+	<property name="baseos" value="${os}"/>
+	<property name="basearch" value="${arch}"/>
+	<property name="basenl" value="${nl}"/>
+	<property name="bundleId" value="com.topsun.posclient.ws"/>
+	<property name="bundleVersion" value="1.0.0.201308022054"/>
+	<property name="p2.publishonerror" value="false"/>
+
+	<!-- Compiler settings. -->
+	<property name="javacFailOnError" value="false"/>
+	<property name="javacDebugInfo" value="on"/>
+	<property name="javacVerbose" value="false"/>
+	<property name="logExtension" value=".log"/>
+	<property name="compilerArg" value=""/>
+	<property name="compilation.prereq.log" value="${buildDirectory}/prereqErrors.log"/>
+	<property name="javacSource" value="1.3"/>
+	<property name="javacTarget" value="1.2"/>
+	<condition property="dir_bootclasspath" value="${java.home}/../Classes">
+		<os family="mac"/>
+	</condition>
+	<property name="dir_bootclasspath" value="${java.home}/lib"/>
+	<path id="path_bootclasspath">
+		<fileset dir="${dir_bootclasspath}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	<property name="bootclasspath" refid="path_bootclasspath"/>
+	<condition property="bundleBootClasspath" value="${JavaSE-1.6}"	>
+		<isset property="JavaSE-1.6"/>
+	</condition>
+	<condition property="bundleJavacSource" value="1.6"	>
+		<isset property="JavaSE-1.6"/>
+	</condition>
+	<condition property="bundleJavacTarget" value="1.6"	>
+		<isset property="JavaSE-1.6"/>
+	</condition>
+	<property name="bundleJavacSource" value="${javacSource}"/>
+	<property name="bundleJavacTarget" value="${javacTarget}"/>
+	<property name="bundleBootClasspath" value="${bootclasspath}"/>
+
+	<target name="init" depends="properties">
+		<condition property="pluginTemp" value="${buildTempFolder}/plugins"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="pluginTemp" value="${basedir}"/>
+		<condition property="build.result.folder" value="${pluginTemp}/com.topsun.posclient.ws_1.0.0.201308022054"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="build.result.folder" value="${basedir}"/>
+		<property name="temp.folder" value="${basedir}/temp.folder"/>
+		<property name="plugin.destination" value="${basedir}"/>
+		<condition property="p2.publish.parts" value="true"		>
+			<istrue value="${p2.gathering}"/>
+		</condition>
+		<property name="compilation.problem.marker" value="${build.result.folder}/compilation.problem"/>
+		<condition property="compilation.problem.marker.exists" value="true"		>
+			<and>
+			<available file="${compilation.problem.marker}"/>
+			<isfalse value="${p2.publishonerror}"/>
+			</and>
+		</condition>
+	</target>
+
+	<target name="properties" if="eclipse.running">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+
+	</target>
+
+	<target name="build.update.jar" depends="init" description="Build the plug-in: com.topsun.posclient.ws for an update site.">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="build.jars"/>
+		<antcall target="gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<jar destfile="${plugin.destination}/com.topsun.posclient.ws_1.0.0.201308022054.jar" basedir="${temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054" filesetmanifest="merge"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+
+	<target name="@dot" depends="init" unless="@dot" description="Create jar: com.topsun.posclient.ws @dot.">
+		<delete dir="${build.result.folder}/@dot"/>
+		<mkdir dir="${build.result.folder}/@dot"/>
+		<path id="@dot.classpath">
+			<pathelement path="../../plugins/org.eclipse.ui_3.6.2.M20110203-1100.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.runtime_3.6.0.v20100505.jar"/>
+			<pathelement path="../../plugins/org.eclipse.osgi_3.6.2.R36x_v20110210.jar"/>
+			<pathelement path="../../plugins/org.eclipse.equinox.common_3.6.0.v20100503.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.jobs_3.5.1.R36x_v20100824.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.runtime.compatibility.registry_3.3.0.v20100520/runtime_registry_compatibility.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.runtime.compatibility.registry_3.3.0.v20100520"/>
+			<pathelement path="../../plugins/org.eclipse.equinox.registry_3.5.0.v20100503.jar"/>
+			<pathelement path="../../plugins/org.eclipse.equinox.preferences_3.3.0.v20100503.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.contenttype_3.4.100.v20100505-1235.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.runtime.compatibility.auth_3.2.200.v20100517.jar"/>
+			<pathelement path="../../plugins/org.eclipse.equinox.app_1.3.1.R36x_v20100803.jar"/>
+			<pathelement path="../../plugins/org.eclipse.osgi.services_3.2.100.v20100503.jar"/>
+			<pathelement path="../../plugins/javax.servlet_2.5.0.v200910301333.jar"/>
+			<pathelement path="../../plugins/org.eclipse.swt_3.6.2.v3659c.jar"/>
+			<pathelement path="../../plugins/org.eclipse.swt.win32.win32.x86_64_3.6.2.v3659c.jar"/>
+			<pathelement path="../../plugins/org.eclipse.jface_3.6.2.M20110210-1200.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.commands_3.6.0.I20100512-1500.jar"/>
+			<pathelement path="../../plugins/org.eclipse.ui.workbench_3.6.2.M20110210-1200.jar"/>
+			<pathelement path="../../plugins/org.eclipse.ui.workbench.compatibility_3.2.100.I20100511-0800/compatibility.jar"/>
+			<pathelement path="../../plugins/org.eclipse.ui.workbench.compatibility_3.2.100.I20100511-0800/e4-workbench.jar"/>
+			<pathelement path="../../plugins/org.eclipse.ui.workbench.compatibility_3.2.100.I20100511-0800"/>
+			<pathelement path="../../plugins/com.ibm.icu_4.2.1.v20100412.jar"/>
+			<pathelement path="../../plugins/org.eclipse.help_3.5.0.v20100524.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.expressions_3.4.200.v20100505.jar"/>
+			<pathelement path="../../plugins/org.eclipse.jface.databinding_1.4.0.I20100601-0800.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.databinding.observable_1.3.0.I20100601-0800.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.databinding.property_1.3.0.I20100601-0800.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.databinding_1.3.100.I20100601-0800.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.resources_3.6.1.R36x_v20110131-1630.jar"/>
+			<pathelement path="../../plugins/org.eclipse.ant.core_3.2.201.v20110203_r362.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.variables_3.2.400.v20100505.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.filesystem_1.3.1.R36x_v20100727-0745.jar"/>
+			<pathelement path="../../plugins/org.eclipse.core.filesystem.win32.x86_64_1.1.201.R36x_v20100727-0745.jar"/>
+			<pathelement path="../../../../work/topsun/code/topsun/com.topsun.posclient.datamodel/bin"/>
+			<pathelement path="../../../../work/topsun/code/topsun/com.topsun.posclient.datamodel/com.topsun.posclient.datamodel.jar"/>
+			<pathelement path="lib/activation-1.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/activation-1.1.jar"/>
+			<pathelement path="lib/antlr-2.7.7.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/antlr-2.7.7.jar"/>
+			<pathelement path="lib/apache-mime4j-core-0.7.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/apache-mime4j-core-0.7.2.jar"/>
+			<pathelement path="lib/axiom-api-1.2.13.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axiom-api-1.2.13.jar"/>
+			<pathelement path="lib/axiom-dom-1.2.13.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axiom-dom-1.2.13.jar"/>
+			<pathelement path="lib/axiom-impl-1.2.13.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axiom-impl-1.2.13.jar"/>
+			<pathelement path="lib/axis2-adb-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-adb-1.6.2.jar"/>
+			<pathelement path="lib/axis2-adb-codegen-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-adb-codegen-1.6.2.jar"/>
+			<pathelement path="lib/axis2-ant-plugin-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-ant-plugin-1.6.2.jar"/>
+			<pathelement path="lib/axis2-clustering-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-clustering-1.6.2.jar"/>
+			<pathelement path="lib/axis2-codegen-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-codegen-1.6.2.jar"/>
+			<pathelement path="lib/axis2-corba-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-corba-1.6.2.jar"/>
+			<pathelement path="lib/axis2-fastinfoset-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-fastinfoset-1.6.2.jar"/>
+			<pathelement path="lib/axis2-java2wsdl-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-java2wsdl-1.6.2.jar"/>
+			<pathelement path="lib/axis2-jaxbri-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-jaxbri-1.6.2.jar"/>
+			<pathelement path="lib/axis2-jaxws-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-jaxws-1.6.2.jar"/>
+			<pathelement path="lib/axis2-jibx-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-jibx-1.6.2.jar"/>
+			<pathelement path="lib/axis2-json-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-json-1.6.2.jar"/>
+			<pathelement path="lib/axis2-kernel-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-kernel-1.6.2.jar"/>
+			<pathelement path="lib/axis2-metadata-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-metadata-1.6.2.jar"/>
+			<pathelement path="lib/axis2-mtompolicy-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-mtompolicy-1.6.2.jar"/>
+			<pathelement path="lib/axis2-saaj-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-saaj-1.6.2.jar"/>
+			<pathelement path="lib/axis2-soapmonitor-servlet-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-soapmonitor-servlet-1.6.2.jar"/>
+			<pathelement path="lib/axis2-spring-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-spring-1.6.2.jar"/>
+			<pathelement path="lib/axis2-transport-http-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-transport-http-1.6.2.jar"/>
+			<pathelement path="lib/axis2-transport-local-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-transport-local-1.6.2.jar"/>
+			<pathelement path="lib/axis2-xmlbeans-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/axis2-xmlbeans-1.6.2.jar"/>
+			<pathelement path="lib/bcel-5.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/bcel-5.1.jar"/>
+			<pathelement path="lib/commons-cli-1.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/commons-cli-1.2.jar"/>
+			<pathelement path="lib/commons-codec-1.3.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/commons-codec-1.3.jar"/>
+			<pathelement path="lib/commons-fileupload-1.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/commons-fileupload-1.2.jar"/>
+			<pathelement path="lib/commons-httpclient-3.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/commons-httpclient-3.1.jar"/>
+			<pathelement path="lib/commons-io-1.4.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/commons-io-1.4.jar"/>
+			<pathelement path="lib/commons-logging-1.1.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/commons-logging-1.1.1.jar"/>
+			<pathelement path="lib/geronimo-annotation_1.0_spec-1.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/geronimo-annotation_1.0_spec-1.1.jar"/>
+			<pathelement path="lib/geronimo-jaxws_2.2_spec-1.0.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/geronimo-jaxws_2.2_spec-1.0.jar"/>
+			<pathelement path="lib/geronimo-jta_1.1_spec-1.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/geronimo-jta_1.1_spec-1.1.jar"/>
+			<pathelement path="lib/geronimo-saaj_1.3_spec-1.0.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/geronimo-saaj_1.3_spec-1.0.1.jar"/>
+			<pathelement path="lib/geronimo-stax-api_1.0_spec-1.0.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/geronimo-stax-api_1.0_spec-1.0.1.jar"/>
+			<pathelement path="lib/geronimo-ws-metadata_2.0_spec-1.1.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/geronimo-ws-metadata_2.0_spec-1.1.2.jar"/>
+			<pathelement path="lib/httpcore-4.0.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/httpcore-4.0.jar"/>
+			<pathelement path="lib/jalopy-1.5rc3.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jalopy-1.5rc3.jar"/>
+			<pathelement path="lib/jaxb-api-2.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jaxb-api-2.1.jar"/>
+			<pathelement path="lib/jaxb-impl-2.1.7.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jaxb-impl-2.1.7.jar"/>
+			<pathelement path="lib/jaxb-xjc-2.1.7.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jaxb-xjc-2.1.7.jar"/>
+			<pathelement path="lib/jaxen-1.1.1.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jaxen-1.1.1.jar"/>
+			<pathelement path="lib/jaxws-tools-2.1.3.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jaxws-tools-2.1.3.jar"/>
+			<pathelement path="lib/jettison-1.0-RC2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jettison-1.0-RC2.jar"/>
+			<pathelement path="lib/jibx-bind-1.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jibx-bind-1.2.jar"/>
+			<pathelement path="lib/jibx-run-1.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jibx-run-1.2.jar"/>
+			<pathelement path="lib/jsr311-api-1.0.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/jsr311-api-1.0.jar"/>
+			<pathelement path="lib/juli-6.0.16.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/juli-6.0.16.jar"/>
+			<pathelement path="lib/log4j-1.2.15.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/log4j-1.2.15.jar"/>
+			<pathelement path="lib/mail-1.4.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/mail-1.4.jar"/>
+			<pathelement path="lib/mex-1.6.2-impl.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/mex-1.6.2-impl.jar"/>
+			<pathelement path="lib/neethi-3.0.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/neethi-3.0.2.jar"/>
+			<pathelement path="lib/regexp-1.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/regexp-1.2.jar"/>
+			<pathelement path="lib/tribes-6.0.16.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/tribes-6.0.16.jar"/>
+			<pathelement path="lib/woden-api-1.0M9.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/woden-api-1.0M9.jar"/>
+			<pathelement path="lib/woden-impl-commons-1.0M9.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/woden-impl-commons-1.0M9.jar"/>
+			<pathelement path="lib/woden-impl-dom-1.0M9.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/woden-impl-dom-1.0M9.jar"/>
+			<pathelement path="lib/wsdl4j-1.6.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/wsdl4j-1.6.2.jar"/>
+			<pathelement path="lib/wstx-asl-3.2.9.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/wstx-asl-3.2.9.jar"/>
+			<pathelement path="lib/xalan-2.7.0.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/xalan-2.7.0.jar"/>
+			<pathelement path="lib/xml-resolver-1.2.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/xml-resolver-1.2.jar"/>
+			<pathelement path="lib/xmlbeans-2.3.0.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/xmlbeans-2.3.0.jar"/>
+			<pathelement path="lib/XmlSchema-1.4.7.jar"/>
+			<pathelement path="${build.result.folder}/../com.topsun.posclient.ws_1.0.0.201308022054/lib/XmlSchema-1.4.7.jar"/>
+		</path>
+		<!-- compile the source code -->
+		<javac destdir="${build.result.folder}/@dot" encoding="UTF-8" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}"		>
+			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
+			<classpath refid="@dot.classpath" />
+			<src path="src/"			/>
+			<compilerarg value="@${basedir}/javaCompiler...args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+			<compilerarg line="-log &apos;${build.result.folder}/@dot${logExtension}&apos;" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+		</javac>
+		<antcall target="checkCompilationResults"/>
+		<!-- Copy necessary resources -->
+		<copy todir="${build.result.folder}/@dot" failonerror="true" overwrite="false">
+			<fileset dir="src/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="src.zip" depends="init" unless="src.zip">
+		<mkdir dir="${build.result.folder}"/>
+		<antcall target="zip.src.zip"/>
+	</target>
+	<target name="zip.src.zip">
+		<zip destfile="${build.result.folder}/src.zip" filesonly="false" whenempty="skip" update="false">
+			<fileset dir="src/">
+				<include name="**/*.java"/>
+			</fileset>
+		</zip>
+	</target>
+	<target name="copy.src.zip">
+		<copy todir="${source.destination.folder}/" failonerror="true" overwrite="true">
+			<fileset dir="src/">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: com.topsun.posclient.ws.">
+		<delete file="${compilation.problem.marker}" quiet="true"/>
+		<available property="@dot" file="${build.result.folder}/@dot"/>
+		<antcall target="@dot"/>
+	</target>
+
+	<target name="checkCompilationResults" if="compilation.error.occured">
+		<echo file="${compilation.problem.marker}" message="com.topsun.posclient.ws_1.0.0.201308022054${line.separator}compilation.error.occured=${compilation.error.occured}"/>
+		<eclipse.logCompileError bundle="com.topsun.posclient.ws_1.0.0.201308022054" log="${compilation.prereq.log}">
+			<include name="D:/work/topsun/code/topsun/com.topsun.posclient.datamodel/compilation.problem"/>
+			<include name="${pluginTemp}/com.topsun.posclient.datamodel_1.0.0.201308022054/compilation.problem"/>
+		</eclipse.logCompileError>
+	</target>
+
+	<target name="build.sources" depends="init">
+		<available property="src.zip" file="${build.result.folder}/src.zip"/>
+		<antcall target="src.zip"/>
+	</target>
+
+	<target name="publish.bin.parts" depends="init" if="p2.publish.parts" unless="compilation.problem.marker.exists">
+		<mkdir dir="${build.result.folder}/com.topsun.posclient.ws_1.0.0.201308022054"/>
+		<copy todir="${build.result.folder}" failonerror="true" overwrite="true">
+			<fileset dir="${basedir}">
+				<include name="META-INF/MANIFEST.MF"/>
+				<include name="plugin.xml"/>
+				<include name="fragment.xml"/>
+			</fileset>
+		</copy>
+		<eclipse.versionReplacer path="${build.result.folder}" version="1.0.0.201308022054"/>
+		<antcall target="apitools.generation">
+			<param name="target.folder" value="${build.result.folder}"/>
+			<param name="projectLocation" value="${basedir}"/>
+			<param name="binary.folders" value="${build.result.folder}/@dot;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/mex-1.6.2-impl.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-soapmonitor-servlet-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-metadata-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/xmlbeans-2.3.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-clustering-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-fastinfoset-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-jibx-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-io-1.4.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-adb-codegen-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-saaj_1.3_spec-1.0.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/XmlSchema-1.4.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-stax-api_1.0_spec-1.0.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jibx-bind-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axiom-api-1.2.13.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/tribes-6.0.16.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-codec-1.3.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-logging-1.1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/antlr-2.7.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/mail-1.4.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jibx-run-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-saaj-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-mtompolicy-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/regexp-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/wsdl4j-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-transport-http-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/neethi-3.0.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/woden-impl-commons-1.0M9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/log4j-1.2.15.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-xmlbeans-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxb-impl-2.1.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/activation-1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jettison-1.0-RC2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-ws-metadata_2.0_spec-1.1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-annotation_1.0_spec-1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/xml-resolver-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jalopy-1.5rc3.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-adb-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/woden-api-1.0M9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxb-xjc-2.1.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxws-tools-2.1.3.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxen-1.1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/xalan-2.7.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-java2wsdl-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxb-api-2.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-jaxws_2.2_spec-1.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-json-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/juli-6.0.16.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-transport-local-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/woden-impl-dom-1.0M9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-httpclient-3.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axiom-impl-1.2.13.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-kernel-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-jta_1.1_spec-1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-jaxws-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jsr311-api-1.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axiom-dom-1.2.13.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-cli-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/httpcore-4.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/bcel-5.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-codegen-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-corba-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/apache-mime4j-core-0.7.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/wstx-asl-3.2.9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-spring-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-fileupload-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-ant-plugin-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-jaxbri-1.6.2.jar"/>
+			<param name="projectName" value="${bundleId}_${bundleVersion}"/>
+		</antcall>
+		<eclipse.gatherBundle 
+		   metadataRepository="${p2.build.repo}"
+		   artifactRepository="${p2.build.repo}"
+		   buildResultFolder="${build.result.folder}"
+		   baseDirectory="${basedir}"
+		/>
+	</target>
+
+	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054"/>
+		<copy todir="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054" failonerror="true" overwrite="false">
+			<fileset dir="${build.result.folder}/@dot">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		<copy todir="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054" failonerror="true" overwrite="true">
+			<fileset dir="${basedir}">
+				<include name="plugin.xml"/>
+				<include name="META-INF/"/>
+				<include name="lib/activation-1.1.jar"/>
+				<include name="lib/antlr-2.7.7.jar"/>
+				<include name="lib/apache-mime4j-core-0.7.2.jar"/>
+				<include name="lib/axiom-api-1.2.13.jar"/>
+				<include name="lib/axiom-dom-1.2.13.jar"/>
+				<include name="lib/axiom-impl-1.2.13.jar"/>
+				<include name="lib/axis2-adb-1.6.2.jar"/>
+				<include name="lib/axis2-adb-codegen-1.6.2.jar"/>
+				<include name="lib/axis2-ant-plugin-1.6.2.jar"/>
+				<include name="lib/axis2-clustering-1.6.2.jar"/>
+				<include name="lib/axis2-codegen-1.6.2.jar"/>
+				<include name="lib/axis2-corba-1.6.2.jar"/>
+				<include name="lib/axis2-fastinfoset-1.6.2.jar"/>
+				<include name="lib/axis2-java2wsdl-1.6.2.jar"/>
+				<include name="lib/axis2-jaxbri-1.6.2.jar"/>
+				<include name="lib/axis2-jaxws-1.6.2.jar"/>
+				<include name="lib/axis2-jibx-1.6.2.jar"/>
+				<include name="lib/axis2-json-1.6.2.jar"/>
+				<include name="lib/axis2-kernel-1.6.2.jar"/>
+				<include name="lib/axis2-metadata-1.6.2.jar"/>
+				<include name="lib/axis2-mtompolicy-1.6.2.jar"/>
+				<include name="lib/axis2-saaj-1.6.2.jar"/>
+				<include name="lib/axis2-soapmonitor-servlet-1.6.2.jar"/>
+				<include name="lib/axis2-spring-1.6.2.jar"/>
+				<include name="lib/axis2-transport-http-1.6.2.jar"/>
+				<include name="lib/axis2-transport-local-1.6.2.jar"/>
+				<include name="lib/axis2-xmlbeans-1.6.2.jar"/>
+				<include name="lib/bcel-5.1.jar"/>
+				<include name="lib/commons-cli-1.2.jar"/>
+				<include name="lib/commons-codec-1.3.jar"/>
+				<include name="lib/commons-fileupload-1.2.jar"/>
+				<include name="lib/commons-httpclient-3.1.jar"/>
+				<include name="lib/commons-io-1.4.jar"/>
+				<include name="lib/commons-logging-1.1.1.jar"/>
+				<include name="lib/geronimo-annotation_1.0_spec-1.1.jar"/>
+				<include name="lib/geronimo-jaxws_2.2_spec-1.0.jar"/>
+				<include name="lib/geronimo-jta_1.1_spec-1.1.jar"/>
+				<include name="lib/geronimo-saaj_1.3_spec-1.0.1.jar"/>
+				<include name="lib/geronimo-stax-api_1.0_spec-1.0.1.jar"/>
+				<include name="lib/geronimo-ws-metadata_2.0_spec-1.1.2.jar"/>
+				<include name="lib/httpcore-4.0.jar"/>
+				<include name="lib/jalopy-1.5rc3.jar"/>
+				<include name="lib/jaxb-api-2.1.jar"/>
+				<include name="lib/jaxb-impl-2.1.7.jar"/>
+				<include name="lib/jaxb-xjc-2.1.7.jar"/>
+				<include name="lib/jaxen-1.1.1.jar"/>
+				<include name="lib/jaxws-tools-2.1.3.jar"/>
+				<include name="lib/jettison-1.0-RC2.jar"/>
+				<include name="lib/jibx-bind-1.2.jar"/>
+				<include name="lib/jibx-run-1.2.jar"/>
+				<include name="lib/jsr311-api-1.0.jar"/>
+				<include name="lib/juli-6.0.16.jar"/>
+				<include name="lib/log4j-1.2.15.jar"/>
+				<include name="lib/mail-1.4.jar"/>
+				<include name="lib/mex-1.6.2-impl.jar"/>
+				<include name="lib/neethi-3.0.2.jar"/>
+				<include name="lib/regexp-1.2.jar"/>
+				<include name="lib/tribes-6.0.16.jar"/>
+				<include name="lib/woden-api-1.0M9.jar"/>
+				<include name="lib/woden-impl-commons-1.0M9.jar"/>
+				<include name="lib/woden-impl-dom-1.0M9.jar"/>
+				<include name="lib/wsdl4j-1.6.2.jar"/>
+				<include name="lib/wstx-asl-3.2.9.jar"/>
+				<include name="lib/xalan-2.7.0.jar"/>
+				<include name="lib/xml-resolver-1.2.jar"/>
+				<include name="lib/xmlbeans-2.3.0.jar"/>
+				<include name="lib/XmlSchema-1.4.7.jar"/>
+			</fileset>
+		</copy>
+		<eclipse.versionReplacer path="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054" version="1.0.0.201308022054"/>
+		<antcall target="apitools.generation">
+			<param name="target.folder" value="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054"/>
+			<param name="projectLocation" value="${basedir}"/>
+			<param name="binary.folders" value="${build.result.folder}/@dot;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/mex-1.6.2-impl.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-soapmonitor-servlet-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-metadata-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/xmlbeans-2.3.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-clustering-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-fastinfoset-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-jibx-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-io-1.4.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-adb-codegen-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-saaj_1.3_spec-1.0.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/XmlSchema-1.4.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-stax-api_1.0_spec-1.0.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jibx-bind-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axiom-api-1.2.13.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/tribes-6.0.16.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-codec-1.3.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-logging-1.1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/antlr-2.7.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/mail-1.4.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jibx-run-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-saaj-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-mtompolicy-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/regexp-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/wsdl4j-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-transport-http-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/neethi-3.0.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/woden-impl-commons-1.0M9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/log4j-1.2.15.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-xmlbeans-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxb-impl-2.1.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/activation-1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jettison-1.0-RC2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-ws-metadata_2.0_spec-1.1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-annotation_1.0_spec-1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/xml-resolver-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jalopy-1.5rc3.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-adb-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/woden-api-1.0M9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxb-xjc-2.1.7.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxws-tools-2.1.3.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxen-1.1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/xalan-2.7.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-java2wsdl-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jaxb-api-2.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-jaxws_2.2_spec-1.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-json-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/juli-6.0.16.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-transport-local-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/woden-impl-dom-1.0M9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-httpclient-3.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axiom-impl-1.2.13.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-kernel-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/geronimo-jta_1.1_spec-1.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-jaxws-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/jsr311-api-1.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axiom-dom-1.2.13.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-cli-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/httpcore-4.0.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/bcel-5.1.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-codegen-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-corba-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/apache-mime4j-core-0.7.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/wstx-asl-3.2.9.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-spring-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/commons-fileupload-1.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-ant-plugin-1.6.2.jar;D:\tools\eclipse_rcp\workspace\com.topsun.posclient.ws/lib/axis2-jaxbri-1.6.2.jar"/>
+			<param name="projectName" value="${bundleId}_${bundleVersion}"/>
+		</antcall>
+	</target>
+
+	<target name="build.zips" depends="init">
+	</target>
+
+	<target name="gather.sources" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054"/>
+		<copy file="${build.result.folder}/src.zip" todir="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054" failonerror="false" overwrite="false"/>
+		<antcall target="copy.src.includes">
+			<param name="source.destination.folder" value="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054"/>
+		</antcall>
+	</target>
+
+	<target name="gather.individual.sources" depends="init">
+		<antcall target="copy.src.zip">
+			<param name="source.destination.folder" value="${destination.temp.folder}"/>
+		</antcall>
+		<antcall target="copy.src.includes">
+			<param name="source.destination.folder" value="${destination.temp.folder}"/>
+		</antcall>
+	</target>
+
+	<target name="copy.src.includes" depends="init">
+	</target>
+
+	<target name="gather.logs" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054"/>
+		<copy todir="${destination.temp.folder}/com.topsun.posclient.ws_1.0.0.201308022054" failonerror="false" overwrite="false">
+			<fileset dir="${build.result.folder}">
+				<include name="@dot${logExtension}"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean" depends="init" description="Clean the plug-in: com.topsun.posclient.ws of all the zips, jars and logs created.">
+		<delete dir="${build.result.folder}/@dot"/>
+		<delete file="${build.result.folder}/src.zip"/>
+		<delete file="${plugin.destination}/com.topsun.posclient.ws_1.0.0.201308022054.jar"/>
+		<delete file="${plugin.destination}/com.topsun.posclient.ws_1.0.0.201308022054.zip"/>
+		<delete dir="${temp.folder}"/>
+		<delete file="${compilation.problem.marker}" quiet="true"/>
+	</target>
+
+	<target name="refresh" depends="init" if="eclipse.running" description="Refresh this folder.">
+		<eclipse.convertPath fileSystemPath="D:/tools/eclipse_rcp/workspace/com.topsun.posclient.ws" property="resourcePath"/>
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>
+	</target>
+
+	<target name="zip.plugin" depends="init" description="Create a zip containing all the elements for the plug-in: com.topsun.posclient.ws.">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="build.jars"/>
+		<antcall target="build.sources"/>
+		<antcall target="gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<antcall target="gather.sources">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<delete>
+			<fileset dir="${temp.folder}">
+				<include name="**/*.bin${logExtension}"/>
+			</fileset>
+		</delete>
+		<zip destfile="${plugin.destination}/com.topsun.posclient.ws_1.0.0.201308022054.zip" basedir="${temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+
+	<target name="apitools.generation" if="generateAPIDescription">
+		<apitooling.apigeneration  projectName="${projectName}" project="${projectLocation}" binary="${binary.folders}" target="${target.folder}" extramanifests="${extraManifests}"		/>
+	</target>
+
+</project>
