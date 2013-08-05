@@ -68,8 +68,13 @@ public class SalesItemCellModify implements ICellModifier {
 				if("".equals(value.toString().trim())){
 					return;
 				}
-				saleItem.setNum(Integer.valueOf(value.toString()));
-				tableViewer.refresh();
+				if(value.toString().length() > 10){
+					
+				}else{
+					saleItem.setNum(Integer.valueOf(value.toString()));
+					tableViewer.refresh();
+				}
+				
 			}
 		}
 	}

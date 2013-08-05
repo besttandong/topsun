@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.sound.midi.SysexMessage;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ISelection;
@@ -20,6 +22,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
@@ -33,6 +36,9 @@ import org.eclipse.ui.part.ViewPart;
 import com.topsun.posclient.common.MockDataFactory;
 import com.topsun.posclient.common.POSClientApp;
 import com.topsun.posclient.common.POSException;
+import com.topsun.posclient.common.core.BarcodeBuffer;
+import com.topsun.posclient.common.core.BarcodeListenetManager;
+import com.topsun.posclient.common.core.IBarcodeListener;
 import com.topsun.posclient.common.listener.IKeyListener;
 import com.topsun.posclient.common.listener.KeyListenerManager;
 import com.topsun.posclient.common.service.ICommonService;
@@ -53,7 +59,9 @@ import com.topsun.posclient.sales.ui.table.SalesTableLableProvider;
 import com.topsun.widget.calendar.CalendarCombo;
 import com.topsun.widget.calendar.DefaultSettings;
 
-public class SalesView extends ViewPart implements IKeyListener {
+public class SalesView extends ViewPart implements IKeyListener,IBarcodeListener {
+	
+	
 	
 	public IPartSaleService partSaleService = new PartSaleServiceImpl();
 	public ICommonService commonService = new CommonServiceImpl();
@@ -99,7 +107,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 	}
 
 	public SalesView() {
-		
+	
 	}
 
 	/**
@@ -108,7 +116,7 @@ public class SalesView extends ViewPart implements IKeyListener {
 	 */
 	private void buildProductInfo(Composite parent){
 		KeyListenerManager.getInstance().addKeyListener(this);
-		
+		BarcodeListenetManager.getInstance().addKeyListener(this);
 		Group productInfo = new Group(parent, SWT.NONE);
 		productInfo.setText(MessageResources.message_ui_group_iteminfo);
 		GridLayout gridLayout = new GridLayout(1,false);
@@ -839,6 +847,69 @@ public class SalesView extends ViewPart implements IKeyListener {
 
 	public void setFocus() {
 
+	}
+
+	@Override
+	public void onChangeBarcode(final String operationType) {
+		Display.getDefault().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+//				tableViewer.setContentProvider(new SalesTableContentProvider());
+//				tableViewer.setLabelProvider(new SalesTableLableProvider());
+				
+				
+				try {
+					if(tableViewer.getInput() != null){
+						List<Item> items = (List<Item>)tableViewer.getInput() ;
+						
+						List<String> nameList = new ArrayList<String>();
+						for (Item item : items) {
+							String itemCode = item.getItemCode();
+							nameList.add(itemCode);
+						}
+						if(nameList.contains(operationType)){
+							Item selectedItem = null;
+							for (Item t_item : items) {
+								String itemCode = t_item.getItemCode();
+								if(itemCode.equals(operationType)){
+									int t_Num = t_item.getNum() + 1;
+									t_item.setNum(t_Num);
+									selectedItem = t_item;
+								}
+							}
+							tableViewer.refresh();
+							tableViewer.setSelection(new StructuredSelection(selectedItem));
+							tableViewer.editElement(selectedItem, 2);
+						}else{
+							Item addItem = new Item();
+							addItem.setItemCode(operationType);
+							addItem.setNum(1);
+							items.add(addItem);
+							tableViewer.setInput(items);
+							tableViewer.editElement(addItem, 0);
+							tableViewer.setSelection(new StructuredSelection(addItem));
+						}
+						
+					}else{
+						List<Item> items = new ArrayList<Item>();
+						Item addItem = new Item();
+						addItem.setNum(1);
+						addItem.setItemCode(operationType);
+						items.add(addItem);
+						tableViewer.setInput(items);
+						tableViewer.editElement(addItem, 0);
+					}
+					caculatorNumAndPrice();
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				
+			}
+		});
+		
+		
 	}
 
 }
