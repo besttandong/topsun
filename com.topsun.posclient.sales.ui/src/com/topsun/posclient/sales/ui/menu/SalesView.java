@@ -31,6 +31,9 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import com.topsun.posclient.common.MockDataFactory;
@@ -186,7 +189,7 @@ public class SalesView extends ViewPart implements IKeyListener,IBarcodeListener
 		}
 		{
 			TableColumn column = new TableColumn(table, SWT.NONE);
-			column.setWidth(80);
+			column.setWidth(130);
 			column.setText(MessageResources.message_ui_text_code);
 		}
 		{
@@ -270,6 +273,20 @@ public class SalesView extends ViewPart implements IKeyListener,IBarcodeListener
 				public void widgetSelected(SelectionEvent e) {
 					Button saveButton = (Button)e.getSource();
 					String salesName = sales.getText();
+
+					{
+						if(tableViewer.getInput() == null){
+							MessageDialog.openError(saveButton.getShell(), MessageResources.message_ui_tips, "ITEM CAN NOT BE NULL");
+							return;
+						}
+						List list = (List)tableViewer.getInput() ;
+						if(list.size() == 0){
+							MessageDialog.openError(saveButton.getShell(), MessageResources.message_ui_tips, "ITEM CAN NOT BE NULL");
+							return;
+						}	
+					}
+					
+					
 					if(salesName == null || "".equals(salesName.trim())){
 						MessageDialog.openError(saveButton.getShell(), MessageResources.message_ui_tips, MessageResources.message_ui_tips_guideisnotnull);
 						return;
@@ -851,6 +868,13 @@ public class SalesView extends ViewPart implements IKeyListener,IBarcodeListener
 
 	@Override
 	public void onChangeBarcode(final String operationType) {
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getWorkbenchWindows()[0];
+		IWorkbenchPage page = window.getActivePage();
+		String viewid = page.getActivePartReference().getId();
+		if(!"com.topsun.posclient.sales.ui.menu.SalesView".equals(viewid)){
+			return;
+		}
+		
 		Display.getDefault().asyncExec(new Runnable() {
 			
 			@Override
@@ -887,7 +911,7 @@ public class SalesView extends ViewPart implements IKeyListener,IBarcodeListener
 							addItem.setNum(1);
 							items.add(addItem);
 							tableViewer.setInput(items);
-							tableViewer.editElement(addItem, 0);
+							tableViewer.editElement(addItem, 2);
 							tableViewer.setSelection(new StructuredSelection(addItem));
 						}
 						
@@ -898,7 +922,7 @@ public class SalesView extends ViewPart implements IKeyListener,IBarcodeListener
 						addItem.setItemCode(operationType);
 						items.add(addItem);
 						tableViewer.setInput(items);
-						tableViewer.editElement(addItem, 0);
+						tableViewer.editElement(addItem, 2);
 					}
 					caculatorNumAndPrice();
 				} catch (Exception e) {
