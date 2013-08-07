@@ -21,7 +21,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	}
 	
 	public void fillStatusLine(IStatusLineManager statusLine){
-		// TODO Ìí¼Ó×´Ì¬ÐÐ
+		// TODO ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½
 	}
 
 }

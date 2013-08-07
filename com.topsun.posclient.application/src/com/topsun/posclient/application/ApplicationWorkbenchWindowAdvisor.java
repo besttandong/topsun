@@ -1,5 +1,6 @@
 package com.topsun.posclient.application;
 
+import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,6 +14,9 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
+
+import com.topsun.posclient.common.POSClientApp;
+import com.topsun.posclient.datamodel.User;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
@@ -43,7 +47,11 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		customizationWindow(shell);
 		
 		IStatusLineManager statusLine = configurer.getActionBarConfigurer().getStatusLineManager();
-		statusLine.setMessage(null, "离线模式\t\t|部门：营业部\t\t|操作员：张三");  
+		User loginUser = POSClientApp.get().getLoginUser();
+		String deptName = loginUser.getDeptName();
+		String userName = loginUser.getUserName();
+		statusLine.setMessage("姓名：" + userName + "      部门:" + deptName +"       登录时间：" + Calendar.getInstance().getTime());
+//		statusLine.setMessage(null, "离线模式\t\t|部门：营业部\t\t|操作员：张三");  
 	}
 	
 	private void customizationWindow(Shell shell) {
